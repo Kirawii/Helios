@@ -1,0 +1,33 @@
+from reportlab.pdfgen import canvas
+from reportlab.lib.colors import HexColor
+from pathlib import Path
+
+target = Path(__file__).parent / 'citation-fixture.pdf'
+c = canvas.Canvas(str(target), pagesize=(600, 800))
+c.bookmarkPage('intro')
+c.addOutlineEntry('Introduction', 'intro')
+c.setFont('Helvetica-Bold', 20)
+c.drawString(50, 735, 'Citation and Translation Feature Test')
+c.setFont('Helvetica', 12)
+c.drawString(50, 690, 'A paragraph about local research and contextual reading.')
+c.drawString(50, 674, 'The translation keeps this paragraph in its original position.')
+c.drawString(50, 630, 'See the evidence and methods in reference [1].')
+c.linkRect('Reference 1', 'reference-one', (280, 624, 305, 643), relative=0, thickness=0)
+c.setStrokeColor(HexColor('#8970b4'))
+c.rect(50, 380, 490, 180)
+c.setFont('Helvetica-Bold', 14)
+c.drawString(70, 525, 'A diagram remains visible under the translation layer')
+c.line(100, 450, 470, 450)
+c.setFont('Helvetica', 11)
+c.drawString(100, 430, 'Source document -> Local model -> Contextual response')
+c.showPage()
+c.bookmarkPage('reference-one', fit='XYZ', left=50, top=700, zoom=0)
+c.addOutlineEntry('References', 'reference-one')
+c.setFont('Helvetica-Bold', 20)
+c.drawString(50, 735, 'References')
+c.setFont('Helvetica', 12)
+c.drawString(50, 690, '[1] Test Authors. A Local Research Reader. 2026.')
+c.drawString(50, 664, 'This is a synthetic fixture, not a published research result.')
+c.linkURL('https://example.com', (50, 655, 400, 680), relative=0, thickness=0)
+c.save()
+print(target)

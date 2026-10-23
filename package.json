@@ -1,0 +1,19 @@
+{
+  "name": "moon",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "node scripts/verify.cjs && node scripts/verify-stream.cjs && node scripts/verify-layout.mjs",
+    "start": "node server.cjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@phosphor-icons/web": "^2.1.2",
+    "express": "^5.3.0",
+    "multer": "^2.4.0",
+    "pdfjs-dist": "^4.10.38"
+  }
+}

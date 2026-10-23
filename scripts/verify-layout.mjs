@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {textBlocks,parseBlockTranslations} from '../public/pdf-layout.mjs';
+const viewport={width:600,height:800,scale:1,convertToViewportPoint:(x,y)=>[x,800-y]};
+const item=(str,x,y,width=200,font=12)=>({str,width,transform:[font,0,0,font,x,y]});
+const blocks=textBlocks([item('A paragraph begins here.',40,700),item('It continues on the next line.',40,684),item('A separate right column.',330,700),item('Another paragraph after a gap.',40,630),item('1',40,40,10)],viewport);
+assert.equal(blocks.length,4);assert.match(blocks[0].text,/begins here.*continues/);assert.equal(blocks[1].text,'A separate right column.');assert.equal(blocks.at(-1).translate,false);assert.ok(blocks.every(b=>b.x>=0&&b.y>=0&&b.w<=1&&b.h<=1));
+const translatable=blocks.filter(b=>b.translate),answer=JSON.stringify(translatable.map(b=>({id:b.id,text:'中文 '+b.id})));
+assert.equal(Object.keys(parseBlockTranslations('```json\n'+answer+'\n```',blocks)).length,3);
+assert.throws(()=>parseBlockTranslations('[]',blocks),/遗漏了 3/);assert.throws(()=>parseBlockTranslations('not json',blocks),/有效/);
+const injected=JSON.stringify([...translatable.map(b=>({id:b.id,text:'译文'})),{id:'unknown',text:'unrelated'}]);assert.ok(!('unknown' in parseBlockTranslations(injected,blocks)));
+assert.deepEqual(parseBlockTranslations('{}',[]),{});
+console.log('PASS: paragraph continuation, separate columns, numeric text retention, normalized geometry, translation completeness, invalid/unknown block rejection');

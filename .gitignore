@@ -1,0 +1,9 @@
+node_modules/
+data/
+*.log
+.env
+
+.env.*
+!.env.example
+/*.jpg
+/sample.pdf
