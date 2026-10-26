@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "node scripts/verify.cjs && node scripts/verify-stream.cjs && node scripts/verify-layout.mjs",
-    "start": "node server.cjs"
+    "test": "node scripts/verify.cjs && node scripts/verify-stream.cjs && node scripts/verify-layout.mjs && node scripts/verify-translation.cjs && node scripts/verify-ocr-unit.cjs",
+    "start": "node server.cjs",
+    "setup:ocr": "node scripts/setup-ocr.cjs",
+    "test:ocr": "node scripts/verify-ocr.cjs"
   },
   "keywords": [],
   "author": "",

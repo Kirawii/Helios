@@ -6,7 +6,7 @@ const tasks={
  highlight:'从论文中选出最多8句重要的英文原文。仅返回 JSON 数组，每项为 {"quote":"逐字原文","reason":"中文解释"}。不得改写原文。',
  citation:'从论文提取参考文献信息。仅使用实际提供的内容，不补造 DOI 或引文。'
 };
-function endpoint(baseUrl,protocol){const url=new URL(baseUrl);if(!['http:','https:'].includes(url.protocol))throw Error('API 地址无效');const ollama=protocol==='ollama'||(!protocol&&(url.port==='11434'||url.pathname.includes('/api')));const base=baseUrl.replace(/\/+$/,'');return {ollama,url:base+(ollama?(base.endsWith('/api')?'/chat':'/api/chat'):(base.endsWith('/v1')?'/chat/completions':'/v1/chat/completions'))}}
+function endpoint(baseUrl,protocol){const url=new URL(baseUrl);if(!['http:','https:'].includes(url.protocol))throw Error('API 地址无效');const ollama=protocol==='ollama'||(!protocol&&(url.port==='11434'||url.pathname.includes('/api')));const base=baseUrl.replace(/\/+$/,'');return {ollama,url:base+(ollama?(base.endsWith('/api/chat')?'':base.endsWith('/api')?'/chat':'/api/chat'):(base.endsWith('/chat/completions')?'':base.endsWith('/v1')?'/chat/completions':'/v1/chat/completions'))}}
 exports.endpoint=endpoint;
 exports.handler=getLibrary=>async(req,res)=>{
  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),180000);res.on('close',()=>{if(!res.writableEnded)controller.abort()});

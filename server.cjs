@@ -2,6 +2,9 @@ const express=require('express'), multer=require('multer'),  fs=require('fs'), p
 const app=express(), root=path.resolve(process.env.MOON_DATA_DIR||path.join(__dirname,'data'));fs.mkdirSync(root,{recursive:true});
 const file=path.join(root,'library.json');let library=fs.existsSync(file)?JSON.parse(fs.readFileSync(file)):[];
 const save=()=>fs.writeFileSync(file,JSON.stringify(library,null,2));
+const {createTranslationService,installTranslationRoutes}=require('./translation.cjs');
+const translationService=createTranslationService({root,getPaper:id=>library.find(paper=>paper.id===id)});
+app.locals.translationService=translationService;
 app.use(express.json({limit:'2mb'}));app.use(express.static('public'));app.use('/icons',express.static(path.join(__dirname,'node_modules/@phosphor-icons/web/src')));app.use('/pdfjs',express.static(path.join(__dirname,'node_modules/pdfjs-dist/build')));
 app.get('/api/papers',(_,r)=>r.json(library.map(({text,...p})=>p)));
 app.get('/api/papers/:id',(q,r)=>{const p=library.find(p=>p.id===q.params.id);p?r.json(p):r.sendStatus(404)});
@@ -10,4 +13,5 @@ app.post('/api/papers',multer({storage:multer.memoryStorage(),limits:{fileSize:5
 app.patch('/api/papers/:id',(q,r)=>{const p=library.find(p=>p.id===q.params.id);if(!p)return r.sendStatus(404);for(const key of ['title','favorite','folder','notes','chat','generated','translations','blockTranslations'])if(key in q.body)p[key]=q.body[key];save();r.json(p)});
 app.delete('/api/papers/:id',(q,r)=>{const p=library.find(p=>p.id===q.params.id);if(!p)return r.sendStatus(404);fs.unlinkSync(path.join(root,p.id+'.pdf'));library=library.filter(p=>p!==p);save();r.json({ok:true})});
 app.post('/api/ai',require('./ai.cjs').handler(()=>library));
-app.use((e,q,r,n)=>r.status(400).json({error:e.message}));module.exports=app;if(require.main===module){const port=Number(process.env.PORT||3210);const server=app.listen(port,'127.0.0.1',()=>console.log('Moonlight Local: http://localhost:'+port));server.on('error',e=>{console.error(e.message);process.exitCode=1})}
+installTranslationRoutes(app,translationService);
+app.use((e,q,r,n)=>r.status(400).json({error:e.message}));module.exports=app;if(require.main===module){const port=Number(process.env.PORT||3210);const server=app.listen(port,'127.0.0.1',()=>console.log('Moonlight Local: http://localhost:'+port));server.on('error',e=>{console.error(e.message);process.exitCode=1});const stop=async()=>{await translationService.close();server.close()};process.once('SIGINT',stop);process.once('SIGTERM',stop);process.once('exit',()=>translationService.close())}
