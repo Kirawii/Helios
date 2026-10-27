@@ -1,0 +1,2545 @@
+{
+  "parser": "PP-StructureV3:gpu:0:144dpi:utf8:all-features-v3:3.7.0:3.2.2:5.9.0",
+  "profile": "structurev3-3.7.0-pdfium-144dpi-utf8-all-features-v3",
+  "pageCount": 12,
+  "requestedPageCount": 12,
+  "allPagesPresent": true,
+  "rawBlocks": 311,
+  "visibleBlocks": 253,
+  "uniqueIds": true,
+  "continuousVisibleNumbers": true,
+  "validGeometry": true,
+  "allModulesEnabled": true,
+  "runtime": [
+    {
+      "page": 1,
+      "runtime": {
+        "device": "gpu:0",
+        "paddle": "3.2.2"
+      },
+      "elapsedSeconds": 8.33
+    },
+    {
+      "page": 2,
+      "runtime": {
+        "device": "gpu:0",
+        "paddle": "3.2.2"
+      },
+      "elapsedSeconds": 11.81
+    },
+    {
+      "page": 3,
+      "runtime": {
+        "device": "gpu:0",
+        "paddle": "3.2.2"
+      },
+      "elapsedSeconds": 27.45
+    },
+    {
+      "page": 4,
+      "runtime": {
+        "device": "gpu:0",
+        "paddle": "3.2.2"
+      },
+      "elapsedSeconds": 24
+    },
+    {
+      "page": 5,
+      "runtime": {
+        "device": "gpu:0",
+        "paddle": "3.2.2"
+      },
+      "elapsedSeconds": 4.62
+    },
+    {
+      "page": 6,
+      "runtime": {
+        "device": "gpu:0",
+        "paddle": "3.2.2"
+      },
+      "elapsedSeconds": 42.08
+    },
+    {
+      "page": 7,
+      "runtime": {
+        "device": "gpu:0",
+        "paddle": "3.2.2"
+      },
+      "elapsedSeconds": 19.23
+    },
+    {
+      "page": 8,
+      "runtime": {
+        "device": "gpu:0",
+        "paddle": "3.2.2"
+      },
+      "elapsedSeconds": 8.09
+    },
+    {
+      "page": 9,
+      "runtime": {
+        "device": "gpu:0",
+        "paddle": "3.2.2"
+      },
+      "elapsedSeconds": 3.06
+    },
+    {
+      "page": 10,
+      "runtime": {
+        "device": "gpu:0",
+        "paddle": "3.2.2"
+      },
+      "elapsedSeconds": 33.66
+    },
+    {
+      "page": 11,
+      "runtime": {
+        "device": "gpu:0",
+        "paddle": "3.2.2"
+      },
+      "elapsedSeconds": 22.33
+    },
+    {
+      "page": 12,
+      "runtime": {
+        "device": "gpu:0",
+        "paddle": "3.2.2"
+      },
+      "elapsedSeconds": 25.59
+    }
+  ],
+  "sourceImages": [
+    {
+      "page": 1,
+      "filename": "page-1.png",
+      "width": 1224,
+      "height": 1584,
+      "matchesCoordinates": true
+    },
+    {
+      "page": 2,
+      "filename": "page-2.png",
+      "width": 1224,
+      "height": 1584,
+      "matchesCoordinates": true
+    },
+    {
+      "page": 3,
+      "filename": "page-3.png",
+      "width": 1224,
+      "height": 1584,
+      "matchesCoordinates": true
+    },
+    {
+      "page": 4,
+      "filename": "page-4.png",
+      "width": 1224,
+      "height": 1584,
+      "matchesCoordinates": true
+    },
+    {
+      "page": 5,
+      "filename": "page-5.png",
+      "width": 1224,
+      "height": 1584,
+      "matchesCoordinates": true
+    },
+    {
+      "page": 6,
+      "filename": "page-6.png",
+      "width": 1224,
+      "height": 1584,
+      "matchesCoordinates": true
+    },
+    {
+      "page": 7,
+      "filename": "page-7.png",
+      "width": 1224,
+      "height": 1584,
+      "matchesCoordinates": true
+    },
+    {
+      "page": 8,
+      "filename": "page-8.png",
+      "width": 1224,
+      "height": 1584,
+      "matchesCoordinates": true
+    },
+    {
+      "page": 9,
+      "filename": "page-9.png",
+      "width": 1224,
+      "height": 1584,
+      "matchesCoordinates": true
+    },
+    {
+      "page": 10,
+      "filename": "page-10.png",
+      "width": 1224,
+      "height": 1584,
+      "matchesCoordinates": true
+    },
+    {
+      "page": 11,
+      "filename": "page-11.png",
+      "width": 1224,
+      "height": 1584,
+      "matchesCoordinates": true
+    },
+    {
+      "page": 12,
+      "filename": "page-12.png",
+      "width": 1224,
+      "height": 1584,
+      "matchesCoordinates": true
+    }
+  ],
+  "typeCounts": {
+    "doc_title": 1,
+    "text": 139,
+    "paragraph_title": 27,
+    "abstract": 1,
+    "formula": 58,
+    "table_title": 5,
+    "table": 6,
+    "figure_title": 7,
+    "chart": 6,
+    "reference": 3
+  },
+  "latexExpressions": 360,
+  "latexSyntaxErrors": [
+    {
+      "id": "p11-b26",
+      "page": 11,
+      "latex": "\\mathrm{\\tt PairSim}(l)=\\frac{1}{n(n-1)}\\sum_{i=1}^{n}\\sum_{\\substack{j=1\\\\j\\neqi}}^{n}\\cos\\big(\\mathbf{h}_{i}^{(l)},\\mathbf{h}_{j}^{(l)}\\big).",
+      "error": "KaTeX parse error: Undefined control sequence: \\neqi at position 77: …substack{j=1\\\\j\\̲n̲e̲q̲i̲}}^{n}\\cos\\big(…"
+    }
+  ],
+  "formulas": [
+    {
+      "id": "p2-b12",
+      "page": 2,
+      "display": true,
+      "latex": "x_{k+1}=f(x_{k})+u_{k},"
+    },
+    {
+      "id": "p2-b13",
+      "page": 2,
+      "display": false,
+      "latex": "x_{k}\\;\\in\\;\\mathbb{R}^{n}"
+    },
+    {
+      "id": "p2-b13",
+      "page": 2,
+      "display": false,
+      "latex": "u_{k}\\;\\in\\;\\mathbb{R}^{n}"
+    },
+    {
+      "id": "p2-b13",
+      "page": 2,
+      "display": false,
+      "latex": "u_{k}"
+    },
+    {
+      "id": "p2-b13",
+      "page": 2,
+      "display": false,
+      "latex": "x_{k}^{*}"
+    },
+    {
+      "id": "p2-b13",
+      "page": 2,
+      "display": false,
+      "latex": "e_{k}=x_{k}-x_{k}^{*}"
+    },
+    {
+      "id": "p2-b14",
+      "page": 2,
+      "display": true,
+      "latex": "\\begin{array}{r l r}{u_{k}}&{{}=}&{-\\alpha e_{k}-\\beta I_{k},}\\end{array}"
+    },
+    {
+      "id": "p2-b15",
+      "page": 2,
+      "display": false,
+      "latex": "e_{k}"
+    },
+    {
+      "id": "p2-b15",
+      "page": 2,
+      "display": false,
+      "latex": "I_{k}\\;=\\;e_{k}+\\gamma I_{k-1}"
+    },
+    {
+      "id": "p2-b17",
+      "page": 2,
+      "display": true,
+      "latex": "X_{l+1}=F(\\widehat{A},X_{l},W_{l}),"
+    },
+    {
+      "id": "p2-b18",
+      "page": 2,
+      "display": false,
+      "latex": "\\widehat{A}=D^{-1/2}A D^{-1/2}\\in\\mathbb{R}^{n\\times n}"
+    },
+    {
+      "id": "p2-b18",
+      "page": 2,
+      "display": false,
+      "latex": "D=\\mathrm{diag}(d_1,d_2,\\cdots,d_n)"
+    },
+    {
+      "id": "p2-b18",
+      "page": 2,
+      "display": false,
+      "latex": "\\begin{array}{r}{d_{i}=\\sum_{j=1}^{n}a_{i j}}\\end{array}"
+    },
+    {
+      "id": "p2-b18",
+      "page": 2,
+      "display": false,
+      "latex": "W_{l}=W"
+    },
+    {
+      "id": "p2-b19",
+      "page": 2,
+      "display": true,
+      "latex": "\\boldsymbol{X}^{*}=F(\\widehat{A},\\boldsymbol{X}^{*},W)."
+    },
+    {
+      "id": "p2-b20",
+      "page": 2,
+      "display": false,
+      "latex": "X^{*}"
+    },
+    {
+      "id": "p2-b20",
+      "page": 2,
+      "display": false,
+      "latex": "X_{l}-X^{*}"
+    },
+    {
+      "id": "p2-b20",
+      "page": 2,
+      "display": false,
+      "latex": "X_{l+1}-X_{l}"
+    },
+    {
+      "id": "p2-b20",
+      "page": 2,
+      "display": false,
+      "latex": "X_{l}"
+    },
+    {
+      "id": "p2-b20",
+      "page": 2,
+      "display": false,
+      "latex": "X^{*}"
+    },
+    {
+      "id": "p2-b22",
+      "page": 2,
+      "display": true,
+      "latex": "X_{l+1}=X_{l}+\\gamma(F(\\widehat{A},X_{l},W_{l})-X_{l})+u_{l},"
+    },
+    {
+      "id": "p2-b23",
+      "page": 2,
+      "display": false,
+      "latex": "F(\\widehat{A},X_{l},W_{l})"
+    },
+    {
+      "id": "p2-b23",
+      "page": 2,
+      "display": false,
+      "latex": "(1),\\gamma\\in\\left[0,1\\right]"
+    },
+    {
+      "id": "p2-b23",
+      "page": 2,
+      "display": false,
+      "latex": "u_{l}"
+    },
+    {
+      "id": "p2-b24",
+      "page": 2,
+      "display": true,
+      "latex": "\\begin{array}{r c l}{{u_{l}}}&{{=}}&{{\\alpha P_{l}+\\beta I_{l},}}\\\\ {{P_{l}}}&{{=}}&{{\\widehat{A}(X_{l-1}-X_{l}),}}\\\\ {{I_{l}}}&{{=}}&{{P_{l-1}+\\theta I_{l-1}.}}\\end{array}"
+    },
+    {
+      "id": "p3-b2",
+      "page": 3,
+      "display": false,
+      "latex": "P_{l}"
+    },
+    {
+      "id": "p3-b2",
+      "page": 3,
+      "display": false,
+      "latex": "I_{l}"
+    },
+    {
+      "id": "p3-b2",
+      "page": 3,
+      "display": false,
+      "latex": "\\alpha\\neq0"
+    },
+    {
+      "id": "p3-b2",
+      "page": 3,
+      "display": false,
+      "latex": "\\beta\\geq0"
+    },
+    {
+      "id": "p3-b2",
+      "page": 3,
+      "display": false,
+      "latex": "\\theta\\in\\left[0,1\\right)"
+    },
+    {
+      "id": "p3-b2",
+      "page": 3,
+      "display": false,
+      "latex": "X_{l+1}-X_{l}\\rightarrow0"
+    },
+    {
+      "id": "p3-b2",
+      "page": 3,
+      "display": false,
+      "latex": "P_{l}\\rightarrow0"
+    },
+    {
+      "id": "p3-b2",
+      "page": 3,
+      "display": false,
+      "latex": "I_{l}\\rightarrow0.\\;\\mathrm{F o r}\\;\\gamma>0,"
+    },
+    {
+      "id": "p3-b2",
+      "page": 3,
+      "display": false,
+      "latex": "F(\\widehat{A},X_{l},W_{l})-X_{l}\\rightarrow0;"
+    },
+    {
+      "id": "p3-b2",
+      "page": 3,
+      "display": false,
+      "latex": "F(\\widehat{A},X^{*},W)=X^{*}"
+    },
+    {
+      "id": "p3-b2",
+      "page": 3,
+      "display": false,
+      "latex": "\\beta\\:=\\:0"
+    },
+    {
+      "id": "p3-b2",
+      "page": 3,
+      "display": false,
+      "latex": "\\alpha=0,\\beta=0,\\gamma=1"
+    },
+    {
+      "id": "p3-b3",
+      "page": 3,
+      "display": false,
+      "latex": "\\alpha,\\beta,"
+    },
+    {
+      "id": "p3-b4",
+      "page": 3,
+      "display": true,
+      "latex": "\\begin{aligned}\\mathcal{S}=&\\{(\\alpha,\\beta,\\theta):\\alpha\\neq0,\\theta\\geq0,\\beta\\geq0,\\theta+\\alpha<1,\\\\&0\\leq\\theta\\alpha-\\beta<1-|\\theta-\\alpha|\\}.\\end{aligned}"
+    },
+    {
+      "id": "p3-b5",
+      "page": 3,
+      "display": false,
+      "latex": "\\beta=0"
+    },
+    {
+      "id": "p3-b5",
+      "page": 3,
+      "display": false,
+      "latex": "\\theta=0"
+    },
+    {
+      "id": "p3-b5",
+      "page": 3,
+      "display": false,
+      "latex": "\\theta>0"
+    },
+    {
+      "id": "p3-b5",
+      "page": 3,
+      "display": false,
+      "latex": "0\\;\\leq\\;\\beta\\;\\leq\\;\\alpha\\theta"
+    },
+    {
+      "id": "p3-b5",
+      "page": 3,
+      "display": false,
+      "latex": "\\alpha\\ne0"
+    },
+    {
+      "id": "p3-b5",
+      "page": 3,
+      "display": false,
+      "latex": "\\alpha>0"
+    },
+    {
+      "id": "p3-b5",
+      "page": 3,
+      "display": false,
+      "latex": "\\alpha+\\theta<1"
+    },
+    {
+      "id": "p3-b5",
+      "page": 3,
+      "display": false,
+      "latex": "\\theta<1.\\mathrm{I f}\\theta=0"
+    },
+    {
+      "id": "p3-b5",
+      "page": 3,
+      "display": false,
+      "latex": "0\\leq-\\beta"
+    },
+    {
+      "id": "p3-b5",
+      "page": 3,
+      "display": false,
+      "latex": "\\beta\\geq0"
+    },
+    {
+      "id": "p3-b5",
+      "page": 3,
+      "display": false,
+      "latex": "\\beta=0"
+    },
+    {
+      "id": "p3-b5",
+      "page": 3,
+      "display": false,
+      "latex": "0<1-\\left|\\alpha\\right|"
+    },
+    {
+      "id": "p3-b5",
+      "page": 3,
+      "display": false,
+      "latex": "0<\\left|\\alpha\\right|<1"
+    },
+    {
+      "id": "p3-b8",
+      "page": 3,
+      "display": true,
+      "latex": "X_{l+1}=X_{l}+\\alpha\\widehat{A}(X_{l-1}-X_{l})+\\beta I_{l}+\\gamma\\Delta_{l},"
+    },
+    {
+      "id": "p3-b9",
+      "page": 3,
+      "display": false,
+      "latex": "I_{l}"
+    },
+    {
+      "id": "p3-b10",
+      "page": 3,
+      "display": true,
+      "latex": "\\Delta_{l}=F(\\widehat{A},X_{l},W_{l})-X_{l}."
+    },
+    {
+      "id": "p3-b11",
+      "page": 3,
+      "display": false,
+      "latex": "\\gamma=0"
+    },
+    {
+      "id": "p3-b12",
+      "page": 3,
+      "display": true,
+      "latex": "H_{l}=(X_{l}^{T},X_{l-1}^{T},I_{l}^{T})^{T},"
+    },
+    {
+      "id": "p3-b13",
+      "page": 3,
+      "display": false,
+      "latex": "H_{l}"
+    },
+    {
+      "id": "p3-b14",
+      "page": 3,
+      "display": true,
+      "latex": "H_{l+1}=W_{\\alpha,\\beta,\\theta}H_{l},"
+    },
+    {
+      "id": "p3-b16",
+      "page": 3,
+      "display": true,
+      "latex": "W_{\\alpha,\\beta,\\theta}=\\left(\\begin{array}{c c c}{{I-\\alpha\\widehat{A}}}&{{\\alpha\\widehat{A}}}&{{\\beta I}}\\\\ {{I}}&{{O}}&{{O}}\\\\ {{-\\widehat{A}}}&{{\\widehat{A}}}&{{\\theta I}}\\end{array}\\right)."
+    },
+    {
+      "id": "p3-b17",
+      "page": 3,
+      "display": false,
+      "latex": "W_{\\alpha,\\beta,\\theta}"
+    },
+    {
+      "id": "p3-b17",
+      "page": 3,
+      "display": false,
+      "latex": "\\widehat{A}."
+    },
+    {
+      "id": "p3-b17",
+      "page": 3,
+      "display": false,
+      "latex": "W_{\\alpha,\\beta,\\theta};"
+    },
+    {
+      "id": "p3-b18",
+      "page": 3,
+      "display": false,
+      "latex": "\\lambda_{i}\\;of\\widehat{A}"
+    },
+    {
+      "id": "p3-b18",
+      "page": 3,
+      "display": false,
+      "latex": "\\xi_{i}"
+    },
+    {
+      "id": "p3-b18",
+      "page": 3,
+      "display": false,
+      "latex": "W_{\\alpha,\\beta,\\theta}"
+    },
+    {
+      "id": "p3-b18",
+      "page": 3,
+      "display": false,
+      "latex": "\\eta_{ij}\\otimes\\xi_{i}"
+    },
+    {
+      "id": "p3-b18",
+      "page": 3,
+      "display": false,
+      "latex": "\\eta_{i j}~(j~=~1,2,3)"
+    },
+    {
+      "id": "p3-b18",
+      "page": 3,
+      "display": false,
+      "latex": "D_{\\alpha,\\beta,\\theta}(\\lambda_i)"
+    },
+    {
+      "id": "p3-b19",
+      "page": 3,
+      "display": true,
+      "latex": "D_{\\alpha,\\beta,\\theta}(\\lambda)=\\left(\\begin{array}{c c c}{{1-\\alpha\\lambda}}&{{\\alpha\\lambda}}&{{\\beta}}\\\\ {{1}}&{{0}}&{{0}}\\\\ {{-\\lambda}}&{{\\lambda}}&{{\\theta}}\\end{array}\\right)."
+    },
+    {
+      "id": "p3-b20",
+      "page": 3,
+      "display": false,
+      "latex": "o f W_{\\alpha,\\beta,\\theta}(\\lambda_{i})"
+    },
+    {
+      "id": "p3-b20",
+      "page": 3,
+      "display": false,
+      "latex": "\\eta_{i j}\\otimes\\xi_{i}~i s\\mu_{i j}"
+    },
+    {
+      "id": "p3-b20",
+      "page": 3,
+      "display": false,
+      "latex": "D_{\\alpha,\\beta,\\theta}\\eta_{i j}=\\mu_{i j}\\eta_{i j}"
+    },
+    {
+      "id": "p3-b21",
+      "page": 3,
+      "display": false,
+      "latex": "\\widehat{A}"
+    },
+    {
+      "id": "p3-b21",
+      "page": 3,
+      "display": false,
+      "latex": "\\rho({\\widehat{A}})=1"
+    },
+    {
+      "id": "p3-b21",
+      "page": 3,
+      "display": false,
+      "latex": "W_{\\alpha,\\beta,\\theta}"
+    },
+    {
+      "id": "p3-b22",
+      "page": 3,
+      "display": false,
+      "latex": "(\\alpha,\\beta,\\theta)\\in\\mathcal{S},\\rho(W_{\\alpha,\\beta,\\theta})=1"
+    },
+    {
+      "id": "p3-b22",
+      "page": 3,
+      "display": false,
+      "latex": "{}^{*}W_{\\alpha,\\beta,\\theta}"
+    },
+    {
+      "id": "p3-b22",
+      "page": 3,
+      "display": false,
+      "latex": "D_{\\alpha,\\beta,\\theta}(\\lambda_{i})"
+    },
+    {
+      "id": "p3-b22",
+      "page": 3,
+      "display": false,
+      "latex": "W_{\\alpha,\\beta,\\theta}"
+    },
+    {
+      "id": "p3-b25",
+      "page": 3,
+      "display": false,
+      "latex": "(\\alpha,\\beta,\\theta)\\in"
+    },
+    {
+      "id": "p3-b25",
+      "page": 3,
+      "display": false,
+      "latex": "\\mathcal{S}"
+    },
+    {
+      "id": "p3-b25",
+      "page": 3,
+      "display": false,
+      "latex": "\\gamma=0"
+    },
+    {
+      "id": "p3-b25",
+      "page": 3,
+      "display": false,
+      "latex": "e_{l}=X_{l}-X_{l-1}"
+    },
+    {
+      "id": "p3-b25",
+      "page": 3,
+      "display": false,
+      "latex": "C>0"
+    },
+    {
+      "id": "p3-b25",
+      "page": 3,
+      "display": false,
+      "latex": "\\rho\\in\\left(0,1\\right)"
+    },
+    {
+      "id": "p3-b26",
+      "page": 3,
+      "display": true,
+      "latex": "\\left\\|e_{l}\\right\\|\\leq C\\rho^{l},\\qquad l\\geq0."
+    },
+    {
+      "id": "p3-b27",
+      "page": 3,
+      "display": false,
+      "latex": "\\boldsymbol{X}^{*}"
+    },
+    {
+      "id": "p3-b27",
+      "page": 3,
+      "display": false,
+      "latex": "\\begin{array}{r}{\\operatorname*{s u p}_{l\\geq0}\\|X_{l}-X_{0}\\|\\leq\\sum_{j=1}^{\\infty}\\|e_{j}\\|\\leq\\frac{C\\rho}{1-\\rho}.}\\end{array}"
+    },
+    {
+      "id": "p3-b28",
+      "page": 3,
+      "display": false,
+      "latex": "F_{l}(X)="
+    },
+    {
+      "id": "p3-b28",
+      "page": 3,
+      "display": false,
+      "latex": "F(\\widehat{A},X,W_{l})"
+    },
+    {
+      "id": "p3-b28",
+      "page": 3,
+      "display": false,
+      "latex": "\\gamma\\in\\left(0,1\\right],\\theta\\in\\left[0,1\\right)"
+    },
+    {
+      "id": "p3-b28",
+      "page": 3,
+      "display": false,
+      "latex": "X^{*}"
+    },
+    {
+      "id": "p3-b28",
+      "page": 3,
+      "display": false,
+      "latex": "F_{l}(X^{*})=X^{*}"
+    },
+    {
+      "id": "p3-b28",
+      "page": 3,
+      "display": false,
+      "latex": "o f X^{*}"
+    },
+    {
+      "id": "p3-b28",
+      "page": 3,
+      "display": false,
+      "latex": "m\\leq M"
+    },
+    {
+      "id": "p3-b28",
+      "page": 3,
+      "display": false,
+      "latex": "o f l"
+    },
+    {
+      "id": "p3-b28",
+      "page": 3,
+      "display": false,
+      "latex": "X\\in\\mathcal{N}"
+    },
+    {
+      "id": "p3-b29",
+      "page": 3,
+      "display": true,
+      "latex": "\\Phi_{l}(\\boldsymbol{X})=F_{l}(\\boldsymbol{X})-F_{l}(\\boldsymbol{X}^{*})"
+    },
+    {
+      "id": "p3-b31",
+      "page": 3,
+      "display": true,
+      "latex": "\\langle\\Phi_{l}(X)-m(X-X^{*}),\\Phi_{l}(X)-M(X-X^{*})\\rangle_{E}\\leq0."
+    },
+    {
+      "id": "p3-b33",
+      "page": 3,
+      "display": true,
+      "latex": "C=\\left(I\\quad O\\quad O\\right),\\quad\\mathcal{B}=C^{T},\\quad\\mathcal{A}_{\\mathrm{P I}}=W_{\\alpha,\\beta,\\theta}-\\gamma\\mathcal{B}C."
+    },
+    {
+      "id": "p3-b34",
+      "page": 3,
+      "display": false,
+      "latex": "P\\succ0"
+    },
+    {
+      "id": "p3-b34",
+      "page": 3,
+      "display": false,
+      "latex": "\\tau>0"
+    },
+    {
+      "id": "p3-b35",
+      "page": 3,
+      "display": true,
+      "latex": "\\begin{array}{r}{\\left(\\begin{matrix}{\\mathcal{A}_{\\mathrm{P I}}^{T}P\\mathcal{A}_{\\mathrm{P I}}-P-\\tau m M C^{T}C}&{\\gamma\\mathcal{A}_{\\mathrm{P I}}^{T}P\\mathcal{B}+\\frac{\\tau(m+M)}{2}C^{T}}\\\\ {\\gamma\\mathcal{B}^{T}P\\mathcal{A}_{\\mathrm{P I}}+\\frac{\\tau(m+M)}{2}C}&{\\gamma^{2}\\mathcal{B}^{T}P\\mathcal{B}-\\tau I}\\end{matrix}\\right)\\prec0,}\\end{array}"
+    },
+    {
+      "id": "p3-b36",
+      "page": 3,
+      "display": false,
+      "latex": "\\left(X^{*},X^{*},0\\right)"
+    },
+    {
+      "id": "p3-b36",
+      "page": 3,
+      "display": false,
+      "latex": "X_{l}\\rightarrow X^{*}"
+    },
+    {
+      "id": "p3-b37",
+      "page": 3,
+      "display": false,
+      "latex": "\\|\\Phi_{l}(X)\\|_{F}\\leq"
+    },
+    {
+      "id": "p3-b37",
+      "page": 3,
+      "display": false,
+      "latex": "L\\|X-X^{*}\\|_{F}"
+    },
+    {
+      "id": "p3-b37",
+      "page": 3,
+      "display": false,
+      "latex": "L=\\operatorname*{m a x}\\{|m|,|M|\\}"
+    },
+    {
+      "id": "p3-b37",
+      "page": 3,
+      "display": false,
+      "latex": "1-\\gamma+\\gamma L<"
+    },
+    {
+      "id": "p3-b37",
+      "page": 3,
+      "display": false,
+      "latex": "L<1"
+    },
+    {
+      "id": "p3-b37",
+      "page": 3,
+      "display": false,
+      "latex": "L>1"
+    },
+    {
+      "id": "p4-b2",
+      "page": 4,
+      "display": false,
+      "latex": "\\sigma({\\widehat{A}})\\subseteq[1/2,1]"
+    },
+    {
+      "id": "p4-b2",
+      "page": 4,
+      "display": false,
+      "latex": "X^{*}"
+    },
+    {
+      "id": "p4-b3",
+      "page": 4,
+      "display": true,
+      "latex": "F(\\widehat{A},X,W)-F(\\widehat{A},X^{*},W)=-\\frac{3}{2}(X-X^{*})."
+    },
+    {
+      "id": "p4-b4",
+      "page": 4,
+      "display": false,
+      "latex": "m=M=-3/2"
+    },
+    {
+      "id": "p4-b4",
+      "page": 4,
+      "display": false,
+      "latex": "L\\;=\\;3/2"
+    },
+    {
+      "id": "p4-b4",
+      "page": 4,
+      "display": false,
+      "latex": "\\gamma\\;=\\;1"
+    },
+    {
+      "id": "p4-b4",
+      "page": 4,
+      "display": false,
+      "latex": "\\begin{array}{r}{\\widetilde{X}_{l+1}=-\\frac{3}{2}\\widetilde{X}_{l}}\\end{array}"
+    },
+    {
+      "id": "p4-b4",
+      "page": 4,
+      "display": false,
+      "latex": "(\\alpha,\\beta,\\theta)="
+    },
+    {
+      "id": "p4-b4",
+      "page": 4,
+      "display": false,
+      "latex": "\\left(-3/4,0,0\\right)"
+    },
+    {
+      "id": "p4-b4",
+      "page": 4,
+      "display": false,
+      "latex": "\\lambda_{i}\\in\\left[1/2,1\\right]"
+    },
+    {
+      "id": "p4-b5",
+      "page": 4,
+      "display": true,
+      "latex": "s^{2}+\\left(\\frac{3}{2}-\\frac{3}{4}\\lambda_{i}\\right)s+\\frac{3}{4}\\lambda_{i}."
+    },
+    {
+      "id": "p4-b7",
+      "page": 4,
+      "display": true,
+      "latex": "\\frac{3}{4}\\lambda_{i}<1,\\qquad1+\\left(\\frac{3}{2}-\\frac{3}{4}\\lambda_{i}\\right)+\\frac{3}{4}\\lambda_{i}=\\frac{5}{2}>0,"
+    },
+    {
+      "id": "p4-b9",
+      "page": 4,
+      "display": true,
+      "latex": "1-\\left(\\frac{3}{2}-\\frac{3}{4}\\lambda_{i}\\right)+\\frac{3}{4}\\lambda_{i}=-\\frac{1}{2}+\\frac{3}{2}\\lambda_{i}>0."
+    },
+    {
+      "id": "p4-b10",
+      "page": 4,
+      "display": false,
+      "latex": "L>1"
+    },
+    {
+      "id": "p4-b10",
+      "page": 4,
+      "display": false,
+      "latex": "L<1"
+    },
+    {
+      "id": "p4-b11",
+      "page": 4,
+      "display": false,
+      "latex": "\\widehat{A}"
+    },
+    {
+      "id": "p4-b11",
+      "page": 4,
+      "display": false,
+      "latex": "W_{\\alpha,\\beta,\\theta}"
+    },
+    {
+      "id": "p4-b11",
+      "page": 4,
+      "display": false,
+      "latex": "\\widehat{A}"
+    },
+    {
+      "id": "p4-b12",
+      "page": 4,
+      "display": true,
+      "latex": "1=\\lambda_{1}>\\lambda_{2}\\geq\\lambda_{3}\\geq\\cdots\\geq\\lambda_{n},"
+    },
+    {
+      "id": "p4-b13",
+      "page": 4,
+      "display": false,
+      "latex": "\\xi_{1}=D^{1/2}\\mathbb{1},\\xi_{2},\\cdots,\\xi_{n}"
+    },
+    {
+      "id": "p4-b13",
+      "page": 4,
+      "display": false,
+      "latex": "\\xi_{i}"
+    },
+    {
+      "id": "p4-b13",
+      "page": 4,
+      "display": false,
+      "latex": "\\widehat{A},"
+    },
+    {
+      "id": "p4-b13",
+      "page": 4,
+      "display": false,
+      "latex": "W_{\\alpha,\\beta,\\theta}"
+    },
+    {
+      "id": "p4-b14",
+      "page": 4,
+      "display": true,
+      "latex": "E_{i}=\\big|\\mu_{i1}\\big|^{2}+\\big|\\mu_{i2}\\big|^{2}+\\big|\\mu_{i3}\\big|^{2},"
+    },
+    {
+      "id": "p4-b15",
+      "page": 4,
+      "display": false,
+      "latex": "\\mu_{i j}"
+    },
+    {
+      "id": "p4-b15",
+      "page": 4,
+      "display": false,
+      "latex": "D_{\\alpha,\\beta,\\theta}(\\lambda_{i})"
+    },
+    {
+      "id": "p4-b15",
+      "page": 4,
+      "display": false,
+      "latex": "\\lambda_{1}=1"
+    },
+    {
+      "id": "p4-b15",
+      "page": 4,
+      "display": false,
+      "latex": "D_{\\alpha,\\beta,\\theta}(1)"
+    },
+    {
+      "id": "p4-b15",
+      "page": 4,
+      "display": false,
+      "latex": "\\frac{\\theta-\\alpha\\pm\\sqrt{(\\alpha+\\theta)^{2}-4\\beta}}{2}"
+    },
+    {
+      "id": "p4-b16",
+      "page": 4,
+      "display": true,
+      "latex": "E_{1}=1+\\left|\\frac{\\theta-\\alpha-\\sqrt{(\\alpha+\\theta)^{2}-4\\beta}}{2}\\right|^{2}+\\left|\\frac{\\theta-\\alpha+\\sqrt{(\\alpha+\\theta)^{2}-4\\beta}}{2}\\right|^{2},"
+    },
+    {
+      "id": "p4-b17",
+      "page": 4,
+      "display": false,
+      "latex": "E_{i},"
+    },
+    {
+      "id": "p4-b17",
+      "page": 4,
+      "display": false,
+      "latex": "W_{\\alpha,\\beta,\\theta}"
+    },
+    {
+      "id": "p4-b18",
+      "page": 4,
+      "display": true,
+      "latex": "\\omega_{i}=E_{i}\\big/E_{1}."
+    },
+    {
+      "id": "p4-b19",
+      "page": 4,
+      "display": false,
+      "latex": "\\omega_{1}=1"
+    },
+    {
+      "id": "p4-b19",
+      "page": 4,
+      "display": false,
+      "latex": "\\omega_{i}"
+    },
+    {
+      "id": "p4-b19",
+      "page": 4,
+      "display": false,
+      "latex": "\\lambda=1"
+    },
+    {
+      "id": "p4-b19",
+      "page": 4,
+      "display": false,
+      "latex": "\\omega_{i}"
+    },
+    {
+      "id": "p4-b19",
+      "page": 4,
+      "display": false,
+      "latex": "\\widehat{A}"
+    },
+    {
+      "id": "p4-b20",
+      "page": 4,
+      "display": true,
+      "latex": "\\kappa_{i}=|\\lambda_{i}|^{2}/\\lambda_{1}^{2}=|\\lambda_{i}|^{2}."
+    },
+    {
+      "id": "p4-b21",
+      "page": 4,
+      "display": false,
+      "latex": "\\kappa_{i}"
+    },
+    {
+      "id": "p4-b21",
+      "page": 4,
+      "display": false,
+      "latex": "\\widehat{A}"
+    },
+    {
+      "id": "p4-b22",
+      "page": 4,
+      "display": false,
+      "latex": "\\kappa_{i}"
+    },
+    {
+      "id": "p4-b22",
+      "page": 4,
+      "display": false,
+      "latex": "\\omega_{i}"
+    },
+    {
+      "id": "p4-b22",
+      "page": 4,
+      "display": false,
+      "latex": "\\omega_{i}~>~\\kappa_{i}"
+    },
+    {
+      "id": "p4-b22",
+      "page": 4,
+      "display": false,
+      "latex": "i~>~1"
+    },
+    {
+      "id": "p4-b22",
+      "page": 4,
+      "display": false,
+      "latex": "W_{\\alpha,\\beta,\\theta}"
+    },
+    {
+      "id": "p4-b22",
+      "page": 4,
+      "display": false,
+      "latex": "\\widehat{A}"
+    },
+    {
+      "id": "p4-b23",
+      "page": 4,
+      "display": false,
+      "latex": "(\\alpha,\\beta,\\theta)\\in\\mathcal{S}"
+    },
+    {
+      "id": "p4-b23",
+      "page": 4,
+      "display": false,
+      "latex": "\\omega_{i}"
+    },
+    {
+      "id": "p4-b23",
+      "page": 4,
+      "display": false,
+      "latex": "W_{\\alpha,\\beta,\\theta}"
+    },
+    {
+      "id": "p4-b23",
+      "page": 4,
+      "display": false,
+      "latex": "\\omega_{i}\\geq\\kappa_{i}\\;f o r\\:i\\geq2"
+    },
+    {
+      "id": "p4-b23",
+      "page": 4,
+      "display": false,
+      "latex": "\\beta>0"
+    },
+    {
+      "id": "p4-b23",
+      "page": 4,
+      "display": false,
+      "latex": "\\beta=0"
+    },
+    {
+      "id": "p4-b23",
+      "page": 4,
+      "display": false,
+      "latex": "\\lambda_{i}>-1"
+    },
+    {
+      "id": "p4-b23",
+      "page": 4,
+      "display": false,
+      "latex": "\\lambda_{i}=-1"
+    },
+    {
+      "id": "p4-b25",
+      "page": 4,
+      "display": false,
+      "latex": "I_{1}=0"
+    },
+    {
+      "id": "p4-b25",
+      "page": 4,
+      "display": false,
+      "latex": "l\\geq2"
+    },
+    {
+      "id": "p4-b25",
+      "page": 4,
+      "display": false,
+      "latex": "X_{l-1}"
+    },
+    {
+      "id": "p4-b25",
+      "page": 4,
+      "display": false,
+      "latex": "\\mathrm{A}.6"
+    },
+    {
+      "id": "p4-b26",
+      "page": 4,
+      "display": false,
+      "latex": "l\\geq2,"
+    },
+    {
+      "id": "p4-b26",
+      "page": 4,
+      "display": false,
+      "latex": "I_{l}"
+    },
+    {
+      "id": "p4-b27",
+      "page": 4,
+      "display": true,
+      "latex": "I_{l}=\\widehat{A}\\left[-X_{l-1}+(1-\\theta)\\sum_{m=1}^{l-2}\\theta^{l-2-m}X_{m}+\\theta^{l-2}X_{0}\\right]."
+    },
+    {
+      "id": "p4-b28",
+      "page": 4,
+      "display": false,
+      "latex": "I_{l}=\\widehat{A}(X_{0}-X_{l-1})i f\\theta=1"
+    },
+    {
+      "id": "p4-b29",
+      "page": 4,
+      "display": false,
+      "latex": "\\theta\\in\\left(0,1\\right)"
+    },
+    {
+      "id": "p4-b29",
+      "page": 4,
+      "display": false,
+      "latex": "\\theta^{l-2-m}\\mathrm{o f}X_{m}"
+    },
+    {
+      "id": "p4-b29",
+      "page": 4,
+      "display": false,
+      "latex": "I_{l}"
+    },
+    {
+      "id": "p4-b29",
+      "page": 4,
+      "display": false,
+      "latex": "l-1-m"
+    },
+    {
+      "id": "p4-b29",
+      "page": 4,
+      "display": false,
+      "latex": "I_{l}"
+    },
+    {
+      "id": "p4-b29",
+      "page": 4,
+      "display": false,
+      "latex": "X_{m}"
+    },
+    {
+      "id": "p4-b30",
+      "page": 4,
+      "display": false,
+      "latex": "\\left[I_{l}^{\\mathrm{s p a r s e}}\\right."
+    },
+    {
+      "id": "p4-b31",
+      "page": 4,
+      "display": true,
+      "latex": "I_{l}^{\\mathrm{s p a r s e}}=R_{l}/n_{l},"
+    },
+    {
+      "id": "p4-b32",
+      "page": 4,
+      "display": false,
+      "latex": "R_{l}=R_{l-1}+\\theta_{l}P_{l-1}"
+    },
+    {
+      "id": "p4-b32",
+      "page": 4,
+      "display": false,
+      "latex": "n_{l}=n_{l-1}+\\theta_{l}"
+    },
+    {
+      "id": "p4-b32",
+      "page": 4,
+      "display": false,
+      "latex": "\\theta_{l}"
+    },
+    {
+      "id": "p4-b32",
+      "page": 4,
+      "display": false,
+      "latex": "\\theta_{l}\\;=\\;1\\mathrm{i f}l\\;\\equiv\\;0\\bmod(d)"
+    },
+    {
+      "id": "p4-b35",
+      "page": 4,
+      "display": false,
+      "latex": "\\theta=0"
+    },
+    {
+      "id": "p4-b35",
+      "page": 4,
+      "display": false,
+      "latex": "\\beta=0"
+    },
+    {
+      "id": "p4-b35",
+      "page": 4,
+      "display": false,
+      "latex": "0<\\left|\\alpha\\right|<1"
+    },
+    {
+      "id": "p4-b35",
+      "page": 4,
+      "display": false,
+      "latex": "\\left(\\gamma=0\\right)"
+    },
+    {
+      "id": "p4-b36",
+      "page": 4,
+      "display": true,
+      "latex": "X_{l+1}=X_{l}+\\alpha\\widehat{A}(X_{l-1}-X_{l}),\\qquad0<|\\alpha|<1."
+    },
+    {
+      "id": "p4-b37",
+      "page": 4,
+      "display": false,
+      "latex": "\\widehat{A},"
+    },
+    {
+      "id": "p4-b37",
+      "page": 4,
+      "display": false,
+      "latex": "O(L|E|d)"
+    },
+    {
+      "id": "p4-b37",
+      "page": 4,
+      "display": false,
+      "latex": "O(L n d)"
+    },
+    {
+      "id": "p5-b4",
+      "page": 5,
+      "display": false,
+      "latex": "X_{l}"
+    },
+    {
+      "id": "p5-b4",
+      "page": 5,
+      "display": false,
+      "latex": "n=111{,}059{,}956"
+    },
+    {
+      "id": "p5-b4",
+      "page": 5,
+      "display": false,
+      "latex": "d=128"
+    },
+    {
+      "id": "p5-b4",
+      "page": 5,
+      "display": false,
+      "latex": "X_{L}"
+    },
+    {
+      "id": "p5-b4",
+      "page": 5,
+      "display": false,
+      "latex": "X_{L}"
+    },
+    {
+      "id": "p5-b4",
+      "page": 5,
+      "display": false,
+      "latex": "X_{L}"
+    },
+    {
+      "id": "p5-b11",
+      "page": 5,
+      "display": false,
+      "latex": "L\\in\\{3,8,16,32\\}"
+    },
+    {
+      "id": "p5-b11",
+      "page": 5,
+      "display": false,
+      "latex": "L\\in\\{64,128\\}"
+    },
+    {
+      "id": "p5-b15",
+      "page": 5,
+      "display": false,
+      "latex": "\\scriptstyle{\\mathrm{G C N}}+{\\mathrm{P I}}"
+    },
+    {
+      "id": "p6-b9",
+      "page": 6,
+      "display": false,
+      "latex": "d=4"
+    },
+    {
+      "id": "p7-b9",
+      "page": 7,
+      "display": false,
+      "latex": "\\left(65.15\\pm0.08\\%\\right)"
+    },
+    {
+      "id": "p7-b9",
+      "page": 7,
+      "display": false,
+      "latex": "\\left(62.56\\pm0.13\\%\\right)"
+    },
+    {
+      "id": "p8-b2",
+      "page": 8,
+      "display": false,
+      "latex": "(\\%,mean\\pm std)"
+    },
+    {
+      "id": "p8-b5",
+      "page": 8,
+      "display": false,
+      "latex": "F_{l}(X)"
+    },
+    {
+      "id": "p8-b6",
+      "page": 8,
+      "display": true,
+      "latex": "{\\mathrm{M o m e n t u m}}\\colon\\quad X_{l+1}=X_{l}+\\gamma F_{l}(X_{l})+m(X_{l}-X_{l-1}),"
+    },
+    {
+      "id": "p8-b7",
+      "page": 8,
+      "display": true,
+      "latex": "{\\mathrm{S e c o n d-o r d e r:}}\\quad X_{l+1}=2X_{l}-X_{l-1}+\\gamma(F_{l}(X_{l})-X_{l}),"
+    },
+    {
+      "id": "p8-b8",
+      "page": 8,
+      "display": true,
+      "latex": "{\\mathrm{S O}}{\\mathrm{-D a m p e d}}{:}\\quad X_{l+1}=X_{l}+m(X_{l}-X_{l-1})+\\gamma(F_{l}(X_{l})-X_{l}),  ( 1)"
+    },
+    {
+      "id": "p8-b9",
+      "page": 8,
+      "display": true,
+      "latex": "{\\mathrm{H i s t A v g}}{:}\\quad X_{l+1}=X_{l}+\\gamma F_{l}\\left({\\frac{1}{l+1}}\\sum_{k=0}^{l}X_{k}\\right)."
+    },
+    {
+      "id": "p8-b10",
+      "page": 8,
+      "display": false,
+      "latex": "P_{l}=\\widehat{A}(X_{l-1}-X_{l})"
+    },
+    {
+      "id": "p8-b11",
+      "page": 8,
+      "display": false,
+      "latex": "\\left(\\gamma=0\\right)"
+    },
+    {
+      "id": "p8-b12",
+      "page": 8,
+      "display": false,
+      "latex": "(\\%,mean\\pm std)"
+    },
+    {
+      "id": "p8-b14",
+      "page": 8,
+      "display": false,
+      "latex": "\\scriptstyle{\\mathrm{G C N I I+P I}}"
+    },
+    {
+      "id": "p8-b15",
+      "page": 8,
+      "display": false,
+      "latex": "\\scriptstyle{\\mathrm{G C N}}+{\\mathrm{P I}}"
+    },
+    {
+      "id": "p8-b17",
+      "page": 8,
+      "display": false,
+      "latex": "65.15\\pm0.08\\%"
+    },
+    {
+      "id": "p10-b4",
+      "page": 10,
+      "display": false,
+      "latex": "\\widehat{A}\\xi_{i}=\\lambda_{i}\\xi_{i}\\mathrm{a n d}D_{\\alpha,\\beta,\\theta}(\\lambda_{i})\\eta_{i j}=\\mu_{i j}\\eta_{i j}"
+    },
+    {
+      "id": "p10-b4",
+      "page": 10,
+      "display": false,
+      "latex": "W_{\\alpha,\\beta,\\theta}"
+    },
+    {
+      "id": "p10-b4",
+      "page": 10,
+      "display": false,
+      "latex": "D_{\\alpha,\\beta,\\theta}(\\lambda_{i})"
+    },
+    {
+      "id": "p10-b5",
+      "page": 10,
+      "display": true,
+      "latex": "W_{\\alpha,\\beta,\\theta}(\\eta_{i j}\\otimes\\xi_{i})=\\left(D_{\\alpha,\\beta,\\theta}(\\lambda_{i})\\eta_{i j}\\right)\\otimes\\xi_{i}=\\mu_{i j}(\\eta_{i j}\\otimes\\xi_{i})."
+    },
+    {
+      "id": "p10-b6",
+      "page": 10,
+      "display": false,
+      "latex": "\\eta_{i j}\\otimes\\xi_{i}"
+    },
+    {
+      "id": "p10-b6",
+      "page": 10,
+      "display": false,
+      "latex": "W_{\\alpha,\\beta,\\theta}"
+    },
+    {
+      "id": "p10-b6",
+      "page": 10,
+      "display": false,
+      "latex": "\\mu_{i j}"
+    },
+    {
+      "id": "p10-b6",
+      "page": 10,
+      "display": false,
+      "latex": "j=1,2,3"
+    },
+    {
+      "id": "p10-b8",
+      "page": 10,
+      "display": false,
+      "latex": "\\lambda\\in[-1,1]"
+    },
+    {
+      "id": "p10-b8",
+      "page": 10,
+      "display": false,
+      "latex": "\\widehat{A},"
+    },
+    {
+      "id": "p10-b8",
+      "page": 10,
+      "display": false,
+      "latex": "\\det(sI-"
+    },
+    {
+      "id": "p10-b8",
+      "page": 10,
+      "display": false,
+      "latex": "D_{\\alpha,\\beta,\\theta}(\\lambda))"
+    },
+    {
+      "id": "p10-b9",
+      "page": 10,
+      "display": true,
+      "latex": "f(s)=(s-1)\\left[s^{2}-(\\theta-\\alpha\\lambda)s-(\\alpha\\theta-\\beta)\\lambda\\right]."
+    },
+    {
+      "id": "p10-b10",
+      "page": 10,
+      "display": false,
+      "latex": "c=\\alpha\\theta-\\beta"
+    },
+    {
+      "id": "p10-b10",
+      "page": 10,
+      "display": false,
+      "latex": "\\Delta(\\lambda)="
+    },
+    {
+      "id": "p10-b10",
+      "page": 10,
+      "display": false,
+      "latex": "(\\theta+\\alpha\\lambda)^{2}-4\\beta\\lambda.\\mathrm{~I f~}\\theta=0"
+    },
+    {
+      "id": "p10-b10",
+      "page": 10,
+      "display": false,
+      "latex": "\\beta\\:=\\:0"
+    },
+    {
+      "id": "p10-b10",
+      "page": 10,
+      "display": false,
+      "latex": "\\Delta(\\lambda)=\\alpha^{2}\\lambda^{2}\\geq0.\\mathrm{~I f~}\\theta>0"
+    },
+    {
+      "id": "p10-b10",
+      "page": 10,
+      "display": false,
+      "latex": "0\\leq\\beta\\leq\\alpha\\theta"
+    },
+    {
+      "id": "p10-b10",
+      "page": 10,
+      "display": false,
+      "latex": "\\alpha>0"
+    },
+    {
+      "id": "p10-b10",
+      "page": 10,
+      "display": false,
+      "latex": "\\Delta(\\lambda)\\geq0"
+    },
+    {
+      "id": "p10-b10",
+      "page": 10,
+      "display": false,
+      "latex": "\\lambda\\leq0"
+    },
+    {
+      "id": "p10-b10",
+      "page": 10,
+      "display": false,
+      "latex": "\\lambda\\geq0,\\Delta(\\lambda)\\geq(\\theta+"
+    },
+    {
+      "id": "p10-b10",
+      "page": 10,
+      "display": false,
+      "latex": "\\alpha\\lambda)^{2}-4\\alpha\\theta\\lambda=(\\theta-\\alpha\\lambda)^{2}\\geq0"
+    },
+    {
+      "id": "p10-b12",
+      "page": 10,
+      "display": true,
+      "latex": "|c\\lambda|<1,\\qquad1-\\theta+(\\alpha-c)\\lambda>0,\\qquad1+\\theta-(\\alpha+c)\\lambda>0."
+    },
+    {
+      "id": "p10-b13",
+      "page": 10,
+      "display": false,
+      "latex": "0\\leq c<1-|\\theta-\\alpha|<1.\\mathrm{W h e n}\\theta=0"
+    },
+    {
+      "id": "p10-b13",
+      "page": 10,
+      "display": false,
+      "latex": "c=\\beta=0\\;\\mathrm{a n d}\\;|\\alpha|<1"
+    },
+    {
+      "id": "p10-b13",
+      "page": 10,
+      "display": false,
+      "latex": "1-\\left|\\alpha\\right|>0"
+    },
+    {
+      "id": "p10-b13",
+      "page": 10,
+      "display": false,
+      "latex": "\\theta>0"
+    },
+    {
+      "id": "p10-b13",
+      "page": 10,
+      "display": false,
+      "latex": "0<\\alpha<1-\\theta"
+    },
+    {
+      "id": "p10-b13",
+      "page": 10,
+      "display": false,
+      "latex": "0\\leq c\\leq\\alpha\\theta"
+    },
+    {
+      "id": "p10-b13",
+      "page": 10,
+      "display": false,
+      "latex": "\\lambda=-1"
+    },
+    {
+      "id": "p10-b13",
+      "page": 10,
+      "display": false,
+      "latex": "1-\\theta-\\alpha>0;"
+    },
+    {
+      "id": "p10-b13",
+      "page": 10,
+      "display": false,
+      "latex": "\\lambda=1"
+    },
+    {
+      "id": "p10-b13",
+      "page": 10,
+      "display": false,
+      "latex": "1+\\theta-\\alpha-\\alpha\\theta=(1+\\theta)(1-\\alpha)>0"
+    },
+    {
+      "id": "p10-b13",
+      "page": 10,
+      "display": false,
+      "latex": "D_{\\alpha,\\beta,\\theta}(\\lambda_{i})"
+    },
+    {
+      "id": "p10-b13",
+      "page": 10,
+      "display": false,
+      "latex": "\\left(-1,1\\right)"
+    },
+    {
+      "id": "p10-b14",
+      "page": 10,
+      "display": false,
+      "latex": "Q=\\left[\\xi_{1},\\ldots,\\xi_{n}\\right]"
+    },
+    {
+      "id": "p10-b14",
+      "page": 10,
+      "display": false,
+      "latex": "\\widehat{A}_{i}"
+    },
+    {
+      "id": "p10-b14",
+      "page": 10,
+      "display": false,
+      "latex": "Q^{\\top}{\\widehat{A}}Q=\\operatorname{d i a g}(\\lambda_{1},\\ldots,\\lambda_{n})"
+    },
+    {
+      "id": "p10-b14",
+      "page": 10,
+      "display": false,
+      "latex": "W_{\\alpha,\\beta,\\theta}"
+    },
+    {
+      "id": "p10-b14",
+      "page": 10,
+      "display": false,
+      "latex": "W_{\\alpha,\\beta,\\theta}"
+    },
+    {
+      "id": "p10-b15",
+      "page": 10,
+      "display": true,
+      "latex": "W_{\\alpha,\\beta,\\theta}\\sim\\bigoplus_{i=1}^{n}D_{\\alpha,\\beta,\\theta}(\\lambda_{i})."
+    },
+    {
+      "id": "p10-b16",
+      "page": 10,
+      "display": false,
+      "latex": "W_{\\alpha,\\beta,\\theta}"
+    },
+    {
+      "id": "p10-b16",
+      "page": 10,
+      "display": false,
+      "latex": "3\\times3\\;\\mathrm{b l o c k s}"
+    },
+    {
+      "id": "p10-b16",
+      "page": 10,
+      "display": false,
+      "latex": "(-1,1)"
+    },
+    {
+      "id": "p10-b16",
+      "page": 10,
+      "display": false,
+      "latex": "W_{\\alpha,\\beta,\\theta}"
+    },
+    {
+      "id": "p10-b16",
+      "page": 10,
+      "display": false,
+      "latex": "W_{\\alpha,\\beta,\\theta}"
+    },
+    {
+      "id": "p10-b18",
+      "page": 10,
+      "display": false,
+      "latex": "e_{l}=X_{l}-X_{l-1}"
+    },
+    {
+      "id": "p10-b18",
+      "page": 10,
+      "display": false,
+      "latex": "\\Delta_{I}"
+    },
+    {
+      "id": "p10-b18",
+      "page": 10,
+      "display": false,
+      "latex": "(2)-(5)"
+    },
+    {
+      "id": "p10-b18",
+      "page": 10,
+      "display": false,
+      "latex": "e_{l+1}=\\gamma\\Delta_{l}-\\alpha\\widehat{A}e_{l}-\\beta\\widehat{A}e_{l-1}+\\beta\\theta I_{l-1}"
+    },
+    {
+      "id": "p10-b19",
+      "page": 10,
+      "display": false,
+      "latex": "\\beta I_{l-1}=e_{l}-\\gamma\\Delta_{l-1}+\\alpha\\widehat{A}e_{l-1}"
+    },
+    {
+      "id": "p10-b20",
+      "page": 10,
+      "display": true,
+      "latex": "e_{l+1}\\quad=\\quad(\\theta I-\\alpha\\widehat{A})e_{l}+(\\alpha\\theta-\\beta)\\widehat{A}e_{l-1}+\\gamma(\\Delta_{l}-\\theta\\Delta_{l-1}). .(22)"
+    },
+    {
+      "id": "p10-b22",
+      "page": 10,
+      "display": true,
+      "latex": "e_{l+1}\\quad=\\quad(\\theta I-\\alpha\\widehat{A})e_{l}+(\\alpha\\theta-\\beta)\\widehat{A}e_{l-1}."
+    },
+    {
+      "id": "p10-b23",
+      "page": 10,
+      "display": false,
+      "latex": "\\widehat{A}"
+    },
+    {
+      "id": "p10-b23",
+      "page": 10,
+      "display": false,
+      "latex": "\\widehat{A}\\xi_{i}=\\lambda_{i}\\xi_{i}"
+    },
+    {
+      "id": "p10-b23",
+      "page": 10,
+      "display": false,
+      "latex": "\\lambda_{i}\\in\\left[-1,1\\right]"
+    },
+    {
+      "id": "p10-b23",
+      "page": 10,
+      "display": false,
+      "latex": "\\xi_{i}"
+    },
+    {
+      "id": "p10-b23",
+      "page": 10,
+      "display": false,
+      "latex": "\\xi_{i}"
+    },
+    {
+      "id": "p10-b24",
+      "page": 10,
+      "display": true,
+      "latex": "\\varepsilon_{l+1}^{(i)}=(\\theta-\\alpha\\lambda_{i})\\varepsilon_{l}^{(i)}+(\\alpha\\theta-\\beta)\\lambda_{i}\\varepsilon_{l-1}^{(i)}."
+    },
+    {
+      "id": "p10-b26",
+      "page": 10,
+      "display": true,
+      "latex": "q_{i}(r)=r^{2}-(\\theta-\\alpha\\lambda_{i})r-(\\alpha\\theta-\\beta)\\lambda_{i}."
+    },
+    {
+      "id": "p10-b27",
+      "page": 10,
+      "display": false,
+      "latex": "\\lambda_{i}\\in[-1,1]"
+    },
+    {
+      "id": "p10-b28",
+      "page": 10,
+      "display": true,
+      "latex": "\\begin{aligned}|(\\alpha\\theta-\\beta)\\lambda_{i}|&<1,\\\\1-(\\theta-\\alpha\\lambda_{i})-(\\alpha\\theta-\\beta)\\lambda_{i}&>0,\\\\1+(\\theta-\\alpha\\lambda_{i})-(\\alpha\\theta-\\beta)\\lambda_{i}&>0.\\end{aligned}"
+    },
+    {
+      "id": "p10-b29",
+      "page": 10,
+      "display": false,
+      "latex": "q_{i}"
+    },
+    {
+      "id": "p10-b29",
+      "page": 10,
+      "display": false,
+      "latex": "C>0\\mathrm{a n d}\\rho\\in(0,1)"
+    },
+    {
+      "id": "p10-b29",
+      "page": 10,
+      "display": false,
+      "latex": "\\|e_{l}\\|\\leq C\\rho^{l}"
+    },
+    {
+      "id": "p10-b29",
+      "page": 10,
+      "display": false,
+      "latex": "\\begin{array}{r}{\\sum_{l=1}^{\\infty}\\|e_{l}\\|<\\infty}\\end{array}"
+    },
+    {
+      "id": "p10-b29",
+      "page": 10,
+      "display": false,
+      "latex": "\\begin{array}{r}{X_{l}=X_{0}+\\sum_{j=1}^{l}e_{j}}\\end{array}"
+    },
+    {
+      "id": "p10-b29",
+      "page": 10,
+      "display": false,
+      "latex": "X^{*}"
+    },
+    {
+      "id": "p10-b31",
+      "page": 10,
+      "display": false,
+      "latex": "F_{l}(X)=F(\\widehat{A},X,W_{l})"
+    },
+    {
+      "id": "p10-b32",
+      "page": 10,
+      "display": true,
+      "latex": "\\widetilde{X}_{l}=X_{l}-X^{*},\\qquad\\Phi_{l}=F_{l}(X_{l})-F_{l}(X^{*}),"
+    },
+    {
+      "id": "p10-b34",
+      "page": 10,
+      "display": true,
+      "latex": "Z_{l}=(\\widetilde{X}_{l}^{T},\\widetilde{X}_{l-1}^{T},I_{l}^{T})^{T}."
+    },
+    {
+      "id": "p10-b35",
+      "page": 10,
+      "display": false,
+      "latex": "F_{l}(X^{*})=X^{*}"
+    },
+    {
+      "id": "p10-b35",
+      "page": 10,
+      "display": false,
+      "latex": "l,(X^{*},X^{*},0)"
+    },
+    {
+      "id": "p10-b35",
+      "page": 10,
+      "display": false,
+      "latex": "I_{l+1}=\\widehat{A}(X_{l-1}-X_{l})+\\theta I_{l}"
+    },
+    {
+      "id": "p10-b36",
+      "page": 10,
+      "display": true,
+      "latex": "Z_{l+1}=\\mathcal{A}_{\\mathrm{P I}}Z_{l}+\\gamma\\mathcal{B}\\Phi_{l},\\qquad\\widetilde{X}_{l}=C Z_{l}."
+    },
+    {
+      "id": "p10-b38",
+      "page": 10,
+      "display": true,
+      "latex": "\\Phi_{l}^{T}\\Phi_{l}-(m+M)Z_{l}^{T}C^{T}\\Phi_{l}+m M Z_{l}^{T}C^{T}C Z_{l}\\leq0."
+    },
+    {
+      "id": "p10-b40",
+      "page": 10,
+      "display": true,
+      "latex": "V_{l}=Z_{l}^{T}P Z_{l},\\qquad P\\succ0."
+    },
+    {
+      "id": "p10-b42",
+      "page": 10,
+      "display": true,
+      "latex": "V_{l+1}-V_{l}=\\binom{Z_{l}}{\\Phi_{l}}^{T}\\left(\\begin{matrix}{\\mathcal{A}_{\\mathrm{P I}}^{T}P\\mathcal{A}_{\\mathrm{P I}}-P}&{\\gamma\\mathcal{A}_{\\mathrm{P I}}^{T}P\\mathcal{B}}\\\\ {\\gamma\\mathcal{B}^{T}P\\mathcal{A}_{\\mathrm{P I}}}&{\\gamma^{2}\\mathcal{B}^{T}P\\mathcal{B}}\\end{matrix}\\right)\\binom{Z_{l}}{\\Phi_{l}}\\;."
+    },
+    {
+      "id": "p10-b44",
+      "page": 10,
+      "display": true,
+      "latex": "\\begin{align*}V_{l+1}-V_l&=\\begin{pmatrix}Z_l\\\\ \\Phi_l\\end{pmatrix}^T\\Omega\\begin{pmatrix}Z_l\\\\ \\Phi_l\\end{pmatrix}\\\\&\\quad+\\tau\\big(\\Phi_l^T\\Phi_l-(m+M)Z_l^T C^T\\Phi_l+m M Z_l^T C^T C Z_l\\big)\\\\&\\leq\\begin{pmatrix}Z_l\\\\ \\Phi_l\\end{pmatrix}^T\\Omega\\begin{pmatrix}Z_l\\\\ \\Phi_l\\end{pmatrix}.\\end{align*}"
+    },
+    {
+      "id": "p11-b2",
+      "page": 11,
+      "display": false,
+      "latex": "\\Omega\\prec0."
+    },
+    {
+      "id": "p11-b2",
+      "page": 11,
+      "display": false,
+      "latex": "\\varepsilon>0"
+    },
+    {
+      "id": "p11-b3",
+      "page": 11,
+      "display": true,
+      "latex": "V_{l+1}-V_{l}\\leq-\\varepsilon\\big\\|Z_{l}\\big\\|_{F}^{2}."
+    },
+    {
+      "id": "p11-b4",
+      "page": 11,
+      "display": false,
+      "latex": "\\lambda_{\\operatorname*{m i n}}(P)\\|Z_{l}\\|_{F}^{2}\\leq V_{l}\\leq\\lambda_{\\operatorname*{m a x}}(P)\\|Z_{l}\\|_{F}^{2}"
+    },
+    {
+      "id": "p11-b4",
+      "page": 11,
+      "display": false,
+      "latex": "V_{l}"
+    },
+    {
+      "id": "p11-b4",
+      "page": 11,
+      "display": false,
+      "latex": "Z_{l}.\\mathrm{A}"
+    },
+    {
+      "id": "p11-b4",
+      "page": 11,
+      "display": false,
+      "latex": "V_{l}"
+    },
+    {
+      "id": "p11-b4",
+      "page": 11,
+      "display": false,
+      "latex": "\\left(X^{*},X^{*},0\\right)"
+    },
+    {
+      "id": "p11-b4",
+      "page": 11,
+      "display": false,
+      "latex": "X_{l}\\to X^{*}"
+    },
+    {
+      "id": "p11-b6",
+      "page": 11,
+      "display": false,
+      "latex": "2,\\Delta(\\lambda)\\geq0\\mathrm{~f o r~}|\\lambda|\\leq1"
+    },
+    {
+      "id": "p11-b6",
+      "page": 11,
+      "display": false,
+      "latex": "\\mu_{i2}"
+    },
+    {
+      "id": "p11-b6",
+      "page": 11,
+      "display": false,
+      "latex": "\\mu_{i3}"
+    },
+    {
+      "id": "p11-b6",
+      "page": 11,
+      "display": false,
+      "latex": "\\mu_{i2}+\\mu_{i3}=\\theta-\\alpha\\lambda_{i}"
+    },
+    {
+      "id": "p11-b6",
+      "page": 11,
+      "display": false,
+      "latex": "\\mu_{i2}\\mu_{i3}=(\\beta-\\alpha\\theta)\\lambda_{i}"
+    },
+    {
+      "id": "p11-b6",
+      "page": 11,
+      "display": false,
+      "latex": "E_{i}="
+    },
+    {
+      "id": "p11-b6",
+      "page": 11,
+      "display": false,
+      "latex": "1+\\mu_{i2}^{2}+\\mu_{i3}^{2}=1+\\theta^{2}+\\alpha^{2}\\lambda_{i}^{2}-2\\beta\\lambda_{i}.\\quad\\mathrm{Since}\\quad\\lambda_{1}=1,E_{1}=1+\\theta^{2}+\\alpha^{2}-2\\beta."
+    },
+    {
+      "id": "p11-b6",
+      "page": 11,
+      "display": false,
+      "latex": "\\omega_{i}-\\kappa_{i}=\\dot{(E_{i}-\\lambda_{i}^{2}E_{1})}/E_{1}"
+    },
+    {
+      "id": "p11-b7",
+      "page": 11,
+      "display": true,
+      "latex": "E_{i}-\\lambda_{i}^{2}E_{1}=(1-\\lambda_{i})\\left((1+\\theta^{2})(1+\\lambda_{i})-2\\beta\\lambda_{i}\\right)."
+    },
+    {
+      "id": "p11-b8",
+      "page": 11,
+      "display": false,
+      "latex": "i\\geq2,-1\\leq\\lambda_i<1,\\quad\\mathrm{so}\\quad1-\\lambda_i>0.\\quad\\mathrm{Let}\\quad B(\\lambda)=(1+\\theta^2)(1+\\lambda)-2\\beta\\lambda"
+    },
+    {
+      "id": "p11-b8",
+      "page": 11,
+      "display": false,
+      "latex": "B(-1)=2\\beta\\geq0\\;\\mathrm{a n d}\\;B(1)=2(1+\\theta^{2}-"
+    },
+    {
+      "id": "p11-b8",
+      "page": 11,
+      "display": false,
+      "latex": "\\beta)>0"
+    },
+    {
+      "id": "p11-b8",
+      "page": 11,
+      "display": false,
+      "latex": "'\\theta>0"
+    },
+    {
+      "id": "p11-b8",
+      "page": 11,
+      "display": false,
+      "latex": "\\beta\\leq\\alpha\\theta<\\theta(1-\\theta);\\mathrm{i f}\\theta=0"
+    },
+    {
+      "id": "p11-b8",
+      "page": 11,
+      "display": false,
+      "latex": "\\beta=0"
+    },
+    {
+      "id": "p11-b8",
+      "page": 11,
+      "display": false,
+      "latex": "B(\\lambda)\\geq0\\mathrm{o n}[-1,1]"
+    },
+    {
+      "id": "p11-b8",
+      "page": 11,
+      "display": false,
+      "latex": "\\beta=0"
+    },
+    {
+      "id": "p11-b8",
+      "page": 11,
+      "display": false,
+      "latex": "\\lambda=-1"
+    },
+    {
+      "id": "p11-b8",
+      "page": 11,
+      "display": false,
+      "latex": "E_{i}-\\lambda_{i}^{2}E_{1}\\geq0"
+    },
+    {
+      "id": "p11-b8",
+      "page": 11,
+      "display": false,
+      "latex": "\\omega_{i}\\geq\\kappa_{i}"
+    },
+    {
+      "id": "p11-b10",
+      "page": 11,
+      "display": false,
+      "latex": "I_{1}=0"
+    },
+    {
+      "id": "p11-b10",
+      "page": 11,
+      "display": false,
+      "latex": "I_{l}=P_{l-1}+\\theta I_{l-1}"
+    },
+    {
+      "id": "p11-b10",
+      "page": 11,
+      "display": false,
+      "latex": "l\\geq2"
+    },
+    {
+      "id": "p11-b10",
+      "page": 11,
+      "display": false,
+      "latex": "\\begin{array}{r}{I_{l}=\\sum_{m=1}^{l-1}\\theta^{l-1-m}P_{m}}\\end{array}"
+    },
+    {
+      "id": "p11-b10",
+      "page": 11,
+      "display": false,
+      "latex": "P_{m}=\\widehat{A}(X_{m-1}-X_{m})"
+    },
+    {
+      "id": "p11-b11",
+      "page": 11,
+      "display": true,
+      "latex": "I_{l}=\\widehat{A}\\left(\\sum_{m=1}^{l-1}\\theta^{l-1-m}X_{m-1}-\\sum_{m=1}^{l-1}\\theta^{l-1-m}X_{m}\\right)."
+    },
+    {
+      "id": "p11-b13",
+      "page": 11,
+      "display": true,
+      "latex": "\\sum_{m=1}^{l-1}\\theta^{l-1-m}X_{m-1}=\\theta^{l-2}X_{0}+\\sum_{m=1}^{l-2}\\theta^{l-2-m}X_{m}."
+    },
+    {
+      "id": "p11-b14",
+      "page": 11,
+      "display": false,
+      "latex": "\\theta=1"
+    },
+    {
+      "id": "p11-b14",
+      "page": 11,
+      "display": false,
+      "latex": "I_{l}~="
+    },
+    {
+      "id": "p11-b14",
+      "page": 11,
+      "display": false,
+      "latex": "\\widehat{A}(X_0-X_{l-1})"
+    },
+    {
+      "id": "p11-b17",
+      "page": 11,
+      "display": false,
+      "latex": "X_{l}"
+    },
+    {
+      "id": "p11-b17",
+      "page": 11,
+      "display": false,
+      "latex": "\\mathbf{h}_{i}^{(l)}"
+    },
+    {
+      "id": "p11-b18",
+      "page": 11,
+      "display": true,
+      "latex": "\\operatorname{R L C}(l)={\\frac{\\|X_{l}-X_{l-1}\\|_{F}}{\\|X_{l}\\|_{F}}}."
+    },
+    {
+      "id": "p11-b21",
+      "page": 11,
+      "display": true,
+      "latex": "\\mathcal{E}(X_{l})=\\frac{1}{2}\\sum_{i,j}A_{i j}\\|\\mathbf{h}_{i}^{(l)}-\\mathbf{h}_{j}^{(l)}\\|_{2}^{2}."
+    },
+    {
+      "id": "p11-b26",
+      "page": 11,
+      "display": true,
+      "latex": "\\mathrm{\\tt PairSim}(l)=\\frac{1}{n(n-1)}\\sum_{i=1}^{n}\\sum_{\\substack{j=1\\\\j\\neqi}}^{n}\\cos\\big(\\mathbf{h}_{i}^{(l)},\\mathbf{h}_{j}^{(l)}\\big)."
+    },
+    {
+      "id": "p11-b28",
+      "page": 11,
+      "display": false,
+      "latex": "\\sigma_{k}^{(l)}"
+    },
+    {
+      "id": "p11-b28",
+      "page": 11,
+      "display": false,
+      "latex": "X_{l},\\;r=\\operatorname{r a n k}(X_{l})"
+    },
+    {
+      "id": "p11-b28",
+      "page": 11,
+      "display": false,
+      "latex": "p_{k}^{(l)}="
+    },
+    {
+      "id": "p11-b28",
+      "page": 11,
+      "display": false,
+      "latex": "\\scriptstyle\\sigma_{k}^{\\kappa}/\\sum_{j=1}^{r}\\sigma_{j}^{(l)}"
+    },
+    {
+      "id": "p11-b29",
+      "page": 11,
+      "display": true,
+      "latex": "\\mathrm{E f f R a n k}(l)=\\exp\\left(-\\sum_{k=1}^{r}p_{k}^{(l)}\\log p_{k}^{(l)}\\right)."
+    },
+    {
+      "id": "p11-b32",
+      "page": 11,
+      "display": false,
+      "latex": "\\alpha=0.5"
+    },
+    {
+      "id": "p11-b32",
+      "page": 11,
+      "display": false,
+      "latex": "\\beta\\;\\in\\;[0.04,0.05]"
+    },
+    {
+      "id": "p11-b32",
+      "page": 11,
+      "display": false,
+      "latex": "\\theta\\in[0.08,0.10]"
+    },
+    {
+      "id": "p11-b32",
+      "page": 11,
+      "display": false,
+      "latex": "\\alpha\\in[-0.9,-0.7]and\\beta=\\theta=0"
+    },
+    {
+      "id": "p11-b32",
+      "page": 11,
+      "display": false,
+      "latex": "\\alpha\\;\\in\\;[0.7,0.9]"
+    },
+    {
+      "id": "p11-b32",
+      "page": 11,
+      "display": false,
+      "latex": "\\beta,\\theta"
+    },
+    {
+      "id": "p11-b32",
+      "page": 11,
+      "display": false,
+      "latex": "\\gamma\\in\\left[0,1\\right]"
+    },
+    {
+      "id": "p11-b34",
+      "page": 11,
+      "display": false,
+      "latex": "\\|P_{l}\\|_{F},\\|I_{l}\\|_{F},\\mathrm{a n d}\\|u_{l}\\|_{F}"
+    },
+    {
+      "id": "p12-b3",
+      "page": 12,
+      "display": false,
+      "latex": "(\\|P_{l}\\|_{F},\\|I_{l}\\|_{F})"
+    },
+    {
+      "id": "p12-b3",
+      "page": 12,
+      "display": false,
+      "latex": "\\left(\\|u_{l}\\|_{F}\\right)"
+    },
+    {
+      "id": "p12-b7",
+      "page": 12,
+      "display": false,
+      "latex": "\\scriptstyle{\\mathrm{G C N}}+{\\mathrm{P I}}"
+    }
+  ],
+  "chartData": [
+    {
+      "id": "p6-b4",
+      "page": 6,
+      "rows": 12,
+      "text": "Dataset | Method | 3 | 8 | 16 | 32\nPubMed | DropEdge | 78 | 79 | 79 | 79\nPubMed | PairNorm+PI | 76 | 78 | 79 | 79\nPubMed | GraphNormv2 | 75 | 76 | 75 | 75\nPubMed | PairNorm | 77 | 78 | 79 | 79\nCornell | DropEdge+PI | 73 | 72 | 72 | 72\nCornell | PairNorm | 41 | 41 | 41 | 41\nCornell | GraphNormv2 | 40 | 41 | 41 | 41\nCornell | PairNorm | 58 | 56 | 55 | 54\nSquirrel | DropEdge | 33 | 33 | 33 | 33\nSquirrel | PairNorm | 26 | 27 | 29 | 28\nSquirrel | GraphNormv2+PI | 38 | 35 | 34 | 34"
+    },
+    {
+      "id": "p6-b6",
+      "page": 6,
+      "rows": 23,
+      "text": "Layer | Cora RLC | Cora PairSim | Cora Dirichlet Energy | CiteSeer RLC | CiteSeer PairSim | CiteSeer Dirichlet Energy | PubMed RLC | PubMed PairSim | PubMed PairSim\n0 | 8.0 | 0.25 | 0.1 | 1.0 | 0.25 | 0.1 | 0.1 | 0.1 | 0.1\n1 | 8.0 | 0.25 | 0.1 | 10.0 | 0.25 | 0.1 | 0.1 |   |  \n2 | 8.0 | 0.25 | 0.1 | 15.0 | 0.25 | 0.1 | 0.1 | -0.1 | -0.1\n3 | 8.0 | 0.25 | 0.1 | 12.0 | 0.25 | 0.1 | 0.1 |  \n4 | 8.0 | 0.25 | 0.1 | 11.0 | 0.25 | 0.1 | 0.15 |  \n5 | 8.0 | 0.25 | 0.1 | 13.0 | 0.25 | 0.1 | 0.1 | >1.0\n6 | 8.0 | 0.25 | 0.1 | 14.0 | 0.25 | 0.1 | 0.1 | <0.1\n7 | 8.0 | 0.25 | 0.1 | 16.0 | 0.25 | 0.1 | 0.1 | ~0.1\n8 | 8.0 | 0.25 | 0.1 | 18.0 | 0.25 | 0.1 | 0.1 | ≤0.1\n9 | 8.0 | 0.25 | 0.1 | 19.0 | 0.25 | 0.1 | 0.1 | ≥1.0\n10 | 8.0 | 0.25 | 0.1 | 20.0 | 0.25 | 0.1 | 0.150 |  \n11 | 8.0 | 0.25 | 0.1 | 21.0 | 0.25 | 0.1 | 0.12 |  \n12 | 8.0 | 0.25 | 0.1 | 22.0 | 0.25 | 0.1 | 0.155 |  \n13 | 8.0 | 0.25 | 0.1 | 23.0 | 0.25 | 0.1 | 0.13 |  \n14 | 8.0 | 0.25 | 0.1 | 24.0 | 0.25 | 0.1 | 0.125 |  \n15 | 8.0 | 0.25 | 0.1 | 25.0 | 0.25 | 0.1 | 0.120 |  \n16 | 8.0 | 0.25 | 0.1 | 26.0 | 0.25 | 0.1 | 0.11 |  \n17 | 8.0 | 0.25 | 0.1 | 27.0 | 0.25 | 0.1 | 0.10 |  \n18 | 8.0 | 0.25 | 0.1 | 28.0 | 0.25 | 0.1 | 0.09 |  \n19 | 8.0 | 0.25 | 0.1 | 29.0 | 0.25 | 0.1 | 0.08 |  \n20 | 8.0 | 0.25 | 0.1 | 30.0 | 0.25 | 0.1 | 0.07 |  \n21 | 8.0 | 0.25 | 0.1 | 31.0 | 0.25 | 0.1 | 0.06 |  \n"
+    },
+    {
+      "id": "p7-b2",
+      "page": 7,
+      "rows": 10,
+      "text": "Layer | Cora | CiteSeer | PubMed\n0 | 0.00 | 0.00 | 0.00\n4 | 0.25 | 0.30 | 0.30\n8 | 0.30 | 0.35 | 0.35\n12 | 0.35 | 0.40 | 0.40\n16 | 0.40 | 0.45 | 0.45\n20 | 0.45 | 0.48 | 0.50\n24 | 0.48 | 0.50 | 0.55\n28 | 0.50 | 0.52 | 0.60\n32 | 0.50 | 0.53 | 0.65"
+    },
+    {
+      "id": "p7-b10",
+      "page": 7,
+      "rows": 16,
+      "text": "Dataset | Layer | GCN | GCN+PI | GCNIII | GCNIII+PI\nCiteSeer | 1 | 25 | 50 | 50 | 50\nCiteSeer | 8 | 1 | 1 | 1 | 1\nCiteSeer | 16 | 1 | 1 | 1 | 1\nCiteSeer | 24 | 1 | 1 | 1 | 1\nCiteSeer | 32 | 1 | 1 | 1 | 1\nCora | 1 | 50 | 50 | 50 | 50\nCora | 8 | 1 | 1 | 1 | 1\nCora | 16 | 1 | 1 | 1 | 1\nCora | 24 | 1 | 1 | 1 | 1\nCora | 32 | 1 | 1 | 1 | 1\nPubMed | 1 | 50 | 50 | 50 | 50.5\nPubMed | 8 | 1 | 1 | 1 | 1\nPubMed | 16 | 1 | 1 | 1 | 1\nPubMed | 24 | 1 | 1 | 1 | 1\nPubMed | 32 | 1 | 1 | 1 | 1"
+    },
+    {
+      "id": "p12-b2",
+      "page": 12,
+      "rows": 31,
+      "text": "Layer | No-I | Raw-I | Discrete-I\n1 | 0 | 0 | 0\n2 | 0 | 0 | 0\n3 | 0 | 0 | 0\n4 | 0 | 0 | 0\n5 | 0 | 0 | 0\n6 | 0 | 0 | 0\n7 | 0 | 0 | 0\n8 | 0 | 0 | 0\n9 | 0 | 0 | 0\n10 | 0 | 0 | 0\n11 | 0 | 0 | 0\n12 | 0 | 0 | 0\n13 | 0 | 0 | 0\n14 | 0 | 0 | 0\n15 | 0 | 0 | 0\n16 | 0 | 0 | 0\n17 | 0 | 0 | 0\n18 | 0 | 0 | 0\n19 | 0 | 0 | 0\n20 | 0 | 0 | 0\n21 | 0 | 0 | 0\n22 | 0 | 0 | 0\n23 | 0 | 0 | 0\n24 | 0 | 0 | 0\n25 | 0 | 0 | 0\n26 | 0 | 0 | 0\n27 | 0 | 0 | 0\n28 | 0 | 0 | 0\n29 | 0 | 0 | 0\n30 | 0 | 0 | 0"
+    },
+    {
+      "id": "p12-b4",
+      "page": 12,
+      "rows": 25,
+      "text": "Chart | Depth | Base (%) | Base + PI (%)\nCora | 16 | 30 | 82\nCora | 32 | 20 | 81\nCora | 64 | 20 | 80\nCora | 128 | 18 | 79\nCiteSeer | 16 | 48 | 68\nCiteSeer | 32 | 22 | 68\nCiteSeer | 64 | 23 | 68\nCiteSeer | 128 | 24 | 68\nPubMed | 16 | 40 | 80\nPubMed | 32 | 38 | 80\nPubMed | 64 | 38 | 80\nPubMed | 128 | 40 | 80\nCora | 16 | 82 | 83\nCora | 32 | 82 | 83\nCora | 64 | 82 | 83\nCora | 128 | 83 | 84\nCiteSeer | 16 | 70 | 71\nCiteSeer | 32 | 71 | 71\nCiteSeer | 64 | 71 | 71\nCiteSeer | 128 | 71 | 71\nPubMed | 16 | 80 | 80\nPubMed | 32 | 80 | 80\nPubMed | 64 | 80 | 80\nPubMed | 128 | 80 | 80"
+    }
+  ],
+  "readingOrderSamples": [
+    {
+      "page": 6,
+      "heading": "p6-b11",
+      "headingOrder": 132,
+      "body": "p6-b9",
+      "bodyOrder": 133,
+      "passed": true
+    },
+    {
+      "page": 12,
+      "heading": "p12-b6",
+      "headingOrder": 252,
+      "body": "p12-b7",
+      "bodyOrder": 253,
+      "passed": true
+    }
+  ],
+  "tableSampleScope": "18 numerical cells manually transcribed from original PI Control PDF page 6, Table 2. Other tables require separate review.",
+  "tableSamples": [
+    {
+      "row": "PI-Linear",
+      "values": [
+        "83.10±0.41",
+        "80.03±0.33",
+        "78.47±4.16",
+        "35.79±1.80",
+        "84.25±4.43",
+        "70.40±0.43",
+        "66.78±0.49",
+        "75.88±0.34",
+        "39.69±0.13"
+      ],
+      "observed": "PI-Linear(ours)83.10±0.4180.03±0.3378.47±4.1635.79±1.8084.25±4.4370.40±0.4366.78±0.4975.88±0.3439.69±0.13",
+      "matches": [
+        {
+          "value": "83.10±0.41",
+          "found": true
+        },
+        {
+          "value": "80.03±0.33",
+          "found": true
+        },
+        {
+          "value": "78.47±4.16",
+          "found": true
+        },
+        {
+          "value": "35.79±1.80",
+          "found": true
+        },
+        {
+          "value": "84.25±4.43",
+          "found": true
+        },
+        {
+          "value": "70.40±0.43",
+          "found": true
+        },
+        {
+          "value": "66.78±0.49",
+          "found": true
+        },
+        {
+          "value": "75.88±0.34",
+          "found": true
+        },
+        {
+          "value": "39.69±0.13",
+          "found": true
+        }
+      ]
+    },
+    {
+      "row": "GCNII+PI",
+      "values": [
+        "83.53±0.21",
+        "80.40±0.50",
+        "76.26±0.73",
+        "47.32±2.00",
+        "86.71±1.05",
+        "71.85±0.25",
+        "70.77±0.59",
+        "74.32±0.07",
+        "40.27±0.12"
+      ],
+      "observed": "GCNII+PI(ours)83.53±0.2180.40±0.5076.26±0.7347.32±2.0086.71±1.0571.85±0.2570.77±0.59",
+      "matches": [
+        {
+          "value": "83.53±0.21",
+          "found": true
+        },
+        {
+          "value": "80.40±0.50",
+          "found": true
+        },
+        {
+          "value": "76.26±0.73",
+          "found": true
+        },
+        {
+          "value": "47.32±2.00",
+          "found": true
+        },
+        {
+          "value": "86.71±1.05",
+          "found": true
+        },
+        {
+          "value": "71.85±0.25",
+          "found": true
+        },
+        {
+          "value": "70.77±0.59",
+          "found": true
+        },
+        {
+          "value": "74.32±0.07",
+          "found": false
+        },
+        {
+          "value": "40.27±0.12",
+          "found": false
+        }
+      ]
+    }
+  ]
+}

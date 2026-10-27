@@ -1,0 +1,3716 @@
+{
+  "version": 1,
+  "paperId": "041afaf8-3523-497a-a6f6-230b1e8ee090",
+  "pdfHash": "0e9cd14523ddb04b91236443fd1427a0fd930762cfd6a3ebc0acdacf4782ef80",
+  "ocrProfile": "structurev3-3.7.0-pdfium-144dpi-utf8-crops-v2",
+  "revision": 23,
+  "pages": [
+    {
+      "page": 1,
+      "width": 1224,
+      "height": 1584,
+      "blocks": [
+        {
+          "id": "p1-b0",
+          "page": 1,
+          "order": 1,
+          "sourceOrder": 1,
+          "type": "doc_title",
+          "text": "Higher Order Eigenvalue Lifting for Graph  Convolutional Networks ",
+          "bbox": [
+            0.2361111111111111,
+            0.12247474747474747,
+            0.7598039215686274,
+            0.1691919191919192
+          ],
+          "confidence": 0.9853626787662506
+        },
+        {
+          "id": "p1-b1",
+          "page": 1,
+          "order": 2,
+          "sourceOrder": 2,
+          "type": "text",
+          "text": "Anonymous Author(s)Affiliation Address email ",
+          "bbox": [
+            0.4215686274509804,
+            0.22285353535353536,
+            0.5784313725490197,
+            0.27525252525252525
+          ],
+          "confidence": 0.9868808537721634
+        },
+        {
+          "id": "p1-b2",
+          "page": 1,
+          "order": 3,
+          "sourceOrder": 3,
+          "type": "paragraph_title",
+          "text": "Abstract ",
+          "bbox": [
+            0.4599673202614379,
+            0.31376262626262624,
+            0.5383986928104575,
+            0.32954545454545453
+          ],
+          "confidence": 0.9998905062675476
+        },
+        {
+          "id": "p1-b3",
+          "page": 1,
+          "order": 4,
+          "sourceOrder": 4,
+          "type": "abstract",
+          "text": "Graph Convolutional Networks (GCNs) have demonstrated strong performance in graph-based learning,yet they remain fundamentally limited by the over-smoothing problem as network depth increases. In this paper, we introduce LiftGCN, a novel spectral graph neural network thateffectively alleviates over-smoothing throuh higher-order eigenvalue lifting mechanism. The insights behind LiftGCN lies in identifying that over-smoothing is inherently driven by the convergence of node embeddings toward the subspace governed by the largest eigenvalue of the normalized adjacency matrix. To counteract this, LiftGCN incorporates a linear spectral transformation that amplifies the largest eigenvalues besides one, thereby narrowing the spectral gap and slowing down the convergence of node embeddings. We provide a spectral analysis, proving that our eigenvalue lifting strategy effectively delays the onset of over-smoothing. Extensive experiments on multiple benchmark datasets show that LiftGCN consistently improves representative GCN backbones and enhances deep propagation stability.\n",
+          "bbox": [
+            0.2312091503267974,
+            0.3472222222222222,
+            0.7647058823529411,
+            0.5410353535353535
+          ],
+          "confidence": 0.9568189552852085
+        },
+        {
+          "id": "p1-b4",
+          "page": 1,
+          "order": 5,
+          "sourceOrder": 5,
+          "type": "paragraph_title",
+          "text": "1Introduction ",
+          "bbox": [
+            0.17238562091503268,
+            0.571969696969697,
+            0.309640522875817,
+            0.5845959595959596
+          ],
+          "confidence": 0.9996850788593292
+        },
+        {
+          "id": "p1-b5",
+          "page": 1,
+          "order": 6,
+          "sourceOrder": 6,
+          "type": "text",
+          "text": "16Graph Convolutional Networks (GCNs) have emerged as a foundational and powerful framework 17for representation learning on graph-structured data, achieving remarkable success across a wide 18spectrum of tasks, including node classification, link prediction, and graph-level prediction Zhang 19et al. [2019]. By effectively leveraging the graph adjacency matrix to aggregate and transform features 20from a node's local neighborhood, GCNs have achieved remarkable success across a diverse spectrum 21of tasks. These include fundamental applications such as semi-supervised node classification Yao 22et al. [2019], link prediction Chen et al.[2020b], and graph-level property prediction Liu et al. [2019.23The intuitive yet powerful message-passing paradigm of GCNs bridges spectral graph theory with 24neural network design Hammond et al. [2011], enabling them to capture complex structural paterns 25and deliver state-of-the-art performance on numerous benchmark datasets.",
+          "bbox": [
+            0.14624183006535948,
+            0.6029040404040404,
+            0.8235294117647058,
+            0.7417929292929293
+          ],
+          "confidence": 0.9825172662734986
+        },
+        {
+          "id": "p1-b6",
+          "page": 1,
+          "order": 7,
+          "sourceOrder": 7,
+          "type": "text",
+          "text": "26Despite their impressive performance, GCNs face a fundamental limitation that severely constrains 27their practical utility: the over-smoothing problem (Rusch et al. [2023], Keriven [2022]). As network 28depth increases, node representations tend to become indistinguishable and converge to similar 29values, losing the discriminative power necessary for effective classification Hammond et al. [2011].30This phenomenon arises from the repeated application of graph convolution operations, which 31progressively smooths node features across the graph structure Wu et al.[2023]. Consequently, while 32shallow GCNs often achieve competitive results, deeper architectures - which theoretically should 33capture more complex and long-range dependencies - actually suffer from performance degradation.34This over-smoothing bottleneck not only undermines the potential benefits of deep learning in graph 35domains but also restricts the scalability and expressiveness of GCNs in handling large-scale graphs 36with intricate topological structures.\n",
+          "bbox": [
+            0.14624183006535948,
+            0.7481060606060606,
+            0.8235294117647058,
+            0.8996212121212122
+          ],
+          "confidence": 0.9809143895452673
+        },
+        {
+          "id": "p1-b7",
+          "page": 1,
+          "order": null,
+          "sourceOrder": null,
+          "type": "footer",
+          "text": "Submitted to 40th Conference on Neural Information Processing Systems (NeurIPS 2026). Do not distribute ",
+          "bbox": [
+            0.17238562091503268,
+            0.9248737373737373,
+            0.7418300653594772,
+            0.9356060606060606
+          ],
+          "confidence": 0.954844057559967
+        }
+      ],
+      "elapsedSeconds": 33.03
+    },
+    {
+      "page": 2,
+      "width": 1224,
+      "height": 1584,
+      "blocks": [
+        {
+          "id": "p2-b0",
+          "page": 2,
+          "order": 8,
+          "sourceOrder": 1,
+          "type": "text",
+          "text": "37The underlying mechanism driving over-smoothing can be understood through spectral graph theory 38Royle and Godsil [2001]. When analyzing the propagation dynamics of GCNs, it becomes evident 39that node embeddings progressively converge toward the subspace spanned by the eigenvectors 40corresponding to the largest eigenvalues of the normalized adjacency matrix (Guan and Shi [2025],41Wu et al. [2022]). This convergence occurs because the graph convolution operation essentially acts 42as a low-pass filter, amplifying the low-frequency components of the signal while attenuating the 43high-frequency ones Hammond et al. [2011]. With each successive layer, the node representations 44become increasingly dominated by the principal eigenvector, causing all nodes to adopt similar feature 45values regardless of their structural positions Chen et al. [2023b]. This spectral perspective reveals 46that over-smoothing is not merely an empirical observation but a fundamental consequence of the 47graph convolution's spectral properties, where the spectral gap between the largest and second-largest 48eigenvalues governs the rate of convergence.\n",
+          "bbox": [
+            0.1454248366013072,
+            0.09217171717171717,
+            0.8235294117647058,
+            0.25757575757575757
+          ],
+          "confidence": 0.9841690162817637
+        },
+        {
+          "id": "p2-b1",
+          "page": 2,
+          "order": 9,
+          "sourceOrder": 2,
+          "type": "text",
+          "text": "49To address this fundamental limitation, we introduce LiftGCN, a novel spectral graph neural network 50that effectively mitigates over-smoothing through a higher-order eigenvalue lifting mechanism. Our 51key insight stems from the observation that for the normalized adjacency matrix, the eigenvalues 52(excluding the largest eigenvalue of 1) exhibit a rapid decay pattern on certain datasets. This rapid 53spectral decay causes the information carried by these eigenvalues to converge quickly as the network 54depth increases. To counteract this phenomenon, we incorporate a linear spectral transformation into 55the GCN framework. Through carefully designed parameter settings, this transformation strategically 56amplifies the eigenvalues of the adjacency matrix, thereby narrowing the spectral gap and significantly 57slowing down the convergence of node embeddings. This mechanism effectively delays the onset of 58over-smoothing, enabling the construction of deeper and more expressive graph neural networks.",
+          "bbox": [
+            0.14624183006535948,
+            0.26452020202020204,
+            0.8235294117647058,
+            0.40214646464646464
+          ],
+          "confidence": 0.983052235841751
+        },
+        {
+          "id": "p2-b2",
+          "page": 2,
+          "order": 10,
+          "sourceOrder": 3,
+          "type": "text",
+          "text": "59The remainder of this paper is organized as follows. Section 2 reviews related techniques for 60alleviating over-smoothing in GCNs. Section 3 introduces the eigenvalue lifting technique of the 61proposed LiftGCN. Sections 4 and 5 analyze the spectral properties of LiftGCN, focusing on the 62effects of eigenvalue lifting in second-order and third-order frameworks, respectively. Section 663presents experimental validation of the proposed method on benchmark graph datasets.",
+          "bbox": [
+            0.1454248366013072,
+            0.4090909090909091,
+            0.8227124183006536,
+            0.4779040404040404
+          ],
+          "confidence": 0.9838054776191711
+        },
+        {
+          "id": "p2-b3",
+          "page": 2,
+          "order": 11,
+          "sourceOrder": 4,
+          "type": "paragraph_title",
+          "text": "642Related Works ",
+          "bbox": [
+            0.1454248366013072,
+            0.509469696969697,
+            0.3284313725490196,
+            0.5220959595959596
+          ],
+          "confidence": 0.9807790815830231
+        },
+        {
+          "id": "p2-b4",
+          "page": 2,
+          "order": 12,
+          "sourceOrder": 5,
+          "type": "text",
+          "text": "65There exists many different classes of techniques for coping with the over-smoothing effects of GCNs,66in what follows these techniques are summarized as from the network structure, network weights,67dynamical system, algebraic, and information filter perspectives.\n",
+          "bbox": [
+            0.14460784313725492,
+            0.5460858585858586,
+            0.8243464052287581,
+            0.5871212121212122
+          ],
+          "confidence": 0.9802539547284445
+        },
+        {
+          "id": "p2-b5",
+          "page": 2,
+          "order": 13,
+          "sourceOrder": 6,
+          "type": "text",
+          "text": "68From a network structure perspective, adjusting the graph topology is a key approach to mitigating 69over-smoothing. Chen et al. identify the low information-to-noise ratio in message passing as the 70cause of over-smoothing, proposing the MADReg regularizer and AdaEdge to adaptively edit edges 71Chen et al.[2020a]. Huang et al. introduce DropEdge, which randomly removes edges during training 72to slow convergence Huang et al. [2020]. The trade-off between over-smoothing and over-squashing 73is analyzed by Giraldo et al., leading to the SJLR method for dynamic edge editing based on curvature 74Giraldo et al. [2023]. Further curvature-based rewiring techniques are proposed to address both 75issues, such as the AFR methods by Fesser and Weber Fesser and Weber [2024] and the edge-dropout 76technique CurvDrop by Liu et al.Liu et al. [2023]. Nguyen et al. theoretically link positive curvature 77to over-smoothing, proposing the BORF rewiring algorithm Nguyen et al. [2023].",
+          "bbox": [
+            0.14624183006535948,
+            0.5946969696969697,
+            0.8227124183006536,
+            0.7323232323232324
+          ],
+          "confidence": 0.9773802995681763
+        },
+        {
+          "id": "p2-b6",
+          "page": 2,
+          "order": 14,
+          "sourceOrder": 7,
+          "type": "text",
+          "text": "78From an edge weights perspective, the over-smoothing effect can be weakened by introducing adaptive 79edge weights. Yan et al. introduce relative degree and node-level heterophily - and theoretically 80demonstrate how their interplay defines three distinct cases of node behavior that explain performance 81degradation in both homophilous and heterophilous graphs Yan et al. [2022]. Based on this insight 82they propose GGCN, which incorporates two novel strategies: structure-based edge correction, which 83adjusts edge weights using node degrees, and feature-based edge correction, which learns signed 84edge weights from node features to model both positive and negative influences.",
+          "bbox": [
+            0.14624183006535948,
+            0.7392676767676768,
+            0.8227124183006536,
+            0.8358585858585859
+          ],
+          "confidence": 0.9639284270150321
+        },
+        {
+          "id": "p2-b7",
+          "page": 2,
+          "order": 15,
+          "sourceOrder": 8,
+          "type": "text",
+          "text": "85From a dynamical system perspective, over-smoothing can be mitigated by modifying the aggregation 86process. Maskey et al. introduce Fractional Laplacian Neural ODEs (FLODE), using learnable 87fractional graph Laplacians to adaptively control representation smoothness Maskey et al. [2023].88Zhou et al. propose Aggregation over Compact Manifolds (ACM), performing aggregation on 89non-contracting manifolds to prevent feature collapse Zhou et al. [2024]. Chen et al. address over",
+          "bbox": [
+            0.14624183006535948,
+            0.8428030303030303,
+            0.8243464052287581,
+            0.9116161616161617
+          ],
+          "confidence": 0.9811256051063537
+        },
+        {
+          "id": "p2-b8",
+          "page": 2,
+          "order": null,
+          "sourceOrder": null,
+          "type": "number",
+          "text": "2",
+          "bbox": [
+            0.494281045751634,
+            0.9375,
+            0.5024509803921569,
+            0.9463383838383839
+          ],
+          "confidence": 0.9997491240501404
+        }
+      ],
+      "elapsedSeconds": 42.19
+    },
+    {
+      "page": 3,
+      "width": 1224,
+      "height": 1584,
+      "blocks": [
+        {
+          "id": "p3-b0",
+          "page": 3,
+          "order": 16,
+          "sourceOrder": 1,
+          "type": "text",
+          "text": "90smoothing in deep GCNs with AGNN, which alternates Graph Convolutional Layers with Graph 91Embedding Layers to preserve discriminative information Chen et al. [2023a].",
+          "bbox": [
+            0.14460784313725492,
+            0.09217171717171717,
+            0.8227124183006536,
+            0.11931818181818182
+          ],
+          "confidence": 0.9799470901489258
+        },
+        {
+          "id": "p3-b1",
+          "page": 3,
+          "order": 17,
+          "sourceOrder": 2,
+          "type": "text",
+          "text": "92From an algebraic perspective, over-smoothing is mitigated by enriching the diffusion process. Chen 93et al. propose GCNII, a deep GCN architecture that combats over-smoothing via initial residual 94connections and identity mapping, enabling an expressive polynomial filter Chen et al. [2020c].95Bodnar et al. introduce Neural Sheaf Diffusion (NSD), a framework leveraging cellular sheaf theory 96to define a more expressive diffusion via a sheaf Laplacian Bodnar et al. [2022].",
+          "bbox": [
+            0.14460784313725492,
+            0.1268939393939394,
+            0.8235294117647058,
+            0.19570707070707072
+          ],
+          "confidence": 0.9751507818698884
+        },
+        {
+          "id": "p3-b2",
+          "page": 3,
+          "order": 18,
+          "sourceOrder": 3,
+          "type": "text",
+          "text": "97From an information filter perspective, innovative filtering designs can alleviate over-smoothing. Bo 98et al. propose FAGCN, which uses a self-gating mechanism to adaptively integrate low-frequency,99high-frequency, and raw features into a unified filter Bo et al. [2021]. Huang et al. introduce the 100Cross-Space Adaptive Filter (CSF), which unifies a topology-based low-pass filter with a node101attribute-based high-pass filter via multiple-kernel learning Huang et al. [2024].",
+          "bbox": [
+            0.1437908496732026,
+            0.20265151515151514,
+            0.8235294117647058,
+            0.27146464646464646
+          ],
+          "confidence": 0.9798611342906952
+        },
+        {
+          "id": "p3-b3",
+          "page": 3,
+          "order": 19,
+          "sourceOrder": 4,
+          "type": "text",
+          "text": "102Building upon these diverse approaches, we address the core spectral origin of over-smoothing. Unlike 103methods that modify graph structure or aggregation dynamics, we propose LiftGCN from a novel 104spectral transformation perspective. It applies a principled linear transformation to directly amplify 105specific eigenvalues of the aggregation matrix, thereby narrowing the spectral gap and delaying the 106convergence towards over-smoothing. This provides a theoretically grounded and computationally 107efficient alternative to existing mitigation strategies.\n",
+          "bbox": [
+            0.14133986928104575,
+            0.2784090909090909,
+            0.8227124183006536,
+            0.3611111111111111
+          ],
+          "confidence": 0.9810718148946762
+        },
+        {
+          "id": "p3-b4",
+          "page": 3,
+          "order": 20,
+          "sourceOrder": 5,
+          "type": "paragraph_title",
+          "text": "1083LiftGCN for Eigenvalue Lifting ",
+          "bbox": [
+            0.14133986928104575,
+            0.3813131313131313,
+            0.4681372549019608,
+            0.39646464646464646
+          ],
+          "confidence": 0.989870548248291
+        },
+        {
+          "id": "p3-b5",
+          "page": 3,
+          "order": 21,
+          "sourceOrder": 6,
+          "type": "text",
+          "text": "109The classic GCN has the following form:",
+          "bbox": [
+            0.14133986928104575,
+            0.41224747474747475,
+            0.44362745098039214,
+            0.42487373737373735
+          ],
+          "confidence": 0.9745804071426392
+        },
+        {
+          "id": "p3-b6",
+          "page": 3,
+          "order": 22,
+          "sourceOrder": 7,
+          "type": "formula",
+          "text": "Hl+1 = σ(AHlWl),A= D−1AD− 1,",
+          "bbox": [
+            0.4125816993464052,
+            0.43497474747474746,
+            0.5808823529411765,
+            0.4703282828282828
+          ],
+          "confidence": 0.873319149017334
+        },
+        {
+          "id": "p3-b7",
+          "page": 3,
+          "order": 23,
+          "sourceOrder": 8,
+          "type": "text",
+          "text": "110where Hl ∈ R×d is the embedding matrix at layer l, Wl ∈ Rd×d is the trainable weight matrix 111at layer l, and σ(⋅) is the activationfunction. Here, A ∈ R× is the adjacency matrix of a given 112graph (A) with positive diagonal entries, and D = diag(d1, d2, . ,dn) is the diagonal degree 113\n114characterizes its spectrum, as stated below.\n",
+          "bbox": [
+            0.14133986928104575,
+            0.48042929292929293,
+            0.8218954248366013,
+            0.5542929292929293
+          ],
+          "confidence": 0.9683004683918424
+        },
+        {
+          "id": "p3-b8",
+          "page": 3,
+          "order": 24,
+          "sourceOrder": 9,
+          "type": "text",
+          "text": "115Proposition1.Seneta[2006] For Agivenin(2), itholds AD1/21= D1/21and ρ(A) =1.Moreover,116if G(A) is connected, then D1/21 is the unique eigenvector of A corresponding to eigenvalue 1.",
+          "bbox": [
+            0.14215686274509803,
+            0.5612373737373737,
+            0.8243464052287581,
+            0.5928030303030303
+          ],
+          "confidence": 0.9728743433952332
+        },
+        {
+          "id": "p3-b9",
+          "page": 3,
+          "order": 25,
+          "sourceOrder": 10,
+          "type": "text",
+          "text": "117When G(A) is connected, we denote the eigenvalues of A by1 1 = λ1 > λ2 ≥ λ3 ≥ · ·· ≥ λn.118In algebraic graph theory, the difference between the two largest eigenvalues, λ1 – λ2, is called 119the spectral gap of g(A) Royle and Godsil [2001] and is commonly used to characterize graph 120connectivity. Since λ1 = 1 for A in GCN, our analysis mainly depends on λ2.",
+          "bbox": [
+            0.14133986928104575,
+            0.6060606060606061,
+            0.8235294117647058,
+            0.6660353535353535
+          ],
+          "confidence": 0.9683201089501381
+        },
+        {
+          "id": "p3-b10",
+          "page": 3,
+          "order": 26,
+          "sourceOrder": 11,
+          "type": "text",
+          "text": "121For large-scale real-world networks, structural sparsity typically leads to a rapid decay of eigenvalues 122as their index increases, which in turn accelerates the loss of information associated with the leading 123eigenvalues. As shown in Fig. 1a, 7 out of 13 examined datasets exhibit such a sharp decline,124highlighting a primary spectral cause of over-smoothing. To further illustrate this phenomenon, we 125construct a series of symmetric Erdös-Rényi random graphs G(n, p) 2 and compute their second126largest eigenvalues λ2(·);the relationship between the connection probability p and λ2(·) is shown in 127Fig. 1b. The results show that λ2(g(n, p)) remains very small relative to the largest eigenvalue 1;128even for graphs with n ≥ 4000 nodes, λ2 can be as low as 0.1. This large spectral gap implies that 129any input signal processed by a GCN rapidly converges toward the subspace spanned by eigenvectors 130associated with eigenvalues smaller than 1, thereby intensifying the over-smoothing effect (Yang et al.131[2020], Huang et al. [2020]], Chen et al. [2020a], Chen et al. [2023a]).",
+          "bbox": [
+            0.14215686274509803,
+            0.672979797979798,
+            0.8235294117647058,
+            0.8244949494949495
+          ],
+          "confidence": 0.9789406088265505
+        },
+        {
+          "id": "p3-b11",
+          "page": 3,
+          "order": 27,
+          "sourceOrder": 12,
+          "type": "text",
+          "text": "132To mitigate this over-smoothing effect, the key idea underlying the proposed LiftGCN is to amplify 133the largest eigenvalues of the normalized adjacency matrix A, while carefully preserving the essential 134information encoded in its eigenspaces via a well-designed mathematical transformation.",
+          "bbox": [
+            0.14133986928104575,
+            0.8308080808080808,
+            0.8227124183006536,
+            0.8743686868686869
+          ],
+          "confidence": 0.9816970427831014
+        },
+        {
+          "id": "p3-b12",
+          "page": 3,
+          "order": null,
+          "sourceOrder": null,
+          "type": "formula_number",
+          "text": "(1)",
+          "bbox": [
+            0.803921568627451,
+            0.43876262626262624,
+            0.8227124183006536,
+            0.45075757575757575
+          ],
+          "confidence": 0.9928520321846008
+        },
+        {
+          "id": "p3-b13",
+          "page": 3,
+          "order": null,
+          "sourceOrder": null,
+          "type": "formula_number",
+          "text": "(2)",
+          "bbox": [
+            0.8047385620915033,
+            0.45896464646464646,
+            0.8227124183006536,
+            0.47095959595959597
+          ],
+          "confidence": 0.994103193283081
+        },
+        {
+          "id": "p3-b14",
+          "page": 3,
+          "order": 28,
+          "sourceOrder": null,
+          "type": "footnote",
+          "text": "1Ahas n eigenvalues and an orthonormal eigenbasis since A is symmetric.\n2Agraph in G(n, p) has nodes,andeach pairof nodes is connectedindependently with probability p.Bollobás[211]",
+          "bbox": [
+            0.1895424836601307,
+            0.8863636363636364,
+            0.8218954248366013,
+            0.9116161616161617
+          ],
+          "confidence": 0.9147038161754608
+        },
+        {
+          "id": "p3-b15",
+          "page": 3,
+          "order": null,
+          "sourceOrder": null,
+          "type": "number",
+          "text": "3",
+          "bbox": [
+            0.494281045751634,
+            0.9375,
+            0.5016339869281046,
+            0.9463383838383839
+          ],
+          "confidence": 0.9998430013656616
+        }
+      ],
+      "elapsedSeconds": 35.36
+    },
+    {
+      "page": 4,
+      "width": 1224,
+      "height": 1584,
+      "blocks": [
+        {
+          "id": "p4-b0",
+          "page": 4,
+          "order": 29,
+          "sourceOrder": null,
+          "type": "chart",
+          "text": "Distribution of Eigenvalues for 13 Datasets \n0.9心\n\n0.8\n\n 0.70.6=-Wisconsin Actor Texas Cornell Squirrel Chameleon \n\nora \n\n0.5CteSeer \n\nPubMed \n\n-Penn94\n\n0.4…enius \n\nNELL \n\narXiv-year \n\n102030405060708090100\nEigenvalue Index \n",
+          "bbox": [
+            0.1895424836601307,
+            0.09343434343434344,
+            0.46895424836601307,
+            0.27335858585858586
+          ],
+          "confidence": 0.9238045978726763
+        },
+        {
+          "id": "p4-b1",
+          "page": 4,
+          "order": 30,
+          "sourceOrder": null,
+          "type": "figure_title",
+          "text": "(a) Largest eigenvalues.",
+          "bbox": [
+            0.2704248366013072,
+            0.2815656565656566,
+            0.3946078431372549,
+            0.29292929292929293
+          ],
+          "confidence": 0.9798923134803772
+        },
+        {
+          "id": "p4-b2",
+          "page": 4,
+          "order": 31,
+          "sourceOrder": null,
+          "type": "chart",
+          "text": "0.18n=1000nodes n-2000nodes.n-3000 nodes.0.16n-4000 nodes.0.120.080.060.10.1140C 口□\n0.04\n0.02🌟\n0\n0.10.20.30.40.50.60.70.80.9Connecting probability p for symmetric random graph G(n,p).",
+          "bbox": [
+            0.5155228758169934,
+            0.09974747474747475,
+            0.798202614379085,
+            0.27335858585858586
+          ],
+          "confidence": 0.8746090576052665
+        },
+        {
+          "id": "p4-b3",
+          "page": 4,
+          "order": 32,
+          "sourceOrder": null,
+          "type": "figure_title",
+          "text": "(b) Algebraic connectivity.",
+          "bbox": [
+            0.5923202614379085,
+            0.2815656565656566,
+            0.7328431372549019,
+            0.2922979797979798
+          ],
+          "confidence": 0.9159339070320129
+        },
+        {
+          "id": "p4-b4",
+          "page": 4,
+          "order": 33,
+          "sourceOrder": null,
+          "type": "figure_title",
+          "text": "Figure 1: Spectral properties of representative graphs. Left: distribution of the largest eigenvalues on typical datasets. Right: relation between the edge probability p in random graphs G(n, p) and algebraic connectivity.",
+          "bbox": [
+            0.1707516339869281,
+            0.30113636363636365,
+            0.8218954248366013,
+            0.32702020202020204
+          ],
+          "confidence": 0.9592620730400085
+        },
+        {
+          "id": "p4-b5",
+          "page": 4,
+          "order": 34,
+          "sourceOrder": 1,
+          "type": "text",
+          "text": "135We use σ(f (A, H, Wl)), where σ(·) is the activation function, to represent a general graph convolu136tion layer. Based on this form, the proposed LiftGCN is defined as ",
+          "bbox": [
+            0.14133986928104575,
+            0.3522727272727273,
+            0.8243464052287581,
+            0.380050505050505
+          ],
+          "confidence": 0.9722083359956741
+        },
+        {
+          "id": "p4-b6",
+          "page": 4,
+          "order": 35,
+          "sourceOrder": 2,
+          "type": "formula",
+          "text": "Hl+1 = A((1 − α − β)Hl + αHl−1 + βHl−2 + γH0) + wl · σ(f (A, Hl, Wl)),",
+          "bbox": [
+            0.21650326797385622,
+            0.38762626262626265,
+            0.7467320261437909,
+            0.40404040404040403
+          ],
+          "confidence": 0.944476842880249
+        },
+        {
+          "id": "p4-b7",
+          "page": 4,
+          "order": 36,
+          "sourceOrder": 3,
+          "type": "text",
+          "text": "137 where α, β, γ are pre-defined parameters satisfying ",
+          "bbox": [
+            0.14215686274509803,
+            0.4109848484848485,
+            0.511437908496732,
+            0.42424242424242425
+          ],
+          "confidence": 0.9739193916320801
+        },
+        {
+          "id": "p4-b8",
+          "page": 4,
+          "order": 37,
+          "sourceOrder": 4,
+          "type": "formula",
+          "text": "β(1 + θ) + αθ > 0",
+          "bbox": [
+            0.4084967320261438,
+            0.4311868686868687,
+            0.5563725490196079,
+            0.4438131313131313
+          ],
+          "confidence": 0.9006179571151733
+        },
+        {
+          "id": "p4-b9",
+          "page": 4,
+          "order": 38,
+          "sourceOrder": 5,
+          "type": "text",
+          "text": "138 for some θ* ∈ (0, 1), together with one of the following two conditions ",
+          "bbox": [
+            0.14052287581699346,
+            0.45202020202020204,
+            0.6405228758169934,
+            0.4659090909090909
+          ],
+          "confidence": 0.9313095211982727
+        },
+        {
+          "id": "p4-b10",
+          "page": 4,
+          "order": 39,
+          "sourceOrder": 6,
+          "type": "formula",
+          "text": "α ∈ [−1, 0] and β ∈ [0, 1].α ∈ [0, 1] and β ∈ [−1/2, 1].",
+          "bbox": [
+            0.39869281045751637,
+            0.47285353535353536,
+            0.5939542483660131,
+            0.5044191919191919
+          ],
+          "confidence": 0.9324047565460205
+        },
+        {
+          "id": "p4-b11",
+          "page": 4,
+          "order": 40,
+          "sourceOrder": 7,
+          "type": "text",
+          "text": "139Moreover, w is an increasing sequence for signal passing: when the network is shallow, LiftGCN 140relies more on the linear filter to preserve structural information.\n",
+          "bbox": [
+            0.14133986928104575,
+            0.5176767676767676,
+            0.8227124183006536,
+            0.5448232323232324
+          ],
+          "confidence": 0.9795524179935455
+        },
+        {
+          "id": "p4-b12",
+          "page": 4,
+          "order": 41,
+          "sourceOrder": 8,
+          "type": "text",
+          "text": "141We emphasize the following heuristics behind the design of (3).",
+          "bbox": [
+            0.14215686274509803,
+            0.55239898989899,
+            0.5906862745098039,
+            0.5656565656565656
+          ],
+          "confidence": 0.9777228832244873
+        },
+        {
+          "id": "p4-b13",
+          "page": 4,
+          "order": 42,
+          "sourceOrder": 9,
+          "type": "text",
+          "text": "142First, the term (1 − α − β)Hl + αHl−1 + βHl−2 is called the filtering term. In the next section,143we show that under the above settings of α, β, this term amplifies the eigenvalues of A lying in the 144interval (θ*, 1) while keeping the spectral radius of A unchanged.\n",
+          "bbox": [
+            0.14215686274509803,
+            0.57260101010101,
+            0.8235294117647058,
+            0.6199494949494949
+          ],
+          "confidence": 0.9695513149102529
+        },
+        {
+          "id": "p4-b14",
+          "page": 4,
+          "order": 43,
+          "sourceOrder": 10,
+          "type": "text",
+          "text": "145Second,the term γH0 is called the preserving term, since it prevents the final output HL from 146deviating too far from H0. Hence, the above parameter setting requires γ (= 0.",
+          "bbox": [
+            0.14133986928104575,
+            0.6262626262626263,
+            0.8227124183006536,
+            0.6546717171717171
+          ],
+          "confidence": 0.9722029119729996
+        },
+        {
+          "id": "p4-b15",
+          "page": 4,
+          "order": 44,
+          "sourceOrder": 11,
+          "type": "text",
+          "text": "147Third, the parameter β is required to satisfy β > 0, so the filtering term becomes a third-order 148linear filter. In the next section, we show that if the order of the filtering term is smaller than 3, the 149above eigenvalue amplification effect becomes weaker. Thus, order 3 provides a balance between 150amplification and computational cost.\n",
+          "bbox": [
+            0.14133986928104575,
+            0.6609848484848485,
+            0.8227124183006536,
+            0.7165404040404041
+          ],
+          "confidence": 0.9774419739842415
+        },
+        {
+          "id": "p4-b16",
+          "page": 4,
+          "order": 45,
+          "sourceOrder": 12,
+          "type": "text",
+          "text": "151In the next section, we explain mathematically why the above parameter choices alleviate over152smoothing by amplifying the eigenvalues of A.\n",
+          "bbox": [
+            0.14133986928104575,
+            0.7234848484848485,
+            0.8235294117647058,
+            0.7531565656565656
+          ],
+          "confidence": 0.9833249896764755
+        },
+        {
+          "id": "p4-b17",
+          "page": 4,
+          "order": 46,
+          "sourceOrder": 13,
+          "type": "paragraph_title",
+          "text": "153 4 Spectral Properties of LiftGCN ",
+          "bbox": [
+            0.14052287581699346,
+            0.7733585858585859,
+            0.4665032679738562,
+            0.7872474747474747
+          ],
+          "confidence": 0.9734910130500793
+        },
+        {
+          "id": "p4-b18",
+          "page": 4,
+          "order": 47,
+          "sourceOrder": 14,
+          "type": "text",
+          "text": "154 As a linear approximation of LiftGCN, we omit the activation σ(·) in (3) and obtain ",
+          "bbox": [
+            0.14052287581699346,
+            0.8036616161616161,
+            0.7214052287581699,
+            0.8169191919191919
+          ],
+          "confidence": 0.9436639547348022
+        },
+        {
+          "id": "p4-b19",
+          "page": 4,
+          "order": 48,
+          "sourceOrder": 15,
+          "type": "formula",
+          "text": "Hl+1 = A((1 − α − β)Hl + αHl−1 + βHl−2 + γH0),",
+          "bbox": [
+            0.2957516339869281,
+            0.8251262626262627,
+            0.6666666666666666,
+            0.8402777777777778
+          ],
+          "confidence": 0.9517173171043396
+        },
+        {
+          "id": "p4-b20",
+          "page": 4,
+          "order": 49,
+          "sourceOrder": 16,
+          "type": "text",
+          "text": "155 whose lifted form can be represented as ",
+          "bbox": [
+            0.14215686274509803,
+            0.8484848484848485,
+            0.4354575163398693,
+            0.860479797979798
+          ],
+          "confidence": 0.984745979309082
+        },
+        {
+          "id": "p4-b21",
+          "page": 4,
+          "order": 50,
+          "sourceOrder": 17,
+          "type": "formula",
+          "text": "Hl+1Hl AH0$ Hl−1Hl = Aα,βHl−1Hl−2+γoo ",
+          "bbox": [
+            0.3161764705882353,
+            0.8680555555555556,
+            0.6486928104575164,
+            0.9122474747474747
+          ],
+          "confidence": 0.8584430694580079
+        },
+        {
+          "id": "p4-b22",
+          "page": 4,
+          "order": null,
+          "sourceOrder": null,
+          "type": "formula_number",
+          "text": "(3)",
+          "bbox": [
+            0.803921568627451,
+            0.3907828282828283,
+            0.8227124183006536,
+            0.4034090909090909
+          ],
+          "confidence": 0.9961110949516296
+        },
+        {
+          "id": "p4-b23",
+          "page": 4,
+          "order": null,
+          "sourceOrder": null,
+          "type": "formula_number",
+          "text": "(4)",
+          "bbox": [
+            0.803921568627451,
+            0.4318181818181818,
+            0.8227124183006536,
+            0.4438131313131313
+          ],
+          "confidence": 0.9939172267913818
+        },
+        {
+          "id": "p4-b24",
+          "page": 4,
+          "order": null,
+          "sourceOrder": null,
+          "type": "formula_number",
+          "text": "(5)",
+          "bbox": [
+            0.803921568627451,
+            0.4734848484848485,
+            0.8227124183006536,
+            0.48547979797979796
+          ],
+          "confidence": 0.997422456741333
+        },
+        {
+          "id": "p4-b25",
+          "page": 4,
+          "order": null,
+          "sourceOrder": null,
+          "type": "formula_number",
+          "text": "(6)",
+          "bbox": [
+            0.803921568627451,
+            0.4911616161616162,
+            0.8218954248366013,
+            0.5031565656565656
+          ],
+          "confidence": 0.9976401329040527
+        },
+        {
+          "id": "p4-b26",
+          "page": 4,
+          "order": null,
+          "sourceOrder": null,
+          "type": "formula_number",
+          "text": "(7)",
+          "bbox": [
+            0.803921568627451,
+            0.8276515151515151,
+            0.8227124183006536,
+            0.8396464646464646
+          ],
+          "confidence": 0.9980934262275696
+        },
+        {
+          "id": "p4-b27",
+          "page": 4,
+          "order": null,
+          "sourceOrder": null,
+          "type": "formula_number",
+          "text": "(8)",
+          "bbox": [
+            0.803921568627451,
+            0.88510101010101,
+            0.8227124183006536,
+            0.8970959595959596
+          ],
+          "confidence": 0.9985852837562561
+        },
+        {
+          "id": "p4-b28",
+          "page": 4,
+          "order": null,
+          "sourceOrder": null,
+          "type": "number",
+          "text": "4",
+          "bbox": [
+            0.494281045751634,
+            0.9375,
+            0.5024509803921569,
+            0.9463383838383839
+          ],
+          "confidence": 0.9996306896209717
+        }
+      ],
+      "elapsedSeconds": 20.61
+    },
+    {
+      "page": 5,
+      "width": 1224,
+      "height": 1584,
+      "blocks": [
+        {
+          "id": "p5-b0",
+          "page": 5,
+          "order": 51,
+          "sourceOrder": 1,
+          "type": "text",
+          "text": "156 where ",
+          "bbox": [
+            0.14133986928104575,
+            0.09343434343434344,
+            0.21486928104575165,
+            0.10353535353535354
+          ],
+          "confidence": 0.9908309578895569
+        },
+        {
+          "id": "p5-b1",
+          "page": 5,
+          "order": 52,
+          "sourceOrder": 2,
+          "type": "formula",
+          "text": "(1 − α − β)A αA βA Aα,β =I O O O I O ",
+          "bbox": [
+            0.34068627450980393,
+            0.10984848484848485,
+            0.6225490196078431,
+            0.1553030303030303
+          ],
+          "confidence": 0.8377032809787326
+        },
+        {
+          "id": "p5-b2",
+          "page": 5,
+          "order": 53,
+          "sourceOrder": 3,
+          "type": "text",
+          "text": "157 By introducing Aα,β, the filtering behavior of GCNs under the proposed lifting technique is governed 158 not by A, but by the eigenvalues of Aα,β.\n",
+          "bbox": [
+            0.14133986928104575,
+            0.1672979797979798,
+            0.8227124183006536,
+            0.19886363636363635
+          ],
+          "confidence": 0.9308120906352997
+        },
+        {
+          "id": "p5-b3",
+          "page": 5,
+          "order": 54,
+          "sourceOrder": 4,
+          "type": "text",
+          "text": "159As a concise heuristic, the subsequent analysis will demonstrate that:",
+          "bbox": [
+            0.14215686274509803,
+            0.2058080808080808,
+            0.6258169934640523,
+            0.21906565656565657
+          ],
+          "confidence": 0.9829044938087463
+        },
+        {
+          "id": "p5-b4",
+          "page": 5,
+          "order": 55,
+          "sourceOrder": 5,
+          "type": "text",
+          "text": "Ha) The eigenvectors of Aα,β are similar to those of A, implying that LiftGCN preserves the structural characteristics of the original eigenspaces.\n",
+          "bbox": [
+            0.1968954248366013,
+            0.2316919191919192,
+            0.8218954248366013,
+            0.26073232323232326
+          ],
+          "confidence": 0.9659803211688995
+        },
+        {
+          "id": "p5-b5",
+          "page": 5,
+          "order": 56,
+          "sourceOrder": 6,
+          "type": "text",
+          "text": "Hb) The eigenvalues of Aα,β are larger than those of A except for the largest one, enabling LiftGCN to enhance critical information in the graph signal.\n",
+          "bbox": [
+            0.1968954248366013,
+            0.26704545454545453,
+            0.8218954248366013,
+            0.2948232323232323
+          ],
+          "confidence": 0.9568389654159546
+        },
+        {
+          "id": "p5-b6",
+          "page": 5,
+          "order": 57,
+          "sourceOrder": 7,
+          "type": "text",
+          "text": "Hc) LiftGCN with β (= 0 amplifies the eigenvalues of A more strongly than the case of β = 0,which highlights the advantage of adopting the third-order LiftGCN.",
+          "bbox": [
+            0.1977124183006536,
+            0.30303030303030304,
+            0.8227124183006536,
+            0.3301767676767677
+          ],
+          "confidence": 0.9396849274635315
+        },
+        {
+          "id": "p5-b7",
+          "page": 5,
+          "order": 58,
+          "sourceOrder": 8,
+          "type": "text",
+          "text": "166To confirm the above claims, we define ",
+          "bbox": [
+            0.14215686274509803,
+            0.3428030303030303,
+            0.43218954248366015,
+            0.3547979797979798
+          ],
+          "confidence": 0.9834606349468231
+        },
+        {
+          "id": "p5-b8",
+          "page": 5,
+          "order": 59,
+          "sourceOrder": 9,
+          "type": "formula",
+          "text": "(1 − α − β)θ αθβθCθ =100010",
+          "bbox": [
+            0.35375816993464054,
+            0.3630050505050505,
+            0.6070261437908496,
+            0.4027777777777778
+          ],
+          "confidence": 0.9718388252788119
+        },
+        {
+          "id": "p5-b9",
+          "page": 5,
+          "order": 60,
+          "sourceOrder": 10,
+          "type": "text",
+          "text": "167and let the eigenvalues of A be λ1 = 1 > λ2 ≥ λ3 ≥ …· ≥ λn with corresponding eigenvectors 168ξ1 = D1/21, ξ2, …, ξn.In what follows, we explain heuristics Ha, Hb, and Hc through the spectral 169 analysis of Aα,β, and all related proofs are deferred to Appendix A.",
+          "bbox": [
+            0.14133986928104575,
+            0.4154040404040404,
+            0.8227124183006536,
+            0.461489898989899
+          ],
+          "confidence": 0.9546220183372498
+        },
+        {
+          "id": "p5-b10",
+          "page": 5,
+          "order": 61,
+          "sourceOrder": 11,
+          "type": "paragraph_title",
+          "text": "1704.1 Explanation for Heuristic Ha ",
+          "bbox": [
+            0.14133986928104575,
+            0.47853535353535354,
+            0.4150326797385621,
+            0.49053030303030304
+          ],
+          "confidence": 0.9775365889072418
+        },
+        {
+          "id": "p5-b11",
+          "page": 5,
+          "order": 62,
+          "sourceOrder": 12,
+          "type": "text",
+          "text": "171Tobegin, we providetwo propositions that connect the eigenvectors of Aα,β with those of A.",
+          "bbox": [
+            0.14052287581699346,
+            0.5031565656565656,
+            0.7826797385620915,
+            0.5195707070707071
+          ],
+          "confidence": 0.9484850168228149
+        },
+        {
+          "id": "p5-b12",
+          "page": 5,
+          "order": 63,
+          "sourceOrder": 13,
+          "type": "text",
+          "text": "172Proposition 2. Any eigenvector ζ of Aα,β can be written as ζ =η ⊗ ξ, where ξ is an eigenvector of 173A with eigenvalue λ and η is an eigenvector of Cλ.\n",
+          "bbox": [
+            0.14133986928104575,
+            0.5271464646464646,
+            0.8243464052287581,
+            0.5587121212121212
+          ],
+          "confidence": 0.9664722383022308
+        },
+        {
+          "id": "p5-b13",
+          "page": 5,
+          "order": 64,
+          "sourceOrder": 14,
+          "type": "text",
+          "text": "174Using the decomposition in Proposition 2, we define the following map ",
+          "bbox": [
+            0.14215686274509803,
+            0.5700757575757576,
+            0.6437908496732027,
+            0.5839646464646465
+          ],
+          "confidence": 0.9715562760829926
+        },
+        {
+          "id": "p5-b14",
+          "page": 5,
+          "order": 65,
+          "sourceOrder": 15,
+          "type": "formula",
+          "text": "H : ζ → (η, ξ),",
+          "bbox": [
+            0.42810457516339867,
+            0.5915404040404041,
+            0.5343137254901961,
+            0.6047979797979798
+          ],
+          "confidence": 0.8727166056632996
+        },
+        {
+          "id": "p5-b15",
+          "page": 5,
+          "order": 66,
+          "sourceOrder": 16,
+          "type": "text",
+          "text": "175which maps any eigenvector ζof Aα,β to a pair of vectors η and ξ, where ξ is an eigenvector of A 176with eigenvalue λ and η is an eigenvector of Cλ.\n",
+          "bbox": [
+            0.14133986928104575,
+            0.61489898989899,
+            0.8243464052287581,
+            0.6439393939393939
+          ],
+          "confidence": 0.964849442243576
+        },
+        {
+          "id": "p5-b16",
+          "page": 5,
+          "order": 67,
+          "sourceOrder": 17,
+          "type": "text",
+          "text": "177Proposition 3. Let ξ be an eigenvector of A with eigenvalue λ, and let η be an eigenvector of Cλ with 178eigenvalue . Then η⊗ ξ is an eigenvector of Aα,β with corresponding eigenvalue . In particular,1791 ⊗ (D1/21) is an eigenvector of Aα,β with eigenvalue 1.\n",
+          "bbox": [
+            0.14133986928104575,
+            0.6508838383838383,
+            0.8243464052287581,
+            0.6982323232323232
+          ],
+          "confidence": 0.9803381065527598
+        },
+        {
+          "id": "p5-b17",
+          "page": 5,
+          "order": 68,
+          "sourceOrder": 18,
+          "type": "text",
+          "text": "180Combining the above two propositions yields the following theorem. For brevity, we omit the proof,181since it follows directly from them.\n",
+          "bbox": [
+            0.14133986928104575,
+            0.7095959595959596,
+            0.8243464052287581,
+            0.7367424242424242
+          ],
+          "confidence": 0.9763606637716293
+        },
+        {
+          "id": "p5-b18",
+          "page": 5,
+          "order": 69,
+          "sourceOrder": 19,
+          "type": "text",
+          "text": "182Theorem 1. The map H in (10) is bijective and ζ =η ⊗ ξ.",
+          "bbox": [
+            0.14215686274509803,
+            0.7417929292929293,
+            0.5620915032679739,
+            0.7556818181818182
+          ],
+          "confidence": 0.9429720342159271
+        },
+        {
+          "id": "p5-b19",
+          "page": 5,
+          "order": 70,
+          "sourceOrder": 20,
+          "type": "text",
+          "text": "183According to Theorem 1, the eigenvectors of Aα,β are structurally similar to those of A, which 184validates heuristic Ha: LiftGCN preserves the structural characteristics of the original eigenspaces.",
+          "bbox": [
+            0.14052287581699346,
+            0.7676767676767676,
+            0.8218954248366013,
+            0.7967171717171717
+          ],
+          "confidence": 0.9816858768463135
+        },
+        {
+          "id": "p5-b20",
+          "page": 5,
+          "order": 71,
+          "sourceOrder": 21,
+          "type": "paragraph_title",
+          "text": "1854.2 Explanation for Heuristic Hb ",
+          "bbox": [
+            0.14215686274509803,
+            0.8137626262626263,
+            0.4166666666666667,
+            0.8257575757575758
+          ],
+          "confidence": 0.9904330372810364
+        },
+        {
+          "id": "p5-b21",
+          "page": 5,
+          "order": 72,
+          "sourceOrder": 22,
+          "type": "text",
+          "text": "186For Cθ in (9) with θ ∈ [0, 1], the eigenvalues of Cθ satisfy ",
+          "bbox": [
+            0.14297385620915032,
+            0.8390151515151515,
+            0.5563725490196079,
+            0.8529040404040404
+          ],
+          "confidence": 0.9615655243396759
+        },
+        {
+          "id": "p5-b22",
+          "page": 5,
+          "order": 73,
+          "sourceOrder": 23,
+          "type": "formula",
+          "text": "λ3 − (1 − α − β)θλ2 − αθλ − βθ = 0.",
+          "bbox": [
+            0.3472222222222222,
+            0.860479797979798,
+            0.6143790849673203,
+            0.875
+          ],
+          "confidence": 0.9451808333396912
+        },
+        {
+          "id": "p5-b23",
+          "page": 5,
+          "order": 74,
+          "sourceOrder": 24,
+          "type": "text",
+          "text": "187In what follows, we prove that λi < ρ(Cλi) ≤ 1 under the parameter settings in Section 3. Before 188presenting the main result, we state the following propositions.\n",
+          "bbox": [
+            0.14215686274509803,
+            0.8838383838383839,
+            0.8218954248366013,
+            0.9116161616161617
+          ],
+          "confidence": 0.9805132001638412
+        },
+        {
+          "id": "p5-b24",
+          "page": 5,
+          "order": null,
+          "sourceOrder": null,
+          "type": "formula_number",
+          "text": "(9)",
+          "bbox": [
+            0.8047385620915033,
+            0.37815656565656564,
+            0.8227124183006536,
+            0.39015151515151514
+          ],
+          "confidence": 0.9979457855224609
+        },
+        {
+          "id": "p5-b25",
+          "page": 5,
+          "order": null,
+          "sourceOrder": null,
+          "type": "formula_number",
+          "text": "(10)",
+          "bbox": [
+            0.795751633986928,
+            0.5921717171717171,
+            0.8218954248366013,
+            0.6041666666666666
+          ],
+          "confidence": 0.9976785182952881
+        },
+        {
+          "id": "p5-b26",
+          "page": 5,
+          "order": null,
+          "sourceOrder": null,
+          "type": "formula_number",
+          "text": "(11)",
+          "bbox": [
+            0.795751633986928,
+            0.8630050505050505,
+            0.8218954248366013,
+            0.875
+          ],
+          "confidence": 0.9985557794570923
+        },
+        {
+          "id": "p5-b27",
+          "page": 5,
+          "order": null,
+          "sourceOrder": null,
+          "type": "number",
+          "text": "5",
+          "bbox": [
+            0.494281045751634,
+            0.9375,
+            0.5024509803921569,
+            0.9463383838383839
+          ],
+          "confidence": 0.9998080134391785
+        }
+      ],
+      "elapsedSeconds": 17.41
+    },
+    {
+      "page": 6,
+      "width": 1224,
+      "height": 1584,
+      "blocks": [
+        {
+          "id": "p6-b0",
+          "page": 6,
+          "order": 75,
+          "sourceOrder": 1,
+          "type": "text",
+          "text": "189Proposition 4. If α ∈ [0, 1], β ∈ [−1/2, 1], and θ ∈ [0, 1], then ρ(Cθ) ≤ 1.",
+          "bbox": [
+            0.14052287581699346,
+            0.09154040404040405,
+            0.6683006535947712,
+            0.10606060606060606
+          ],
+          "confidence": 0.9646332561969757
+        },
+        {
+          "id": "p6-b1",
+          "page": 6,
+          "order": 76,
+          "sourceOrder": 2,
+          "type": "text",
+          "text": "190Proposition 5. If α ∈ [−1, 0], β ∈ [0, 1], and θ ∈ [0, 1], then ρ(Cθ) ≤ 1.",
+          "bbox": [
+            0.14215686274509803,
+            0.11047979797979798,
+            0.6519607843137255,
+            0.12563131313131312
+          ],
+          "confidence": 0.9690632224082947
+        },
+        {
+          "id": "p6-b2",
+          "page": 6,
+          "order": 77,
+          "sourceOrder": 3,
+          "type": "text",
+          "text": "191Proposition 6. If θ ∈ (0, 1) and β(θ + 1) + αθ > 0, then there exists an eigenvalue  of Cθ such 192that  > τα,β(θ) · , whre \n",
+          "bbox": [
+            0.14215686274509803,
+            0.13005050505050506,
+            0.8227124183006536,
+            0.15782828282828282
+          ],
+          "confidence": 0.9692072719335556
+        },
+        {
+          "id": "p6-b3",
+          "page": 6,
+          "order": 78,
+          "sourceOrder": 4,
+          "type": "formula",
+          "text": "τα,β(θ) =1 + θ (β(1 + θ) + αθ)1 + β(1 + θ) + αθ>1.",
+          "bbox": [
+            0.35049019607843135,
+            0.1672979797979798,
+            0.6119281045751634,
+            0.19696969696969696
+          ],
+          "confidence": 0.9597079753875732
+        },
+        {
+          "id": "p6-b4",
+          "page": 6,
+          "order": 79,
+          "sourceOrder": 5,
+          "type": "text",
+          "text": "193Before presenting the main theorem, we define the inverse map of (10) as ",
+          "bbox": [
+            0.14052287581699346,
+            0.21338383838383837,
+            0.6552287581699346,
+            0.22664141414141414
+          ],
+          "confidence": 0.9695769846439362
+        },
+        {
+          "id": "p6-b5",
+          "page": 6,
+          "order": 80,
+          "sourceOrder": 6,
+          "type": "formula",
+          "text": "H−1 : (η, ξ) → ζ = η ⊗ ξ,",
+          "bbox": [
+            0.3897058823529412,
+            0.23484848484848486,
+            0.5727124183006536,
+            0.24936868686868688
+          ],
+          "confidence": 0.8614359498023987
+        },
+        {
+          "id": "p6-b6",
+          "page": 6,
+          "order": 81,
+          "sourceOrder": 7,
+          "type": "text",
+          "text": "194 whereis aneigenvectorof Awitheigenvalue λ,ηisaneigenvectorofCλ,andis aneienvctor 195of Aα,β.\n",
+          "bbox": [
+            0.14052287581699346,
+            0.26136363636363635,
+            0.8227124183006536,
+            0.2922979797979798
+          ],
+          "confidence": 0.9011580348014832
+        },
+        {
+          "id": "p6-b7",
+          "page": 6,
+          "order": 82,
+          "sourceOrder": 8,
+          "type": "text",
+          "text": "196Combining the above propositions, we obtain the following main theorem explaining heuristic Hb.",
+          "bbox": [
+            0.14133986928104575,
+            0.29924242424242425,
+            0.8169934640522876,
+            0.31313131313131315
+          ],
+          "confidence": 0.9811943769454956
+        },
+        {
+          "id": "p6-b8",
+          "page": 6,
+          "order": 83,
+          "sourceOrder": 9,
+          "type": "text",
+          "text": "197Theorem 2. If α and β in Aα,β satisfy α + β ≥ 0 and θ(α + β) +β > 0, together with one of the 198two conditions (5) and (6), then ρ(Aα,β) = 1. Moreover, for any eigenvector ξ of A with eigenvalue 199λ ∈ (θ, 1), there exists an η such that ζ = η⊗ξin (13) is an eigenvector of Aα,β with eigenvalue 200satisfying 1 ≥  > λ.\n",
+          "bbox": [
+            0.14215686274509803,
+            0.32007575757575757,
+            0.8227124183006536,
+            0.38257575757575757
+          ],
+          "confidence": 0.9692095816135406
+        },
+        {
+          "id": "p6-b9",
+          "page": 6,
+          "order": 84,
+          "sourceOrder": 10,
+          "type": "text",
+          "text": "201According to Theorem 2, any eigenvalue of A greater than θ is amplified to an eigenvalue of Aα,β202that is still no greater than 1, validating heuristic Hb: LiftGCN enhances critical information in the 203graph signal. For the case β = 0, the amplification extent is discussed in B.",
+          "bbox": [
+            0.13970588235294118,
+            0.3958333333333333,
+            0.8227124183006536,
+            0.43813131313131315
+          ],
+          "confidence": 0.9795855184396108
+        },
+        {
+          "id": "p6-b10",
+          "page": 6,
+          "order": 85,
+          "sourceOrder": 11,
+          "type": "paragraph_title",
+          "text": "2044.3 Explanation for Heuristic Hc ",
+          "bbox": [
+            0.14052287581699346,
+            0.45580808080808083,
+            0.41421568627450983,
+            0.4678030303030303
+          ],
+          "confidence": 0.9943454563617706
+        },
+        {
+          "id": "p6-b11",
+          "page": 6,
+          "order": 86,
+          "sourceOrder": 12,
+          "type": "text",
+          "text": "205According to Proposition 6, the critical factor α,β(θ) characterizes the extent to which the eigenvalues 206of Acan be amplified. If we set β = 0,the amplification factor τα,o(θ) satisfies thefollowing property,207whose proof is given in A.7.\n",
+          "bbox": [
+            0.14215686274509803,
+            0.4810606060606061,
+            0.8235294117647058,
+            0.5252525252525253
+          ],
+          "confidence": 0.9741525053977966
+        },
+        {
+          "id": "p6-b12",
+          "page": 6,
+          "order": 87,
+          "sourceOrder": 13,
+          "type": "text",
+          "text": "Proposition 7. Given any θ ∈ (0, 1) and β > 0, we have τα,β(θ) > τα,0(θ)",
+          "bbox": [
+            0.16830065359477125,
+            0.5309343434343434,
+            0.6748366013071896,
+            0.5448232323232324
+          ],
+          "confidence": 0.9491941928863525
+        },
+        {
+          "id": "p6-b13",
+          "page": 6,
+          "order": 88,
+          "sourceOrder": 14,
+          "type": "text",
+          "text": "The above proposition shows that the amplification factor τα,β(θ) is larger than its counterpart when β = 0, which explains heuristic Hc: third-order LiftGCN provides a stronger amplification effect than second-order LiftGCN.\n",
+          "bbox": [
+            0.16911764705882354,
+            0.5574494949494949,
+            0.8227124183006536,
+            0.5959595959595959
+          ],
+          "confidence": 0.961958110332489
+        },
+        {
+          "id": "p6-b14",
+          "page": 6,
+          "order": 89,
+          "sourceOrder": 15,
+          "type": "paragraph_title",
+          "text": "2125 Experiments ",
+          "bbox": [
+            0.14052287581699346,
+            0.6193181818181818,
+            0.3112745098039216,
+            0.6325757575757576
+          ],
+          "confidence": 0.9837612807750702
+        },
+        {
+          "id": "p6-b15",
+          "page": 6,
+          "order": 90,
+          "sourceOrder": 16,
+          "type": "paragraph_title",
+          "text": "2135.1 Experimental Setup ",
+          "bbox": [
+            0.14052287581699346,
+            0.6502525252525253,
+            0.35049019607843135,
+            0.6622474747474747
+          ],
+          "confidence": 0.9877946674823761
+        },
+        {
+          "id": "p6-b16",
+          "page": 6,
+          "order": 91,
+          "sourceOrder": 17,
+          "type": "text",
+          "text": "214Datasets. We evaluate LiftGCN on 10 widely used node classification benchmarks covering both 215homophilic and heterophilic graphs, with graph scales ranging from small WebKB networks to 216large-scale real-world graphs. Specifically, the datasets include WebKB (TEXAS, WiscoNSIN,217CORNELL) Craven et al. [2000], WikipediaNetwork (SQUIRREL, CHAMELEON) Rozemberczki 218et al. [2021], Planetoid (CORA, CITESEER, PUBMED) Sen et al. [2008], Namata et al. [2012], and 219large-scale benchmarks from LINKX (PENN94, GENIUS) Traud et al. [2012], Lim and Benson 220[2021]. Detailed dataset statistics are provided in Appendix C.2.\n",
+          "bbox": [
+            0.13970588235294118,
+            0.6755050505050505,
+            0.8227124183006536,
+            0.7714646464646465
+          ],
+          "confidence": 0.979854017496109
+        },
+        {
+          "id": "p6-b17",
+          "page": 6,
+          "order": 92,
+          "sourceOrder": 18,
+          "type": "text",
+          "text": "Models and baselines. We consider five representative GCN backbones as baselines: GCN Kipf and Welling [2016], GAT Veličković et al. [2018],GCNII Chen et al. [2020c], GRAPHSAGEMEAN Hamilton et al. [2017], and a residual GCN-style backbone (RESNET) Li et al. [2019].For each backbone, we instantiate our method under the proposed LiftGCN framework (3). In addition, we incorporate several representative over-smoothing mitigation mechanisms, including PAIRNORM Zhao and Akoglu [2020], GRAPHNORMV2 Scholkemper et al. [2025], and DROPEDGE Rong et al. [2020]. These comparisons allow us to examine whether the proposed Lift mechanism can provide additional gains when combined with existing strategies for alleviating representation homogenization in deep graph propagation.\n",
+          "bbox": [
+            0.16748366013071894,
+            0.7866161616161617,
+            0.8235294117647058,
+            0.9116161616161617
+          ],
+          "confidence": 0.9527354836463928
+        },
+        {
+          "id": "p6-b18",
+          "page": 6,
+          "order": null,
+          "sourceOrder": null,
+          "type": "formula_number",
+          "text": "(12)",
+          "bbox": [
+            0.795751633986928,
+            0.17613636363636365,
+            0.8218954248366013,
+            0.18876262626262627
+          ],
+          "confidence": 0.9984852075576782
+        },
+        {
+          "id": "p6-b19",
+          "page": 6,
+          "order": null,
+          "sourceOrder": null,
+          "type": "formula_number",
+          "text": "(13)",
+          "bbox": [
+            0.795751633986928,
+            0.23674242424242425,
+            0.8218954248366013,
+            0.24936868686868688
+          ],
+          "confidence": 0.9984604120254517
+        },
+        {
+          "id": "p6-b20",
+          "page": 6,
+          "order": null,
+          "sourceOrder": null,
+          "type": "number",
+          "text": "6",
+          "bbox": [
+            0.494281045751634,
+            0.9375,
+            0.5024509803921569,
+            0.9463383838383839
+          ],
+          "confidence": 0.9998149275779724
+        }
+      ],
+      "elapsedSeconds": 25.53
+    },
+    {
+      "page": 7,
+      "width": 1224,
+      "height": 1584,
+      "blocks": [
+        {
+          "id": "p7-b0",
+          "page": 7,
+          "order": 93,
+          "sourceOrder": null,
+          "type": "figure_title",
+          "text": "Table 1: Main results of TestAcc@BestVal (%). Each entry reports the mean test accuracy over multiple random seeds. The superscript denotes the selected depth from {3,8,16,32}, and the subscript denotes the standard deviation.indicates ties across multiple depths. Best mean results are highlighted in bold.",
+          "bbox": [
+            0.1715686274509804,
+            0.08964646464646464,
+            0.8218954248366013,
+            0.1275252525252525
+          ],
+          "confidence": 0.967914879322052
+        },
+        {
+          "id": "p7-b1",
+          "page": 7,
+          "order": 94,
+          "sourceOrder": null,
+          "type": "table",
+          "text": "",
+          "bbox": [
+            0.17647058823529413,
+            0.13825757575757575,
+            0.8194444444444444,
+            0.30492424242424243
+          ],
+          "confidence": 0.9681787490844727
+        },
+        {
+          "id": "p7-b2",
+          "page": 7,
+          "order": 95,
+          "sourceOrder": 1,
+          "type": "text",
+          "text": "Evaluation metrics. We report node classification performance by TestAcc@BestVal, which evaluates test accuracy at the epoch achieving the best validation accuracy, averaged over 10 random seeds. To quantify over-smoothing, we use PairCosSim, which measures the average pairwise cosine similarity among node representations within the same layer. As PairCosSim approaches 1,node embeddings become increasingly homogenized, indicating more severe over-smoothing. In addition, we introduce NSER (Non-dominant Spectral Energy Retention) to characterize the layerwise preservation of non-dominant spectral components during deep propagation. A higher NSER indicates stronger retention of non-dominant spectral information, while a lower NSER suggests faster spectral concentration toward the dominant eigenspace. Detailed definitions and formulas of these metrics are provided in Appendix C.3.\n",
+          "bbox": [
+            0.1707516339869281,
+            0.3333333333333333,
+            0.8235294117647058,
+            0.4703282828282828
+          ],
+          "confidence": 0.9712572753429413
+        },
+        {
+          "id": "p7-b3",
+          "page": 7,
+          "order": 96,
+          "sourceOrder": 2,
+          "type": "text",
+          "text": "Fairness and reproducibility. For a fair comparison, we adopt a unified training protocol for all methods. For each dataset-backbone pair, we use the same training hyperparameters and optimizer configuration for all variants, and select the reported checkpoint using an identical validation-based early-stopping rule. To support reproducibility, our code and hyperparameter configurations will be released on GitHub.\n",
+          "bbox": [
+            0.16993464052287582,
+            0.48737373737373735,
+            0.8218954248366013,
+            0.5542929292929293
+          ],
+          "confidence": 0.9703747510910035
+        },
+        {
+          "id": "p7-b4",
+          "page": 7,
+          "order": 97,
+          "sourceOrder": 3,
+          "type": "paragraph_title",
+          "text": "5.2 Main Results ",
+          "bbox": [
+            0.17238562091503268,
+            0.5738636363636364,
+            0.30392156862745096,
+            0.5845959595959596
+          ],
+          "confidence": 0.962165892124176
+        },
+        {
+          "id": "p7-b5",
+          "page": 7,
+          "order": 98,
+          "sourceOrder": 4,
+          "type": "text",
+          "text": "We evaluate the proposed Lift framework on ten benchmark datasets with five representative GNN backbones, namely GCN, GAT, GCNII, GraphSAGE-Mean, and ResNet. Tab. 1 reports the results over depths {3,8,16,32}. For each dataset-backbone pair, we show the best TestAcc@BestVal among these depths together with the corresponding depth. Detailed hyperparameter settings are provided in the appendix.\n",
+          "bbox": [
+            0.16748366013071894,
+            0.5997474747474747,
+            0.8227124183006536,
+            0.6679292929292929
+          ],
+          "confidence": 0.9661634206771851
+        },
+        {
+          "id": "p7-b6",
+          "page": 7,
+          "order": 99,
+          "sourceOrder": 5,
+          "type": "text",
+          "text": "Overall, Lift either improves the base models or maintains competitive performance across most dataset-backbones, demonstrating its robustness across different backbones and graph regimes. The gains are especially clear on heterophilous benchmarks. For example, Lift improves GCNII on WISCONSIN from 64.71% to 76.47%, GraphSAGE on TEXAS from 75.68% to 83.78%, and GAT on SQUIRREL from 25.94% to 31.41%. On homophilous citation graphs and large-scale benchmarks,Lift also maintains competitive performance and brings steady improvements in several cases, such as GCNII on CORA and GCN on PENN94. Notably, the best result on every dataset is achieved by a Lift-enhanced variant, demonstrating the broad effectiveness of Lift across architectures and graph regimes.\n",
+          "bbox": [
+            0.16993464052287582,
+            0.6755050505050505,
+            0.8235294117647058,
+            0.797979797979798
+          ],
+          "confidence": 0.9702266454696655
+        },
+        {
+          "id": "p7-b7",
+          "page": 7,
+          "order": 100,
+          "sourceOrder": 6,
+          "type": "paragraph_title",
+          "text": "5.3Over-smoothing Analysis ",
+          "bbox": [
+            0.1715686274509804,
+            0.8169191919191919,
+            0.3872549019607843,
+            0.8289141414141414
+          ],
+          "confidence": 0.9880042672157288
+        },
+        {
+          "id": "p7-b8",
+          "page": 7,
+          "order": 101,
+          "sourceOrder": 7,
+          "type": "text",
+          "text": "261We evaluate deep propagation stability from three complementary aspects. First, we compare GCN 262and GCNII with their Lift-enhanced variants on CoRA, CITESEER, and PUBMED, using PairCosSim 263to quantify layer-wise representation homogenization. Second, we use NSER to examine whether 264Lift preserves non-dominant spectral components during deep propagation, with detailed results 265provided in Appendix C.4. Third, we test whether Lift can complement existing over-smoothing ",
+          "bbox": [
+            0.14052287581699346,
+            0.8428030303030303,
+            0.8227124183006536,
+            0.9116161616161617
+          ],
+          "confidence": 0.982354462146759
+        },
+        {
+          "id": "p7-b9",
+          "page": 7,
+          "order": null,
+          "sourceOrder": null,
+          "type": "number",
+          "text": "7",
+          "bbox": [
+            0.494281045751634,
+            0.9375,
+            0.5024509803921569,
+            0.9463383838383839
+          ],
+          "confidence": 0.9999475479125977
+        }
+      ],
+      "elapsedSeconds": 41.12
+    }
+  ],
+  "overrides": {},
+  "context": null,
+  "contextOverride": null,
+  "contextFingerprint": "",
+  "translations": {},
+  "errors": {},
+  "status": "cancelled",
+  "stage": "ocr",
+  "progress": {
+    "done": 7,
+    "total": 27
+  },
+  "stale": false,
+  "mode": "recognition",
+  "error": "已停止，已完成的内容保留，可继续处理",
+  "updatedAt": "2026-10-27T02:55:06.161Z",
+  "ocrPhase": "recognizing",
+  "ocrPage": 8,
+  "blocks": [
+    {
+      "id": "p1-b0",
+      "page": 1,
+      "order": 1,
+      "sourceOrder": 1,
+      "type": "doc_title",
+      "text": "Higher Order Eigenvalue Lifting for Graph  Convolutional Networks ",
+      "bbox": [
+        0.2361111111111111,
+        0.12247474747474747,
+        0.7598039215686274,
+        0.1691919191919192
+      ],
+      "confidence": 0.9853626787662506
+    },
+    {
+      "id": "p1-b1",
+      "page": 1,
+      "order": 2,
+      "sourceOrder": 2,
+      "type": "text",
+      "text": "Anonymous Author(s)Affiliation Address email ",
+      "bbox": [
+        0.4215686274509804,
+        0.22285353535353536,
+        0.5784313725490197,
+        0.27525252525252525
+      ],
+      "confidence": 0.9868808537721634
+    },
+    {
+      "id": "p1-b2",
+      "page": 1,
+      "order": 3,
+      "sourceOrder": 3,
+      "type": "paragraph_title",
+      "text": "Abstract ",
+      "bbox": [
+        0.4599673202614379,
+        0.31376262626262624,
+        0.5383986928104575,
+        0.32954545454545453
+      ],
+      "confidence": 0.9998905062675476
+    },
+    {
+      "id": "p1-b3",
+      "page": 1,
+      "order": 4,
+      "sourceOrder": 4,
+      "type": "abstract",
+      "text": "Graph Convolutional Networks (GCNs) have demonstrated strong performance in graph-based learning,yet they remain fundamentally limited by the over-smoothing problem as network depth increases. In this paper, we introduce LiftGCN, a novel spectral graph neural network thateffectively alleviates over-smoothing throuh higher-order eigenvalue lifting mechanism. The insights behind LiftGCN lies in identifying that over-smoothing is inherently driven by the convergence of node embeddings toward the subspace governed by the largest eigenvalue of the normalized adjacency matrix. To counteract this, LiftGCN incorporates a linear spectral transformation that amplifies the largest eigenvalues besides one, thereby narrowing the spectral gap and slowing down the convergence of node embeddings. We provide a spectral analysis, proving that our eigenvalue lifting strategy effectively delays the onset of over-smoothing. Extensive experiments on multiple benchmark datasets show that LiftGCN consistently improves representative GCN backbones and enhances deep propagation stability.\n",
+      "bbox": [
+        0.2312091503267974,
+        0.3472222222222222,
+        0.7647058823529411,
+        0.5410353535353535
+      ],
+      "confidence": 0.9568189552852085
+    },
+    {
+      "id": "p1-b4",
+      "page": 1,
+      "order": 5,
+      "sourceOrder": 5,
+      "type": "paragraph_title",
+      "text": "1Introduction ",
+      "bbox": [
+        0.17238562091503268,
+        0.571969696969697,
+        0.309640522875817,
+        0.5845959595959596
+      ],
+      "confidence": 0.9996850788593292
+    },
+    {
+      "id": "p1-b5",
+      "page": 1,
+      "order": 6,
+      "sourceOrder": 6,
+      "type": "text",
+      "text": "16Graph Convolutional Networks (GCNs) have emerged as a foundational and powerful framework 17for representation learning on graph-structured data, achieving remarkable success across a wide 18spectrum of tasks, including node classification, link prediction, and graph-level prediction Zhang 19et al. [2019]. By effectively leveraging the graph adjacency matrix to aggregate and transform features 20from a node's local neighborhood, GCNs have achieved remarkable success across a diverse spectrum 21of tasks. These include fundamental applications such as semi-supervised node classification Yao 22et al. [2019], link prediction Chen et al.[2020b], and graph-level property prediction Liu et al. [2019.23The intuitive yet powerful message-passing paradigm of GCNs bridges spectral graph theory with 24neural network design Hammond et al. [2011], enabling them to capture complex structural paterns 25and deliver state-of-the-art performance on numerous benchmark datasets.",
+      "bbox": [
+        0.14624183006535948,
+        0.6029040404040404,
+        0.8235294117647058,
+        0.7417929292929293
+      ],
+      "confidence": 0.9825172662734986
+    },
+    {
+      "id": "p1-b6",
+      "page": 1,
+      "order": 7,
+      "sourceOrder": 7,
+      "type": "text",
+      "text": "26Despite their impressive performance, GCNs face a fundamental limitation that severely constrains 27their practical utility: the over-smoothing problem (Rusch et al. [2023], Keriven [2022]). As network 28depth increases, node representations tend to become indistinguishable and converge to similar 29values, losing the discriminative power necessary for effective classification Hammond et al. [2011].30This phenomenon arises from the repeated application of graph convolution operations, which 31progressively smooths node features across the graph structure Wu et al.[2023]. Consequently, while 32shallow GCNs often achieve competitive results, deeper architectures - which theoretically should 33capture more complex and long-range dependencies - actually suffer from performance degradation.34This over-smoothing bottleneck not only undermines the potential benefits of deep learning in graph 35domains but also restricts the scalability and expressiveness of GCNs in handling large-scale graphs 36with intricate topological structures.\n",
+      "bbox": [
+        0.14624183006535948,
+        0.7481060606060606,
+        0.8235294117647058,
+        0.8996212121212122
+      ],
+      "confidence": 0.9809143895452673
+    },
+    {
+      "id": "p1-b7",
+      "page": 1,
+      "order": null,
+      "sourceOrder": null,
+      "type": "footer",
+      "text": "Submitted to 40th Conference on Neural Information Processing Systems (NeurIPS 2026). Do not distribute ",
+      "bbox": [
+        0.17238562091503268,
+        0.9248737373737373,
+        0.7418300653594772,
+        0.9356060606060606
+      ],
+      "confidence": 0.954844057559967
+    },
+    {
+      "id": "p2-b0",
+      "page": 2,
+      "order": 8,
+      "sourceOrder": 1,
+      "type": "text",
+      "text": "37The underlying mechanism driving over-smoothing can be understood through spectral graph theory 38Royle and Godsil [2001]. When analyzing the propagation dynamics of GCNs, it becomes evident 39that node embeddings progressively converge toward the subspace spanned by the eigenvectors 40corresponding to the largest eigenvalues of the normalized adjacency matrix (Guan and Shi [2025],41Wu et al. [2022]). This convergence occurs because the graph convolution operation essentially acts 42as a low-pass filter, amplifying the low-frequency components of the signal while attenuating the 43high-frequency ones Hammond et al. [2011]. With each successive layer, the node representations 44become increasingly dominated by the principal eigenvector, causing all nodes to adopt similar feature 45values regardless of their structural positions Chen et al. [2023b]. This spectral perspective reveals 46that over-smoothing is not merely an empirical observation but a fundamental consequence of the 47graph convolution's spectral properties, where the spectral gap between the largest and second-largest 48eigenvalues governs the rate of convergence.\n",
+      "bbox": [
+        0.1454248366013072,
+        0.09217171717171717,
+        0.8235294117647058,
+        0.25757575757575757
+      ],
+      "confidence": 0.9841690162817637
+    },
+    {
+      "id": "p2-b1",
+      "page": 2,
+      "order": 9,
+      "sourceOrder": 2,
+      "type": "text",
+      "text": "49To address this fundamental limitation, we introduce LiftGCN, a novel spectral graph neural network 50that effectively mitigates over-smoothing through a higher-order eigenvalue lifting mechanism. Our 51key insight stems from the observation that for the normalized adjacency matrix, the eigenvalues 52(excluding the largest eigenvalue of 1) exhibit a rapid decay pattern on certain datasets. This rapid 53spectral decay causes the information carried by these eigenvalues to converge quickly as the network 54depth increases. To counteract this phenomenon, we incorporate a linear spectral transformation into 55the GCN framework. Through carefully designed parameter settings, this transformation strategically 56amplifies the eigenvalues of the adjacency matrix, thereby narrowing the spectral gap and significantly 57slowing down the convergence of node embeddings. This mechanism effectively delays the onset of 58over-smoothing, enabling the construction of deeper and more expressive graph neural networks.",
+      "bbox": [
+        0.14624183006535948,
+        0.26452020202020204,
+        0.8235294117647058,
+        0.40214646464646464
+      ],
+      "confidence": 0.983052235841751
+    },
+    {
+      "id": "p2-b2",
+      "page": 2,
+      "order": 10,
+      "sourceOrder": 3,
+      "type": "text",
+      "text": "59The remainder of this paper is organized as follows. Section 2 reviews related techniques for 60alleviating over-smoothing in GCNs. Section 3 introduces the eigenvalue lifting technique of the 61proposed LiftGCN. Sections 4 and 5 analyze the spectral properties of LiftGCN, focusing on the 62effects of eigenvalue lifting in second-order and third-order frameworks, respectively. Section 663presents experimental validation of the proposed method on benchmark graph datasets.",
+      "bbox": [
+        0.1454248366013072,
+        0.4090909090909091,
+        0.8227124183006536,
+        0.4779040404040404
+      ],
+      "confidence": 0.9838054776191711
+    },
+    {
+      "id": "p2-b3",
+      "page": 2,
+      "order": 11,
+      "sourceOrder": 4,
+      "type": "paragraph_title",
+      "text": "642Related Works ",
+      "bbox": [
+        0.1454248366013072,
+        0.509469696969697,
+        0.3284313725490196,
+        0.5220959595959596
+      ],
+      "confidence": 0.9807790815830231
+    },
+    {
+      "id": "p2-b4",
+      "page": 2,
+      "order": 12,
+      "sourceOrder": 5,
+      "type": "text",
+      "text": "65There exists many different classes of techniques for coping with the over-smoothing effects of GCNs,66in what follows these techniques are summarized as from the network structure, network weights,67dynamical system, algebraic, and information filter perspectives.\n",
+      "bbox": [
+        0.14460784313725492,
+        0.5460858585858586,
+        0.8243464052287581,
+        0.5871212121212122
+      ],
+      "confidence": 0.9802539547284445
+    },
+    {
+      "id": "p2-b5",
+      "page": 2,
+      "order": 13,
+      "sourceOrder": 6,
+      "type": "text",
+      "text": "68From a network structure perspective, adjusting the graph topology is a key approach to mitigating 69over-smoothing. Chen et al. identify the low information-to-noise ratio in message passing as the 70cause of over-smoothing, proposing the MADReg regularizer and AdaEdge to adaptively edit edges 71Chen et al.[2020a]. Huang et al. introduce DropEdge, which randomly removes edges during training 72to slow convergence Huang et al. [2020]. The trade-off between over-smoothing and over-squashing 73is analyzed by Giraldo et al., leading to the SJLR method for dynamic edge editing based on curvature 74Giraldo et al. [2023]. Further curvature-based rewiring techniques are proposed to address both 75issues, such as the AFR methods by Fesser and Weber Fesser and Weber [2024] and the edge-dropout 76technique CurvDrop by Liu et al.Liu et al. [2023]. Nguyen et al. theoretically link positive curvature 77to over-smoothing, proposing the BORF rewiring algorithm Nguyen et al. [2023].",
+      "bbox": [
+        0.14624183006535948,
+        0.5946969696969697,
+        0.8227124183006536,
+        0.7323232323232324
+      ],
+      "confidence": 0.9773802995681763
+    },
+    {
+      "id": "p2-b6",
+      "page": 2,
+      "order": 14,
+      "sourceOrder": 7,
+      "type": "text",
+      "text": "78From an edge weights perspective, the over-smoothing effect can be weakened by introducing adaptive 79edge weights. Yan et al. introduce relative degree and node-level heterophily - and theoretically 80demonstrate how their interplay defines three distinct cases of node behavior that explain performance 81degradation in both homophilous and heterophilous graphs Yan et al. [2022]. Based on this insight 82they propose GGCN, which incorporates two novel strategies: structure-based edge correction, which 83adjusts edge weights using node degrees, and feature-based edge correction, which learns signed 84edge weights from node features to model both positive and negative influences.",
+      "bbox": [
+        0.14624183006535948,
+        0.7392676767676768,
+        0.8227124183006536,
+        0.8358585858585859
+      ],
+      "confidence": 0.9639284270150321
+    },
+    {
+      "id": "p2-b7",
+      "page": 2,
+      "order": 15,
+      "sourceOrder": 8,
+      "type": "text",
+      "text": "85From a dynamical system perspective, over-smoothing can be mitigated by modifying the aggregation 86process. Maskey et al. introduce Fractional Laplacian Neural ODEs (FLODE), using learnable 87fractional graph Laplacians to adaptively control representation smoothness Maskey et al. [2023].88Zhou et al. propose Aggregation over Compact Manifolds (ACM), performing aggregation on 89non-contracting manifolds to prevent feature collapse Zhou et al. [2024]. Chen et al. address over",
+      "bbox": [
+        0.14624183006535948,
+        0.8428030303030303,
+        0.8243464052287581,
+        0.9116161616161617
+      ],
+      "confidence": 0.9811256051063537
+    },
+    {
+      "id": "p2-b8",
+      "page": 2,
+      "order": null,
+      "sourceOrder": null,
+      "type": "number",
+      "text": "2",
+      "bbox": [
+        0.494281045751634,
+        0.9375,
+        0.5024509803921569,
+        0.9463383838383839
+      ],
+      "confidence": 0.9997491240501404
+    },
+    {
+      "id": "p3-b0",
+      "page": 3,
+      "order": 16,
+      "sourceOrder": 1,
+      "type": "text",
+      "text": "90smoothing in deep GCNs with AGNN, which alternates Graph Convolutional Layers with Graph 91Embedding Layers to preserve discriminative information Chen et al. [2023a].",
+      "bbox": [
+        0.14460784313725492,
+        0.09217171717171717,
+        0.8227124183006536,
+        0.11931818181818182
+      ],
+      "confidence": 0.9799470901489258
+    },
+    {
+      "id": "p3-b1",
+      "page": 3,
+      "order": 17,
+      "sourceOrder": 2,
+      "type": "text",
+      "text": "92From an algebraic perspective, over-smoothing is mitigated by enriching the diffusion process. Chen 93et al. propose GCNII, a deep GCN architecture that combats over-smoothing via initial residual 94connections and identity mapping, enabling an expressive polynomial filter Chen et al. [2020c].95Bodnar et al. introduce Neural Sheaf Diffusion (NSD), a framework leveraging cellular sheaf theory 96to define a more expressive diffusion via a sheaf Laplacian Bodnar et al. [2022].",
+      "bbox": [
+        0.14460784313725492,
+        0.1268939393939394,
+        0.8235294117647058,
+        0.19570707070707072
+      ],
+      "confidence": 0.9751507818698884
+    },
+    {
+      "id": "p3-b2",
+      "page": 3,
+      "order": 18,
+      "sourceOrder": 3,
+      "type": "text",
+      "text": "97From an information filter perspective, innovative filtering designs can alleviate over-smoothing. Bo 98et al. propose FAGCN, which uses a self-gating mechanism to adaptively integrate low-frequency,99high-frequency, and raw features into a unified filter Bo et al. [2021]. Huang et al. introduce the 100Cross-Space Adaptive Filter (CSF), which unifies a topology-based low-pass filter with a node101attribute-based high-pass filter via multiple-kernel learning Huang et al. [2024].",
+      "bbox": [
+        0.1437908496732026,
+        0.20265151515151514,
+        0.8235294117647058,
+        0.27146464646464646
+      ],
+      "confidence": 0.9798611342906952
+    },
+    {
+      "id": "p3-b3",
+      "page": 3,
+      "order": 19,
+      "sourceOrder": 4,
+      "type": "text",
+      "text": "102Building upon these diverse approaches, we address the core spectral origin of over-smoothing. Unlike 103methods that modify graph structure or aggregation dynamics, we propose LiftGCN from a novel 104spectral transformation perspective. It applies a principled linear transformation to directly amplify 105specific eigenvalues of the aggregation matrix, thereby narrowing the spectral gap and delaying the 106convergence towards over-smoothing. This provides a theoretically grounded and computationally 107efficient alternative to existing mitigation strategies.\n",
+      "bbox": [
+        0.14133986928104575,
+        0.2784090909090909,
+        0.8227124183006536,
+        0.3611111111111111
+      ],
+      "confidence": 0.9810718148946762
+    },
+    {
+      "id": "p3-b4",
+      "page": 3,
+      "order": 20,
+      "sourceOrder": 5,
+      "type": "paragraph_title",
+      "text": "1083LiftGCN for Eigenvalue Lifting ",
+      "bbox": [
+        0.14133986928104575,
+        0.3813131313131313,
+        0.4681372549019608,
+        0.39646464646464646
+      ],
+      "confidence": 0.989870548248291
+    },
+    {
+      "id": "p3-b5",
+      "page": 3,
+      "order": 21,
+      "sourceOrder": 6,
+      "type": "text",
+      "text": "109The classic GCN has the following form:",
+      "bbox": [
+        0.14133986928104575,
+        0.41224747474747475,
+        0.44362745098039214,
+        0.42487373737373735
+      ],
+      "confidence": 0.9745804071426392
+    },
+    {
+      "id": "p3-b6",
+      "page": 3,
+      "order": 22,
+      "sourceOrder": 7,
+      "type": "formula",
+      "text": "Hl+1 = σ(AHlWl),A= D−1AD− 1,",
+      "bbox": [
+        0.4125816993464052,
+        0.43497474747474746,
+        0.5808823529411765,
+        0.4703282828282828
+      ],
+      "confidence": 0.873319149017334
+    },
+    {
+      "id": "p3-b7",
+      "page": 3,
+      "order": 23,
+      "sourceOrder": 8,
+      "type": "text",
+      "text": "110where Hl ∈ R×d is the embedding matrix at layer l, Wl ∈ Rd×d is the trainable weight matrix 111at layer l, and σ(⋅) is the activationfunction. Here, A ∈ R× is the adjacency matrix of a given 112graph (A) with positive diagonal entries, and D = diag(d1, d2, . ,dn) is the diagonal degree 113\n114characterizes its spectrum, as stated below.\n",
+      "bbox": [
+        0.14133986928104575,
+        0.48042929292929293,
+        0.8218954248366013,
+        0.5542929292929293
+      ],
+      "confidence": 0.9683004683918424
+    },
+    {
+      "id": "p3-b8",
+      "page": 3,
+      "order": 24,
+      "sourceOrder": 9,
+      "type": "text",
+      "text": "115Proposition1.Seneta[2006] For Agivenin(2), itholds AD1/21= D1/21and ρ(A) =1.Moreover,116if G(A) is connected, then D1/21 is the unique eigenvector of A corresponding to eigenvalue 1.",
+      "bbox": [
+        0.14215686274509803,
+        0.5612373737373737,
+        0.8243464052287581,
+        0.5928030303030303
+      ],
+      "confidence": 0.9728743433952332
+    },
+    {
+      "id": "p3-b9",
+      "page": 3,
+      "order": 25,
+      "sourceOrder": 10,
+      "type": "text",
+      "text": "117When G(A) is connected, we denote the eigenvalues of A by1 1 = λ1 > λ2 ≥ λ3 ≥ · ·· ≥ λn.118In algebraic graph theory, the difference between the two largest eigenvalues, λ1 – λ2, is called 119the spectral gap of g(A) Royle and Godsil [2001] and is commonly used to characterize graph 120connectivity. Since λ1 = 1 for A in GCN, our analysis mainly depends on λ2.",
+      "bbox": [
+        0.14133986928104575,
+        0.6060606060606061,
+        0.8235294117647058,
+        0.6660353535353535
+      ],
+      "confidence": 0.9683201089501381
+    },
+    {
+      "id": "p3-b10",
+      "page": 3,
+      "order": 26,
+      "sourceOrder": 11,
+      "type": "text",
+      "text": "121For large-scale real-world networks, structural sparsity typically leads to a rapid decay of eigenvalues 122as their index increases, which in turn accelerates the loss of information associated with the leading 123eigenvalues. As shown in Fig. 1a, 7 out of 13 examined datasets exhibit such a sharp decline,124highlighting a primary spectral cause of over-smoothing. To further illustrate this phenomenon, we 125construct a series of symmetric Erdös-Rényi random graphs G(n, p) 2 and compute their second126largest eigenvalues λ2(·);the relationship between the connection probability p and λ2(·) is shown in 127Fig. 1b. The results show that λ2(g(n, p)) remains very small relative to the largest eigenvalue 1;128even for graphs with n ≥ 4000 nodes, λ2 can be as low as 0.1. This large spectral gap implies that 129any input signal processed by a GCN rapidly converges toward the subspace spanned by eigenvectors 130associated with eigenvalues smaller than 1, thereby intensifying the over-smoothing effect (Yang et al.131[2020], Huang et al. [2020]], Chen et al. [2020a], Chen et al. [2023a]).",
+      "bbox": [
+        0.14215686274509803,
+        0.672979797979798,
+        0.8235294117647058,
+        0.8244949494949495
+      ],
+      "confidence": 0.9789406088265505
+    },
+    {
+      "id": "p3-b11",
+      "page": 3,
+      "order": 27,
+      "sourceOrder": 12,
+      "type": "text",
+      "text": "132To mitigate this over-smoothing effect, the key idea underlying the proposed LiftGCN is to amplify 133the largest eigenvalues of the normalized adjacency matrix A, while carefully preserving the essential 134information encoded in its eigenspaces via a well-designed mathematical transformation.",
+      "bbox": [
+        0.14133986928104575,
+        0.8308080808080808,
+        0.8227124183006536,
+        0.8743686868686869
+      ],
+      "confidence": 0.9816970427831014
+    },
+    {
+      "id": "p3-b12",
+      "page": 3,
+      "order": null,
+      "sourceOrder": null,
+      "type": "formula_number",
+      "text": "(1)",
+      "bbox": [
+        0.803921568627451,
+        0.43876262626262624,
+        0.8227124183006536,
+        0.45075757575757575
+      ],
+      "confidence": 0.9928520321846008
+    },
+    {
+      "id": "p3-b13",
+      "page": 3,
+      "order": null,
+      "sourceOrder": null,
+      "type": "formula_number",
+      "text": "(2)",
+      "bbox": [
+        0.8047385620915033,
+        0.45896464646464646,
+        0.8227124183006536,
+        0.47095959595959597
+      ],
+      "confidence": 0.994103193283081
+    },
+    {
+      "id": "p3-b14",
+      "page": 3,
+      "order": 28,
+      "sourceOrder": null,
+      "type": "footnote",
+      "text": "1Ahas n eigenvalues and an orthonormal eigenbasis since A is symmetric.\n2Agraph in G(n, p) has nodes,andeach pairof nodes is connectedindependently with probability p.Bollobás[211]",
+      "bbox": [
+        0.1895424836601307,
+        0.8863636363636364,
+        0.8218954248366013,
+        0.9116161616161617
+      ],
+      "confidence": 0.9147038161754608
+    },
+    {
+      "id": "p3-b15",
+      "page": 3,
+      "order": null,
+      "sourceOrder": null,
+      "type": "number",
+      "text": "3",
+      "bbox": [
+        0.494281045751634,
+        0.9375,
+        0.5016339869281046,
+        0.9463383838383839
+      ],
+      "confidence": 0.9998430013656616
+    },
+    {
+      "id": "p4-b0",
+      "page": 4,
+      "order": 29,
+      "sourceOrder": null,
+      "type": "chart",
+      "text": "Distribution of Eigenvalues for 13 Datasets \n0.9心\n\n0.8\n\n 0.70.6=-Wisconsin Actor Texas Cornell Squirrel Chameleon \n\nora \n\n0.5CteSeer \n\nPubMed \n\n-Penn94\n\n0.4…enius \n\nNELL \n\narXiv-year \n\n102030405060708090100\nEigenvalue Index \n",
+      "bbox": [
+        0.1895424836601307,
+        0.09343434343434344,
+        0.46895424836601307,
+        0.27335858585858586
+      ],
+      "confidence": 0.9238045978726763
+    },
+    {
+      "id": "p4-b1",
+      "page": 4,
+      "order": 30,
+      "sourceOrder": null,
+      "type": "figure_title",
+      "text": "(a) Largest eigenvalues.",
+      "bbox": [
+        0.2704248366013072,
+        0.2815656565656566,
+        0.3946078431372549,
+        0.29292929292929293
+      ],
+      "confidence": 0.9798923134803772
+    },
+    {
+      "id": "p4-b2",
+      "page": 4,
+      "order": 31,
+      "sourceOrder": null,
+      "type": "chart",
+      "text": "0.18n=1000nodes n-2000nodes.n-3000 nodes.0.16n-4000 nodes.0.120.080.060.10.1140C 口□\n0.04\n0.02🌟\n0\n0.10.20.30.40.50.60.70.80.9Connecting probability p for symmetric random graph G(n,p).",
+      "bbox": [
+        0.5155228758169934,
+        0.09974747474747475,
+        0.798202614379085,
+        0.27335858585858586
+      ],
+      "confidence": 0.8746090576052665
+    },
+    {
+      "id": "p4-b3",
+      "page": 4,
+      "order": 32,
+      "sourceOrder": null,
+      "type": "figure_title",
+      "text": "(b) Algebraic connectivity.",
+      "bbox": [
+        0.5923202614379085,
+        0.2815656565656566,
+        0.7328431372549019,
+        0.2922979797979798
+      ],
+      "confidence": 0.9159339070320129
+    },
+    {
+      "id": "p4-b4",
+      "page": 4,
+      "order": 33,
+      "sourceOrder": null,
+      "type": "figure_title",
+      "text": "Figure 1: Spectral properties of representative graphs. Left: distribution of the largest eigenvalues on typical datasets. Right: relation between the edge probability p in random graphs G(n, p) and algebraic connectivity.",
+      "bbox": [
+        0.1707516339869281,
+        0.30113636363636365,
+        0.8218954248366013,
+        0.32702020202020204
+      ],
+      "confidence": 0.9592620730400085
+    },
+    {
+      "id": "p4-b5",
+      "page": 4,
+      "order": 34,
+      "sourceOrder": 1,
+      "type": "text",
+      "text": "135We use σ(f (A, H, Wl)), where σ(·) is the activation function, to represent a general graph convolu136tion layer. Based on this form, the proposed LiftGCN is defined as ",
+      "bbox": [
+        0.14133986928104575,
+        0.3522727272727273,
+        0.8243464052287581,
+        0.380050505050505
+      ],
+      "confidence": 0.9722083359956741
+    },
+    {
+      "id": "p4-b6",
+      "page": 4,
+      "order": 35,
+      "sourceOrder": 2,
+      "type": "formula",
+      "text": "Hl+1 = A((1 − α − β)Hl + αHl−1 + βHl−2 + γH0) + wl · σ(f (A, Hl, Wl)),",
+      "bbox": [
+        0.21650326797385622,
+        0.38762626262626265,
+        0.7467320261437909,
+        0.40404040404040403
+      ],
+      "confidence": 0.944476842880249
+    },
+    {
+      "id": "p4-b7",
+      "page": 4,
+      "order": 36,
+      "sourceOrder": 3,
+      "type": "text",
+      "text": "137 where α, β, γ are pre-defined parameters satisfying ",
+      "bbox": [
+        0.14215686274509803,
+        0.4109848484848485,
+        0.511437908496732,
+        0.42424242424242425
+      ],
+      "confidence": 0.9739193916320801
+    },
+    {
+      "id": "p4-b8",
+      "page": 4,
+      "order": 37,
+      "sourceOrder": 4,
+      "type": "formula",
+      "text": "β(1 + θ) + αθ > 0",
+      "bbox": [
+        0.4084967320261438,
+        0.4311868686868687,
+        0.5563725490196079,
+        0.4438131313131313
+      ],
+      "confidence": 0.9006179571151733
+    },
+    {
+      "id": "p4-b9",
+      "page": 4,
+      "order": 38,
+      "sourceOrder": 5,
+      "type": "text",
+      "text": "138 for some θ* ∈ (0, 1), together with one of the following two conditions ",
+      "bbox": [
+        0.14052287581699346,
+        0.45202020202020204,
+        0.6405228758169934,
+        0.4659090909090909
+      ],
+      "confidence": 0.9313095211982727
+    },
+    {
+      "id": "p4-b10",
+      "page": 4,
+      "order": 39,
+      "sourceOrder": 6,
+      "type": "formula",
+      "text": "α ∈ [−1, 0] and β ∈ [0, 1].α ∈ [0, 1] and β ∈ [−1/2, 1].",
+      "bbox": [
+        0.39869281045751637,
+        0.47285353535353536,
+        0.5939542483660131,
+        0.5044191919191919
+      ],
+      "confidence": 0.9324047565460205
+    },
+    {
+      "id": "p4-b11",
+      "page": 4,
+      "order": 40,
+      "sourceOrder": 7,
+      "type": "text",
+      "text": "139Moreover, w is an increasing sequence for signal passing: when the network is shallow, LiftGCN 140relies more on the linear filter to preserve structural information.\n",
+      "bbox": [
+        0.14133986928104575,
+        0.5176767676767676,
+        0.8227124183006536,
+        0.5448232323232324
+      ],
+      "confidence": 0.9795524179935455
+    },
+    {
+      "id": "p4-b12",
+      "page": 4,
+      "order": 41,
+      "sourceOrder": 8,
+      "type": "text",
+      "text": "141We emphasize the following heuristics behind the design of (3).",
+      "bbox": [
+        0.14215686274509803,
+        0.55239898989899,
+        0.5906862745098039,
+        0.5656565656565656
+      ],
+      "confidence": 0.9777228832244873
+    },
+    {
+      "id": "p4-b13",
+      "page": 4,
+      "order": 42,
+      "sourceOrder": 9,
+      "type": "text",
+      "text": "142First, the term (1 − α − β)Hl + αHl−1 + βHl−2 is called the filtering term. In the next section,143we show that under the above settings of α, β, this term amplifies the eigenvalues of A lying in the 144interval (θ*, 1) while keeping the spectral radius of A unchanged.\n",
+      "bbox": [
+        0.14215686274509803,
+        0.57260101010101,
+        0.8235294117647058,
+        0.6199494949494949
+      ],
+      "confidence": 0.9695513149102529
+    },
+    {
+      "id": "p4-b14",
+      "page": 4,
+      "order": 43,
+      "sourceOrder": 10,
+      "type": "text",
+      "text": "145Second,the term γH0 is called the preserving term, since it prevents the final output HL from 146deviating too far from H0. Hence, the above parameter setting requires γ (= 0.",
+      "bbox": [
+        0.14133986928104575,
+        0.6262626262626263,
+        0.8227124183006536,
+        0.6546717171717171
+      ],
+      "confidence": 0.9722029119729996
+    },
+    {
+      "id": "p4-b15",
+      "page": 4,
+      "order": 44,
+      "sourceOrder": 11,
+      "type": "text",
+      "text": "147Third, the parameter β is required to satisfy β > 0, so the filtering term becomes a third-order 148linear filter. In the next section, we show that if the order of the filtering term is smaller than 3, the 149above eigenvalue amplification effect becomes weaker. Thus, order 3 provides a balance between 150amplification and computational cost.\n",
+      "bbox": [
+        0.14133986928104575,
+        0.6609848484848485,
+        0.8227124183006536,
+        0.7165404040404041
+      ],
+      "confidence": 0.9774419739842415
+    },
+    {
+      "id": "p4-b16",
+      "page": 4,
+      "order": 45,
+      "sourceOrder": 12,
+      "type": "text",
+      "text": "151In the next section, we explain mathematically why the above parameter choices alleviate over152smoothing by amplifying the eigenvalues of A.\n",
+      "bbox": [
+        0.14133986928104575,
+        0.7234848484848485,
+        0.8235294117647058,
+        0.7531565656565656
+      ],
+      "confidence": 0.9833249896764755
+    },
+    {
+      "id": "p4-b17",
+      "page": 4,
+      "order": 46,
+      "sourceOrder": 13,
+      "type": "paragraph_title",
+      "text": "153 4 Spectral Properties of LiftGCN ",
+      "bbox": [
+        0.14052287581699346,
+        0.7733585858585859,
+        0.4665032679738562,
+        0.7872474747474747
+      ],
+      "confidence": 0.9734910130500793
+    },
+    {
+      "id": "p4-b18",
+      "page": 4,
+      "order": 47,
+      "sourceOrder": 14,
+      "type": "text",
+      "text": "154 As a linear approximation of LiftGCN, we omit the activation σ(·) in (3) and obtain ",
+      "bbox": [
+        0.14052287581699346,
+        0.8036616161616161,
+        0.7214052287581699,
+        0.8169191919191919
+      ],
+      "confidence": 0.9436639547348022
+    },
+    {
+      "id": "p4-b19",
+      "page": 4,
+      "order": 48,
+      "sourceOrder": 15,
+      "type": "formula",
+      "text": "Hl+1 = A((1 − α − β)Hl + αHl−1 + βHl−2 + γH0),",
+      "bbox": [
+        0.2957516339869281,
+        0.8251262626262627,
+        0.6666666666666666,
+        0.8402777777777778
+      ],
+      "confidence": 0.9517173171043396
+    },
+    {
+      "id": "p4-b20",
+      "page": 4,
+      "order": 49,
+      "sourceOrder": 16,
+      "type": "text",
+      "text": "155 whose lifted form can be represented as ",
+      "bbox": [
+        0.14215686274509803,
+        0.8484848484848485,
+        0.4354575163398693,
+        0.860479797979798
+      ],
+      "confidence": 0.984745979309082
+    },
+    {
+      "id": "p4-b21",
+      "page": 4,
+      "order": 50,
+      "sourceOrder": 17,
+      "type": "formula",
+      "text": "Hl+1Hl AH0$ Hl−1Hl = Aα,βHl−1Hl−2+γoo ",
+      "bbox": [
+        0.3161764705882353,
+        0.8680555555555556,
+        0.6486928104575164,
+        0.9122474747474747
+      ],
+      "confidence": 0.8584430694580079
+    },
+    {
+      "id": "p4-b22",
+      "page": 4,
+      "order": null,
+      "sourceOrder": null,
+      "type": "formula_number",
+      "text": "(3)",
+      "bbox": [
+        0.803921568627451,
+        0.3907828282828283,
+        0.8227124183006536,
+        0.4034090909090909
+      ],
+      "confidence": 0.9961110949516296
+    },
+    {
+      "id": "p4-b23",
+      "page": 4,
+      "order": null,
+      "sourceOrder": null,
+      "type": "formula_number",
+      "text": "(4)",
+      "bbox": [
+        0.803921568627451,
+        0.4318181818181818,
+        0.8227124183006536,
+        0.4438131313131313
+      ],
+      "confidence": 0.9939172267913818
+    },
+    {
+      "id": "p4-b24",
+      "page": 4,
+      "order": null,
+      "sourceOrder": null,
+      "type": "formula_number",
+      "text": "(5)",
+      "bbox": [
+        0.803921568627451,
+        0.4734848484848485,
+        0.8227124183006536,
+        0.48547979797979796
+      ],
+      "confidence": 0.997422456741333
+    },
+    {
+      "id": "p4-b25",
+      "page": 4,
+      "order": null,
+      "sourceOrder": null,
+      "type": "formula_number",
+      "text": "(6)",
+      "bbox": [
+        0.803921568627451,
+        0.4911616161616162,
+        0.8218954248366013,
+        0.5031565656565656
+      ],
+      "confidence": 0.9976401329040527
+    },
+    {
+      "id": "p4-b26",
+      "page": 4,
+      "order": null,
+      "sourceOrder": null,
+      "type": "formula_number",
+      "text": "(7)",
+      "bbox": [
+        0.803921568627451,
+        0.8276515151515151,
+        0.8227124183006536,
+        0.8396464646464646
+      ],
+      "confidence": 0.9980934262275696
+    },
+    {
+      "id": "p4-b27",
+      "page": 4,
+      "order": null,
+      "sourceOrder": null,
+      "type": "formula_number",
+      "text": "(8)",
+      "bbox": [
+        0.803921568627451,
+        0.88510101010101,
+        0.8227124183006536,
+        0.8970959595959596
+      ],
+      "confidence": 0.9985852837562561
+    },
+    {
+      "id": "p4-b28",
+      "page": 4,
+      "order": null,
+      "sourceOrder": null,
+      "type": "number",
+      "text": "4",
+      "bbox": [
+        0.494281045751634,
+        0.9375,
+        0.5024509803921569,
+        0.9463383838383839
+      ],
+      "confidence": 0.9996306896209717
+    },
+    {
+      "id": "p5-b0",
+      "page": 5,
+      "order": 51,
+      "sourceOrder": 1,
+      "type": "text",
+      "text": "156 where ",
+      "bbox": [
+        0.14133986928104575,
+        0.09343434343434344,
+        0.21486928104575165,
+        0.10353535353535354
+      ],
+      "confidence": 0.9908309578895569
+    },
+    {
+      "id": "p5-b1",
+      "page": 5,
+      "order": 52,
+      "sourceOrder": 2,
+      "type": "formula",
+      "text": "(1 − α − β)A αA βA Aα,β =I O O O I O ",
+      "bbox": [
+        0.34068627450980393,
+        0.10984848484848485,
+        0.6225490196078431,
+        0.1553030303030303
+      ],
+      "confidence": 0.8377032809787326
+    },
+    {
+      "id": "p5-b2",
+      "page": 5,
+      "order": 53,
+      "sourceOrder": 3,
+      "type": "text",
+      "text": "157 By introducing Aα,β, the filtering behavior of GCNs under the proposed lifting technique is governed 158 not by A, but by the eigenvalues of Aα,β.\n",
+      "bbox": [
+        0.14133986928104575,
+        0.1672979797979798,
+        0.8227124183006536,
+        0.19886363636363635
+      ],
+      "confidence": 0.9308120906352997
+    },
+    {
+      "id": "p5-b3",
+      "page": 5,
+      "order": 54,
+      "sourceOrder": 4,
+      "type": "text",
+      "text": "159As a concise heuristic, the subsequent analysis will demonstrate that:",
+      "bbox": [
+        0.14215686274509803,
+        0.2058080808080808,
+        0.6258169934640523,
+        0.21906565656565657
+      ],
+      "confidence": 0.9829044938087463
+    },
+    {
+      "id": "p5-b4",
+      "page": 5,
+      "order": 55,
+      "sourceOrder": 5,
+      "type": "text",
+      "text": "Ha) The eigenvectors of Aα,β are similar to those of A, implying that LiftGCN preserves the structural characteristics of the original eigenspaces.\n",
+      "bbox": [
+        0.1968954248366013,
+        0.2316919191919192,
+        0.8218954248366013,
+        0.26073232323232326
+      ],
+      "confidence": 0.9659803211688995
+    },
+    {
+      "id": "p5-b5",
+      "page": 5,
+      "order": 56,
+      "sourceOrder": 6,
+      "type": "text",
+      "text": "Hb) The eigenvalues of Aα,β are larger than those of A except for the largest one, enabling LiftGCN to enhance critical information in the graph signal.\n",
+      "bbox": [
+        0.1968954248366013,
+        0.26704545454545453,
+        0.8218954248366013,
+        0.2948232323232323
+      ],
+      "confidence": 0.9568389654159546
+    },
+    {
+      "id": "p5-b6",
+      "page": 5,
+      "order": 57,
+      "sourceOrder": 7,
+      "type": "text",
+      "text": "Hc) LiftGCN with β (= 0 amplifies the eigenvalues of A more strongly than the case of β = 0,which highlights the advantage of adopting the third-order LiftGCN.",
+      "bbox": [
+        0.1977124183006536,
+        0.30303030303030304,
+        0.8227124183006536,
+        0.3301767676767677
+      ],
+      "confidence": 0.9396849274635315
+    },
+    {
+      "id": "p5-b7",
+      "page": 5,
+      "order": 58,
+      "sourceOrder": 8,
+      "type": "text",
+      "text": "166To confirm the above claims, we define ",
+      "bbox": [
+        0.14215686274509803,
+        0.3428030303030303,
+        0.43218954248366015,
+        0.3547979797979798
+      ],
+      "confidence": 0.9834606349468231
+    },
+    {
+      "id": "p5-b8",
+      "page": 5,
+      "order": 59,
+      "sourceOrder": 9,
+      "type": "formula",
+      "text": "(1 − α − β)θ αθβθCθ =100010",
+      "bbox": [
+        0.35375816993464054,
+        0.3630050505050505,
+        0.6070261437908496,
+        0.4027777777777778
+      ],
+      "confidence": 0.9718388252788119
+    },
+    {
+      "id": "p5-b9",
+      "page": 5,
+      "order": 60,
+      "sourceOrder": 10,
+      "type": "text",
+      "text": "167and let the eigenvalues of A be λ1 = 1 > λ2 ≥ λ3 ≥ …· ≥ λn with corresponding eigenvectors 168ξ1 = D1/21, ξ2, …, ξn.In what follows, we explain heuristics Ha, Hb, and Hc through the spectral 169 analysis of Aα,β, and all related proofs are deferred to Appendix A.",
+      "bbox": [
+        0.14133986928104575,
+        0.4154040404040404,
+        0.8227124183006536,
+        0.461489898989899
+      ],
+      "confidence": 0.9546220183372498
+    },
+    {
+      "id": "p5-b10",
+      "page": 5,
+      "order": 61,
+      "sourceOrder": 11,
+      "type": "paragraph_title",
+      "text": "1704.1 Explanation for Heuristic Ha ",
+      "bbox": [
+        0.14133986928104575,
+        0.47853535353535354,
+        0.4150326797385621,
+        0.49053030303030304
+      ],
+      "confidence": 0.9775365889072418
+    },
+    {
+      "id": "p5-b11",
+      "page": 5,
+      "order": 62,
+      "sourceOrder": 12,
+      "type": "text",
+      "text": "171Tobegin, we providetwo propositions that connect the eigenvectors of Aα,β with those of A.",
+      "bbox": [
+        0.14052287581699346,
+        0.5031565656565656,
+        0.7826797385620915,
+        0.5195707070707071
+      ],
+      "confidence": 0.9484850168228149
+    },
+    {
+      "id": "p5-b12",
+      "page": 5,
+      "order": 63,
+      "sourceOrder": 13,
+      "type": "text",
+      "text": "172Proposition 2. Any eigenvector ζ of Aα,β can be written as ζ =η ⊗ ξ, where ξ is an eigenvector of 173A with eigenvalue λ and η is an eigenvector of Cλ.\n",
+      "bbox": [
+        0.14133986928104575,
+        0.5271464646464646,
+        0.8243464052287581,
+        0.5587121212121212
+      ],
+      "confidence": 0.9664722383022308
+    },
+    {
+      "id": "p5-b13",
+      "page": 5,
+      "order": 64,
+      "sourceOrder": 14,
+      "type": "text",
+      "text": "174Using the decomposition in Proposition 2, we define the following map ",
+      "bbox": [
+        0.14215686274509803,
+        0.5700757575757576,
+        0.6437908496732027,
+        0.5839646464646465
+      ],
+      "confidence": 0.9715562760829926
+    },
+    {
+      "id": "p5-b14",
+      "page": 5,
+      "order": 65,
+      "sourceOrder": 15,
+      "type": "formula",
+      "text": "H : ζ → (η, ξ),",
+      "bbox": [
+        0.42810457516339867,
+        0.5915404040404041,
+        0.5343137254901961,
+        0.6047979797979798
+      ],
+      "confidence": 0.8727166056632996
+    },
+    {
+      "id": "p5-b15",
+      "page": 5,
+      "order": 66,
+      "sourceOrder": 16,
+      "type": "text",
+      "text": "175which maps any eigenvector ζof Aα,β to a pair of vectors η and ξ, where ξ is an eigenvector of A 176with eigenvalue λ and η is an eigenvector of Cλ.\n",
+      "bbox": [
+        0.14133986928104575,
+        0.61489898989899,
+        0.8243464052287581,
+        0.6439393939393939
+      ],
+      "confidence": 0.964849442243576
+    },
+    {
+      "id": "p5-b16",
+      "page": 5,
+      "order": 67,
+      "sourceOrder": 17,
+      "type": "text",
+      "text": "177Proposition 3. Let ξ be an eigenvector of A with eigenvalue λ, and let η be an eigenvector of Cλ with 178eigenvalue . Then η⊗ ξ is an eigenvector of Aα,β with corresponding eigenvalue . In particular,1791 ⊗ (D1/21) is an eigenvector of Aα,β with eigenvalue 1.\n",
+      "bbox": [
+        0.14133986928104575,
+        0.6508838383838383,
+        0.8243464052287581,
+        0.6982323232323232
+      ],
+      "confidence": 0.9803381065527598
+    },
+    {
+      "id": "p5-b17",
+      "page": 5,
+      "order": 68,
+      "sourceOrder": 18,
+      "type": "text",
+      "text": "180Combining the above two propositions yields the following theorem. For brevity, we omit the proof,181since it follows directly from them.\n",
+      "bbox": [
+        0.14133986928104575,
+        0.7095959595959596,
+        0.8243464052287581,
+        0.7367424242424242
+      ],
+      "confidence": 0.9763606637716293
+    },
+    {
+      "id": "p5-b18",
+      "page": 5,
+      "order": 69,
+      "sourceOrder": 19,
+      "type": "text",
+      "text": "182Theorem 1. The map H in (10) is bijective and ζ =η ⊗ ξ.",
+      "bbox": [
+        0.14215686274509803,
+        0.7417929292929293,
+        0.5620915032679739,
+        0.7556818181818182
+      ],
+      "confidence": 0.9429720342159271
+    },
+    {
+      "id": "p5-b19",
+      "page": 5,
+      "order": 70,
+      "sourceOrder": 20,
+      "type": "text",
+      "text": "183According to Theorem 1, the eigenvectors of Aα,β are structurally similar to those of A, which 184validates heuristic Ha: LiftGCN preserves the structural characteristics of the original eigenspaces.",
+      "bbox": [
+        0.14052287581699346,
+        0.7676767676767676,
+        0.8218954248366013,
+        0.7967171717171717
+      ],
+      "confidence": 0.9816858768463135
+    },
+    {
+      "id": "p5-b20",
+      "page": 5,
+      "order": 71,
+      "sourceOrder": 21,
+      "type": "paragraph_title",
+      "text": "1854.2 Explanation for Heuristic Hb ",
+      "bbox": [
+        0.14215686274509803,
+        0.8137626262626263,
+        0.4166666666666667,
+        0.8257575757575758
+      ],
+      "confidence": 0.9904330372810364
+    },
+    {
+      "id": "p5-b21",
+      "page": 5,
+      "order": 72,
+      "sourceOrder": 22,
+      "type": "text",
+      "text": "186For Cθ in (9) with θ ∈ [0, 1], the eigenvalues of Cθ satisfy ",
+      "bbox": [
+        0.14297385620915032,
+        0.8390151515151515,
+        0.5563725490196079,
+        0.8529040404040404
+      ],
+      "confidence": 0.9615655243396759
+    },
+    {
+      "id": "p5-b22",
+      "page": 5,
+      "order": 73,
+      "sourceOrder": 23,
+      "type": "formula",
+      "text": "λ3 − (1 − α − β)θλ2 − αθλ − βθ = 0.",
+      "bbox": [
+        0.3472222222222222,
+        0.860479797979798,
+        0.6143790849673203,
+        0.875
+      ],
+      "confidence": 0.9451808333396912
+    },
+    {
+      "id": "p5-b23",
+      "page": 5,
+      "order": 74,
+      "sourceOrder": 24,
+      "type": "text",
+      "text": "187In what follows, we prove that λi < ρ(Cλi) ≤ 1 under the parameter settings in Section 3. Before 188presenting the main result, we state the following propositions.\n",
+      "bbox": [
+        0.14215686274509803,
+        0.8838383838383839,
+        0.8218954248366013,
+        0.9116161616161617
+      ],
+      "confidence": 0.9805132001638412
+    },
+    {
+      "id": "p5-b24",
+      "page": 5,
+      "order": null,
+      "sourceOrder": null,
+      "type": "formula_number",
+      "text": "(9)",
+      "bbox": [
+        0.8047385620915033,
+        0.37815656565656564,
+        0.8227124183006536,
+        0.39015151515151514
+      ],
+      "confidence": 0.9979457855224609
+    },
+    {
+      "id": "p5-b25",
+      "page": 5,
+      "order": null,
+      "sourceOrder": null,
+      "type": "formula_number",
+      "text": "(10)",
+      "bbox": [
+        0.795751633986928,
+        0.5921717171717171,
+        0.8218954248366013,
+        0.6041666666666666
+      ],
+      "confidence": 0.9976785182952881
+    },
+    {
+      "id": "p5-b26",
+      "page": 5,
+      "order": null,
+      "sourceOrder": null,
+      "type": "formula_number",
+      "text": "(11)",
+      "bbox": [
+        0.795751633986928,
+        0.8630050505050505,
+        0.8218954248366013,
+        0.875
+      ],
+      "confidence": 0.9985557794570923
+    },
+    {
+      "id": "p5-b27",
+      "page": 5,
+      "order": null,
+      "sourceOrder": null,
+      "type": "number",
+      "text": "5",
+      "bbox": [
+        0.494281045751634,
+        0.9375,
+        0.5024509803921569,
+        0.9463383838383839
+      ],
+      "confidence": 0.9998080134391785
+    },
+    {
+      "id": "p6-b0",
+      "page": 6,
+      "order": 75,
+      "sourceOrder": 1,
+      "type": "text",
+      "text": "189Proposition 4. If α ∈ [0, 1], β ∈ [−1/2, 1], and θ ∈ [0, 1], then ρ(Cθ) ≤ 1.",
+      "bbox": [
+        0.14052287581699346,
+        0.09154040404040405,
+        0.6683006535947712,
+        0.10606060606060606
+      ],
+      "confidence": 0.9646332561969757
+    },
+    {
+      "id": "p6-b1",
+      "page": 6,
+      "order": 76,
+      "sourceOrder": 2,
+      "type": "text",
+      "text": "190Proposition 5. If α ∈ [−1, 0], β ∈ [0, 1], and θ ∈ [0, 1], then ρ(Cθ) ≤ 1.",
+      "bbox": [
+        0.14215686274509803,
+        0.11047979797979798,
+        0.6519607843137255,
+        0.12563131313131312
+      ],
+      "confidence": 0.9690632224082947
+    },
+    {
+      "id": "p6-b2",
+      "page": 6,
+      "order": 77,
+      "sourceOrder": 3,
+      "type": "text",
+      "text": "191Proposition 6. If θ ∈ (0, 1) and β(θ + 1) + αθ > 0, then there exists an eigenvalue  of Cθ such 192that  > τα,β(θ) · , whre \n",
+      "bbox": [
+        0.14215686274509803,
+        0.13005050505050506,
+        0.8227124183006536,
+        0.15782828282828282
+      ],
+      "confidence": 0.9692072719335556
+    },
+    {
+      "id": "p6-b3",
+      "page": 6,
+      "order": 78,
+      "sourceOrder": 4,
+      "type": "formula",
+      "text": "τα,β(θ) =1 + θ (β(1 + θ) + αθ)1 + β(1 + θ) + αθ>1.",
+      "bbox": [
+        0.35049019607843135,
+        0.1672979797979798,
+        0.6119281045751634,
+        0.19696969696969696
+      ],
+      "confidence": 0.9597079753875732
+    },
+    {
+      "id": "p6-b4",
+      "page": 6,
+      "order": 79,
+      "sourceOrder": 5,
+      "type": "text",
+      "text": "193Before presenting the main theorem, we define the inverse map of (10) as ",
+      "bbox": [
+        0.14052287581699346,
+        0.21338383838383837,
+        0.6552287581699346,
+        0.22664141414141414
+      ],
+      "confidence": 0.9695769846439362
+    },
+    {
+      "id": "p6-b5",
+      "page": 6,
+      "order": 80,
+      "sourceOrder": 6,
+      "type": "formula",
+      "text": "H−1 : (η, ξ) → ζ = η ⊗ ξ,",
+      "bbox": [
+        0.3897058823529412,
+        0.23484848484848486,
+        0.5727124183006536,
+        0.24936868686868688
+      ],
+      "confidence": 0.8614359498023987
+    },
+    {
+      "id": "p6-b6",
+      "page": 6,
+      "order": 81,
+      "sourceOrder": 7,
+      "type": "text",
+      "text": "194 whereis aneigenvectorof Awitheigenvalue λ,ηisaneigenvectorofCλ,andis aneienvctor 195of Aα,β.\n",
+      "bbox": [
+        0.14052287581699346,
+        0.26136363636363635,
+        0.8227124183006536,
+        0.2922979797979798
+      ],
+      "confidence": 0.9011580348014832
+    },
+    {
+      "id": "p6-b7",
+      "page": 6,
+      "order": 82,
+      "sourceOrder": 8,
+      "type": "text",
+      "text": "196Combining the above propositions, we obtain the following main theorem explaining heuristic Hb.",
+      "bbox": [
+        0.14133986928104575,
+        0.29924242424242425,
+        0.8169934640522876,
+        0.31313131313131315
+      ],
+      "confidence": 0.9811943769454956
+    },
+    {
+      "id": "p6-b8",
+      "page": 6,
+      "order": 83,
+      "sourceOrder": 9,
+      "type": "text",
+      "text": "197Theorem 2. If α and β in Aα,β satisfy α + β ≥ 0 and θ(α + β) +β > 0, together with one of the 198two conditions (5) and (6), then ρ(Aα,β) = 1. Moreover, for any eigenvector ξ of A with eigenvalue 199λ ∈ (θ, 1), there exists an η such that ζ = η⊗ξin (13) is an eigenvector of Aα,β with eigenvalue 200satisfying 1 ≥  > λ.\n",
+      "bbox": [
+        0.14215686274509803,
+        0.32007575757575757,
+        0.8227124183006536,
+        0.38257575757575757
+      ],
+      "confidence": 0.9692095816135406
+    },
+    {
+      "id": "p6-b9",
+      "page": 6,
+      "order": 84,
+      "sourceOrder": 10,
+      "type": "text",
+      "text": "201According to Theorem 2, any eigenvalue of A greater than θ is amplified to an eigenvalue of Aα,β202that is still no greater than 1, validating heuristic Hb: LiftGCN enhances critical information in the 203graph signal. For the case β = 0, the amplification extent is discussed in B.",
+      "bbox": [
+        0.13970588235294118,
+        0.3958333333333333,
+        0.8227124183006536,
+        0.43813131313131315
+      ],
+      "confidence": 0.9795855184396108
+    },
+    {
+      "id": "p6-b10",
+      "page": 6,
+      "order": 85,
+      "sourceOrder": 11,
+      "type": "paragraph_title",
+      "text": "2044.3 Explanation for Heuristic Hc ",
+      "bbox": [
+        0.14052287581699346,
+        0.45580808080808083,
+        0.41421568627450983,
+        0.4678030303030303
+      ],
+      "confidence": 0.9943454563617706
+    },
+    {
+      "id": "p6-b11",
+      "page": 6,
+      "order": 86,
+      "sourceOrder": 12,
+      "type": "text",
+      "text": "205According to Proposition 6, the critical factor α,β(θ) characterizes the extent to which the eigenvalues 206of Acan be amplified. If we set β = 0,the amplification factor τα,o(θ) satisfies thefollowing property,207whose proof is given in A.7.\n",
+      "bbox": [
+        0.14215686274509803,
+        0.4810606060606061,
+        0.8235294117647058,
+        0.5252525252525253
+      ],
+      "confidence": 0.9741525053977966
+    },
+    {
+      "id": "p6-b12",
+      "page": 6,
+      "order": 87,
+      "sourceOrder": 13,
+      "type": "text",
+      "text": "Proposition 7. Given any θ ∈ (0, 1) and β > 0, we have τα,β(θ) > τα,0(θ)",
+      "bbox": [
+        0.16830065359477125,
+        0.5309343434343434,
+        0.6748366013071896,
+        0.5448232323232324
+      ],
+      "confidence": 0.9491941928863525
+    },
+    {
+      "id": "p6-b13",
+      "page": 6,
+      "order": 88,
+      "sourceOrder": 14,
+      "type": "text",
+      "text": "The above proposition shows that the amplification factor τα,β(θ) is larger than its counterpart when β = 0, which explains heuristic Hc: third-order LiftGCN provides a stronger amplification effect than second-order LiftGCN.\n",
+      "bbox": [
+        0.16911764705882354,
+        0.5574494949494949,
+        0.8227124183006536,
+        0.5959595959595959
+      ],
+      "confidence": 0.961958110332489
+    },
+    {
+      "id": "p6-b14",
+      "page": 6,
+      "order": 89,
+      "sourceOrder": 15,
+      "type": "paragraph_title",
+      "text": "2125 Experiments ",
+      "bbox": [
+        0.14052287581699346,
+        0.6193181818181818,
+        0.3112745098039216,
+        0.6325757575757576
+      ],
+      "confidence": 0.9837612807750702
+    },
+    {
+      "id": "p6-b15",
+      "page": 6,
+      "order": 90,
+      "sourceOrder": 16,
+      "type": "paragraph_title",
+      "text": "2135.1 Experimental Setup ",
+      "bbox": [
+        0.14052287581699346,
+        0.6502525252525253,
+        0.35049019607843135,
+        0.6622474747474747
+      ],
+      "confidence": 0.9877946674823761
+    },
+    {
+      "id": "p6-b16",
+      "page": 6,
+      "order": 91,
+      "sourceOrder": 17,
+      "type": "text",
+      "text": "214Datasets. We evaluate LiftGCN on 10 widely used node classification benchmarks covering both 215homophilic and heterophilic graphs, with graph scales ranging from small WebKB networks to 216large-scale real-world graphs. Specifically, the datasets include WebKB (TEXAS, WiscoNSIN,217CORNELL) Craven et al. [2000], WikipediaNetwork (SQUIRREL, CHAMELEON) Rozemberczki 218et al. [2021], Planetoid (CORA, CITESEER, PUBMED) Sen et al. [2008], Namata et al. [2012], and 219large-scale benchmarks from LINKX (PENN94, GENIUS) Traud et al. [2012], Lim and Benson 220[2021]. Detailed dataset statistics are provided in Appendix C.2.\n",
+      "bbox": [
+        0.13970588235294118,
+        0.6755050505050505,
+        0.8227124183006536,
+        0.7714646464646465
+      ],
+      "confidence": 0.979854017496109
+    },
+    {
+      "id": "p6-b17",
+      "page": 6,
+      "order": 92,
+      "sourceOrder": 18,
+      "type": "text",
+      "text": "Models and baselines. We consider five representative GCN backbones as baselines: GCN Kipf and Welling [2016], GAT Veličković et al. [2018],GCNII Chen et al. [2020c], GRAPHSAGEMEAN Hamilton et al. [2017], and a residual GCN-style backbone (RESNET) Li et al. [2019].For each backbone, we instantiate our method under the proposed LiftGCN framework (3). In addition, we incorporate several representative over-smoothing mitigation mechanisms, including PAIRNORM Zhao and Akoglu [2020], GRAPHNORMV2 Scholkemper et al. [2025], and DROPEDGE Rong et al. [2020]. These comparisons allow us to examine whether the proposed Lift mechanism can provide additional gains when combined with existing strategies for alleviating representation homogenization in deep graph propagation.\n",
+      "bbox": [
+        0.16748366013071894,
+        0.7866161616161617,
+        0.8235294117647058,
+        0.9116161616161617
+      ],
+      "confidence": 0.9527354836463928
+    },
+    {
+      "id": "p6-b18",
+      "page": 6,
+      "order": null,
+      "sourceOrder": null,
+      "type": "formula_number",
+      "text": "(12)",
+      "bbox": [
+        0.795751633986928,
+        0.17613636363636365,
+        0.8218954248366013,
+        0.18876262626262627
+      ],
+      "confidence": 0.9984852075576782
+    },
+    {
+      "id": "p6-b19",
+      "page": 6,
+      "order": null,
+      "sourceOrder": null,
+      "type": "formula_number",
+      "text": "(13)",
+      "bbox": [
+        0.795751633986928,
+        0.23674242424242425,
+        0.8218954248366013,
+        0.24936868686868688
+      ],
+      "confidence": 0.9984604120254517
+    },
+    {
+      "id": "p6-b20",
+      "page": 6,
+      "order": null,
+      "sourceOrder": null,
+      "type": "number",
+      "text": "6",
+      "bbox": [
+        0.494281045751634,
+        0.9375,
+        0.5024509803921569,
+        0.9463383838383839
+      ],
+      "confidence": 0.9998149275779724
+    },
+    {
+      "id": "p7-b0",
+      "page": 7,
+      "order": 93,
+      "sourceOrder": null,
+      "type": "figure_title",
+      "text": "Table 1: Main results of TestAcc@BestVal (%). Each entry reports the mean test accuracy over multiple random seeds. The superscript denotes the selected depth from {3,8,16,32}, and the subscript denotes the standard deviation.indicates ties across multiple depths. Best mean results are highlighted in bold.",
+      "bbox": [
+        0.1715686274509804,
+        0.08964646464646464,
+        0.8218954248366013,
+        0.1275252525252525
+      ],
+      "confidence": 0.967914879322052
+    },
+    {
+      "id": "p7-b1",
+      "page": 7,
+      "order": 94,
+      "sourceOrder": null,
+      "type": "table",
+      "text": "",
+      "bbox": [
+        0.17647058823529413,
+        0.13825757575757575,
+        0.8194444444444444,
+        0.30492424242424243
+      ],
+      "confidence": 0.9681787490844727
+    },
+    {
+      "id": "p7-b2",
+      "page": 7,
+      "order": 95,
+      "sourceOrder": 1,
+      "type": "text",
+      "text": "Evaluation metrics. We report node classification performance by TestAcc@BestVal, which evaluates test accuracy at the epoch achieving the best validation accuracy, averaged over 10 random seeds. To quantify over-smoothing, we use PairCosSim, which measures the average pairwise cosine similarity among node representations within the same layer. As PairCosSim approaches 1,node embeddings become increasingly homogenized, indicating more severe over-smoothing. In addition, we introduce NSER (Non-dominant Spectral Energy Retention) to characterize the layerwise preservation of non-dominant spectral components during deep propagation. A higher NSER indicates stronger retention of non-dominant spectral information, while a lower NSER suggests faster spectral concentration toward the dominant eigenspace. Detailed definitions and formulas of these metrics are provided in Appendix C.3.\n",
+      "bbox": [
+        0.1707516339869281,
+        0.3333333333333333,
+        0.8235294117647058,
+        0.4703282828282828
+      ],
+      "confidence": 0.9712572753429413
+    },
+    {
+      "id": "p7-b3",
+      "page": 7,
+      "order": 96,
+      "sourceOrder": 2,
+      "type": "text",
+      "text": "Fairness and reproducibility. For a fair comparison, we adopt a unified training protocol for all methods. For each dataset-backbone pair, we use the same training hyperparameters and optimizer configuration for all variants, and select the reported checkpoint using an identical validation-based early-stopping rule. To support reproducibility, our code and hyperparameter configurations will be released on GitHub.\n",
+      "bbox": [
+        0.16993464052287582,
+        0.48737373737373735,
+        0.8218954248366013,
+        0.5542929292929293
+      ],
+      "confidence": 0.9703747510910035
+    },
+    {
+      "id": "p7-b4",
+      "page": 7,
+      "order": 97,
+      "sourceOrder": 3,
+      "type": "paragraph_title",
+      "text": "5.2 Main Results ",
+      "bbox": [
+        0.17238562091503268,
+        0.5738636363636364,
+        0.30392156862745096,
+        0.5845959595959596
+      ],
+      "confidence": 0.962165892124176
+    },
+    {
+      "id": "p7-b5",
+      "page": 7,
+      "order": 98,
+      "sourceOrder": 4,
+      "type": "text",
+      "text": "We evaluate the proposed Lift framework on ten benchmark datasets with five representative GNN backbones, namely GCN, GAT, GCNII, GraphSAGE-Mean, and ResNet. Tab. 1 reports the results over depths {3,8,16,32}. For each dataset-backbone pair, we show the best TestAcc@BestVal among these depths together with the corresponding depth. Detailed hyperparameter settings are provided in the appendix.\n",
+      "bbox": [
+        0.16748366013071894,
+        0.5997474747474747,
+        0.8227124183006536,
+        0.6679292929292929
+      ],
+      "confidence": 0.9661634206771851
+    },
+    {
+      "id": "p7-b6",
+      "page": 7,
+      "order": 99,
+      "sourceOrder": 5,
+      "type": "text",
+      "text": "Overall, Lift either improves the base models or maintains competitive performance across most dataset-backbones, demonstrating its robustness across different backbones and graph regimes. The gains are especially clear on heterophilous benchmarks. For example, Lift improves GCNII on WISCONSIN from 64.71% to 76.47%, GraphSAGE on TEXAS from 75.68% to 83.78%, and GAT on SQUIRREL from 25.94% to 31.41%. On homophilous citation graphs and large-scale benchmarks,Lift also maintains competitive performance and brings steady improvements in several cases, such as GCNII on CORA and GCN on PENN94. Notably, the best result on every dataset is achieved by a Lift-enhanced variant, demonstrating the broad effectiveness of Lift across architectures and graph regimes.\n",
+      "bbox": [
+        0.16993464052287582,
+        0.6755050505050505,
+        0.8235294117647058,
+        0.797979797979798
+      ],
+      "confidence": 0.9702266454696655
+    },
+    {
+      "id": "p7-b7",
+      "page": 7,
+      "order": 100,
+      "sourceOrder": 6,
+      "type": "paragraph_title",
+      "text": "5.3Over-smoothing Analysis ",
+      "bbox": [
+        0.1715686274509804,
+        0.8169191919191919,
+        0.3872549019607843,
+        0.8289141414141414
+      ],
+      "confidence": 0.9880042672157288
+    },
+    {
+      "id": "p7-b8",
+      "page": 7,
+      "order": 101,
+      "sourceOrder": 7,
+      "type": "text",
+      "text": "261We evaluate deep propagation stability from three complementary aspects. First, we compare GCN 262and GCNII with their Lift-enhanced variants on CoRA, CITESEER, and PUBMED, using PairCosSim 263to quantify layer-wise representation homogenization. Second, we use NSER to examine whether 264Lift preserves non-dominant spectral components during deep propagation, with detailed results 265provided in Appendix C.4. Third, we test whether Lift can complement existing over-smoothing ",
+      "bbox": [
+        0.14052287581699346,
+        0.8428030303030303,
+        0.8227124183006536,
+        0.9116161616161617
+      ],
+      "confidence": 0.982354462146759
+    },
+    {
+      "id": "p7-b9",
+      "page": 7,
+      "order": null,
+      "sourceOrder": null,
+      "type": "number",
+      "text": "7",
+      "bbox": [
+        0.494281045751634,
+        0.9375,
+        0.5024509803921569,
+        0.9463383838383839
+      ],
+      "confidence": 0.9999475479125977
+    }
+  ],
+  "active": false
+}

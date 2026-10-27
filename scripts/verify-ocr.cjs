@@ -12,9 +12,10 @@ const {OcrWorker} = require('../ocr-worker.cjs');
   const pages = process.argv[3] ? process.argv[3].split(',').map(Number) : Array.from({length: pageCount}, (_, index) => index + 1);
   assert.ok(pages.every(page => Number.isInteger(page) && page > 0 && page <= pageCount));
   const worker = new OcrWorker(), parsed = [];
+  const outputDirectory = path.resolve(process.env.HELIOS_OCR_ASSETS || path.join(__dirname, '../.cache/ocr-verification-pages'));
   try {
-    const result = await worker.request({path: input, pageCount, pages}, event => {
-      if (event.event === 'loading') console.log('Loading PP-StructureV3 CPU models...');
+    const result = await worker.request({path: input, pageCount, pages, outputDirectory}, event => {
+      if (event.event === 'loading') console.log('Loading PP-StructureV3: all recognition features...');
       if (event.event === 'page') {
         const page = event.data;
         assert.equal(page.blocks.length, new Set(page.blocks.map(block => block.id)).size);

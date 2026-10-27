@@ -4,7 +4,7 @@ const {setTimeout: delay} = require('node:timers/promises');
 
 const digest = value => crypto.createHash('sha256').update(typeof value === 'string' || Buffer.isBuffer(value) ? value : JSON.stringify(value)).digest('hex');
 const mediaBlock = block => /^(image|figure|chart|table|formula|equation|algorithm)$/.test(block.type);
-const ignoredBlock = block => /^(header|footer|page_number|number|formula_number|header_image|footer_image|seal)$/.test(block.type);
+const ignoredBlock = block => /^(header|footer|page_number|number|formula_number|header_image|footer_image|aside_text)$/.test(block.type);
 const translatable = block => !mediaBlock(block) && !ignoredBlock(block) && /[A-Za-z]/.test(block.text);
 
 function providerConfig(input = {}) {

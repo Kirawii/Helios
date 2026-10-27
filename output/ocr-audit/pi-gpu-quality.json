@@ -1,0 +1,800 @@
+{
+  "pdf": "C:\\Users\\jiely\\Downloads\\PI Control for GCN-3.0-WWW (1).pdf",
+  "source": "Original PDF text-layer prose samples, aligned by complete paragraph text; coordinates from corrected pages are not used",
+  "scope": "Sampled plain prose only. Does not measure formulas, tables, charts, omitted unselected paragraphs or whole-document accuracy. Inspect uncertain alignments individually.",
+  "referenceReport": "C:\\Users\\jiely\\Desktop\\Helios\\output\\ocr-audit\\pi-quality.json",
+  "recognizedPages": 12,
+  "sampledParagraphs": 60,
+  "referenceCharacters": 30157,
+  "edits": 1437,
+  "sampleCharacterErrorRate": 0.04765062837815433,
+  "uncertainAlignments": [
+    "p1-b13",
+    "p6-b3",
+    "p7-b5",
+    "p7-b7",
+    "p12-b6"
+  ],
+  "comparisons": [
+    {
+      "page": 1,
+      "sourceSample": "p1-b4",
+      "matchedBlocks": [
+        "p1-b3"
+      ],
+      "referenceCharacters": 1153,
+      "edits": 47,
+      "characterErrorRate": 0.040763226366001735,
+      "needsAlignmentReview": false,
+      "reference": "Graph Convolutional Networks (GCNs) have become a fundamental\narchitecture for graph representation learning through neighbor-\nhood aggregation. However, as the number of layers increases,\nrepeated message passing often leads to unstable representation\nevolution, less discriminative node representations, and degraded\nperformance. Inspired by classical control theory, we introduce a\nProportional-Integral (PI) feedback framework into the propagation\ndynamics of GCNs. The proposed method, termed PIGCN, uses pro-\nportional feedback to correct layer-wise propagation discrepancies\nand integral feedback to aggregate historical correction signals,\nthereby stabilizing deep graph propagation, preserving discrimina-\ntive node representations, and improving the performance of deep\nGCNs. We provide a spectral analysis to theoretically characterize\nhow PI feedback reshapes propagation dynamics. Comprehensive\nexperiments on benchmark datasets demonstrate that PIGCN con-\nsistently improves multiple representative GCN backbones and\nachieves superior performance over representative baselines in\nboth accuracy and propagation stability. In particular, our PI-Linear\nvariant achieves 65.15% accuracy on the large-scale Paper-100M\nbenchmark, demonstrating the scalability and effectiveness of our\nframework on large graphs.",
+      "ocr": "Graph Convolutional Networks (GCNs) have become a fundamental architecture for graph representation learning through neighborhood aggregation. However, as the number of layers increases,repeated message passing often leads to unstable representation evolution, less discriminative node representations, and degraded performance. Inspired by classical control theory, we introduce a Propor ckktion dynamics of GCNs. The proposed method, termed PIGCN, uses proportional feedback to correct layer-wise propagation discrepancies and integral feedback to aggregate historical correction signals,thereby stabilizing deep graph propagation, preserving discriminative node representations, and improving the performance of deep GCNs. We provide a spectral analysis to theoretically characterize how PI feedback reshapes propagation dynamics. Comprehensive experiments on benchmark datasets demonstrate that PIGCN consistently improves multiple representative GCN backbones and achieves superior performance over representative baselines in both accuracy and propagation stability.In particular, our PI-Linear variant achieves 65.15% accuracy on the large-scale Paper-100M benchmark, demonstrating the scalability and effectiveness of our framework on large graphs.\n"
+    },
+    {
+      "page": 1,
+      "sourceSample": "p1-b5",
+      "matchedBlocks": [
+        "p1-b5"
+      ],
+      "referenceCharacters": 155,
+      "edits": 3,
+      "characterErrorRate": 0.01935483870967742,
+      "needsAlignmentReview": false,
+      "reference": "Anonymous Author(s). 2027. Proportional Integral Control for Graph Convo-\nlutional Networks. In Proceedings of The ACM Web Conference 2027 (WWW\n’27). ACM, New York, NY, USA, 12 pages.",
+      "ocr": "Anonymous Author(s).227.Proportional Integral Control for Graph Convolutional Networks. In Proceedings of The ACM Web Conference 2027 (WWw '27).ACM, New York,NY, USA, 12 pages.\n"
+    },
+    {
+      "page": 1,
+      "sourceSample": "p1-b7",
+      "matchedBlocks": [
+        "p1-b7"
+      ],
+      "referenceCharacters": 445,
+      "edits": 0,
+      "characterErrorRate": 0.0,
+      "needsAlignmentReview": false,
+      "reference": "Graph neural networks (GNNs) have become a standard paradigm\nfor learning representations from graph-structured data by jointly\nexploiting node attributes and graph topology [13, 21]. Through\nrecursive neighborhood aggregation, GNNs enlarge the receptive\nfield of each node and capture structural dependencies beyond\nlocal features [13]. This message-passing mechanism has achieved\nstrong performance on various graph learning tasks, including node\nclassification, link prediction, and graph-level prediction.",
+      "ocr": "Graph neural networks (GNNs) have become a standard paradigm for learning representations from graph-structured data by jointly exploiting node attributes and graph topology [13, 21]. Through recursive neighborhood aggregation, GNNs enlarge the receptive field of each node and capture structural dependencies beyond local features [13]. This message-passing mechanism has achieved strong performance on various graph learning tasks, including node classification, link prediction, and graph-level prediction."
+    },
+    {
+      "page": 1,
+      "sourceSample": "p1-b8",
+      "matchedBlocks": [
+        "p1-b8"
+      ],
+      "referenceCharacters": 749,
+      "edits": 1,
+      "characterErrorRate": 0.0013351134846461949,
+      "needsAlignmentReview": false,
+      "reference": "Despite their success, GNNs remain difficult to scale to large\ndepths. Repeated message passing may make the layer-wise evo-\nlution of node representations unstable and progressively less dis-\ncriminative, leading to degraded trainability and poor general-\nization [3, 27, 32, 43]. As depth increases, graph propagation re-\npeatedly mixes neighborhood information and may suppress task-\nrelevant signals, accumulate propagation bias, and drive hidden\nrepresentations toward less informative states. Such depth-induced\ndegradation can manifest as representation homogenization, low-\ndimensional feature collapse, or excessive concentration toward\ndominant spectral components [14, 22, 26, 38]. Therefore, regulat-\ning the layer-wise evolution of node representations is crucial for\nimproving the stability and discriminability of deep GNNs under\nrepeated message passing.",
+      "ocr": "Despite their success, GNNs remain difficult to scale to large depths. Repeated message passing may make the layer-wise evolution of node representations unstable and progressively less discriminative, leading to degraded trainability and poor generalization [3, 27, 32, 43]. As depth increases, graph propagation repeatedly mixes neighborhood information and may suppress taskrelevant signals, accumulate propagation bias, and drive hidden representations toward less informative states. Such depth-induced degradation can manifest as representation homogenization, lowdimensional feature collapse, or excessive concentration toward dominant spectral components [14, 22, 26, 38].Therefore, regulating the layer-wise evolution of node representations is crucial for improving the stability and discriminability of deep GNNs under repeated message passing \n"
+    },
+    {
+      "page": 1,
+      "sourceSample": "p1-b9",
+      "matchedBlocks": [
+        "p1-b9"
+      ],
+      "referenceCharacters": 723,
+      "edits": 2,
+      "characterErrorRate": 0.0027662517289073307,
+      "needsAlignmentReview": false,
+      "reference": "Existing studies have improved deep graph propagation from sev-\neral perspectives, including residual and identity mappings, normal-\nization and regularization, decoupled propagation, diffusion-based\nmodels, and spectral filtering [1, 3, 6, 12, 18, 24, 30, 35, 39, 43]. These\nmethods alleviate depth-induced degradation by preserving ear-\nlier representations, regulating embedding geometry, aggregating\nmulti-hop signals, or designing frequency-selective filters. However,\nmost existing methods improve deep propagation by redesigning\nthe propagation architecture, normalization strategy, or spectral\nfilter, rather than explicitly controlling how repeated propagation\nreshapes spectral components across layers. How to regulate the\nspectral evolution of node representations during deep message\npassing remains less explored.",
+      "ocr": "Existing studies have improved deep graph propagation from several perspectives, including residual and identity mappings, normalization and regularization, decoupled propagation, diffusion-based models,and spectral fltering[1,3,6,12,18,24,30,35,39,4].These methods alleviate depth-induced degradation by preserving earlier representations, regulating embedding geometry, aggregating multi-hop signals, or designing frequency-selective filters. However,most existing methods improve deep propagation by redesigning the propagation architecture, normalization strategy, or spectral filter, rather than explicitly controlling how repeated propagation reshapes spectral components across layers. How to regulate the spectral evolution of node representations during deep message passing remains less explored.\n"
+    },
+    {
+      "page": 1,
+      "sourceSample": "p1-b10",
+      "matchedBlocks": [
+        "p1-b10"
+      ],
+      "referenceCharacters": 726,
+      "edits": 0,
+      "characterErrorRate": 0.0,
+      "needsAlignmentReview": false,
+      "reference": "Spectral filtering provides an important perspective for under-\nstanding depth-induced degradation in graph propagation. Re-\npeated message passing can progressively concentrate node rep-\nresentations toward dominant spectral components, causing non-\ndominant components that may carry discriminative information\nto decay. Existing spectral GNNs improve this process mainly by\ndesigning or learning frequency-selective filters, such as low-pass,\nhigh-pass, band-pass, or adaptive polynomial filters [1, 6, 9, 16, 18,\n20, 39]. However, these methods primarily focus on filter design,\nwhile less attention has been paid to regulating the spectral evo-\nlution induced by repeated propagation itself. This motivates us\nto study whether feedback-based propagation control can reshape\nspectral energy evolution and improve the stability of deep GNNs.",
+      "ocr": "Spectral filtering provides an important perspective for understanding depth-induced degradation in graph propagation. Repeated message passing can progressively concentrate node representations toward dominant spectral components, causing nondominant components that may carry discriminative information to decay. Existing spectral GNNs improve this process mainly by designing or learning frequency-selective filters, such as low-pass,high-pass, band-pass, or adaptive polynomial filters [1, 6, 9, 16, 18,20, 39]. However, these methods primarily focus on filter design,while less attention has been paid to regulating the spectral evolution induced by repeated propagation itself. This motivates us to study whether feedback-based propagation control can reshape spectral energy evolution and improve the stability of deep GNNs."
+    },
+    {
+      "page": 1,
+      "sourceSample": "p1-b11",
+      "matchedBlocks": [
+        "p1-b11"
+      ],
+      "referenceCharacters": 810,
+      "edits": 0,
+      "characterErrorRate": 0.0,
+      "needsAlignmentReview": false,
+      "reference": "In this work, we propose PIGCN, a feedback-regulated graph\npropagation framework for improving the stability of deep GNNs.\nInstead of treating deep graph propagation as a purely feedforward\ntransformation, PIGCN views it as an iterative dynamical process\nand introduces proportional-integral feedback into layer-wise prop-\nagation. The proportional term captures the discrepancy between\nadjacent propagation states, while the integral term accumulates\nhistorical propagation discrepancies along the depth trajectory.\nThrough these feedback signals, PIGCN regulates the propagation\ndynamics of deep GNNs and reshapes the spectral evolution of node\nrepresentations, thereby reducing excessive spectral concentration\nand preserving more discriminative information under repeated\nmessage passing. Moreover, PIGCN extends effectively to large-\nscale graphs, maintaining competitive predictive performance with\nlow GPU memory overhead.",
+      "ocr": "In this work, we propose PIGCN, a feedback-regulated graph propagation framework for improving the stability of deep GNNs.Instead of treating deep graph propagation as a purely feedforward transformation, PIGCN views it as an iterative dynamical process and introduces proportional-integral feedback into layer-wise propagation. The proportional term captures the discrepancy between adjacent propagation states, while the integral term accumulates historical propagation discrepancies along the depth trajectory.Through these feedback signals, PIGCN regulates the propagation dynamics of deep GNNs and reshapes the spectral evolution of node representations, thereby reducing excessive spectral concentration and preserving more discriminative information under repeated message passing. Moreover, PIGCN extends effectively to largescale graphs, maintaining competitive predictive performance with low GPU memory overhead.\n"
+    },
+    {
+      "page": 1,
+      "sourceSample": "p1-b13",
+      "matchedBlocks": [
+        "p1-b13"
+      ],
+      "referenceCharacters": 242,
+      "edits": 47,
+      "characterErrorRate": 0.19421487603305784,
+      "needsAlignmentReview": true,
+      "reference": "To address depth-induced degradation in deep GNNs, existing stud-\nies have improved graph propagation from several perspectives,\nincluding architectural design, propagation reformulation, normal-\nization and regularization, spectral filtering, and dynamical-system\nmodeling.",
+      "ocr": "To address depth-induced deradation in deep GNNs, existing studies have improved graph propagation from several perspectives,including architectural design,propagation reformulation, normalization ndl d lstem modeling.\n"
+    },
+    {
+      "page": 1,
+      "sourceSample": "p1-b14",
+      "matchedBlocks": [
+        "p1-b14"
+      ],
+      "referenceCharacters": 225,
+      "edits": 14,
+      "characterErrorRate": 0.06222222222222222,
+      "needsAlignmentReview": false,
+      "reference": "One line of work improves deep GNNs through residual connec-\ntions, identity mappings, or layer-wise feature reuse [3, 4, 32, 40].\nGCNII injects initial node features into each layer and uses identity\nmapping to stabilize deep propagation [3], while JKNet aggregates",
+      "ocr": "One line of work improves deep GNNs through residual connections, identity mappings, or layer-wisefeature reuse[3,4, 32, 40].GCNII injects initial nodefaturesintoeach layer and usesidentity mappingtotabilieeeppropagtio],whileNetgretes "
+    },
+    {
+      "page": 2,
+      "sourceSample": "p2-b3",
+      "matchedBlocks": [
+        "p2-b2"
+      ],
+      "referenceCharacters": 348,
+      "edits": 1,
+      "characterErrorRate": 0.0028735632183908046,
+      "needsAlignmentReview": false,
+      "reference": "representations from different layers to capture multi-scale neigh-\nborhood information [40]. Related propagation-based methods,\nsuch as APPNP and DAGNN, decouple feature transformation from\npropagation or adaptively fuse multi-hop representations [12, 24].\nThese methods improve depth robustness mainly by preserving ear-\nlier representations or aggregating information across propagation\ndepths.",
+      "ocr": "representations from different layers to capture multi-scale neighborhood information [40]. Related propagation-based methods,such as APPNP and DAGNN, decouple feature transformation from propagation or adaptively fuse multi-hop representations[12, 2].These methods improve depth robustness mainly by preserving earlier representations or aggregating information across propagation depths.\n"
+    },
+    {
+      "page": 2,
+      "sourceSample": "p2-b4",
+      "matchedBlocks": [
+        "p2-b3"
+      ],
+      "referenceCharacters": 554,
+      "edits": 1,
+      "characterErrorRate": 0.0018050541516245488,
+      "needsAlignmentReview": false,
+      "reference": "Another family of methods mitigates over-smoothing through\nnormalization and regularization [30, 32, 43, 44]. PairNorm pre-\nserves pairwise feature distances to prevent node embeddings from\nbecoming overly similar [43], while DropEdge randomly removes\nedges during training to reduce excessive neighborhood mixing [30].\nRecent studies further show that residual connections and normal-\nization layers can prevent complete representation collapse, and\nGraphNormv2 improves the centering operation to better preserve\nuseful graph signals [32]. These approaches mainly regulate repre-\nsentation geometry, feature scale, or graph connectivity.",
+      "ocr": "Another family of methods mitigates over-smoothing through normalization and regularization [30, 32, 43, 44].PairNorm preserves pairwise feature distances to prevent node embeddings from becoming overly similar [43], while DropEdge randomly removes edges during training to reduce excessive neighborhood mixing [30].Recent studies further show that residual connections and normalization layers can prevent complete representation collapse, and GraphNormv2 improves the centering operation to better preserve useful graph signals [2].These approaches mainly regulate representation geometry, feature scale, or graph connectivity."
+    },
+    {
+      "page": 2,
+      "sourceSample": "p2-b5",
+      "matchedBlocks": [
+        "p2-b4"
+      ],
+      "referenceCharacters": 864,
+      "edits": 2,
+      "characterErrorRate": 0.0023148148148148147,
+      "needsAlignmentReview": false,
+      "reference": "Spectral filtering provides another important perspective for\nunderstanding graph propagation. From this viewpoint, message\npassing can be interpreted as frequency-selective processing of\ngraph signals, and depth-induced degradation is closely related to\nhow repeated propagation reshapes spectral components. Represen-\ntative spectral GNNs, such as GPR-GNN, FAGCN, ARMA, BernNet,\nDSF, and UniFilter, improve graph learning through adaptive prop-\nagation weights, frequency-aware filtering, rational filters, polyno-\nmial approximations, or homophily-heterophily adaptive spectral\nresponses [1, 2, 6, 9, 16, 18, 20, 39]. In parallel, dynamical-system\napproaches model graph propagation through diffusion, differential-\nequation discretization, or stable graph dynamics [10, 15, 29, 35].\nThese methods provide useful tools for designing propagation oper-\nators and understanding deep graph dynamics, but they mainly fo-\ncus on filter design, propagation formulation, or continuous-depth\nmodeling.",
+      "ocr": "Spectral filtering provides another important perspective for understanding graph propagation. From this viewpoint, message passing can be interpreted as frequency-selective processing of graph signals, and depth-induced degradation is closely related to how repeated propagation reshapes spectral components. Representative spectral GNNs, such as GPR-GNN, FAGCN, ARMA, BernNet,DSF, and UniFilter, improve graph learning through adaptive propagation weights,frequency-aware filtering, rational filters, polynomial approximations, or homophily-heterophily adaptive spectral responses[1,2, 6, 9,16, 18,20,39].In parallel, dynamical-system approaches model graph propagation through difusion, diferentialequation discretization, or stable graph dynamics [10, 15, 29, 35].These methods provide useful tools for designing propagation operators and understanding deep graph dynamics, but they mainly focus on filter design, propagation formulation, or continuous-depth modeling.\n"
+    },
+    {
+      "page": 2,
+      "sourceSample": "p2-b6",
+      "matchedBlocks": [
+        "p2-b5"
+      ],
+      "referenceCharacters": 788,
+      "edits": 4,
+      "characterErrorRate": 0.005076142131979695,
+      "needsAlignmentReview": false,
+      "reference": "Scaling GNNs to large graphs remains challenging due to the\ncomputational and memory costs of message passing. Existing ap-\nproaches improve scalability through sampling, graph partitioning,\nsparsification, or coarsening. GraphSAGE uses neighborhood sam-\npling, Cluster-GCN forms mini-batches from graph clusters, and\nGraphSAINT samples subgraphs for mini-batch training [5, 17, 41].\nRecent methods also explore graph sparsification and coarsening.\nSGNN-LS uses Laplacian sparsification to approximate spectral\ngraph propagation with theoretical guarantees [8], while Graph\nBatch Coarsening reduces computational costs through graph de-\ncomposition and coarsening [42]. Although these approaches im-\nprove scalability, sampling, sparsification, and coarsening may alter\nthe effective graph connectivity or introduce approximation errors,\npotentially affecting the preservation of structural information.",
+      "ocr": "Scaling GNNs to large graphs remains challenging due to the computational and memory costs of message passing. Existing approaches improve scalability through sampling, graph partitioning,sparsification, or coarsening. GraphSAGE uses neighborhood sampling, Cluster-GCN forms mini-batches from graph clusters, and GraphSAINT samples subgraphs for mini-batch training[5, 17, 41].Recent methods also explore graph sparsification and coarsening.SGNN-LS uses Laplacian sparsification to approximate spectral graph propagation with theoretical guarantees [8], while Graph Batch Coarsening reduces computational costs through graph decomposition and coarsening [42]. Although these approaches improve scalabilityampling, sparsification and coarening may alter the effective graph connectivity or introduce approximation errors,potentially affecting the preservation of structural information."
+    },
+    {
+      "page": 2,
+      "sourceSample": "p2-b7",
+      "matchedBlocks": [
+        "p2-b6"
+      ],
+      "referenceCharacters": 505,
+      "edits": 8,
+      "characterErrorRate": 0.015841584158415842,
+      "needsAlignmentReview": false,
+      "reference": "Different from the above approaches, PIGCN addresses deep\ngraph propagation from the perspective of feedback-regulated prop-\nagation control. It introduces proportional feedback to correct cur-\nrent propagation discrepancies and integral feedback to accumulate\nhistorical discrepancies along the depth trajectory. This mecha-\nnism modifies the effective propagation dynamics and reshapes the\nspectral behavior of deep GNNs, thereby improving depth stability\nand preserving discriminative information under repeated mes-\nsage passing. Furthermore, PIGCN can be efficiently extended to",
+      "ocr": "Different from the above approaches, PIGCN addresses deep graph ropagation from the rspctive of edback-rgulated propagation control. It introduces proportional feedback to correct current propagation discrepancies and integral feedback to accumulate historical discrepancies along the depth trajectory. This mechanism modifies the effective propagation dynamics and reshapes the spectral behavior of deep GNNs, thereby improving depth stability and preserving discriminative information under repeated message passing.Furthermore, IGCN can be efficiently extended to "
+    },
+    {
+      "page": 2,
+      "sourceSample": "p2-b8",
+      "matchedBlocks": [
+        "p2-b7"
+      ],
+      "referenceCharacters": 112,
+      "edits": 0,
+      "characterErrorRate": 0.0,
+      "needsAlignmentReview": false,
+      "reference": "large-scale graphs without modifying the original graph structure,\nachieving competitive performance with low memory overhead.",
+      "ocr": "large-scale graphs without modifying the original graph structure,achieving competitive performance with low memory overhead."
+    },
+    {
+      "page": 2,
+      "sourceSample": "p2-b10",
+      "matchedBlocks": [
+        "p2-b9"
+      ],
+      "referenceCharacters": 165,
+      "edits": 0,
+      "characterErrorRate": 0.0,
+      "needsAlignmentReview": false,
+      "reference": "In this section, we first introduce PIGCN, a PI-controlled graph\nconvolutional network. We then discuss its basic properties and\nfinally present an improved variant with a sparse integral term.",
+      "ocr": "In this section, we first introduce PIGCN, a PI-controlled graph convolutional network. We then discuss its basic properties and finally present an improved variant with a sparse integral term."
+    },
+    {
+      "page": 2,
+      "sourceSample": "p2-b12",
+      "matchedBlocks": [
+        "p2-b11"
+      ],
+      "referenceCharacters": 164,
+      "edits": 0,
+      "characterErrorRate": 0.0,
+      "needsAlignmentReview": false,
+      "reference": "Proportional-Integral (PI) control is a classical feedback mechanism\nfor discrete-time dynamical systems [11, 34]. In the discrete-time\nsetting, a nonlinear control system can be written as",
+      "ocr": "Proportional-Integral (PI) control is a classical feedback mechanism for discrete-time dynamical systems [11, 34]. In the discrete-time setting, a nonlinear control system can be written as "
+    },
+    {
+      "page": 2,
+      "sourceSample": "p2-b17",
+      "matchedBlocks": [
+        "p2-b16"
+      ],
+      "referenceCharacters": 177,
+      "edits": 0,
+      "characterErrorRate": 0.0,
+      "needsAlignmentReview": false,
+      "reference": "Motivated by this classical formulation, we next introduce an\nanalogous PI feedback mechanism into graph convolutional propa-\ngation. In fact, the general form of a graph convolutional network\nis described as",
+      "ocr": "Motivated by this classical formulation, we next introduce an analogous PI feedback mechanism into graph convolutional propagation. In fact, the general form of a graph convolutional network is described as \n"
+    },
+    {
+      "page": 2,
+      "sourceSample": "p2-b22",
+      "matchedBlocks": [
+        "p2-b21"
+      ],
+      "referenceCharacters": 108,
+      "edits": 1,
+      "characterErrorRate": 0.009259259259259259,
+      "needsAlignmentReview": false,
+      "reference": "Inspired by the classical PI framework for discrete-time control\nsystems, we define the proposed PI-controlled GCN (PIGCN) as",
+      "ocr": "Inspired by the classical PI framework for discrete-time control systems, we define the proposed PI-controlled GCN (IGCN) as "
+    },
+    {
+      "page": 3,
+      "sourceSample": "p3-b24",
+      "matchedBlocks": [
+        "p3-b23"
+      ],
+      "referenceCharacters": 130,
+      "edits": 0,
+      "characterErrorRate": 0.0,
+      "needsAlignmentReview": false,
+      "reference": "Using the above results, the following two subsections will dis-\ncuss about the stability and spectral amplification effects of PIGCN\n(7), respectively.",
+      "ocr": "Using the above results, the following two subsections will discuss about the stability and spectral amplification effects of PIGCN (7), respectively.\n"
+    },
+    {
+      "page": 3,
+      "sourceSample": "p3-b25",
+      "matchedBlocks": [
+        "p3-b24"
+      ],
+      "referenceCharacters": 226,
+      "edits": 1,
+      "characterErrorRate": 0.004424778761061947,
+      "needsAlignmentReview": false,
+      "reference": "3.2.1 Stability of PIGCN. In what follows, we first study the incre-\nment stability of the linear PI dynamics and then establish the local\nstability of the complete nonlinear PIGCN around a fixed point. The\nproofs are given in Appendix A.3 and Appendix A.4, respectively.",
+      "ocr": "3.2.1 Stability of PlGCN. In what follows, we first study the increment stability of the linear PI dynamics and then establish the local stability of the complete nonlinear PIGCN around a fixed point. The proofs are given in Appendix A.3 and Appendix A.4, respectively."
+    },
+    {
+      "page": 4,
+      "sourceSample": "p4-b35",
+      "matchedBlocks": [
+        "p4-b34"
+      ],
+      "referenceCharacters": 351,
+      "edits": 0,
+      "characterErrorRate": 0.0,
+      "needsAlignmentReview": false,
+      "reference": "Training GNNs on ultra-large graphs is challenging because both\nthe cost of message passing over edges and the memory required\nto store node representations and intermediate activations grow\nsubstantially with graph size and model depth. To address these\nconstraints, we next show how a light-weigthed PI control leads\nto a memory-efficient propagation rule and why it is suitable for\nlarge-scale graph learning.",
+      "ocr": "Training GNNs on ultra-large graphs is challenging because both the cost of message passing over edges and the memory required to store node representations and intermediate activations grow substantially with graph size and model depth. To address these constraints, we next show how a light-weigthed PI control leads to a memory-effi cient propagation rule and why it is suitable for large-scale graph learning.\n"
+    },
+    {
+      "page": 5,
+      "sourceSample": "p5-b8",
+      "matchedBlocks": [
+        "p5-b7"
+      ],
+      "referenceCharacters": 625,
+      "edits": 61,
+      "characterErrorRate": 0.0976,
+      "needsAlignmentReview": false,
+      "reference": "Datasets. We evaluate our method on 10 widely used node clas-\nsification benchmarks spanning homophilous and heterophilous\ngraphs, and include the large-scale citation graph ogbn-papers100M\n[19]. Specifically, we use three Planetoid citation networks, includ-\ning Cora, CiteSeer, and PubMed [25, 33]; two WebKB graphs,\nWisconsin and Cornell [7]; two WikipediaNetwork graphs, in-\ncluding Sqirrel and Chameleon [31]. We additionally include\nthe Roman-empire benchmark [28], as well as Penn94 and arXiv-\nyear from the LINKX benchmark suite [23]. We follow the standard\nsplits for Planetoid datasets and use the commonly adopted 10 fixed\nsplits for WebKB and WikipediaNetwork datasets. Detailed dataset\nstatistics are provided in Table 1.",
+      "ocr": "Datasets. We evaluate our method on 10 widely used node classification benchmarks spanning homophilous and heterophilous graphs, and include the large-scale citation graph oGBN-PAPERs100M [19]. Specifically, we use three Planetoid citation networks, including CoRA, CITESEER, and PuBMED [25, 33]; two WebKB graphs,WIscoNSIn and CoRNeLL [7]; two WikipediaNetwork graphs, including SQUIRREL and CHAMELEON [31]. We additionally include the RoMAN-EMPIRE benchmark [28], as well as PENN94 and ARXIvYEAR from the LINKX benchmark suite [23]. We follow the standard splits for Planetoid datasets and use the commonly adopted 10 fixed splits for WebKB and WikipediaNetwork datasets. Detailed dataset statistics are provided in Table 1.\n"
+    },
+    {
+      "page": 5,
+      "sourceSample": "p5-b9",
+      "matchedBlocks": [
+        "p5-b8"
+      ],
+      "referenceCharacters": 581,
+      "edits": 26,
+      "characterErrorRate": 0.04475043029259897,
+      "needsAlignmentReview": false,
+      "reference": "Baselines. To evaluate PI feedback on message-passing back-\nbones, we use GCN [21] and GCNII [3], comparing each with its\nPI-enhanced counterpart at matched depths and under identical\ntraining settings. We also compare PI-enhanced models with rep-\nresentative methods for deep graph propagation, over-smoothing\nmitigation, spectral filtering, and heterophilous graphs. These base-\nlines include GPR-GNN [6], APPNP [12], DAGNN [24], H2GCN [45],\nLINKX [23], ARMA [1], BernNet [18], FAGCN [2], DSF [16], and\nUniFilter [20]. We additionally evaluate whether PI complements\nestablished over-smoothing mitigation methods, including PairNor\n[43], GraphNormv2 [32], and DropEdge [30].",
+      "ocr": "Baselines. To evaluate PI feedback on message-passing backbones, we use GCN [21] and GCNII [3], comparing each with its PI-enhanced counterpart at matched depths and under identical training settings. We also compare PI-enhanced models with re resentative methods for deep graph propagation, over-smoothing mitigation, spectral filtering, and heterophilous graphs. These baselines includeGPR-GNN[6], APPNP [12], DAGNN [24], H2GCN [45],LINKX[23], ARMA[1], BERNET[18],FAGCN[2],DSF [16], and UNIFILTER [20]. We additionally evaluate whether PI complemets established over-smoothing mitigation methods,including PairNorM [43], GRAPHNoRMv2 [32], and DRoEDGE [30]."
+    },
+    {
+      "page": 5,
+      "sourceSample": "p5-b10",
+      "matchedBlocks": [
+        "p5-b9"
+      ],
+      "referenceCharacters": 112,
+      "edits": 0,
+      "characterErrorRate": 0.0,
+      "needsAlignmentReview": false,
+      "reference": "For large-scale evaluation, we additionally include Simplifying\nGraph Convolution (SGC) [37] and the Laplacian-sparsification",
+      "ocr": "For large-scale evaluation, we additionally include Simplifying Graph Convolution (SGC) [37] and the Laplacian-sparsification "
+    },
+    {
+      "page": 5,
+      "sourceSample": "p5-b11",
+      "matchedBlocks": [
+        "p5-b10"
+      ],
+      "referenceCharacters": 100,
+      "edits": 0,
+      "characterErrorRate": 0.0,
+      "needsAlignmentReview": false,
+      "reference": "methods introduced by Ding et al. [8], namely GPR-LS and APPNP-\nLS, sparse variants of GPR-GNN and APPNP, respectively.",
+      "ocr": "methods introduced by Ding et al.[8], namely GPR-LS and APPNPLS, sparse variants of GPR-GNN and APPNP, respectively."
+    },
+    {
+      "page": 5,
+      "sourceSample": "p5-b13",
+      "matchedBlocks": [
+        "p5-b12"
+      ],
+      "referenceCharacters": 910,
+      "edits": 0,
+      "characterErrorRate": 0.0,
+      "needsAlignmentReview": false,
+      "reference": "Evaluation Metrics. We report node classification accuracy as\nmean ± standard deviation over random runs, using the check-\npoint with the highest validation accuracy. To track whether node\nrepresentations settle as propagation deepens, we report the Rela-\ntive Layer-wise Change (RLC): decreasing values indicate smaller\nchanges between consecutive layers, and values approaching zero\nindicate layer-wise convergence. To assess whether this stabiliza-\ntion comes with over-smoothing or loss of representation diversity,\nwe also report PairSim, Dirichlet Energy, and effective rank. PairSim\ntracks node-wise similarity, Dirichlet Energy measures variation\nacross graph edges (with excessively low values potentially indicat-\ning over-smoothing), and effective rank summarizes feature-space\ndiversity. Together, these metrics help distinguish stable propaga-\ntion that preserves representation differences from stabilization\naccompanied by homogenization or feature collapse. Their formal\ndefinitions and interpretations are provided in Appendix B.1.",
+      "ocr": "Evaluation Metrics. We report node classification accuracy as mean ± standard deviation over random runs, using the checkpoint with the highest validation accuracy. To track whether node representations settle as propagation deepens, we report the Relative Layer-wise Change (RLC): decreasing values indicate smaller changes between consecutive layers, and values approaching zero indicate layer-wise convergence. To assess whether this stabilization comes with over-smoothing or loss of representation diversity,we also report PairSim, Dirichlet Energy, and effective rank. PairSim tracks node-wise similarity, Dirichlet Energy measures variation across graph edges (with excessively low values potentially indicating over-smoothing), and effective rank summarizes feature-space diversity. Together, these metrics help distinguish stable propagation that preserves representation differences from stabilization accompanied by homogenization or feature collapse. Their formal definitions and interpretations are provided in Appendix B.1."
+    },
+    {
+      "page": 5,
+      "sourceSample": "p5-b15",
+      "matchedBlocks": [
+        "p5-b14"
+      ],
+      "referenceCharacters": 265,
+      "edits": 17,
+      "characterErrorRate": 0.06415094339622641,
+      "needsAlignmentReview": false,
+      "reference": "We compare PIGCN with representative spectral, propagation-\nbased, and heterophily-oriented baselines, including FAGCN, GPR-\nGNN, H2GCN, LINKX, ARMA, BernNet, DSF, UniFilter, DAGNN,\nand APPNP. Here, the PI-enhanced results are from the 32-layer\nGCN+PI and GCNII+PI models; PI-Linear is reported separately.",
+      "ocr": "We compare PIGCN with representative spectral, propagationbased, and heterophily-oriented baselines, including FAGCN, GPRGNN, H2GCN,LINKX, ARMA,BERNNET, DSF, UNIFILTER, DAGNN,and APPNP. Here, the PI-enhanced results are from the 32-layer GCN+PI and GCNII+PI models; PI-LINEAR is reported separately."
+    },
+    {
+      "page": 5,
+      "sourceSample": "p5-b16",
+      "matchedBlocks": [
+        "p5-b15"
+      ],
+      "referenceCharacters": 535,
+      "edits": 36,
+      "characterErrorRate": 0.06728971962616823,
+      "needsAlignmentReview": false,
+      "reference": "Table 2 shows that PI-enhanced models are competitive with\nstrong specialized baselines and achieve the best results on most\ndatasets. In particular, GCNII+PI obtains the best performance on\nCora, Cornell, Squirrel, and Wisconsin, while GCN+PI achieves the\nbest result on PubMed. The improvements are especially clear on\nheterophilic datasets, where stable propagation is more difficult for\nstandard message passing. These results indicate that PI feedback\nprovides gains beyond existing spectral filtering and heterophily-\noriented aggregation strategies by explicitly regulating the layer-\nwise propagation trajectory.",
+      "ocr": "Table 2 shows that PI-enhanced models are competitive with strong specialized baselines and achieve the best results on most datasets. In particular, GCNII+PI obtains the best performance on Cora, Cornell, Squirrel, and Wisconsin, while $\\scriptstyle{\\mathrm{G C N}}+{\\mathrm{P I}}$ achieves the best result on PubMed. The improvements are especially clear on heterophilic datasets, where stable propagation is more difficult for standard message passing. These results indicate that PI feedback provides gains beyond existing spectral filtering and heterophilyoriented aggregation strategies by explicitly regulating the layer wise propagation trajectory.\n"
+    },
+    {
+      "page": 5,
+      "sourceSample": "p5-b17",
+      "matchedBlocks": [
+        "p5-b16"
+      ],
+      "referenceCharacters": 270,
+      "edits": 0,
+      "characterErrorRate": 0.0,
+      "needsAlignmentReview": false,
+      "reference": "We further examine whether PI feedback improves depth-wise\nstability when combined with existing over-smoothing mitiga-\ntion methods. Figure 1 compares DropEdge, PairNorm, and Graph-\nNormv2 with their PI-enhanced variants across depths on PubMed,\nCornell, and Squirrel. The PI-enhanced curves are generally higher",
+      "ocr": "We further examine whether PI feedback improves depth-wise stability when combined with existing over-smoothing mitigation methods. Figure 1 compares DropEdge, PairNorm, and GraphNormv2 with their PI-enhanced variants across depths on PubMed,Cornell, and Squirrel. The PI-enhanced curves are generally higher "
+    },
+    {
+      "page": 6,
+      "sourceSample": "p6-b3",
+      "matchedBlocks": [
+        "p6-b2"
+      ],
+      "referenceCharacters": 197,
+      "edits": 110,
+      "characterErrorRate": 0.5583756345177665,
+      "needsAlignmentReview": true,
+      "reference": "Table 2: Comparison with representative spectral and heterophily-oriented baselines. All entries report node classification\naccuracy (%, mean ± std over ten random seeds). The best available result in each column is shown in bold.",
+      "ocr": "accuracy (%, mean ± std over ten random seeds). The best available result in each column is shown in bold.\n"
+    },
+    {
+      "page": 6,
+      "sourceSample": "p6-b6",
+      "matchedBlocks": [
+        "p6-b5"
+      ],
+      "referenceCharacters": 232,
+      "edits": 13,
+      "characterErrorRate": 0.05603448275862069,
+      "needsAlignmentReview": false,
+      "reference": "Figure 1: Depth-wise accuracy comparison of over-smoothing mitigation methods and their PI-enhanced variants on PubMed,\nCornell, and Sqirrel. Dashed lines denote base methods, solid lines denote PI variants, and shaded regions indicate standard\ndeviation across runs.",
+      "ocr": "Figure 1: Depth-wise accuracy comparison of over-smoothing mitigation methods and their PI-enhanced variants on PuBMD,CoRNELL, and SquiRREL. Dashed lines denote base methods, solid lines denote PI variants, and shaded regions indicate standard deviation across runs.\n"
+    },
+    {
+      "page": 6,
+      "sourceSample": "p6-b8",
+      "matchedBlocks": [
+        "p6-b7"
+      ],
+      "referenceCharacters": 220,
+      "edits": 1,
+      "characterErrorRate": 0.004545454545454545,
+      "needsAlignmentReview": false,
+      "reference": "and more stable as depth increases, especially when the base meth-\nods show depth-induced degradation. This suggests that PI feed-\nback complements existing mitigation methods by stabilizing deep\nmessage passing rather than merely increasing model capacity.",
+      "ocr": "and more stable as depth increases, especially when the base methods show depth-induced degradation. This suggests that PI feedback complements existing mitigation methods by stabilizing deep message passing rather than merely increassing model capacity."
+    },
+    {
+      "page": 6,
+      "sourceSample": "p6-b9",
+      "matchedBlocks": [
+        "p6-b8"
+      ],
+      "referenceCharacters": 168,
+      "edits": 0,
+      "characterErrorRate": 0.0,
+      "needsAlignmentReview": false,
+      "reference": "Overall, these results show that PI feedback remains competi-\ntive with strong spectral and heterophily-oriented baselines, and\nimproves the depth-wise stability of existing mitigation methods.",
+      "ocr": "Overall, these results show that PI feedback remains competitive with strong spectral and heterophily-oriented baselines, and improves the depth-wise stability of existing mitigation methods."
+    },
+    {
+      "page": 6,
+      "sourceSample": "p6-b13",
+      "matchedBlocks": [
+        "p6-b12"
+      ],
+      "referenceCharacters": 504,
+      "edits": 1,
+      "characterErrorRate": 0.001984126984126984,
+      "needsAlignmentReview": false,
+      "reference": "Across all three datasets, the RLC of GCN+PI drops by several\norders of magnitude with depth and approaches zero, indicating\nprogressively smaller changes between successive representations.\nIn contrast, the standard GCN retains substantially higher RLC\nvalues and exhibits additional fluctuations on CiteSeer, suggesting\nless stable layer-wise dynamics. Crucially, GCN+PI’s lower RLC is\naccompanied by lower PairSim and higher Dirichlet Energy than\nGCN. The lower PairSim indicates less node-wise homogenization,\nwhile the higher Dirichlet Energy reflects greater variation across",
+      "ocr": "Across all three datasets, the RLC of GCN+PI drops by several orders of magnitude with depth and approaches zero, indicating progressively smaller changes between successive representations.In contrast, the standard GCN retains substantially higher RLC values and exhibits additional fluctuations on CiteSeer, suggesting less stable layer-wise dynamics. Crucially, GCN+PI's lower RLC is accompanied by lower PairSim and higher Dirichlet Energy than GCN. The lower PairSim indicates less node-wise homogenization,while the higher Dirichlet Energy reflects greater variation across "
+    },
+    {
+      "page": 6,
+      "sourceSample": "p6-b11",
+      "matchedBlocks": [
+        "p6-b10"
+      ],
+      "referenceCharacters": 185,
+      "edits": 0,
+      "characterErrorRate": 0.0,
+      "needsAlignmentReview": false,
+      "reference": "Figure 2: Layer-wise propagation diagnostics for 32-layer\nGCN and GCN+PI on Cora, CiteSeer, and PubMed. Rows show\nRLC(Relative Layer-wise Node Representation Change), Pair-\nSim, and Dirichlet Energy, respectively;",
+      "ocr": "Figure 2: Layer-wise propagation diagnostics for 32-layer GCN and GCN+PI on Cora, CiteSeer, and PubMed. Rows show RLC(Relative Layer-wise Node Representation Change), PairSim, and Dirichlet Energy, respectively;"
+    },
+    {
+      "page": 6,
+      "sourceSample": "p6-b14",
+      "matchedBlocks": [
+        "p6-b13"
+      ],
+      "referenceCharacters": 182,
+      "edits": 0,
+      "characterErrorRate": 0.0,
+      "needsAlignmentReview": false,
+      "reference": "adjacent nodes. Together, these trends suggest that PI feedback\nstabilizes deep propagation while preserving representation differ-\nences, rather than driving the embeddings toward an excessively\nsmooth state.",
+      "ocr": "adjacent nodes. Together, these trends suggest that PI feedback stabilizes deep propagation while preserving representation differences, rather than driving the embeddings toward an excessively smooth state.\n"
+    },
+    {
+      "page": 7,
+      "sourceSample": "p7-b5",
+      "matchedBlocks": [
+        "p7-b12"
+      ],
+      "referenceCharacters": 91,
+      "edits": 83,
+      "characterErrorRate": 0.9120879120879121,
+      "needsAlignmentReview": true,
+      "reference": "Figure 3: Layer-wise PairSim comparison of GCN, GCN+PI, GCNII, and GCNII+PI on Cora, CiteSeer, and PubMed.",
+      "ocr": "Table 3: Accuracy and peak GPU memory usage on the Paper100M dataset. The  marker identifies our PI-Linear model."
+    },
+    {
+      "page": 7,
+      "sourceSample": "p7-b7",
+      "matchedBlocks": [
+        "p7-b5"
+      ],
+      "referenceCharacters": 741,
+      "edits": 145,
+      "characterErrorRate": 0.19568151147098514,
+      "needsAlignmentReview": true,
+      "reference": "Figure 3 reports the layer-wise PairSim results. The standard\nGCN exhibits a rapid increase in PairSim, especially on Cora and\nCiteSeer, indicating that node representations become progressively\nmore homogeneous as the depth increases. On these datasets, Pair-\nSim quickly approaches a high level after only a few layers, reveal-\ning severe over-smoothing. After introducing PI feedback, GCN+PI\nconsistently maintains lower PairSim values across layers, suggest-\ning that PI feedback effectively regulates the propagation process\nand slows down representation homogenization. A similar trend\ncan also be observed for GCNII. Although GCNII already incorpo-\nrates architectural designs to improve deep propagation, GCNII+PI\nfurther reduces PairSim on most datasets, indicating that PI feed-\nback can provide complementary benefits even for stronger deep\nGNN backbones.",
+      "ocr": "Figure 3 reports the layer-wise PairSim results. The standard GCN exhibits a rapid increase in PairSim, especially on Cora and CiteSeer, indicating that node representations become progressively more homogeneous as the depth increases. On these datasets, PairSim quickly approaches a high level after only a few layers, revealaee eee e ee rreere re eer r   rrer  r e ee ee re r eee oe rr e and slows down representation homogenization. A similar trend can also be observed for GCNII. Although GCNII already incorporates architectural designs to improve deep propagation, GCNII+PI further reduces PairSim on most datasets, indicating that PI feedback can provide complementary benefits even for stronger deep GNN backbones.\n"
+    },
+    {
+      "page": 7,
+      "sourceSample": "p7-b8",
+      "matchedBlocks": [
+        "p7-b6"
+      ],
+      "referenceCharacters": 178,
+      "edits": 0,
+      "characterErrorRate": 0.0,
+      "needsAlignmentReview": false,
+      "reference": "Overall, the PairSim results suggest that PI feedback slows rep-\nresentation homogenization during deep propagation; the effective-\nrank analyses below provide a complementary view of feature-\nspace collapse.",
+      "ocr": "Overall, the PairSim results suggest that PI feedback slows representation homogenization during deep propagation; the effectiverank analyses below provide a complementary view of featurespace collapse.\n"
+    },
+    {
+      "page": 7,
+      "sourceSample": "p7-b9",
+      "matchedBlocks": [
+        "p7-b7"
+      ],
+      "referenceCharacters": 437,
+      "edits": 0,
+      "characterErrorRate": 0.0,
+      "needsAlignmentReview": false,
+      "reference": "Figure 4 compares layer-wise effective rank for the GCN and\nGCNII backbones and their PI-enhanced variants on Cora, CiteSeer,\nand PubMed. In both comparisons, PI-enhanced models generally\nmaintain higher effective rank than their corresponding baselines;\nnotably, GCN+PI avoids the sharp early decline observed for stan-\ndard GCN. These results indicate that PI feedback helps preserve\nrepresentation diversity across both backbones, complementing\nthe PairSim evidence of reduced node-wise homogenization.",
+      "ocr": "Figure 4 compares layer-wise effective rank for the GCN and GCNII backbones and their PI-enhanced variants on Cora, CiteSeer,and PubMed. In both comparisons, PI-enhanced models generally maintain higher effective rank than their corresponding baselines;notably, GCN+PI avoids the sharp early decline observed for standard GCN. These results indicate that PI feedback helps preserve representation diversity across both backbones, complementing the PairSim evidence of reduced node-wise homogenization."
+    },
+    {
+      "page": 7,
+      "sourceSample": "p7-b11",
+      "matchedBlocks": [
+        "p7-b9"
+      ],
+      "referenceCharacters": 643,
+      "edits": 35,
+      "characterErrorRate": 0.05443234836702955,
+      "needsAlignmentReview": false,
+      "reference": "To assess the feasibility of PI-based propagation on very large\ngraphs, we evaluate PI-Linear-8 on Paper-100M and compare it\nwith MLP, GCN-2, GAT [36], GCNII, GPR/GPR-LS, APPNP/APPNP-\nLS, and SGC-3 (Table 3). GCN-2, GAT, GCNII, GPR, and APPNP run\nout of GPU memory, while the other methods complete evaluation.\nPI-Linear-8 achieves the highest accuracy among the completed\nmethods (65.15 ± 0.08%), outperforming APPNP-LS (62.10%) by 3.05\npercentage points and SGC-3 (62.56 ± 0.13%) by 2.59 percentage\npoints. These results show that PI-Linear-8 can be applied at the\nscale of Paper-100M and achieves stronger accuracy than the listed\nbaselines that complete evaluation, supporting the feasibility and\neffectiveness of PI-based propagation on large graphs.",
+      "ocr": "To assess the feasibility of PI-based propagation on very large graphs, we evaluate PI-Linear-8 on Paper-100M and compare it with MLP, GCN-2, GAT [36], GCNII, GPR/GPR-LS, APPNP/APPNPLS, and SGC-3 (Table 3). GCN-2, GAT, GCNII, GPR, and APPNP run out of GPU memory, while the other methods complete evaluation.PI-Linear-8 achieves the highest accuracy among the completed methods $\\left(65.15\\pm0.08\\%\\right)$ J, outperforming APPNP-LS (62.10%) by 3.05percentage points and SGC-3$\\left(62.56\\pm0.13\\%\\right)$ by 2.59 percentage points. These results show that PI-Linear-8 can be applied at the scale of Paper-100M and achieves stronger accuracy than the listed baselines that complete evaluation, supporting the feasibility and effectiveness of PI-based propagation on large graphs."
+    },
+    {
+      "page": 7,
+      "sourceSample": "p7-b13",
+      "matchedBlocks": [
+        "p7-b11"
+      ],
+      "referenceCharacters": 234,
+      "edits": 0,
+      "characterErrorRate": 0.0,
+      "needsAlignmentReview": false,
+      "reference": "Figure 4: Layer-wise effective rank comparisons of (a) GCN\nversus GCN+PI and (b) GCNII versus GCNII+PI on CiteSeer,\nCora, and PubMed with 32 layers. PI feedback generally pre-\nserves higher effective rank, indicating reduced representa-\ntion collapse during deep propagation.",
+      "ocr": "Figure 4: Layer-wise effective rank comparisons of (a) GCN versus GCN+PI and (b) GCNII versus GCNII+PI on CiteSeer,Cora, and PubMed with 32 layers. PI feedback generally preserves higher effective rank, indicating reduced representation collapse during deep propagation.\n"
+    },
+    {
+      "page": 7,
+      "sourceSample": "p7-b14",
+      "matchedBlocks": [
+        "p7-b12"
+      ],
+      "referenceCharacters": 97,
+      "edits": 2,
+      "characterErrorRate": 0.020618556701030927,
+      "needsAlignmentReview": false,
+      "reference": "Table 3: Accuracy and peak GPU memory usage on the Paper-\n100M dataset. The † marker identifies our PI-Linear model.",
+      "ocr": "Table 3: Accuracy and peak GPU memory usage on the Paper100M dataset. The  marker identifies our PI-Linear model."
+    },
+    {
+      "page": 7,
+      "sourceSample": "p7-b17",
+      "matchedBlocks": [
+        "p7-b15"
+      ],
+      "referenceCharacters": 372,
+      "edits": 1,
+      "characterErrorRate": 0.002688172043010753,
+      "needsAlignmentReview": false,
+      "reference": "4.5.1 Contribution of PI Feedback Components. We investigate the\nindividual contributions of the proportional and integral feedback\nterms in PIGCN. Experiments are conducted using 32-layer GCN\nand GCNII backbones on both homophilic and heterophilic datasets.\nFor each backbone, we evaluate the full PI model and three variants:\nremoving the proportional term (w/o P), removing the integral term\n(w/o I), and removing both terms (Base).",
+      "ocr": "4.5.1Contribution of Pl Feedback Components. We investigate the individual contributions of the proportional and integral feedback terms in PIGCN. Experiments are conducted using 32-layer GCN and GCNII backbones on both homophilic and heterophilic datasets.For each backbone, we evaluate the full PI model and three variants:removing the proportional term (w/o P), removing the integral term (w/o I), and removing both terms (Base).\n"
+    },
+    {
+      "page": 8,
+      "sourceSample": "p8-b3",
+      "matchedBlocks": [
+        "p8-b2"
+      ],
+      "referenceCharacters": 153,
+      "edits": 8,
+      "characterErrorRate": 0.05228758169934641,
+      "needsAlignmentReview": false,
+      "reference": "Table 4: Component ablation of proportional and integral\nfeedback. All variants are evaluated with 32 layers. Results\nare reported as node classification accuracy (%, mean ± std).",
+      "ocr": "Table 4: Component ablation of proportional and integral feedback. All variants are evaluated with 32 layers. Results are reported as node classification accuracy.$(\\%,mean\\pm std)$ J."
+    },
+    {
+      "page": 8,
+      "sourceSample": "p8-b5",
+      "matchedBlocks": [
+        "p8-b4"
+      ],
+      "referenceCharacters": 533,
+      "edits": 1,
+      "characterErrorRate": 0.001876172607879925,
+      "needsAlignmentReview": false,
+      "reference": "As shown in Table 4, the full PI model consistently achieves\nthe best performance across all datasets and backbones. Removing\neither feedback term leads to performance degradation, particularly\non heterophilic datasets such as Wisconsin, Chameleon, and Cor-\nnell. These results highlight the complementary roles of the two\nfeedback components: the proportional term corrects current propa-\ngation discrepancies, while the integral term accumulates historical\ndiscrepancies to regulate feature propagation. Their combination\nenables more effective deep propagation and helps preserve dis-\ncriminative representations.",
+      "ocr": "As shown in Table 4, the full PI model consistently achieves the best performance across all datasets and backbones. Removing either feedback term leads to performance degradation, paricularly on heterophilic datasets such as Wisconsin, Chameleon, and Cornell. These results highlight the complementary roles of the two feedback components: the proportional term corrects current propagation discrepancies, while the integral term accumulates historical discrepancies to regulate feature propagation. Their combination enables more effective deep propagation and helps preserve discriminative representations.\n"
+    },
+    {
+      "page": 8,
+      "sourceSample": "p8-b13",
+      "matchedBlocks": [
+        "p8-b12"
+      ],
+      "referenceCharacters": 165,
+      "edits": 7,
+      "characterErrorRate": 0.04242424242424243,
+      "needsAlignmentReview": false,
+      "reference": "Table 5: Comparison with alternative historical feedback\nmechanisms. Results are reported as node classification ac-\ncuracy (%, mean ± std). The best result in each column is\nhighlighted in bold.",
+      "ocr": "Table 5: Comparison with alternative historical feedback mechanisms. Results are reported as node classification accuracy $(\\%,mean\\pm std)$ ). The best result in each column is highlighted in bold.\n"
+    },
+    {
+      "page": 8,
+      "sourceSample": "p8-b15",
+      "matchedBlocks": [
+        "p8-b14"
+      ],
+      "referenceCharacters": 315,
+      "edits": 25,
+      "characterErrorRate": 0.07936507936507936,
+      "needsAlignmentReview": false,
+      "reference": "much relative energy to each nontrivial graph mode as the base\npropagation operator. These guarantees apply to PIGCN under the\nstated assumptions; We evaluate all four alternatives, along with\nGCN+PI and GCNII+PI, using 32-layer networks on the same five\ndatasets as the component ablation study, without adding learnable\nweight matrices to the alternative mechanisms.",
+      "ocr": "much relative energy to each nontrivial graph mode as the base propagation operator. These guarantees apply to PIGCN under the stated assumptions; We evaluate all four alternatives, along with GCN+PI and $\\scriptstyle{\\mathrm{G C N I I+P I}}$ ,using 32-layer networks on the same five datasets as the component ablation study, without adding learnable weight matrices to the alternative mechanisms."
+    },
+    {
+      "page": 8,
+      "sourceSample": "p8-b16",
+      "matchedBlocks": [
+        "p8-b15"
+      ],
+      "referenceCharacters": 354,
+      "edits": 36,
+      "characterErrorRate": 0.1016949152542373,
+      "needsAlignmentReview": false,
+      "reference": "Table 5 shows dataset-dependent results: GCN+PI outperforms\nall four alternatives on Cornell, Cora, and PubMed, and SO-Damped\nis comparable on Wisconsin; on Chameleon, Second-order, SO-\nDamped, and HistAvg outperform GCN+PI. Overall, adding histori-\ncal information alone does not consistently reproduce the gains of\nPI feedback. Instead, it complements the theoretical stability and\nspectral analysis of PIGCN.",
+      "ocr": "Table 5 shows dataset-dependent results:$\\scriptstyle{\\mathrm{G C N}}+{\\mathrm{P I}}$ outperforms all four alternatives on Cornell, Cora, and PubMed, and SO-Damped is comparable on Wisconsin; on Chameleon, Second-order, SODamped, and HistAvg outperform GCN+PI. Overall, adding historical information alone does not consistently reproduce the gains of PI feedback. Instead, it complements the theoretical stability and spectral analysis of PIGCN.\n"
+    },
+    {
+      "page": 8,
+      "sourceSample": "p8-b18",
+      "matchedBlocks": [
+        "p8-b17"
+      ],
+      "referenceCharacters": 981,
+      "edits": 9,
+      "characterErrorRate": 0.009174311926605505,
+      "needsAlignmentReview": false,
+      "reference": "We proposed PIGCN, a proportional-integral feedback framework\nfor stabilizing deep graph propagation. By correcting current prop-\nagation discrepancies and accumulating historical discrepancies,\nPIGCN regulates the layer-wise evolution of node representations\nunder repeated message passing. Our analysis shows that PI feed-\nback reshapes the effective propagation behavior from a spectral\nperspective, helping preserve discriminative information in deep\nGNNs. Experiments across diverse benchmarks and representa-\ntive backbones demonstrate the effectiveness and compatibility\nof PIGCN. Propagation analyses further show that PI feedback\nimproves deep stability by alleviating representation homogeniza-\ntion and maintaining stronger performance at larger depths. On\nthe large-scale ogbn-papers100M benchmark, PI-Linear-8 achieves\n65.15 ± 0.08% accuracy with a peak GPU memory usage of 40.12 GB,\ndemonstrating the feasibility of PI-based propagation on graphs\nwith over 100 million nodes. This feedback-regulated view provides\na practical principle for improving the stability and discriminability\nof deep graph neural networks.",
+      "ocr": "We proposed PIGCN, a proportional-integral feedback framework for stabilizing deep graph propagation. By correcting current propagation discrepancies and accumulating historical discrepancies,PIGCN regulates the layer-wise evolution of node representations under repeated message passing. Our analysis shows that PI feedback reshapes the effective propagation behavior from a spectral perspective, helping preserve discriminative information in deep GNNs. Experiments across diverse benchmarks and representative backbones demonstrate the effectiveness and compatibility of PIGCN. Propagation analyses further show that PI feedback improves deep stability by alleviating representation homogenization and maintaining stronger performance at larger depths. On the large-scale ogbn-papers100M benchmark, PI-Linear-8 achieves $65.15\\pm0.08\\%$ accuracy with a peak GPU memory usage of 40.12 GB,demonstrating the feasibility of PI-based propagation on graphs with over 100 million nodes. This feedback-regulated view provides a practical principle forimproving the stability and dicrimiaility of deep graph neural networks.\n"
+    },
+    {
+      "page": 8,
+      "sourceSample": "p8-b20",
+      "matchedBlocks": [
+        "p8-b19"
+      ],
+      "referenceCharacters": 676,
+      "edits": 98,
+      "characterErrorRate": 0.14497041420118342,
+      "needsAlignmentReview": false,
+      "reference": "[1] Filippo Maria Bianchi, Daniele Grattarola, Lorenzo Livi, and Cesare Alippi. 2021.\nGraph neural networks with convolutional arma filters. IEEE transactions on\npattern analysis and machine intelligence 44, 7 (2021), 3496–3507.\n[2] Deyu Bo, Xiao Wang, Chuan Shi, and Huawei Shen. 2021. Beyond low-frequency\ninformation in graph convolutional networks. In Proceedings of the AAAI confer-\nence on artificial intelligence, Vol. 35. 3950–3957.\n[3] Ming Chen, Zhewei Wei, Zengfeng Huang, Bolin Ding, and Yaliang Li. 2020.\nSimple and deep graph convolutional networks. In International conference on\nmachine learning. PMLR, 1725–1735.\n[4] Ziang Chen, Zhengjiang Lin, Shi Chen, Yury Polyanskiy, and Philippe Rigollet.\n2025. Residual connections provably mitigate oversmoothing in graph neural",
+      "ocr": "[1]FilippoMaiaanchiDanieleGrattarola,LorenzoLiviandeareAli Graphneural networks with convolutional arma filters.IEEE transactions on pattern analysis and machine intelligence 44,7 (2021),3496–3507.[2]u information ingraphconvolutionalnetworks.InProceedingsof theAAA confer-ence on artificial intelligence,Vol.35.3950-3957.\n[3]Ming Chen, Zhewei Wei,Zengfeng Huang,Bolin Ding, and Yaliang Li.202.Simple and deep graph convolutional networks.In Internationalconfernce on machine learning.PMLR,1725-1735\n[4]Ziang ChenhegjiangLinShi CenYury Polanski,and PilippeRoll.2025.Residual connections provably mitigate oversmoothing in graph neural "
+    },
+    {
+      "page": 9,
+      "sourceSample": "p9-b3",
+      "matchedBlocks": [
+        "p9-b2"
+      ],
+      "referenceCharacters": 4590,
+      "edits": 392,
+      "characterErrorRate": 0.08540305010893247,
+      "needsAlignmentReview": false,
+      "reference": "networks. arXiv preprint arXiv:2501.00762 (2025).\n[5] Wei-Lin Chiang, Xuanqing Liu, Si Si, Yang Li, Samy Bengio, and Cho-Jui Hsieh.\n2019. Cluster-gcn: An efficient algorithm for training deep and large graph\nconvolutional networks. In Proceedings of the 25th ACM SIGKDD international\nconference on knowledge discovery & data mining. 257–266.\n[6] Eli Chien, Jianhao Peng, Pan Li, and Olgica Milenkovic. 2021. Adaptive Universal\nGeneralized PageRank Graph Neural Network. In International Conference on\nLearning Representations.\n[7] Mark Craven, Dan DiPasquo, Dayne Freitag, Andrew McCallum, Tom Mitchell,\nKamal Nigam, and Seán Slattery. 2000. Learning to construct knowledge bases\nfrom the World Wide Web. Artificial intelligence 118, 1-2 (2000), 69–113.\n[8] Haipeng Ding, Zhewei Wei, and Yuhang Ye. 2025. Large-scale spectral graph\nneural networks via laplacian sparsification. In Proceedings of the 31st ACM\nSIGKDD Conference on Knowledge Discovery and Data Mining V. 1. 213–223.\n[9] Rui Duan, Mingjian Guang, Junli Wang, Chungang Yan, Hongda Qi, Wenkang\nSu, Can Tian, and Haoran Yang. 2024. Unifying homophily and heterophily for\nspectral graph neural networks via triple filter ensembles. Advances in Neural\nInformation Processing Systems 37 (2024), 93540–93567.\n[10] Moshe Eliasof, Eldad Haber, and Eran Treister. 2021. Pde-gcn: Novel architectures\nfor graph neural networks motivated by partial differential equations. Advances\nin neural information processing systems 34 (2021), 3836–3849.\n[11] J-C Fan and Toshihiro Kobayashi. 2002. A simple adaptive pi controller for linear\nsystems with constant disturbances. IEEE transactions on automatic control 43, 5\n(2002), 733–736.\n[12] Johannes Gasteiger, Aleksandar Bojchevski, and Stephan Günnemann. 2019.\nPredict then Propagate: Graph Neural Networks meet Personalized PageRank.\nIn International Conference on Learning Representations.\n[13] Justin Gilmer, Samuel S. Schoenholz, Patrick F. Riley, Oriol Vinyals, and George E.\nDahl. 2017. Neural Message Passing for Quantum Chemistry. In Proceedings of\nthe 34th International Conference on Machine Learning (Proceedings of Machine\nLearning Research, Vol. 70), Doina Precup and Yee Whye Teh (Eds.). PMLR, 1263–\n1272.\n[14] Jhony H Giraldo, Konstantinos Skianis, Thierry Bouwmans, and Fragkiskos D\nMalliaros. 2023. On the trade-off between over-smoothing and over-squashing\nin deep graph neural networks. In Proceedings of the 32nd ACM international\nconference on information and knowledge management. 566–576.\n[15] Alessio Gravina, Davide Bacciu, and Claudio Gallicchio. [n. d.]. Anti-Symmetric\nDGN: a stable architecture for Deep Graph Networks. In The Eleventh Interna-\ntional Conference on Learning Representations.\n[16] Jingwei Guo, Kaizhu Huang, Xinping Yi, and Rui Zhang. 2023. Graph neural\nnetworks with diverse spectral filtering. In Proceedings of the ACM web conference\n2023. 306–316.\n[17] William L Hamilton, Rex Ying, and Jure Leskovec. 2017. Inductive representation\nlearning on large graphs. In Proceedings of the 31st International Conference on\nNeural Information Processing Systems. 1025–1035.\n[18] Mingguo He, Zhewei Wei, Hongteng Xu, et al. 2021. Bernnet: Learning arbitrary\ngraph spectral filters via bernstein approximation. Advances in neural information\nprocessing systems 34 (2021), 14239–14251.\n[19] Weihua Hu, Matthias Fey, Marinka Zitnik, Yuxiao Dong, Hongyu Ren, Bowen\nLiu, Michele Catasta, and Jure Leskovec. 2020. Open Graph Benchmark: Datasets\nfor Machine Learning on Graphs. In Advances in Neural Information Processing\nSystems, H. Larochelle, M. Ranzato, R. Hadsell, M.F. Balcan, and H. Lin (Eds.),\nVol. 33. Curran Associates, Inc., 22118–22133.\n[20] Keke Huang, Yu Guang Wang, Ming Li, and Pietro Lio. 2024. How Universal\nPolynomial Bases Enhance Spectral Graph Neural Networks: Heterophily, Over-\nsmoothing, and Over-squashing. In International Conference on Machine Learning.\nPMLR, 20310–20330.\n[21] Thomas N. Kipf and Max Welling. 2017. Semi-Supervised Classification with\nGraph Convolutional Networks. In International Conference on Learning Repre-\nsentations.\n[22] Qimai Li, Zhichao Han, and Xiao-Ming Wu. 2018. Deeper insights into graph\nconvolutional networks for semi-supervised learning. In Proceedings of the AAAI\nconference on artificial intelligence, Vol. 32.\n[23] Derek Lim, Felix Hohne, Xiuyu Li, Sijia Linda Huang, Vaishnavi Gupta, Omkar\nBhalerao, and Ser Nam Lim. 2021. Large scale learning on non-homophilous\ngraphs: New benchmarks and strong simple methods. Advances in Neural Infor-\nmation Processing Systems 34 (2021), 20887–20902.\n[24] Meng Liu, Hongyang Gao, and Shuiwang Ji. 2020. Towards deeper graph neural\nnetworks. In Proceedings of the 26th ACM SIGKDD international conference on\nknowledge discovery & data mining. 338–348.\n[25] Galileo Namata, Ben London, Lise Getoor, Bert Huang, and U Edu. 2012. Query-\ndriven active surveying for collective classification. In 10th international workshop\non mining and learning with graphs, Vol. 8. 1.\n[26] Kenta Oono and Taiji Suzuki. 2020. Graph Neural Networks Exponentially Lose\nExpressive Power for Node Classification. In International Conference on Learning\nRepresentations.\n[27] Jie Peng, Runlin Lei, and Zhewei Wei. 2024. Beyond over-smoothing: Uncovering\nthe trainability challenges in deep graph neural networks. In Proceedings of the",
+      "ocr": "networks. arXiv preprint arXiv:2501.00762 (2025).\n2019.Cluster-gcn: An efficient algorithm for training deep and larea convolutional networks.In Proceedings of the 25th ACM SIGKDD international conference on knowledge discovery & data mining.257-26.[EliognOcav..atvUal Generalized PageRank Graph Neural Network. In International Conference on Learning Representations.\n[7]Mark Craven,Dan DiPasquo,DayneFreitag,Andrew McCallum,Tom Mitchell,\nKamalNigam,and SeanSlatery.Learningtoconstructknowledgeaes fromtheWoldWdebAriicialinllgec118-20.[8]Haipeng Ding,Zhewei Wei,and Yuhang Ye.2025.Large-scale spectral graph neural networks via laplacian sparsification.In Proceedings of the 3st ACM SIGKDD Conferenceon Knowledge Discovery and DataMining V.1.213–223.[]RuiDuGia,ag Su, Can Tian, and Haoran Yang. 2024. Unifying homophily and heterophily for spectral graph neural networks via triple filter ensembles. Advances in Neural InformationProcessing Systems37(2024),93540-9357.[10]Moshe Eliasof,EldadHaber,and Eran Treister.2021.Pde-gcn:Novel architectures forgraph neural networksmotivatedby partial diferentialequations.Advncs in neural information processing systems 34(2021),3836-3849.[11]J-CFanandToshihiroKobayashi.2002.Asimpleadaptive picontrollerfor linear systems with constant disturbances. IEEE transactions on automatic control 43, 5(2002), 733–736.\n[12] Johannes Gasteiger, Aleksandar Bojchevski, and Stephan Günnemann. 2019.\nPredict then Propagate: Graph Neural Networks meet Personalized PageRank.\nIn International Conference on Learning Representations.[13] JustinGilmer,Samuel S.Schoenholz,Patrick F.Riley,Oriol Vinyals,and George E.\nDahl. 2017. Neural Message Passing for Quantum Chemistry. In Proceedings of the 34th International Conference on Machine Learning (Proceedings of Machine Learning Research, Vol. 70), Doina Precup and Yee Whye Teh (Eds.). PMLR, 12631272.\n[14] Jhony H Giraldo, Konstantinos Skianis, Thierry Bouwmans, and Fragkiskos D Malliaros. 2023. On the trade-off between over-smoothing and over-squashing in deep graph neural networks. In Proceedings of the 32nd ACM international conference on information and knowledge management. 566-576.[15]AlessioGravina,DavideBacciu,andClaudio Gallicchio.[n.d].Anti-Symmetric DGN: a stable architecture for Deep Graph Networks. In The Eleventh International Conference on Learning Representations [16] Jingwei Guo, Kaizhu Huang, Xinping Yi, and Rui Zhang. 2023. Graph neural networks with diverse spectral filtering.In Proceedings of the ACM web conference 2023.306-316.\n[17]William L Hamilton,Rex Ying,and Jure Leskovec.2017.Inductive representation learning on large graphs. In Proceedings of the 31st International Conference on Neural Information Processing Systems. 1025-1035.\n[18]Mingguo He,Zhewei Wei,Hongteng Xu,et al.2021.Bernnet:Learning arbitrary graph spectral filters via bernstein approximation.Advances in neural information processing systems 34 (2021), 14239–14251.\n[19]Weihua HuMathias Fey,Marinka tnik,YuxiaoDong,HongyuRnBowen Liu, Michele Catasta,andJureLeskovec.2020.OpenGraphBenchmark:Datases for Machine Learning on Graphs. In Advances in Neural Information Processing Systems, H.Larochelle, M.Ranzato,R.Hadsell,M.F.Balcanand H.Lin(Ed.,\nVol.33.Curran Associates,Inc.,22118-22133.\nPolynomial Bases Enhance Spectral Graph Neural Networks: Heterophily, Oversmoothing, and Over-squashing.In International Conference on Machine Learning.\nPMLR,20310-20330\n[21]Thomas N.Kipf and Max Welling. 2017. Semi-Supervised Classification with Graph Convolutional Networks. In International Conference on Learning Representations.\n[22] Qimai Li, Zhichao Han, and Xiao-Ming Wu.2018. Deeper insights into graph convolutional networks for semi-supervised learning. In Proceedings of the AAAI conference on artificial intelligence, Vol.32.\n[23]Derek LimFelixHohne,XiuyuLi,Sijia Linda Huang,Vaishnavi Gupta,Omkar Bhalerao, and Ser Nam Lim. 2021. Large scale learning on non-homophilous graphs: New benchmarks and strong simple methods. Advances in Neural Information Processing Systems 34 (2021),20887–20902.\n[24] Meng Liu,Hongyang Gao,and Shuiwang Ji.2020. Towards deeper graph neural networks. In Proceedings of the 26th ACM SIGKDD international conference on knowledge discovery & data mining.338-348.\n[25] Galileo Namata,Ben London,Lise Getoor,Bert Huang, andU Edu.2012. QuerydrivenctivurigforollctivaictioIntintrioalwrksop on mining and learning with graphs, Vol. 8. 1.\n[26]KentaOonoand Taijiuzuki220.GraphNural NetworksExponentiallyLe Expressive Power for Node Classification.In International Conference on Learning Representations.\n[27JiegRulinndi.og:vei thetrainabilitychallenesindeepgraphnuralnetworks.InProceedingsoft "
+    },
+    {
+      "page": 9,
+      "sourceSample": "p9-b4",
+      "matchedBlocks": [
+        "p9-b3"
+      ],
+      "referenceCharacters": 3393,
+      "edits": 56,
+      "characterErrorRate": 0.01650456822870616,
+      "needsAlignmentReview": false,
+      "reference": "33rd ACM International Conference on Information and Knowledge Management.\n1878–1887.\n[28] Oleg Platonov, Denis Kuznedelev, Michael Diskin, Artem Babenko, and Liud-\nmila Prokhorenkova. 2023. A Critical Look at the Evaluation of GNNs under\nHeterophily: Are We Really Making Progress?. In International Conference on\nLearning Representations.\n[29] Michael Poli, Stefano Massaroli, Junyoung Park, Atsushi Yamashita, Hajime\nAsama, and Jinkyoo Park. 2019. Graph neural ordinary differential equations.\narXiv preprint arXiv:1911.07532 (2019).\n[30] Yu Rong, Wenbing Huang, Tingyang Xu, and Junzhou Huang. 2020. DropE-\ndge: Towards Deep Graph Convolutional Networks on Node Classification. In\nInternational Conference on Learning Representations.\n[31] Benedek Rozemberczki, Carl Allen, and Rik Sarkar. 2021. Multi-scale attributed\nnode embedding. Journal of Complex Networks 9, 2 (2021), cnab014.\n[32] Michael Scholkemper, Xinyi Wu, Ali Jadbabaie, and Michael T Schaub. 2025.\nResidual Connections and Normalization Can Provably Prevent Oversmoothing\nin GNNs. In The Thirteenth International Conference on Learning Representations.\n[33] Prithviraj Sen, Galileo Namata, Mustafa Bilgic, Lise Getoor, Brian Galligher, and\nTina Eliassi-Rad. 2008. Collective classification in network data. AI magazine 29,\n3 (2008), 93–93.\n[34] Yongduan Song, Yujuan Wang, and Changyun Wen. 2016. Adaptive fault-tolerant\nPI tracking control with guaranteed transient and steady-state performance. IEEE\nTransactions on automatic control 62, 1 (2016), 481–487.\n[35] Matthew Thorpe, Tan Minh Nguyen, Hedi Xia, Thomas Strohmer, Andrea\nBertozzi, Stanley Osher, and Bao Wang. 2022. GRAND++: Graph neural diffusion\nwith a source term. In International Conference on Learning Representations.\n[36] Petar Veličković, Guillem Cucurull, Arantxa Casanova, Adriana Romero, Pietro\nLiò, and Yoshua Bengio. 2018. Graph Attention Networks. In International\nConference on Learning Representations (ICLR).\n[37] Felix Wu, Amauri Souza, Tianyi Zhang, Christopher Fifty, Tao Yu, and Kilian\nWeinberger. 2019. Simplifying graph convolutional networks. In International\nconference on machine learning. Pmlr, 6861–6871.\n[38] Xinyi Wu, Amir Ajorlou, Zihui Wu, and Ali Jadbabaie. 2023. Demystifying\noversmoothing in attention-based graph neural networks. Advances in Neural\nInformation Processing Systems 36 (2023), 35084–35106.\n[39] Jiaxing Xu, Aihu Zhang, Qingtian Bian, Vijay Prakash Dwivedi, and Yiping Ke.\n2024. Union subgraph neural networks. In Proceedings of the AAAI conference on\nartificial intelligence, Vol. 38. 16173–16183.\n[40] Keyulu Xu, Chengtao Li, Yonglong Tian, Tomohiro Sonobe, Ken-ichi\nKawarabayashi, and Stefanie Jegelka. 2018. Representation learning on graphs\nwith jumping knowledge networks. In International conference on machine learn-\ning. pmlr, 5453–5462.\n[41] Hanqing Zeng, Hongkuan Zhou, Ajitesh Srivastava, Rajgopal Kannan, and Viktor\nPrasanna. 2019. Graphsaint: Graph sampling based inductive learning method.\narXiv preprint arXiv:1907.04931 (2019).\n[42] Shengzhong Zhang, Yimin Zhang, Bisheng Li, Wenjie Yang, Min Zhou, and\nZengfeng Huang. 2025. Graph Batch Coarsening framework for scalable graph\nneural networks. Neural Networks 183 (2025), 106931.\n[43] Lingxiao Zhao and Leman Akoglu. 2020. PairNorm: Tackling Oversmoothing in\nGNNs. In International Conference on Learning Representations.\n[44] Kuangqi Zhou, Yanfei Dong, Kaixin Wang, Wee Sun Lee, Bryan Hooi, Huan Xu,\nand Jiashi Feng. 2021. Understanding and resolving performance degradation in\ndeep graph convolutional networks. In Proceedings of the 30th ACM international\nconference on information & knowledge management. 2728–2737.\n[45] Jiong Zhu, Yujun Yan, Lingxiao Zhao, Mark Heimann, Leman Akoglu, and Danai\nKoutra. 2020. Beyond homophily in graph neural networks: Current limitations\nand effective designs. Advances in neural information processing systems 33 (2020),\n7793–7804.",
+      "ocr": "33rd ACMIntrnational ConferenceonInormationandKnowledgeManagement.1878-1887.\n[28] Oleg Platonov, Denis Kuznedelev, Michael Diskin, Artem Babenko, and Liudmila Prokhorenkova. 2023. A Critical Look at the Evaluation of GNNs under Heterophily: Are We Really Making Progress?. In International Conference on Learning Representations.\n[29] Michael Poli,Stefano Massaroli, Junyoung Park,Atsushi Yamashita, Hajime Asama, and Jinkyoo Park. 2019. Graph neural ordinary differential equations.\narXiv preprintarXiv:1911.07532(2019)\n[30] Yu Rong, Wenbing Huang, Tingyang Xu, and Junzhou Huang. 2020. DropEdge: Towards Deep Graph Convolutional Networks on Node Classification. In International Conference on Learning Representations.\n[31] BenedekRozemberczki,Carl Allen,and Rik Sarkar.2021.Multi-scaleattributed node embedding.Journal of Complex Networks 9.2 (2021),cnab014.[32] Michael Scholkemper, Xinyi Wu, Ali Jadbabaie,and Michael T Schaub.2025.\nResidual Connections and Normalization Can Provably Prevent Oversmoothing in GNNs. In The Thirteenth International Conference on Learning Representations.3PtviajnGaliloNaautaaliieGtooranGll,a Tina Eliassi-Rad. 2008. Collective classification in network data. AI magazine 29,\n3(2008).93–93\n[34] Yongduan Song, Yujuan Wang, and Changyun Wen.2016.Adaptive fault-tolernt PI tracking control with guaranteed transient and steady-state performance. IEEE Transactions on automatic control 62,1 (2016),481–487.[35] Matthew Thorpe, Tan Minh Nguyen, Hedi Xia, Thomas Strohmer, Andea Bertozzi,Stanley Osher, and Bao Wang.2022. GRAND++: Graph neural diffusion with a source term. In International Conference on Learning Representations.[36] Petar Veličković,GuillemCucurull,Arantxa Caanova,Adriana Romero,etro Lio,and Yoshua Bengio. 2018. Graph Attention Networks. In International Conference on Learning Representations (ICLR).\n[37] Felix Wu, Amauri Souza,Tianyi Zhang, Christopher Fifty, Tao Yu, and Kilian Weinberger. 2019. Simplifying graph convolutional networks. In International conference on machine learning. Pmlr, 6861-6871.\n[38] Xinyi Wu, Amir Ajorlou, Zihui Wu, and Ali Jadbabaie. 2023. Demystifying oversmoothing in attention-based graph neural networks. Advances in Neural Information Processing Systems 36 (2023),35084-35106.[39] Jiaxing Xu, Aihu Zhang, Qingtian Bian,Vijay Prakash Dwivedi, and Yiping Ke.\n2024. Union subgraph neural networks.In Proceedings of the AAAI conference on artificial intelligence,Vol.38.16173–16183.\n[40] Keyulu Xu, Chengtao Li, Yonglong Tian, Tomohiro Sonobe, Ken-ichi Kawarabayashi, and Stefanie Jegelka. 2018. Representation learning on graphs with jumping knowledge networks. In International conference on machine learning.pmlr,5453–5462.\n[41] Hanqing Zeng,Hongkuan Zhou, Ajitesh Srivastava,Rajgopal Kannan, and Viktor Prasanna. 2019. Graphsaint: Graph sampling based inductive learning method.\narXiv preprintarXiv:1907.04931 (2019).\n[42] Shengzhong Zhang, Yimin Zhang, Bisheng Li, Wenjie Yang, Min Zhou,and Zengfeng Huang. 2025. Graph Batch Coarsening framework for scalable graph neural networks.Neural Networks 183 (2025),106931.\n[43] Lingxiao Zhao andLeman Akoglu.2020.PairNorm: Tackling Oversmoothing in GNNs. In International Conference on Learning Representations.[44] Kuangqi Zhou,Yanfei Dong, Kaixin Wang, Wee Sun Lee,Bryan HooiHuan Xu,\nand Jiashi Feng. 2021. Understanding and resolving performance degradation in deep graph convolutional networks. In Proceedings of the 30th ACM international conference on information & knowledge management.2728-2737.[45] Jiong Zhu,Yujun Yan,Lingxiao Zhao,Mark Heimann,Leman Akoglu,and Danai Koutra. 2020. Beyond homophily in graph neural networks: Current limitations and effective designs. Advances in neural information processing systems 33 (2020)\n7793–7804.\n"
+    },
+    {
+      "page": 10,
+      "sourceSample": "p10-b22",
+      "matchedBlocks": [
+        "p10-b21"
+      ],
+      "referenceCharacters": 97,
+      "edits": 0,
+      "characterErrorRate": 0.0,
+      "needsAlignmentReview": false,
+      "reference": "Consequently, when the propagation discrepancy is neglected in\nthe linear approximation, the increment follows",
+      "ocr": "Consequently, when the propagation discrepancy is neglected in the linear approximation, the increment follows "
+    },
+    {
+      "page": 11,
+      "sourceSample": "p11-b23",
+      "matchedBlocks": [
+        "p11-b22"
+      ],
+      "referenceCharacters": 100,
+      "edits": 0,
+      "characterErrorRate": 0.0,
+      "needsAlignmentReview": false,
+      "reference": "Lower energy indicates smoother neighboring representations; an\nexcessively low value may signal over-smoothing.",
+      "ocr": "Lower energy indicates smoother neighboring representations; an excessively low value may signal over-smoothing."
+    },
+    {
+      "page": 11,
+      "sourceSample": "p11-b31",
+      "matchedBlocks": [
+        "p11-b30"
+      ],
+      "referenceCharacters": 133,
+      "edits": 0,
+      "characterErrorRate": 0.0,
+      "needsAlignmentReview": false,
+      "reference": "Higher effective rank indicates greater feature diversity; together\nwith lower PairSim, it suggests better preservation of discriminative\ninformation.",
+      "ocr": "Higher effective rank indicates greater feature diversity; together with lower PairSim, it suggests better preservation of discriminative information.\n"
+    },
+    {
+      "page": 11,
+      "sourceSample": "p11-b32",
+      "matchedBlocks": [
+        "p11-b31"
+      ],
+      "referenceCharacters": 370,
+      "edits": 11,
+      "characterErrorRate": 0.02972972972972973,
+      "needsAlignmentReview": false,
+      "reference": "Common training settings. All models share the optimizer, train-\ning budget, early-stopping strategy, and data splits (Table 6). Each\nstandard-benchmark run uses one 16-GB NVIDIA Tesla V100-SXM2\nGPU; Paper-100M runs use one 64-GB GPU die of an AMD Instinct\nMI250. Although the configuration includes experiment.num_runs\nrepeated runs are controlled by the listed seeds in our implementa-\ntion, and each result averages those ten seeds.",
+      "ocr": "Common training settings. All models share the optimizer, training budget, early-stopping strategy, and data splits (Table 6). Each standard-benchmark run uses one 16-GB NVIDIA Tesla V100-SXM2GPU; Paper-100M runs use one 64-GB GPU die of an AMD Instinct MI250.Although the configuration includes experiment.num_runs,repeatedrun arecorolled by th lited edsinourimlemna tion, and each result averages those ten seeds."
+    },
+    {
+      "page": 12,
+      "sourceSample": "p12-b7",
+      "matchedBlocks": [
+        "p12-b5"
+      ],
+      "referenceCharacters": 178,
+      "edits": 0,
+      "characterErrorRate": 0.0,
+      "needsAlignmentReview": false,
+      "reference": "Figure 6: Depth-wise accuracy comparison on Cora, CiteSeer,\nand PubMed for (top) GCN versus GCN+PI and (bottom) GC-\nNII versus GCNII+PI. At 64 and 128 layers, GCN+PI retains\nmore stable accuracy than the base GCN.",
+      "ocr": "Figure 6: Depth-wise accuracy comparison on Cora, CiteSeer,and PubMed for (top) GCN versus GCN+PI and (bottom) GCNII versus GCNII+PI. At 64 and 128 layers, GCN+PI retains more stable accuracy than the base GCN.\n"
+    },
+    {
+      "page": 12,
+      "sourceSample": "p12-b6",
+      "matchedBlocks": [
+        "p12-b7"
+      ],
+      "referenceCharacters": 520,
+      "edits": 131,
+      "characterErrorRate": 0.2519230769230769,
+      "needsAlignmentReview": true,
+      "reference": "We compare both the standard GCN and the stronger GCNII back-\nbone across depths. Figure 6 compares the classification accuracy\nof GCN and GCNII with and without PI control across different\nnetwork depths on Cora, CiteSeer, and PubMed. As the network\nbecomes deeper, GCN+PI generally maintains more stable accuracy\nthan the vanilla GCN, particularly at 64 and 128 layers, demon-\nstrating the effectiveness of PI control in mitigating depth-induced\nperformance degradation. For GCNII, which already incorporates\ninitial residual connections and identity mapping, the improve-\nments are generally less pronounced.",
+      "ocr": "We compare both the standard GCN and the stronger GCNII backbone across depths. Figure 6 compares the classification accuracy of GCN and GCNII with and without PI control across different network depths on Cora, CiteSeer, and PubMed. As the network becomes deeper,$\\scriptstyle{\\mathrm{G C N}}+{\\mathrm{P I}}$ generally maintains more stable accuracy than the vanilla GCN, particularly at 64 and 128 layers, demonstrating the effectiveness of PI control in mitigating depth-induced e o rsee oe re r e e  ee ee re ments are generally less pronounced.\n"
+    }
+  ]
+}

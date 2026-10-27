@@ -12,7 +12,7 @@ let recognitionClosedPanel=false;
 let config=JSON.parse(localStorage.getItem('moon-api')||'{"baseUrl":"https://api.deepseek.com/v1","model":"deepseek-flash","protocol":"openai"}');let apiKey='';
 const toast=s=>{const t=document.querySelector('#toast');t.textContent=s;t.style.display='block';clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.style.display='none',4000)};
 async function api(url,opts={}){const r=await fetch(url,opts),d=await r.json();if(!r.ok)throw Error(d.error||'请求失败');return d}
-const translationReader=createTranslationReader({getPaper:()=>paper,getConfig:()=>({...config,key:apiKey}),api,toast,settings:()=>settings(),modal:(content,cls)=>modal(content,cls),closeModal:()=>closeModal()});
+const translationReader=createTranslationReader({getPaper:()=>paper,getConfig:()=>({...config,key:apiKey}),getDocument:()=>doc,api,toast,settings:()=>settings(),modal:(content,cls)=>modal(content,cls),closeModal:()=>closeModal()});
 const patch=async data=>{paper=await api('/api/papers/'+paper.id,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});paper.generated??={};paper.translations??={};return paper};
 function logo(){return '<span class="orb"></span><span>Moonlight</span>'}
 function landing(){translationReader.detach();paper=null;app.innerHTML=homeMarkup();activateHome(app)}

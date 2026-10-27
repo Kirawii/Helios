@@ -27,11 +27,21 @@ function releaseWorkerLock(filename, token) {
   try { if (JSON.parse(fs.readFileSync(filename, 'utf8')).token === token) fs.unlinkSync(filename); } catch {}
 }
 
+function ocrRuntime() {
+  let saved = {};
+  try { saved = JSON.parse(fs.readFileSync(path.join(__dirname, '.cache/ocr-runtime.json'), 'utf8')); } catch {}
+  return {
+    python: process.env.HELIOS_OCR_PYTHON || path.join(__dirname, saved.verified && saved.environment === '.venv-gpu' ? '.venv-gpu' : '.venv', process.platform === 'win32' ? 'Scripts/python.exe' : 'bin/python'),
+    device: process.env.HELIOS_OCR_DEVICE || (saved.verified && saved.environment === '.venv-gpu' ? 'gpu:0' : 'cpu'),
+  };
+}
+
 class OcrWorker {
-  constructor({pythonPath, spawnProcess = spawn, lockFile = path.join(__dirname, '.cache/ocr-worker.lock')} = {}) {
+  constructor({pythonPath, spawnProcess = spawn, lockFile = path.join(__dirname, '.cache/ocr-worker.lock'), timeoutMs = 30 * 60 * 1000} = {}) {
     this.pythonPath = pythonPath;
     this.spawnProcess = spawnProcess;
     this.lockFile = lockFile;
+    this.timeoutMs = timeoutMs;
     this.process = null;
     this.active = null;
     this.queue = Promise.resolve();
@@ -41,7 +51,8 @@ class OcrWorker {
 
   launch() {
     if (this.process) return;
-    const python = this.pythonPath || process.env.HELIOS_OCR_PYTHON || path.join(__dirname, '.venv', process.platform === 'win32' ? 'Scripts/python.exe' : 'bin/python');
+    const runtime = ocrRuntime();
+    const python = this.pythonPath || runtime.python;
     if (!fs.existsSync(python)) throw Error('本机 OCR 尚未安装，请先运行 npm run setup:ocr');
     const lockFile = this.lockFile, lockToken = crypto.randomUUID();
     acquireWorkerLock(lockFile, lockToken);
@@ -49,25 +60,30 @@ class OcrWorker {
     const certificates = process.platform === 'darwin' && fs.existsSync('/etc/ssl/cert.pem') ? {SSL_CERT_FILE: '/etc/ssl/cert.pem', REQUESTS_CA_BUNDLE: '/etc/ssl/cert.pem'} : {};
     const child = this.spawnProcess(python, ['-u', path.join(__dirname, 'ocr/worker.py')], {
       cwd: __dirname,
-      env: {...certificates, ...process.env, HELIOS_OCR_THREADS: threads, OMP_NUM_THREADS: threads, OPENBLAS_NUM_THREADS: threads, MKL_NUM_THREADS: threads, VECLIB_MAXIMUM_THREADS: threads, NUMEXPR_NUM_THREADS: threads, PYTHONUNBUFFERED: '1', PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK: 'True', PADDLE_PDX_CACHE_HOME: path.join(__dirname, '.cache/paddleocr'), HF_HOME: path.join(__dirname, '.cache/huggingface')},
+      env: {...certificates, ...process.env, HELIOS_OCR_DEVICE: runtime.device, HELIOS_OCR_THREADS: threads, OMP_NUM_THREADS: threads, OPENBLAS_NUM_THREADS: threads, MKL_NUM_THREADS: threads, VECLIB_MAXIMUM_THREADS: threads, NUMEXPR_NUM_THREADS: threads, PYTHONUNBUFFERED: '1', PYTHONIOENCODING: 'utf-8', PYTHONUTF8: '1', PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK: 'True', PADDLE_PDX_CACHE_HOME: path.join(__dirname, '.cache/paddleocr'), HF_HOME: path.join(__dirname, '.cache/huggingface')},
       stdio: ['pipe', 'pipe', 'pipe'],
     });
     this.process = child;
     if (child.pid) fs.writeFileSync(lockFile, JSON.stringify({pid: child.pid, token: lockToken}));
-    this.exitCleanup = () => child.kill();
-    process.once('exit', this.exitCleanup);
-    process.once('SIGINT', this.exitCleanup);
-    process.once('SIGTERM', this.exitCleanup);
+    const exitCleanup = () => child.kill();
+    this.exitCleanup = exitCleanup;
+    process.once('exit', exitCleanup);
+    process.once('SIGINT', exitCleanup);
+    process.once('SIGTERM', exitCleanup);
     let diagnostics = '';
-    child.stderr.on('data', chunk => { diagnostics = (diagnostics + chunk.toString()).slice(-2000); });
+    child.stderr.on('data', chunk => {
+      diagnostics = (diagnostics + chunk.toString()).slice(-2000);
+      if (process.env.HELIOS_OCR_DIAGNOSTICS === '1') process.stderr.write(chunk);
+    });
     const lines = createInterface({input: child.stdout});
     lines.on('line', line => {
       let message;
       try { message = JSON.parse(line); } catch { return; }
       const active = this.active;
       if (!active || active.child !== child || active.requestId !== message.requestId) return;
-      if (message.event === 'page' || message.event === 'loading') {
-        try { active.onEvent(message); } catch (error) { active.reject(error); child.kill(); }
+      if (message.event === 'page' || message.event === 'loading' || message.event === 'progress') {
+        active.touch();
+        try { active.onEvent(message); } catch (error) { active.failure = error; child.kill(); }
       }
       if (message.event === 'done') active.resolve(message);
       if (message.event === 'error') active.reject(Error('OCR 处理失败：' + message.error));
@@ -78,17 +94,18 @@ class OcrWorker {
     });
     child.on('close', () => {
       releaseWorkerLock(lockFile, lockToken);
-      if (this.exitCleanup) process.removeListener('exit', this.exitCleanup);
-      if (this.exitCleanup) process.removeListener('SIGINT', this.exitCleanup);
-      if (this.exitCleanup) process.removeListener('SIGTERM', this.exitCleanup);
+      process.removeListener('exit', exitCleanup);
+      process.removeListener('SIGINT', exitCleanup);
+      process.removeListener('SIGTERM', exitCleanup);
       if (this.process === child) this.process = null;
-      if (this.active?.child === child) this.active.reject(this.active.signal?.aborted ? this.active.signal.reason : Error('OCR 进程已退出。请检查依赖与模型文件。' + diagnostics.slice(-500)));
+      if (this.active?.child === child) this.active.reject(this.active.failure || (this.active.signal?.aborted ? this.active.signal.reason : Error('OCR 进程已退出。请检查依赖与模型文件。' + diagnostics.slice(-500))));
       lines.close();
     });
     child.stdin.on('error', () => {});
   }
 
   request(payload, onEvent = () => {}, signal) {
+    try { onEvent({event: 'queued'}); } catch (error) { return Promise.reject(error); }
     let started = false;
     const operation = this.queue.catch(() => {}).then(async () => {
       signal?.throwIfAborted();
@@ -102,14 +119,23 @@ class OcrWorker {
           if (this.process === child) this.process = null;
           child.kill();
         };
-        const timer = setTimeout(() => { child.kill(); this.active?.reject(Error('OCR 超时，请重试未完成的页面')); }, 30 * 60 * 1000);
+        let timer;
+        const touch = () => {
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            if (this.active?.requestId !== requestId) return;
+            this.active.failure = Error('OCR 长时间没有进展，请重试未完成的页面');
+            child.kill();
+          }, this.timeoutMs);
+        };
         const cleanup = () => {
           clearTimeout(timer); signal?.removeEventListener('abort', abort);
           if (this.active?.requestId === requestId) this.active = null;
           const idleSeconds = Math.max(1, Number(process.env.HELIOS_OCR_IDLE_SECONDS) || 30);
           this.idleTimer = setTimeout(() => this.close(), idleSeconds * 1000); this.idleTimer.unref();
         };
-        this.active = {child, requestId, onEvent, signal, resolve: value => { cleanup(); resolve(value); }, reject: error => { cleanup(); reject(error); }};
+        this.active = {child, requestId, onEvent, signal, touch, resolve: value => { cleanup(); resolve(value); }, reject: error => { cleanup(); reject(error); }};
+        touch();
         signal?.addEventListener('abort', abort, {once: true});
         child.stdin.write(JSON.stringify({...payload, requestId}) + '\n');
         if (signal?.aborted) abort();
@@ -132,4 +158,4 @@ class OcrWorker {
   }
 }
 
-module.exports = {OcrWorker, acquireWorkerLock, releaseWorkerLock};
+module.exports = {OcrWorker, acquireWorkerLock, releaseWorkerLock, ocrRuntime};

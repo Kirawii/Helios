@@ -1,5 +1,6 @@
 import unittest
-from worker import normalize_page
+from worker import normalize_page, enabled_features, FEATURES
+from quality import RecoveringOCR, normalize_math_syntax, fill_empty_table_cells, CapturingPreprocessor, UnmaskedCharts
 
 
 class NormalizePageTests(unittest.TestCase):
@@ -30,6 +31,66 @@ class NormalizePageTests(unittest.TestCase):
 
     def test_blank_page(self):
         self.assertEqual(normalize_page({"parsing_res_list": []}, 3, 100, 200)["blocks"], [])
+
+    def test_all_modules_must_be_active_in_actual_result(self):
+        result = {"model_settings": {**FEATURES, "use_doc_preprocessor": True},
+                  "doc_preprocessor_res": {"model_settings": {"use_doc_orientation_classify": True, "use_doc_unwarping": True}},
+                  "overall_ocr_res": {"model_settings": {"use_textline_orientation": True}}}
+        self.assertTrue(all(enabled_features(result).values()))
+        result["model_settings"]["use_chart_recognition"] = False
+        with self.assertRaisesRegex(RuntimeError, "use_chart_recognition"):
+            enabled_features(result)
+
+    def test_fused_latex_index_keeps_relation_and_index(self):
+        self.assertEqual(normalize_math_syntax(r"\substack{j=1\\j\neqi}"), r"\substack{j=1\\j\neq i}")
+        self.assertEqual(normalize_math_syntax(r"\infty\leqslant x\geqq y"), r"\infty\leqslant x\geqq y")
+
+    def test_orientation_classifier_stays_enabled_with_confidence_recovery(self):
+        class FakeOCR:
+            def __call__(self):
+                yield {"textline_orientation_angles": [1, 1, 0], "rec_scores": [.2, .76, .3], "rec_texts": ["upside down", "keep", "upright"],
+                       "rec_polys": ["first", "second", "third"], "doc_preprocessor_res": {"output_img": "source"}, "model_settings": {"use_textline_orientation": True}}
+            def _crop_by_polys(self, image, polygons):
+                self.test_image = image
+                return polygons
+            def text_rec_model(self, crops):
+                for text, score in [("Readable text", .96), ("uncertain alternative", .80)]:
+                    yield {"rec_text": text, "rec_score": score}
+        pipeline = FakeOCR()
+        result = list(RecoveringOCR(pipeline)())[0]
+        self.assertEqual(result["rec_texts"], ["Readable text", "keep", "upright"])
+        self.assertEqual(result["textline_orientation_angles"], [0, 1, 0])
+        self.assertEqual(result["rec_polys"], ["first", "second", "third"])
+        self.assertTrue(result["model_settings"]["use_textline_orientation"])
+        self.assertEqual(len(result["orientation_recoveries"]), 1)
+
+    def test_table_gap_fill_matches_unique_row_and_preserves_existing_cells(self):
+        primary = '<table><tr><td>DSF</td><td></td><td>79.01 ± 0.10</td></tr></table>'
+        alternate = '<table><tr><td>DSF</td><td>83.10 ± 0.30</td><td>wrong alternative</td></tr></table>'
+        repaired, changes = fill_empty_table_cells(primary, alternate)
+        self.assertIn('<td>83.10 ± 0.30</td>', repaired)
+        self.assertIn('79.01 ± 0.10', repaired)
+        self.assertEqual(len(changes), 1)
+        merged = alternate.replace('83.10 ± 0.30', '83.10 ± 0.30 82.50 ± 0.01')
+        self.assertEqual(fill_empty_table_cells(primary, merged), (primary, []))
+        duplicated = alternate.replace('</table>', '<tr><td>DSF</td><td>different</td><td>value</td></tr></table>')
+        self.assertEqual(fill_empty_table_cells(primary, duplicated), (primary, []))
+
+    def test_chart_sees_unmasked_source_with_original_colors(self):
+        class Pixels:
+            def __init__(self, values): self.values = values
+            def copy(self): return Pixels(self.values[:])
+            def __setitem__(self, key, other): self.values = other.values[:]
+        image = Pixels([0, 0, 255])
+        class Preprocessor:
+            def __call__(self): yield {"output_img": image}
+        capture = CapturingPreprocessor(Preprocessor())
+        list(capture())
+        image.values = [255, 255, 255]
+        def model():
+            self.assertEqual(image.values, [0, 0, 255])
+            yield {"result": "legend retained"}
+        self.assertEqual(list(UnmaskedCharts(model, capture)())[0]["result"], "legend retained")
 
 
 if __name__ == "__main__":

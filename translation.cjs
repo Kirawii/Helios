@@ -2,17 +2,22 @@ const fs = require('node:fs');
 const path = require('node:path');
 const {OcrWorker} = require('./ocr-worker.cjs');
 const model = require('./translation-model.cjs');
+const {readingOrder} = require('./recognition-order.cjs');
 
 const VERSION = 1;
-const OCR_PROFILE = 'structurev3-3.7.0-paddle-3.3.1-pdfium-144dpi-v1';
+const OCR_PROFILE = 'structurev3-3.7.0-pdfium-144dpi-utf8-all-features-quality-v4';
 const CONTEXT_PROFILE = 'evidence-context-v1';
 const TRANSLATION_PROFILE = 'zh-protected-v1';
 
 function createTranslationService({root, getPaper, worker = new OcrWorker(), requestJSON = model.requestJSON}) {
   const states = new Map(), jobs = new Map();
   const stateDirectory = id => path.join(root, 'translations', id);
-  const getBlocks = state => Object.values(state.pages).sort((first, second) => first.page - second.page).flatMap(page => page.blocks.map(block => ({...block, text: state.overrides[block.id] ?? block.text})))
-    .map((block, index) => ({...block, order: index + 1}));
+  const getBlocks = state => {
+    let order = 0;
+    return Object.values(state.pages).sort((first, second) => first.page - second.page)
+      .flatMap(page => readingOrder(page.blocks).map(block => ({...block, text: state.overrides[block.id] ?? block.text})))
+      .map(block => ({...block, order: model.ignoredBlock(block) ? null : ++order}));
+  };
   const persist = state => {
     state.updatedAt = new Date().toISOString(); state.revision++;
     const directory = stateDirectory(state.paperId);
@@ -28,9 +33,13 @@ function createTranslationService({root, getPaper, worker = new OcrWorker(), req
     const filename = path.join(stateDirectory(id), 'state.json');
     let state = fs.existsSync(filename) ? JSON.parse(fs.readFileSync(filename, 'utf8')) : null;
     if (!state || state.version !== VERSION || state.pdfHash !== pdfHash || state.ocrProfile !== OCR_PROFILE) {
+      if (state) {
+        const backup = path.join(stateDirectory(id), 'state-before-' + model.digest(state).slice(0, 16) + '.json');
+        if (!fs.existsSync(backup)) fs.copyFileSync(filename, backup);
+      }
       state = {version: VERSION, paperId: id, pdfHash, ocrProfile: OCR_PROFILE, revision: 0, pages: {}, overrides: {}, context: null, contextOverride: null, contextFingerprint: '', analysisCache: {}, translations: {}, errors: {}, status: 'idle', stage: 'ocr', progress: {done: 0, total: paper.pages}, stale: false};
     }
-    if (state.status === 'running') { state.status = 'interrupted'; state.error = '服务已重启；重新提供模型密钥后可继续'; persist(state); }
+    if (state.status === 'running') { state.status = 'interrupted'; state.error = state.mode === 'recognition' ? '服务已重启，点击继续识别即可恢复' : '服务已重启；重新提供模型密钥后可继续'; persist(state); }
     states.set(id, state); return state;
   }
   function view(id) {
@@ -60,10 +69,15 @@ function createTranslationService({root, getPaper, worker = new OcrWorker(), req
     const paper = getPaper(state.paperId);
     const pageNumbers = Array.from({length: paper.pages}, (_, index) => index + 1);
     const missing = pageNumbers.filter(page => !state.pages[page]);
-    state.stage = 'ocr'; state.progress = {done: paper.pages - missing.length, total: paper.pages}; persist(state);
+    state.stage = 'ocr'; state.ocrPhase = 'queued'; state.ocrPage = null; state.progress = {done: paper.pages - missing.length, total: paper.pages}; persist(state);
     if (missing.length) {
-      const result = await worker.request({path: path.join(root, state.paperId + '.pdf'), pageCount: paper.pages, pages: missing}, event => {
+      const result = await worker.request({path: path.join(root, state.paperId + '.pdf'), pageCount: paper.pages, pages: missing, outputDirectory: path.join(stateDirectory(state.paperId), 'pages')}, event => {
         signal.throwIfAborted();
+        if (event.event === 'queued' || event.event === 'loading' || event.event === 'progress') {
+          state.ocrPhase = event.event === 'progress' ? 'recognizing' : event.event;
+          if (event.device) state.ocrDevice = event.device;
+          state.ocrPage = event.page || null; persist(state); return;
+        }
         if (event.event !== 'page') return;
         const page = event.data;
         if (!missing.includes(page.page) || !Array.isArray(page.blocks)) throw Error('OCR 返回了错误页码');
@@ -81,7 +95,9 @@ function createTranslationService({root, getPaper, worker = new OcrWorker(), req
     const blocks = getBlocks(state);
     if (!blocks.some(block => block.text.trim())) throw Error('没有识别到可读内容，请检查扫描清晰度');
     if (recognitionOnly) {
-      state.status = 'recognized'; state.stage = 'layout'; state.progress = {done: blocks.length, total: blocks.length};
+      state.status = 'recognized'; state.stage = 'layout'; state.ocrPhase = 'done';
+      const visible = blocks.filter(block => !model.ignoredBlock(block));
+      state.progress = {done: visible.length, total: visible.length};
       return;
     }
     const sourceFingerprint = model.digest(blocks.map(({id, text, type}) => ({id, text, type})));
@@ -222,7 +238,14 @@ function createTranslationService({root, getPaper, worker = new OcrWorker(), req
     for (const job of jobs.values()) job.controller.abort();
     await Promise.allSettled([...jobs.values()].map(job => job.promise)); worker.close?.();
   }
-  return {view, start, recognize: (id, input) => start(id, input, true), correct, cancel, remove, close, wait: id => jobs.get(id)?.promise};
+  function sourceAsset(id, pageNumber, format = 'png') {
+    const state = load(id), number = Number(pageNumber), page = state.pages[number];
+    if (!Number.isSafeInteger(number) || number < 1 || !page?.sourceImage || !['png', 'json'].includes(format)) {
+      const error = Error('识别页面不存在'); error.status = 404; throw error;
+    }
+    return {filename: 'page-' + number + '.' + format, directory: path.join(stateDirectory(id), 'pages')};
+  }
+  return {view, sourceAsset, start, recognize: (id, input) => start(id, input, true), correct, cancel, remove, close, wait: id => jobs.get(id)?.promise};
 }
 
 function installTranslationRoutes(app, service) {
@@ -234,6 +257,10 @@ function installTranslationRoutes(app, service) {
   app.patch('/api/papers/:id/translation', wrap((request, response) => response.json(service.correct(request.params.id, request.body))));
   app.post('/api/papers/:id/translation/cancel', wrap(async (request, response) => response.json(await service.cancel(request.params.id))));
   app.get('/api/papers/:id/recognition', wrap((request, response) => response.json(service.view(request.params.id))));
+  for (const [suffix, format] of [['image', 'png'], ['raw', 'json']]) app.get('/api/papers/:id/recognition/pages/:page/' + suffix, wrap((request, response) => {
+    const asset = service.sourceAsset(request.params.id, request.params.page, format);
+    response.sendFile(asset.filename, {root: asset.directory, dotfiles: 'allow'});
+  }));
   app.post('/api/papers/:id/recognition', wrap((request, response) => response.status(202).json(service.recognize(request.params.id, request.body))));
   app.patch('/api/papers/:id/recognition', wrap((request, response) => response.json(service.correct(request.params.id, request.body, true))));
   app.post('/api/papers/:id/recognition/cancel', wrap(async (request, response) => response.json(await service.cancel(request.params.id))));

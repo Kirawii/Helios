@@ -1,0 +1,4 @@
+-c constraints.txt
+paddleocr[doc-parser]==3.7.0
+pypdfium2==5.9.0
+setuptools==84.2.1

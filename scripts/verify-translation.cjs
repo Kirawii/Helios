@@ -75,6 +75,36 @@ function contextFor(blocks) {
     assert.equal(service.view('paper').status, 'recognized'); assert.equal(analysisCalls, 0); assert.equal(translationCalls, 0);
     assert.equal(service.view('paper').blocks.length, 6);
 
+    // Marginal review line numbers must not become paragraphs or consume labels.
+    const numberingRoot = fs.mkdtempSync(path.join(root, 'numbering-'));
+    fs.writeFileSync(path.join(numberingRoot, 'paper.pdf'), testPdf());
+    const numberingWorker = {close() {}, async request(request, emit) {
+      emit({event: 'loading'}); emit({event: 'progress', page: 1});
+      emit({event: 'page', data: {...pages[0], blocks: [
+        {id: 'p1-b9', page: 1, order: 1, sourceOrder: null, type: 'aside_text', text: '1 2 3 4', bbox: [.01, .1, .04, .9]},
+        ...pages[0].blocks,
+      ]}});
+      emit({event: 'page', data: pages[1]});
+      return {signature: 'TEST numbering fixture'};
+    }};
+    const numberingService = createTranslationService({root: numberingRoot, getPaper: () => paper, worker: numberingWorker});
+    numberingService.recognize('paper'); await numberingService.wait('paper');
+    const numbered = numberingService.view('paper');
+    assert.equal(numbered.blocks[0].order, null);
+    assert.deepEqual(numbered.blocks.filter(block => !model.ignoredBlock(block)).map(block => block.order), [1, 2, 3, 4, 5, 6]);
+    assert.equal(numbered.blocks[0].text, '1 2 3 4');
+    assert.equal(numbered.progress.total, 6);
+    await numberingService.close();
+    const oldStatePath = path.join(numberingRoot, 'translations/paper/state.json');
+    const oldState = JSON.parse(fs.readFileSync(oldStatePath, 'utf8'));
+    oldState.ocrProfile = 'previous-profile'; oldState.overrides = {'p1-b1': 'User correction to retain in backup'};
+    fs.writeFileSync(oldStatePath, JSON.stringify(oldState));
+    const updatedService = createTranslationService({root: numberingRoot, getPaper: () => paper, worker: numberingWorker});
+    assert.equal(updatedService.view('paper').status, 'idle');
+    const backupName = fs.readdirSync(path.dirname(oldStatePath)).find(name => name.startsWith('state-before-'));
+    assert.equal(JSON.parse(fs.readFileSync(path.join(path.dirname(oldStatePath), backupName), 'utf8')).overrides['p1-b1'], oldState.overrides['p1-b1']);
+    await updatedService.close();
+
     service.start('paper', config);
     assert.throws(() => service.start('paper', config), error => error.status === 409);
     await service.wait('paper');
@@ -123,6 +153,22 @@ function contextFor(blocks) {
     assert.equal((await fetch(apiUrl)).status, 200);
     const recognitionUrl = apiUrl.replace('/translation', '/recognition');
     assert.equal((await fetch(recognitionUrl)).status, 200);
+    assert.equal((await fetch(recognitionUrl + '/pages/999/image')).status, 404);
+    const recognitionStatePath = path.join(root, 'translations/paper/state.json');
+    const sourceState = JSON.parse(fs.readFileSync(recognitionStatePath, 'utf8'));
+    sourceState.pages[1].sourceImage = 'page-1.png';
+    const sourceService = createTranslationService({root, getPaper: id => id === paper.id ? paper : null, worker});
+    fs.writeFileSync(recognitionStatePath, JSON.stringify(sourceState));
+    const asset = sourceService.sourceAsset('paper', '1');
+    fs.mkdirSync(asset.directory, {recursive:true}); fs.writeFileSync(path.join(asset.directory, asset.filename), Buffer.from('PNG fixture only'));
+    assert.equal(asset.filename, 'page-1.png');
+    assert.throws(() => sourceService.sourceAsset('paper', '../1'), error => error.status === 404);
+    assert.throws(() => sourceService.sourceAsset('paper', '1', '../../state'), error => error.status === 404);
+    assert.throws(() => sourceService.sourceAsset('unknown', '1'), error => error.status === 404);
+    const sourceApp = express(); installTranslationRoutes(sourceApp, sourceService);
+    const sourceServer = http.createServer(sourceApp); await new Promise(resolve => sourceServer.listen(0,'127.0.0.1',resolve));
+    try { assert.equal(await (await fetch('http://127.0.0.1:' + sourceServer.address().port + '/api/papers/paper/recognition/pages/1/image')).text(), 'PNG fixture only'); }
+    finally { sourceServer.close(); await sourceService.close(); }
     assert.equal((await fetch(recognitionUrl, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: '{}'})).status, 202);
     await service.wait('paper'); assert.equal(service.view('paper').status, 'recognized');
     assert.equal((await fetch(apiUrl, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(config)})).status, 202);
