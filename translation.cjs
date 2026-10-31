@@ -1,6 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const {OcrWorker} = require('./ocr-worker.cjs');
+const {OcrProvider, resolveOcrConfig, publicOcrConfig, ocrFingerprint} = require('./ocr-provider.cjs');
 const model = require('./translation-model.cjs');
 const {readingOrder} = require('./recognition-order.cjs');
 
@@ -9,21 +9,27 @@ const OCR_PROFILE = 'structurev3-3.7.0-pdfium-144dpi-utf8-all-features-quality-v
 const CONTEXT_PROFILE = 'evidence-context-v1';
 const TRANSLATION_PROFILE = 'zh-protected-v1';
 
-function createTranslationService({root, getPaper, worker = new OcrWorker(), requestJSON = model.requestJSON}) {
+function createTranslationService({root, getPaper, worker = new OcrProvider(), requestJSON = model.requestJSON}) {
   const states = new Map(), jobs = new Map();
   const stateDirectory = id => path.join(root, 'translations', id);
+  const initialState = (id, pdfHash, pageCount) => ({version: VERSION, paperId: id, pdfHash, ocrProfile: OCR_PROFILE, revision: 0, pages: {}, overrides: {}, context: null, contextOverride: null, contextFingerprint: '', analysisCache: {}, translations: {}, errors: {}, status: 'idle', stage: 'ocr', progress: {done: 0, total: pageCount}, stale: false});
   const getBlocks = state => {
     let order = 0;
     return Object.values(state.pages).sort((first, second) => first.page - second.page)
       .flatMap(page => readingOrder(page.blocks).map(block => ({...block, text: state.overrides[block.id] ?? block.text})))
       .map(block => ({...block, order: model.ignoredBlock(block) ? null : ++order}));
   };
-  const persist = state => {
-    state.updatedAt = new Date().toISOString(); state.revision++;
+  const pendingWrites=new Map();
+  const writeState = state => {
     const directory = stateDirectory(state.paperId);
     fs.mkdirSync(directory, {recursive: true});
     const filename = path.join(directory, 'state.json');
     fs.writeFileSync(filename + '.tmp', JSON.stringify(state)); fs.renameSync(filename + '.tmp', filename);
+  };
+  const persist = (state,defer=false) => {
+    state.updatedAt=new Date().toISOString();state.revision++;
+    if(defer){if(!pendingWrites.has(state.paperId)){const timer=setTimeout(()=>{pendingWrites.delete(state.paperId);writeState(state);},100);timer.unref();pendingWrites.set(state.paperId,timer);}return;}
+    clearTimeout(pendingWrites.get(state.paperId));pendingWrites.delete(state.paperId);writeState(state);
   };
   function load(id) {
     const paper = getPaper(id);
@@ -37,7 +43,7 @@ function createTranslationService({root, getPaper, worker = new OcrWorker(), req
         const backup = path.join(stateDirectory(id), 'state-before-' + model.digest(state).slice(0, 16) + '.json');
         if (!fs.existsSync(backup)) fs.copyFileSync(filename, backup);
       }
-      state = {version: VERSION, paperId: id, pdfHash, ocrProfile: OCR_PROFILE, revision: 0, pages: {}, overrides: {}, context: null, contextOverride: null, contextFingerprint: '', analysisCache: {}, translations: {}, errors: {}, status: 'idle', stage: 'ocr', progress: {done: 0, total: paper.pages}, stale: false};
+      state = initialState(id, pdfHash, paper.pages);
     }
     if (state.status === 'running') { state.status = 'interrupted'; state.error = state.mode === 'recognition' ? '服务已重启，点击继续识别即可恢复' : '服务已重启；重新提供模型密钥后可继续'; persist(state); }
     states.set(id, state); return state;
@@ -50,35 +56,55 @@ function createTranslationService({root, getPaper, worker = new OcrWorker(), req
     const state = load(id);
     if (jobs.has(id)) { const error = Error('这篇论文已有翻译任务正在运行'); error.status = 409; throw error; }
     const config = recognitionOnly ? null : model.providerConfig(input);
+    const ocr = resolveOcrConfig(input.ocr, state.ocrProvider);
+    const fingerprint = ocrFingerprint(ocr);
+    const previousFingerprint = state.ocrFingerprint || ocrFingerprint({mode: 'local'});
+    const changedOcr = previousFingerprint !== fingerprint;
+    const paper = getPaper(id);
+    if (ocr.mode === 'api' && ocr.strategy !== 'hybrid' && !ocr.key && (changedOcr || Object.keys(state.pages).length < paper.pages)) throw Error('请填写硅基流动 OCR API Key，或配置 SILICONFLOW_API_KEY');
+    if (changedOcr) {
+      if (Object.keys(state.pages).length || Object.keys(state.overrides).length) {
+        const directory = stateDirectory(id); fs.mkdirSync(directory, {recursive: true});
+        const backup = path.join(directory, 'state-before-' + model.digest(state).slice(0, 16) + '.json');
+        if (!fs.existsSync(backup)) fs.writeFileSync(backup, JSON.stringify(state));
+      }
+      const fresh = initialState(id, state.pdfHash, paper.pages), revision = state.revision;
+      for (const key of Object.keys(state)) delete state[key];
+      Object.assign(state, fresh, {revision, assetDirectory: 'pages-' + fingerprint.slice(0, 16)});
+    }
+    state.ocrProvider = publicOcrConfig(ocr); state.ocrFingerprint = fingerprint;
     const providerFingerprint = config ? model.digest({baseUrl: config.baseUrl, model: config.model, protocol: config.protocol}) : state.providerFingerprint;
     if (input.force) { state.generation = (state.generation || 0) + 1; state.stale = true; }
     if (state.providerFingerprint && state.providerFingerprint !== providerFingerprint) state.stale = true;
     state.providerFingerprint = providerFingerprint;
     if (config) state.provider = {baseUrl: config.baseUrl, model: config.model, protocol: config.protocol};
     state.mode = recognitionOnly ? 'recognition' : 'translation';
-    state.status = 'running'; state.error = null;
+    state.status = 'running'; state.error = null; state.startedAt = new Date().toISOString(); state.ocrTiming = null;
     const controller = new AbortController();
     const job = {controller}; jobs.set(id, job); persist(state);
-    job.promise = run(state, config, controller.signal, recognitionOnly).catch(error => {
+    job.promise = run(state, config, controller.signal, recognitionOnly, ocr).catch(error => {
       state.status = controller.signal.aborted ? 'cancelled' : 'failed';
-      state.error = controller.signal.aborted ? '已停止，已完成的内容保留，可继续处理' : String(error.message || '处理失败').split(config?.key || '\0').join('[已隐藏]');
+      state.error = controller.signal.aborted ? '已停止，已完成的内容保留，可继续处理' : [config?.key, ocr.key].filter(Boolean).reduce((message, key) => message.split(key).join('[已隐藏]'), String(error.message || '处理失败'));
     }).finally(() => { jobs.delete(id); persist(state); });
     return view(id);
   }
-  async function run(state, config, signal, recognitionOnly) {
+  async function run(state, config, signal, recognitionOnly, ocr) {
     const paper = getPaper(state.paperId);
     const pageNumbers = Array.from({length: paper.pages}, (_, index) => index + 1);
-    const missing = pageNumbers.filter(page => !state.pages[page]);
+    const completed = page => state.pages[page] && state.pages[page].complete !== false;
+    const missing = pageNumbers.filter(page => !completed(page));
     state.stage = 'ocr'; state.ocrPhase = 'queued'; state.ocrPage = null; state.progress = {done: paper.pages - missing.length, total: paper.pages}; persist(state);
     if (missing.length) {
-      const result = await worker.request({path: path.join(root, state.paperId + '.pdf'), pageCount: paper.pages, pages: missing, outputDirectory: path.join(stateDirectory(state.paperId), 'pages')}, event => {
+      const result = await worker.request({path: path.join(root, state.paperId + '.pdf'), pageCount: paper.pages, pages: missing, outputDirectory: path.join(stateDirectory(state.paperId), state.assetDirectory || 'pages'), ocr}, event => {
         signal.throwIfAborted();
         if (event.event === 'queued' || event.event === 'loading' || event.event === 'progress') {
           state.ocrPhase = event.event === 'progress' ? 'recognizing' : event.event;
           if (event.device) state.ocrDevice = event.device;
-          state.ocrPage = event.page || null; persist(state); return;
+          state.ocrPage = event.page || null; state.ocrStep = event.step || null;
+          if(event.timing)state.ocrTiming=event.timing;
+          persist(state,Boolean(event.timing)); return;
         }
-        if (event.event !== 'page') return;
+        if (event.event !== 'page' && event.event !== 'draft') return;
         const page = event.data;
         if (!missing.includes(page.page) || !Array.isArray(page.blocks)) throw Error('OCR 返回了错误页码');
         const ids = new Set();
@@ -86,12 +112,18 @@ function createTranslationService({root, getPaper, worker = new OcrWorker(), req
           if (block.page !== page.page || !/^p\d+-b[\w-]+$/.test(block.id) || ids.has(block.id) || typeof block.text !== 'string' || !Array.isArray(block.bbox) || block.bbox.length !== 4 || block.bbox.some(value => !Number.isFinite(value) || value < 0 || value > 1) || block.bbox[2] <= block.bbox[0] || block.bbox[3] <= block.bbox[1]) throw Error('OCR 文本块或坐标无效');
           ids.add(block.id);
         }
-        state.pages[page.page] = page; state.progress.done = Object.keys(state.pages).length; persist(state);
+        state.pages[page.page] = page; state.progress.done = pageNumbers.filter(completed).length; persist(state,event.event==='draft');
       }, signal);
       state.parser = result.signature;
+      if(result.timing)state.ocrTiming=result.timing;
     }
     signal.throwIfAborted();
     if (pageNumbers.some(page => !state.pages[page])) throw Error('OCR 遗漏了页面，未启动翻译');
+    if(pageNumbers.some(page=>!completed(page))) {
+      state.status='partial';state.stage='ocr';state.ocrPhase='done';
+      state.error=(Object.values(state.pages).some(page=>page.sourceKind==='pdf-native')?'文字层已提取，部分图像/公式尚未识别完成。':'部分页面/区域尚未识别完成。')+'继续处理会复用已完成区域。';
+      return;
+    }
     const blocks = getBlocks(state);
     if (!blocks.some(block => block.text.trim())) throw Error('没有识别到可读内容，请检查扫描清晰度');
     if (recognitionOnly) {
@@ -240,10 +272,10 @@ function createTranslationService({root, getPaper, worker = new OcrWorker(), req
   }
   function sourceAsset(id, pageNumber, format = 'png') {
     const state = load(id), number = Number(pageNumber), page = state.pages[number];
-    if (!Number.isSafeInteger(number) || number < 1 || !page?.sourceImage || !['png', 'json'].includes(format)) {
+    if (!Number.isSafeInteger(number) || number < 1 || !page || (format === 'png' && !page.sourceImage) || !['png', 'json'].includes(format)) {
       const error = Error('识别页面不存在'); error.status = 404; throw error;
     }
-    return {filename: 'page-' + number + '.' + format, directory: path.join(stateDirectory(id), 'pages')};
+    return {filename: 'page-' + number + '.' + format, directory: path.join(stateDirectory(id), state.assetDirectory || 'pages')};
   }
   return {view, sourceAsset, start, recognize: (id, input) => start(id, input, true), correct, cancel, remove, close, wait: id => jobs.get(id)?.promise};
 }

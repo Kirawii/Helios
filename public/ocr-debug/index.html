@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OCR 调试 · Helios</title>
+  <link rel="stylesheet" href="/katex/katex.min.css">
+  <link rel="stylesheet" href="/ocr-debug/reader.css">
+  <link rel="stylesheet" href="/ocr-debug/debug.css">
+</head>
+<body>
+  <header class="debug-header">
+    <div><strong>OCR 调试</strong><small>PaddleOCR · 识别、重排与校对</small></div>
+    <a href="/">返回主应用</a>
+  </header>
+  <section class="debug-toolbar" aria-label="文档操作">
+    <label for="paper-select">文献库</label>
+    <select id="paper-select"><option value="">选择 PDF…</option></select>
+    <button id="refresh-library">刷新列表</button>
+    <label class="upload-button" for="upload-file">上传 PDF</label>
+    <input id="upload-file" type="file" accept="application/pdf" hidden>
+    <span class="toolbar-spacer"></span>
+    <label for="page-number">页码</label>
+    <input id="page-number" type="number" min="1" value="1" disabled>
+    <span id="page-count">/ 0</span>
+    <button id="toggle-original" disabled aria-pressed="false">仅看识别结果</button>
+  </section>
+  <form class="ocr-settings" id="ocr-settings" aria-label="OCR 识别设置">
+    <label>识别方式<select id="ocr-mode"><option value="local">本地部署 · PaddleOCR</option><option value="api">API · 硅基流动</option></select></label>
+    <div id="ocr-api-fields" hidden>
+      <label>解析策略<select id="ocr-strategy"><option value="hybrid">混合解析 · 文字层 + 区域 OCR</option><option value="full">兼容模式 · 整页 OCR</option></select></label>
+      <label>API 地址<input id="ocr-api-url" type="url" value="https://api.siliconflow.cn/v1" spellcheck="false"></label>
+      <label>OCR 模型<input id="ocr-api-model" value="PaddlePaddle/PaddleOCR-VL-1.5" list="ocr-models" spellcheck="false"></label>
+      <datalist id="ocr-models"><option value="PaddlePaddle/PaddleOCR-VL-1.5"><option value="deepseek-ai/DeepSeek-OCR"></datalist>
+      <label>API Key（仅当前页面）<input id="ocr-api-key" type="password" autocomplete="off" placeholder="或在服务端配置 SILICONFLOW_API_KEY"></label>
+      <label>最大输出 Token<input id="ocr-max-tokens" type="number" min="256" max="32768" value="4096"></label>
+      <label>API 并发数<input id="ocr-concurrency" type="number" min="1" max="32" value="8"></label>
+    </div>
+    <p id="ocr-mode-description">本地识别需先运行 npm run setup:ocr；PDF 在本机处理。</p>
+  </form>
+  <p id="document-status" role="status">从文献库选择或上传 PDF。进入页面不会自动启动 OCR。</p>
+  <main class="pdf-area">
+    <section class="debug-pane" id="source-pane" aria-label="原始 PDF">
+      <h2>原始 PDF</h2>
+      <div id="original"><div class="pages"><p class="empty">尚未选择文档</p></div></div>
+    </section>
+    <section class="debug-pane" aria-label="识别与排版">
+      <h2>识别与排版 <small>需点击“开始全文识别”</small></h2>
+      <div id="translated" class="translated"><div class="translated-pages"><p class="empty">选择文档后可查看已保存结果或开始识别。</p></div></div>
+    </section>
+  </main>
+  <div id="toast" role="status" hidden></div>
+  <script type="module" src="/ocr-debug/app.js"></script>
+</body>
+</html>

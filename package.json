@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "node scripts/verify.cjs && node scripts/verify-stream.cjs && node scripts/verify-layout.mjs && node scripts/verify-translation.cjs && node scripts/verify-ocr-unit.cjs",
+    "test": "node scripts/verify.cjs && node scripts/verify-stream.cjs && node scripts/verify-layout.mjs && node scripts/verify-translation.cjs && node scripts/verify-ocr-unit.cjs && node scripts/verify-ocr-api.cjs && node scripts/verify-ocr-queue.cjs && node scripts/verify-ocr-hybrid.cjs && node scripts/verify-pdf-preparation.cjs",
     "start": "node server.cjs",
     "setup:ocr": "node scripts/setup-ocr.cjs",
     "test:ocr": "node scripts/verify-ocr.cjs"

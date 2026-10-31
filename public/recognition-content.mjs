@@ -26,13 +26,13 @@ export function markdownTableRows(value) {
 }
 
 export function recognitionMarkdown(state) {
-  return state.pages.map(page => '## 第 ' + page.page + ' 页\n\n' + page.blocks.filter(block => block.order != null).map(block => {
+  return state.pages.map(page => '## 第 ' + page.page + ' 页\n\n' + (page.complete === false ? '> 本页图像/公式尚未全部识别完成。\n\n' : '') + page.blocks.filter(block => block.order != null).map(block => {
     const anchor = '<!-- #' + block.order + ' ' + block.id + ' -->\n';
     if (block.type === 'formula' || block.type === 'equation') return anchor + '$$\n' + stripMathDelimiters(block.text) + '\n$$';
     if (block.type === 'paragraph_title') return anchor + '### ' + block.text;
     if (block.type === 'doc_title') return anchor + '# ' + block.text;
     if (block.type === 'chart') return anchor + '> 图表数据为模型估读，请核对原图。\n\n' + block.text;
-    if (/^(image|figure|algorithm)$/.test(block.type)) return anchor + '[原图：第 ' + page.page + ' 页，' + block.bbox.join(', ') + ']';
+    if (/^(image|figure|algorithm)$/.test(block.type)) return anchor + '[原图：第 ' + page.page + ' 页，' + block.bbox.join(', ') + ']' + (block.ocrText ? '\n\n' + block.ocrText : '');
     return anchor + block.text;
   }).join('\n\n')).join('\n\n');
 }

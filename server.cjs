@@ -14,4 +14,16 @@ app.patch('/api/papers/:id',(q,r)=>{const p=library.find(p=>p.id===q.params.id);
 app.delete('/api/papers/:id',(q,r)=>{const p=library.find(p=>p.id===q.params.id);if(!p)return r.sendStatus(404);fs.unlinkSync(path.join(root,p.id+'.pdf'));library=library.filter(p=>p!==p);save();r.json({ok:true})});
 app.post('/api/ai',require('./ai.cjs').handler(()=>library));
 installTranslationRoutes(app,translationService);
-app.use((e,q,r,n)=>r.status(400).json({error:e.message}));module.exports=app;if(require.main===module){const port=Number(process.env.PORT||3210);const server=app.listen(port,'127.0.0.1',()=>console.log('Moonlight Local: http://localhost:'+port));server.on('error',e=>{console.error(e.message);process.exitCode=1});const stop=async()=>{await translationService.close();server.close()};process.once('SIGINT',stop);process.once('SIGTERM',stop);process.once('exit',()=>translationService.close())}
+app.use((e,q,r,n)=>r.status(400).json({error:e.message}));module.exports=app;
+if(require.main===module) {
+  const {prewarmPdf,closePdfPool}=require('./pdf-pool.cjs');
+  let server;
+  const stop=async()=>{await translationService.close();await closePdfPool();server?.close();};
+  process.once('SIGINT',stop);process.once('SIGTERM',stop);
+  prewarmPdf().then(info=>{
+    console.log('PDF preparation warmed: '+info.workers+' workers ('+Math.round(info.warmupMs)+' ms)');
+    const port=Number(process.env.PORT||3210);
+    server=app.listen(port,'127.0.0.1',()=>console.log('Moonlight Local: http://localhost:'+port));
+    server.on('error',async error=>{console.error(error.message);await stop();process.exitCode=1;});
+  }).catch(error=>{console.error('PDF prewarm failed: '+error.message);closePdfPool();process.exitCode=1;});
+}

@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
-const {OcrWorker} = require('../ocr-worker.cjs');
+const {OcrProvider, resolveOcrConfig} = require('../ocr-provider.cjs');
 
 (async () => {
   const input = path.resolve(process.argv[2] || path.join(__dirname, 'citation-fixture.pdf'));
@@ -11,11 +11,11 @@ const {OcrWorker} = require('../ocr-worker.cjs');
   await document.destroy();
   const pages = process.argv[3] ? process.argv[3].split(',').map(Number) : Array.from({length: pageCount}, (_, index) => index + 1);
   assert.ok(pages.every(page => Number.isInteger(page) && page > 0 && page <= pageCount));
-  const worker = new OcrWorker(), parsed = [];
+  const worker = new OcrProvider(), parsed = [], ocr = resolveOcrConfig();
   const outputDirectory = path.resolve(process.env.HELIOS_OCR_ASSETS || path.join(__dirname, '../.cache/ocr-verification-pages'));
   try {
-    const result = await worker.request({path: input, pageCount, pages, outputDirectory}, event => {
-      if (event.event === 'loading') console.log('Loading PP-StructureV3: all recognition features...');
+    const result = await worker.request({path: input, pageCount, pages, outputDirectory, ocr}, event => {
+      if (event.event === 'loading') console.log(ocr.mode === 'api' ? 'Calling SiliconFlow OCR API...' : 'Loading PP-StructureV3: all recognition features...');
       if (event.event === 'page') {
         const page = event.data;
         assert.equal(page.blocks.length, new Set(page.blocks.map(block => block.id)).size);
@@ -28,6 +28,6 @@ const {OcrWorker} = require('../ocr-worker.cjs');
     assert.ok(parsed.some(page => page.blocks.some(block => block.text.trim())));
     const output = process.env.HELIOS_OCR_REPORT;
     if (output) fs.writeFileSync(output, JSON.stringify({signature: result.signature, pages: parsed}, null, 2));
-    console.log('PASS: real PaddleOCR, all requested pages, stable IDs, normalized geometry');
+    console.log('PASS: real ' + (ocr.mode === 'api' ? 'SiliconFlow API' : 'PaddleOCR') + ', all requested pages, stable IDs, normalized geometry');
   } finally { worker.close(); }
 })().catch(error => { console.error(error.message); process.exitCode = 1; });

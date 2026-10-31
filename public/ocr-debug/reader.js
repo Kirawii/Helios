@@ -8,12 +8,13 @@ const isIgnored = block => /^(header|footer|page_number|number|formula_number|he
 const typeNames = {doc_title: '文章标题', paragraph_title: '章节标题', text: '正文', abstract: '摘要', figure_title: '图注', table_title: '表注', image: '插图', chart: '图表', seal: '印章', table: '表格', formula: '公式', equation: '公式', algorithm: '算法', reference: '参考文献', reference_content: '参考文献', footnote: '脚注'};
 const stageNames = {ocr: '识别与阅读顺序', analysis: '文章理解与术语', translation: '全文翻译', done: '翻译结果'};
 
-export function createTranslationReader({getPaper, getConfig, getDocument = () => null, api, toast, settings, modal, closeModal, mode = 'recognition'}) {
+export function createTranslationReader({getPaper, getConfig, getDocument = () => null, getOcrConfig = () => null, api, toast, settings, modal, closeModal, mode = 'recognition'}) {
   const recognitionOnly = mode === 'recognition';
   let state = null, paperId = null, timer = null, generation = 0, syncing = false, syncTimer = null;
   let pageSignatures = new Map();
   let mediaQueue = Promise.resolve();
   let sourceImages = new Map();
+  const sourceVersion = () => (state?.ocrFingerprint || '') + ':' + (state?.ocrProfile || '');
   const endpoint = () => '/api/papers/' + encodeURIComponent(paperId) + '/' + mode;
   function detach() {
     generation++; clearTimeout(timer); clearTimeout(syncTimer); paperId = null; state = null; pageSignatures.clear(); sourceImages.clear();
@@ -35,7 +36,7 @@ export function createTranslationReader({getPaper, getConfig, getDocument = () =
       if (current !== generation || targetId !== paperId) return;
       const changed = state?.revision !== next.revision;
       state = next;
-      if (changed) render();
+      if (changed || next.active) render();
       clearTimeout(timer);
       if (next.active) timer = setTimeout(() => refresh(current), document.hidden ? 4000 : 1000);
     } catch (error) {
@@ -58,7 +59,8 @@ export function createTranslationReader({getPaper, getConfig, getDocument = () =
     const config = recognitionOnly ? {} : configured(); if (!config) return;
     const current = generation;
     try {
-      const next = await api(endpoint(), {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({...config, force})});
+      const ocr = getOcrConfig();
+      const next = await api(endpoint(), {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({...config, force, ...(ocr ? {ocr} : {})})});
       if (current !== generation) return;
       state = next; render(); clearTimeout(timer); timer = setTimeout(() => refresh(current), 500);
     } catch (error) { toast(error.message); }
@@ -81,12 +83,34 @@ export function createTranslationReader({getPaper, getConfig, getDocument = () =
       workspace.addEventListener('click', handleClick);
     }
     const active = state?.active;
-    const labels = recognitionOnly ? {idle: '准备识别与排版', running: '正在识别文章结构与阅读顺序', recognized: '全文识别与排版已完成', completed: '识别结果已就绪', partial: '识别结果已就绪', failed: '识别失败', cancelled: '已停止，可继续识别', interrupted: '服务重启后可继续识别'} : {idle: state?.stale ? '内容已校对，译文待更新' : '准备翻译', running: stageNames[state?.stage] || '处理中', completed: '全文翻译已完成', partial: '部分段落需要重试', failed: '处理失败', cancelled: '已停止，可继续', interrupted: '服务重启后可继续'};
+    const labels = recognitionOnly ? {idle: '准备识别与排版', running: '正在识别文章结构与阅读顺序', recognized: '全文识别与排版已完成', completed: '识别结果已就绪', partial: '文字已保留，图像/公式未全部完成', failed: '识别失败', cancelled: '已停止，可继续识别', interrupted: '服务重启后可继续识别'} : {idle: state?.stale ? '内容已校对，译文待更新' : '准备翻译', running: stageNames[state?.stage] || '处理中', completed: '全文翻译已完成', partial: '部分段落需要重试', failed: '处理失败', cancelled: '已停止，可继续', interrupted: '服务重启后可继续'};
+    if(recognitionOnly&&!state?.pages?.some(page=>page.sourceKind==='pdf-native'))labels.partial='部分页面尚未识别完成';
     if (state?.status === 'running' && state.stage === 'ocr') {
-      labels.running = {queued: '等待本机识别任务', loading: '正在准备识别模型，首次运行需要下载', recognizing: '正在识别第 ' + state.ocrPage + ' 页'}[state.ocrPhase] || labels.running;
+      labels.running = state.ocrProvider?.mode === 'api'
+        ? {queued: '等待 API 识别', loading: '正在准备 API 输入页面', recognizing: '正在调用 API 识别第 ' + state.ocrPage + ' 页'}[state.ocrPhase] || labels.running
+        : {queued: '等待本机识别任务', loading: '正在准备识别模型，首次运行需要下载', recognizing: '正在识别第 ' + state.ocrPage + ' 页'}[state.ocrPhase] || labels.running;
     }
+    if(state?.active&&state.ocrProvider?.strategy==='hybrid')labels.running={extracting:'正在提取 PDF 文字与位置',rendering:'正在裁剪识别区域',requesting:'正在并发识别图像与公式',regions:'文字已就绪，正在处理图像与公式'}[state.ocrStep]||labels.running;
     const progress = state?.progress || {done: 0, total: 0};
     workspace.querySelector('.translation-task').innerHTML = `<div class="translation-task-heading"><strong>${escapeHtml(labels[state?.status] || '准备识别')}${(state?.ocrDevice || state?.pages?.[0]?.runtime?.device || '').startsWith('gpu') ? ' · GPU' : ''}</strong><span>${progress.done} / ${progress.total}${state?.stage === 'ocr' ? ' 页' : ' 块'}</span></div><progress aria-label="当前阶段进度" value="${progress.done}" max="${Math.max(1, progress.total)}"></progress><ol class="translation-stages">${(recognitionOnly ? ['识别内容类型', '恢复阅读顺序', '重排阅读与校对'] : ['识别', '文章理解', '翻译']).map(label => `<li>${label}</li>`).join('')}</ol>${state?.error ? `<p class="translation-error" role="status">${escapeHtml(state.error)}</p>` : ''}<div class="translation-task-actions">${active ? '<button data-translation-action="cancel">停止处理</button>' : `<button class="primary" data-translation-action="start">${recognitionOnly ? state?.blocks?.length ? '继续 / 检查识别' : '开始全文识别' : '继续 / 重试翻译'}</button>`}${recognitionOnly ? '' : `<button data-translation-action="context" ${state?.context ? '' : 'disabled'}>文章理解与术语</button>`}<button data-translation-action="correct" ${state?.blocks?.length && !active ? '' : 'disabled'}>校对识别文本</button>${recognitionOnly && state?.pages?.length ? '<button data-translation-action="export">导出 Markdown / LaTeX</button><button data-translation-action="export-json">导出结构化 JSON</button>' : ''}${!recognitionOnly && state?.status === 'completed' ? '<button data-translation-action="force">重新翻译全文</button>' : ''}</div><small class="translation-explanation">${recognitionOnly ? '本机识别，无需模型密钥。' : ''}公式转为 LaTeX，表格与图表提供结构化内容。左侧为识别校正页面；编号连接页面与${recognitionOnly ? '识别结果' : '译文'}。</small>`;
+    const explanation = workspace.querySelector('.translation-explanation');
+    const apiMode = state?.ocrProvider?.mode === 'api';
+    const hybrid=apiMode&&state.ocrProvider.strategy==='hybrid';
+    const device = state?.ocrDevice || '';
+    if (explanation) explanation.textContent = hybrid ? 'PDF 原有文字与坐标直接复用；只识别图像和公式候选区域。复杂版式与公式区域由启发式定位，请对照原文核对。' : apiMode
+      ? `硅基流动 API · ${state.ocrProvider.model}。编号关联原文与识别结果；未返回位置框的页面仅支持页级定位。`
+      : '本地 PaddleOCR，无需模型密钥。公式、表格和图表支持结构化展示；编号关联原文与识别结果。';
+    if (apiMode && device === 'api') workspace.querySelector('.translation-task-heading strong').append(' · API');
+    if(hybrid) {
+      const timing=state.ocrTiming||{},info=document.createElement('p');info.className='translation-explanation';
+      const elapsed=state.active&&state.startedAt?Date.now()-Date.parse(state.startedAt):timing.totalMs;
+      const native=(state.pages||[]).filter(page=>page.sourceKind==='pdf-native').length;
+      info.textContent=`文字层 ${native} 页 · 完成区域 ${timing.completedRegions||0}/${timing.totalRegions||0} · 失败 ${timing.failedRegions||0} · 缓存命中 ${timing.cacheHits||0}`+(Number.isFinite(elapsed)?` · 总耗时 ${(elapsed/1000).toFixed(1)} 秒`:'')+(Number.isFinite(timing.parseMs)?` · 解析 ${(timing.parseMs/1000).toFixed(2)} 秒`:'');
+      if(timing.preparation)info.textContent+=` · 本地池 ${timing.preparation.poolSize} 线程 · 布局缓存 ${timing.preparation.layoutCacheHits} 页 · 图片缓存 ${timing.preparation.cropCacheHits} 区域 · 免裁剪 ${timing.renderSkipped||0} 区域`;
+      if(Number.isFinite(timing.preparationMs))info.textContent+=` · 本地准备完成 ${(timing.preparationMs/1000).toFixed(2)} 秒`;
+      if(Number.isFinite(timing.activeApi))info.textContent+=` · API 处理中 ${timing.activeApi}`;
+      workspace.querySelector('.translation-task').append(info);
+    }
     const features = state?.pages?.[0]?.features;
     if (features) {
       const names = {use_doc_orientation_classify:'页面方向',use_doc_unwarping:'页面校正',use_textline_orientation:'文字行方向',use_seal_recognition:'印章文字',use_table_recognition:'表格结构',use_formula_recognition:'公式 LaTeX',use_chart_recognition:'图表数据',use_region_detection:'区域划分'};
@@ -98,17 +122,22 @@ export function createTranslationReader({getPaper, getConfig, getDocument = () =
     const documentContainer = workspace.querySelector('.translation-document');
     if (!state?.pages?.length) {
       documentContainer.innerHTML = recognitionOnly ? '<div class="translation-empty"><h3>让论文结构清晰可读</h3><p>本机识别标题、段落、图表与公式，按阅读顺序重排。启用公式、表格、图表、印章、方向识别与页面校正。识别结果自动保存，可以逐块校对。</p></div>' : '<div class="translation-empty"><h3>在中文里读懂这篇论文</h3><p>先识别文章结构，再统一术语，最后逐段翻译。结果会自动保存。</p></div>';
+      if (apiMode) documentContainer.querySelector('p').textContent = hybrid ? '直接保留 PDF 原有文字，图像和公式区域并发识别。已完成区域自动保存，可以继续处理未完成区域。' : '通过硅基流动 API 逐页识别，无需安装本地模型。已完成页面自动保存，可以逐块校对。';
+      document.querySelectorAll('.translation-source-anchor,.translation-source-focus').forEach(element => element.remove());
+      pageSignatures.clear();
       return;
     }
+    documentContainer.querySelector('.translation-empty')?.remove();
     const scroll = document.querySelector('#translated');
     const anchor = [...documentContainer.querySelectorAll('.reflow-block')].find(element => element.getBoundingClientRect().bottom > scroll.getBoundingClientRect().top + 100);
     const anchorId = anchor?.dataset.blockId, anchorOffset = anchor?.getBoundingClientRect().top;
     for (const page of state.pages) {
-      const signature = JSON.stringify([page, page.blocks.map(block => [state.translations[block.id], state.errors[block.id]]), state.translationFingerprint, state.stale, state.stage]);
+      const signature = JSON.stringify([sourceVersion(), page, page.blocks.map(block => [state.translations[block.id], state.errors[block.id]]), state.translationFingerprint, state.stale, state.stage]);
       let section = documentContainer.querySelector('[data-translation-page="' + page.page + '"]');
       if (section && pageSignatures.get(page.page) === signature) continue;
       const replacement = renderPage(page);
-      if (section) section.replaceWith(replacement); else documentContainer.append(replacement);
+      if (section) section.replaceWith(replacement);
+      else documentContainer.insertBefore(replacement,[...documentContainer.querySelectorAll('[data-translation-page]')].find(element=>Number(element.dataset.translationPage)>page.page)||null);
       pageSignatures.set(page.page, signature);
     }
     if (anchorId) {
@@ -120,10 +149,14 @@ export function createTranslationReader({getPaper, getConfig, getDocument = () =
   function renderPage(page) {
     const section = document.createElement('section'); section.className = 'reflow-page'; section.dataset.translationPage = page.page;
     const heading = document.createElement('h3'); heading.className = 'reflow-page-label'; heading.textContent = '第 ' + page.page + ' 页'; section.append(heading);
+    if (page.warning) { const warning = document.createElement('p'); warning.className = 'translation-explanation'; warning.textContent = page.warning; section.append(warning); }
+    if(page.complete===false){const pending=document.createElement('p');pending.className='translation-error';pending.textContent=`本页尚未完成：待识别 ${page.recognition?.pending||0} 个区域，失败 ${page.recognition?.failed||0} 个区域。`;
+      for(const region of page.regions||[])if(region.error){const line=document.createElement('span');line.style.display='block';line.textContent=region.id+'：'+region.error;pending.append(line);}section.append(pending);}
     for (const block of page.blocks.filter(block => !isIgnored(block))) {
       const element = document.createElement('article'); element.className = 'reflow-block'; element.dataset.blockId = block.id; element.tabIndex = 0;
       if (/title/.test(block.type) && !/figure|table|chart/.test(block.type)) element.classList.add('reflow-heading');
       const label = document.createElement('button'); label.className = 'reflow-block-label'; label.textContent = '#' + block.order + ' · ' + (typeNames[block.type] || block.type) + (block.confidence != null && block.confidence < .85 ? ' · 建议校对' : ''); label.title = '定位原文'; label.onclick = () => locateSource(block);
+      if (block.positionGranularity === 'page') { label.textContent += ' · 仅页级定位'; label.title = '定位原文页（API 未提供文字坐标）'; }
       element.append(label);
       if (/^(formula|equation)$/.test(block.type) && block.text.trim()) {
         const formula = document.createElement('div'); formula.className = 'reflow-formula';
@@ -155,6 +188,7 @@ export function createTranslationReader({getPaper, getConfig, getDocument = () =
         } else if (block.text.trim()) { const content = document.createElement('p'); richText(content, block.text); element.append(content); }
       } else if (isMedia(block)) {
         element.append(mediaCrop(block, page));
+        if(block.ocrText){const details=document.createElement('details'),summary=document.createElement('summary'),text=document.createElement('p');details.className='translation-source';summary.textContent='查看区域识别文字';richText(text,block.ocrText);details.append(summary,text);element.append(details);}
       } else {
         const entry = recognitionOnly ? null : state.translations[block.id];
         const text = document.createElement('p'); text.className = 'reflow-text'; richText(text, entry?.text || block.text);
@@ -221,43 +255,45 @@ export function createTranslationReader({getPaper, getConfig, getDocument = () =
     sharpenMedia(canvas, block.page, bounds); return canvas;
   }
   function sourceImage(page) {
-    if (!sourceImages.has(page.page)) sourceImages.set(page.page, new Promise((resolve, reject) => {
-      const image = new Image(); image.onload = () => resolve(image); image.onerror = () => { sourceImages.delete(page.page); reject(Error('校正页面加载失败')); };
-      image.src = '/api/papers/' + encodeURIComponent(paperId) + '/recognition/pages/' + page.page + '/image?v=' + encodeURIComponent(state.ocrProfile);
+    const key = sourceVersion() + ':' + page.page;
+    if (!sourceImages.has(key)) sourceImages.set(key, new Promise((resolve, reject) => {
+      const image = new Image(); image.onload = () => resolve(image); image.onerror = () => { sourceImages.delete(key); reject(Error('识别输入页面加载失败')); };
+      image.src = '/api/papers/' + encodeURIComponent(paperId) + '/recognition/pages/' + page.page + '/image?v=' + encodeURIComponent(sourceVersion());
     }));
-    return sourceImages.get(page.page);
+    return sourceImages.get(key);
   }
   function sourcePages() {
-    const targetId = paperId;
+    const targetId = paperId, version = sourceVersion();
     for (const page of state.pages.filter(page => page.sourceImage)) sourceImage(page).then(image => {
-      if (targetId !== paperId || document.querySelector('#translated')?.hidden) return;
+      if (targetId !== paperId || version !== sourceVersion() || document.querySelector('#translated')?.hidden) return;
       const element = document.querySelector('#original .page[data-page="' + page.page + '"]');
-      if (!element || element.dataset.recognitionSource) return;
+      if (!element || element.dataset.recognitionSource === version) return;
       const canvas = element.querySelector('canvas'); canvas.width = image.naturalWidth; canvas.height = image.naturalHeight; canvas.getContext('2d').drawImage(image, 0, 0);
-      element.style.height = element.clientWidth * image.naturalHeight / image.naturalWidth + 'px'; element.dataset.recognitionSource = 'true';
-      const label = document.createElement('span'); label.className = 'recognition-source-label'; label.textContent = '识别校正页面'; element.append(label); sourceAnchors();
+      element.style.height = element.clientWidth * image.naturalHeight / image.naturalWidth + 'px'; element.dataset.recognitionSource = version;
+      element.querySelector('.recognition-source-label')?.remove();
+      const label = document.createElement('span'); label.className = 'recognition-source-label'; label.textContent = page.sourceKind === 'original-render' ? 'API 输入页面' : '识别校正页面'; element.append(label); sourceAnchors();
     }).catch(error => toast(error.message));
   }
   function sharpenMedia(canvas, pageNumber, [left, top, right, bottom]) {
-    const pdf = getDocument(), targetId = paperId;
+    const pdf = getDocument(), targetId = paperId, version = sourceVersion();
     const page = state.pages.find(page => page.page === pageNumber);
     if (page?.sourceImage) {
       sourceImage(page).then(image => {
-        if (targetId !== paperId || !canvas.isConnected) return;
+        if (targetId !== paperId || version !== sourceVersion() || !canvas.isConnected) return;
         canvas.width = Math.max(1, Math.ceil((right - left) * image.naturalWidth)); canvas.height = Math.max(1, Math.ceil((bottom - top) * image.naturalHeight));
         canvas.getContext('2d').drawImage(image, left * image.naturalWidth, top * image.naturalHeight, (right - left) * image.naturalWidth, (bottom - top) * image.naturalHeight, 0, 0, canvas.width, canvas.height); canvas.dataset.quality = 'corrected-source';
       }).catch(error => toast(error.message)); return;
     }
     if (!pdf) return;
     mediaQueue = mediaQueue.catch(() => {}).then(async () => {
-      if (targetId !== paperId || !canvas.isConnected) return;
+      if (targetId !== paperId || version !== sourceVersion() || !canvas.isConnected) return;
       const page = await pdf.getPage(pageNumber);
       const viewport = page.getViewport({scale: 3});
       const crop = document.createElement('canvas');
       crop.width = Math.max(1, Math.ceil((right - left) * viewport.width));
       crop.height = Math.max(1, Math.ceil((bottom - top) * viewport.height));
       await page.render({canvasContext: crop.getContext('2d'), viewport, transform: [1, 0, 0, 1, -left * viewport.width, -top * viewport.height]}).promise;
-      if (targetId !== paperId || !canvas.isConnected) return;
+      if (targetId !== paperId || version !== sourceVersion() || !canvas.isConnected) return;
       canvas.width = crop.width; canvas.height = crop.height;
       canvas.getContext('2d').drawImage(crop, 0, 0);
       canvas.dataset.quality = 'high';
@@ -266,18 +302,20 @@ export function createTranslationReader({getPaper, getConfig, getDocument = () =
   function clearHighlight() { document.querySelectorAll('.translation-source-focus').forEach(element => element.remove()); }
   function highlightSource(block) {
     clearHighlight();
+    if (block.positionGranularity === 'page') return;
     const source = document.querySelector('#original .page[data-page="' + block.page + '"]');
     if (!source) return;
-    if (state.pages.find(page=>page.page===block.page)?.sourceImage && !source.dataset.recognitionSource) return;
-    const highlight = document.createElement('div'); highlight.className = 'translation-source-focus';
-    const [left, top, right, bottom] = block.bbox;
-    Object.assign(highlight.style, {left: left * 100 + '%', top: top * 100 + '%', width: (right - left) * 100 + '%', height: (bottom - top) * 100 + '%'}); source.append(highlight);
+    if (state.pages.find(page=>page.page===block.page)?.sourceImage && source.dataset.recognitionSource !== sourceVersion()) return;
+    for (const [left, top, right, bottom] of block.regions || [block.bbox]) {
+      const highlight = document.createElement('div'); highlight.className = 'translation-source-focus';
+      Object.assign(highlight.style, {left: left * 100 + '%', top: top * 100 + '%', width: (right - left) * 100 + '%', height: (bottom - top) * 100 + '%'}); source.append(highlight);
+    }
   }
   function sourceAnchors() {
     document.querySelectorAll('.translation-source-anchor').forEach(element => element.remove());
-    for (const block of state.blocks.filter(block => !isIgnored(block))) {
+    for (const block of state.blocks.filter(block => !isIgnored(block) && block.positionGranularity !== 'page')) {
       const source = document.querySelector('#original .page[data-page="' + block.page + '"]'); if (!source) continue;
-      if (state.pages.find(page => page.page === block.page)?.sourceImage && !source.dataset.recognitionSource) continue;
+      if (state.pages.find(page => page.page === block.page)?.sourceImage && source.dataset.recognitionSource !== sourceVersion()) continue;
       const anchor = document.createElement('button'); anchor.className = 'translation-source-anchor'; anchor.textContent = block.order; anchor.setAttribute('aria-label', '查看第 ' + block.order + ' 块' + (recognitionOnly ? '识别内容' : '译文'));
       Object.assign(anchor.style, {left: Math.max(0, block.bbox[0] * 100 - 2) + '%', top: block.bbox[1] * 100 + '%'});
       anchor.onclick = event => { event.stopPropagation(); locateTranslation(block); }; source.append(anchor);
