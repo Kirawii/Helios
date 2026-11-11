@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "manifestSha256": "b90cd9ca9ea9c9cb3f4e7188b2f46de9b206960ca8bebf2dac91e50e70b762f9",
+  "papers": [
+    {
+      "id": "tois-mrag",
+      "path": "data/8c54237c-6f89-4832-bc81-8626480545fc.pdf",
+      "sha256": "63e48d4f8eb4e1a241d8a4f8e281c3febcf99be644b29db8d8a11df2b857f5a5",
+      "bytes": 2723449,
+      "source": "existing local library; not redistributed",
+      "pages": [
+        8,
+        16
+      ]
+    },
+    {
+      "id": "ner-aal",
+      "path": "data/9bdc2f08-430c-4102-89bf-a413d3dc4ca2.pdf",
+      "sha256": "a5ff0c041153932869285932f81189555135b34fcbcb7d188b60d5681cd45922",
+      "bytes": 769723,
+      "source": "existing local library; not redistributed",
+      "pages": [
+        1,
+        4
+      ]
+    },
+    {
+      "id": "attention",
+      "path": ".cache/layout-benchmark/pdfs/attention-1706.03762v1.pdf",
+      "sha256": "0a9bff1be3575cf9fe26a4a3d3a9175bc791ecec90de8b9deba4cff75d2b9476",
+      "bytes": 2128686,
+      "source": "https://arxiv.org/abs/1706.03762v1",
+      "pages": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": "bert",
+      "path": ".cache/layout-benchmark/pdfs/bert-1810.04805v2.pdf",
+      "sha256": "5692a5514787a8c6727b4ff3b726a3385798bc68e12138d1d4af83947e2acf6e",
+      "bytes": 775166,
+      "source": "https://arxiv.org/abs/1810.04805v2",
+      "pages": [
+        2,
+        4
+      ]
+    },
+    {
+      "id": "lora",
+      "path": ".cache/layout-benchmark/pdfs/lora-2106.09685v2.pdf",
+      "sha256": "e9a0d3128767db616085dc0f4e6e455e672e89af823e8ed1282793682787395a",
+      "bytes": 1609513,
+      "source": "https://arxiv.org/abs/2106.09685v2",
+      "pages": [
+        3,
+        4
+      ]
+    },
+    {
+      "id": "resnet",
+      "path": ".cache/layout-benchmark/pdfs/resnet-1512.03385v1.pdf",
+      "sha256": "1e0651b6810ecba34a3dbc5b5b0209226f889004607c1f203540a48d64e5a93a",
+      "bytes": 819383,
+      "source": "https://arxiv.org/abs/1512.03385v1",
+      "pages": [
+        3,
+        4
+      ]
+    }
+  ]
+}

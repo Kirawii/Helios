@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>逐句翻译 · Helios</title>
+<link rel="stylesheet" href="/katex/katex.min.css"><link rel="stylesheet" href="/ocr-debug/debug.css"><link rel="stylesheet" href="/translate/style.css"></head>
+<body>
+<header class="debug-header"><div><strong>逐句翻译</strong><small>原文与译文双向定位</small></div><nav><a id="ocr-link" href="/ocr-debug/">OCR 调试</a> · <a href="/">返回主应用</a></nav></header>
+<section class="debug-toolbar"><label for="paper-select">文献库</label><select id="paper-select"><option value="">选择 PDF…</option></select><button id="prepare" disabled>提取与断句</button><button id="translate" class="primary" disabled>翻译 / 继续未完成句子</button><button id="cancel" disabled>取消</button></section>
+<form class="ocr-settings" id="model-settings"><label>API 地址<input id="base-url" type="url" value="https://api.deepseek.com/v1" required></label><label>模型<input id="model" value="deepseek-flash" required></label><label>协议<select id="protocol"><option value="openai">OpenAI 兼容</option><option value="ollama">Ollama</option></select></label><label>API Key（仅当前页面）<input id="key" type="password" autocomplete="off" placeholder="或使用服务端 DEEPSEEK_API_KEY"></label><p>断句在本机进行；点击翻译后才发送句子。公式、数字、引用保留原样。扫描页请先完成 OCR。未完句和粗粒度坐标会明确标记。</p></form>
+<p id="document-status" role="status">选择 PDF 后点击“提取与断句”。</p>
+<main class="pdf-area"><section class="debug-pane" aria-label="原始 PDF"><h2>原文 <small>点击句子编号，或点击文字区域选句</small></h2><div id="original"><div class="pages"></div></div></section><section class="debug-pane" aria-label="逐句译文"><h2>译文 <small>点击译文定位原文；悬停同步高亮</small></h2><div id="translated"><div class="translated-pages"></div></div></section></main>
+<dialog id="sentence-chooser"><h3>这个文字区域对应多句，请选择</h3><div></div><button id="close-chooser">关闭</button></dialog>
+<div id="toast" role="status" hidden></div><script type="module" src="/translate/app.js"></script></body></html>

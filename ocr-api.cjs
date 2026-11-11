@@ -85,7 +85,7 @@ class ApiOcrWorker {
   async recognizeImage(image, config, signal, kind='page') {
     const started=performance.now();
     const url=config.baseUrl.endsWith('/chat/completions')?config.baseUrl:config.baseUrl+'/chat/completions';
-    const prompt=/deepseek.*ocr/i.test(config.model)?GROUNDING_PROMPT:kind==='formula'?'Formula Recognition:':'OCR:';
+    const prompt=/deepseek.*ocr/i.test(config.model)?GROUNDING_PROMPT:({formula:'Formula Recognition:',table:'Table Recognition:',chart:'Chart Recognition:'}[kind]||'OCR:');
     try {
       const response=await this.fetchImpl(url,{method:'POST',redirect:'error',signal:AbortSignal.any([signal,AbortSignal.timeout(this.timeoutMs)]),
         headers:{'Content-Type':'application/json',Authorization:'Bearer '+config.key},

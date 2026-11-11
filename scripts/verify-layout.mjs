@@ -7,6 +7,13 @@ const viewport={width:600,height:800,scale:1,convertToViewportPoint:(x,y)=>[x,80
 const item=(str,x,y,width=200,font=12)=>({str,width,transform:[font,0,0,font,x,y]});
 const blocks=textBlocks([item('A paragraph begins here.',40,700),item('It continues on the next line.',40,684),item('A separate right column.',330,700),item('Another paragraph after a gap.',40,630),item('1',40,40,10)],viewport);
 assert.equal(blocks.length,4);assert.match(blocks[0].text,/begins here.*continues/);assert.equal(blocks[1].text,'A separate right column.');assert.equal(blocks.at(-1).translate,false);assert.ok(blocks.every(b=>b.x>=0&&b.y>=0&&b.w<=1&&b.h<=1));
+// Two columns separated by a 14pt gutter must not merge into single lines.
+const column=(label,x)=>Array.from({length:8},(_,i)=>item(label+' column line '+i+' with text',x,700-i*14,248,12));
+const columns=textBlocks([...column('LEFT',40),...column('RIGHT',302)],viewport);
+assert.equal(columns.length,2);assert.ok(columns.every(b=>!(/LEFT/.test(b.text)&&/RIGHT/.test(b.text))));assert.ok(columns[0].x+columns[0].w<=302/600&&columns[1].x>=302/600-.003);
+// A first-line indent continues the paragraph; an indented line after it starts the next one.
+const indented=textBlocks([item('Indented first line of a paragraph',55,700,300),item('second line at the margin',40,686,300),item('third line at the margin',40,672,300),item('Next paragraph is indented too',55,658,300),item('and wraps to the margin',40,644,300)],viewport);
+assert.equal(indented.length,2);assert.deepEqual(indented.map(b=>b.id),['b0','b1']);
 const translatable=blocks.filter(b=>b.translate),answer=JSON.stringify(translatable.map(b=>({id:b.id,text:'中文 '+b.id})));
 assert.equal(Object.keys(parseBlockTranslations('```json\n'+answer+'\n```',blocks)).length,3);
 assert.throws(()=>parseBlockTranslations('[]',blocks),/遗漏了 3/);assert.throws(()=>parseBlockTranslations('not json',blocks),/有效/);

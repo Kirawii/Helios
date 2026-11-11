@@ -5,11 +5,14 @@ const os = require('node:os');
 const crypto = require('node:crypto');
 const {Worker} = require('node:worker_threads');
 const {PreparationCache,digest} = require('./pdf-preparation-cache.cjs');
+const {MODEL,layoutMode,layoutProvider}=require('./layout-contract.cjs');
+const {getLayoutModel,closeLayoutModel}=require('./layout-model.cjs');
 
 // A change to geometry, rendering, dependency version or pixel settings invalidates
 // preparation caches without touching saved OCR results or provider fingerprints.
 const PROFILE=digest(JSON.stringify([require('pdfjs-dist/package.json').version,require('@napi-rs/canvas/package.json').version,process.platform,process.arch,'144dpi-png-adaptive-v1',
-  ...['pdf-native.cjs','pdf-document.cjs','pdf-embedded-image.cjs'].map(file=>fs.readFileSync(path.join(__dirname,file),'utf8'))]));
+  layoutMode(),layoutMode()==='model'?MODEL.sha256:null,layoutProvider(),
+  ...['pdf-native.cjs','pdf-document.cjs','pdf-embedded-image.cjs','pdf-layout-model.cjs','layout-contract.cjs','layout-preprocess.cjs'].map(file=>fs.readFileSync(path.join(__dirname,file),'utf8'))]));
 
 class PdfPool {
   constructor({size=Number(process.env.HELIOS_PDF_WORKERS||Math.min(4,Math.max(1,os.availableParallelism()-1)))}={}) {
@@ -70,7 +73,7 @@ class PdfPool {
     if(this.busy[index]||!this.queues[index].length)return;
     // Do not bury later page analysis behind queued rendering. Knowing layouts
     // first lets the local preparation queue see and prioritize expensive pages.
-    const priority=entry=>entry.message.method==='analyze'?2:entry.message.method==='cropBatch'?1:0;
+    const priority=entry=>['analyze','layoutInput'].includes(entry.message.method)?2:entry.message.method==='cropBatch'?1:0;
     let chosen=0;for(let n=1;n<this.queues[index].length;n++)if(priority(this.queues[index][n])>priority(this.queues[index][chosen]))chosen=n;
     const [entry]=this.queues[index].splice(chosen,1);this.busy[index]=true;
     entry.signal?.removeEventListener('abort',entry.abort);
@@ -88,8 +91,8 @@ class PdfPool {
 
 let sharedPool;
 const getPdfPool=()=>sharedPool ||= new PdfPool();
-const prewarmPdf=()=>getPdfPool().prewarm();
-async function closePdfPool(){const pool=sharedPool;sharedPool=undefined;await pool?.close();}
+const prewarmPdf=async()=>{const pool=await getPdfPool().prewarm();if(layoutMode()==='model')pool.layout=await getLayoutModel().warmup();return pool;};
+async function closePdfPool(){const pool=sharedPool;sharedPool=undefined;await pool?.close();await closeLayoutModel();}
 
 async function openPreparedPdf(filename,{pool=getPdfPool(),cacheDirectory=process.env.HELIOS_PDF_CACHE||path.join(__dirname,'.cache/pdf-preparation'),signal}={}) {
   signal?.throwIfAborted();
@@ -166,7 +169,17 @@ async function openPreparedPdf(filename,{pool=getPdfPool(),cacheDirectory=proces
       if(!plans.has(page))plans.set(page,(async()=>{
         const started=performance.now();let plan=await cache?.readLayout(page);operationSignal.throwIfAborted();
         if(plan)metrics.layoutCacheHits++;
-        else {metrics.analyses++;plan=await call('analyze',page,[page],operationSignal);operationSignal.throwIfAborted();await cache?.writeLayout(page,plan);}
+        else {
+          metrics.analyses++;
+          if(layoutMode()==='model'){
+            const input=await call('layoutInput',page,[page],operationSignal);
+            const detected=await getLayoutModel().detect(input.pixels,operationSignal);delete input.pixels;
+            plan=require('./pdf-layout-model.cjs').buildModelPlan(input,detected.regions);
+            plan.layout={...plan.layout,modelSha256:detected.modelSha256,provider:detected.provider,inferenceMs:detected.inferenceMs};
+            plan.renderCost=input.width*input.height;
+          }else plan=await call('analyze',page,[page],operationSignal);
+          operationSignal.throwIfAborted();await cache?.writeLayout(page,plan);
+        }
         return {...plan,parseMs:performance.now()-started};
       })());
       try{return structuredClone(await plans.get(page));}catch(error){plans.delete(page);throw error;}

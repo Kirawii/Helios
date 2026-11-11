@@ -1,27 +1,31 @@
 const {endpoint} = require('./ai.cjs');
 const crypto = require('node:crypto');
 const {setTimeout: delay} = require('node:timers/promises');
+const {clientError}=require('./http-error.cjs');
 
 const digest = value => crypto.createHash('sha256').update(typeof value === 'string' || Buffer.isBuffer(value) ? value : JSON.stringify(value)).digest('hex');
 const mediaBlock = block => /^(image|figure|chart|table|formula|equation|algorithm)$/.test(block.type);
-const ignoredBlock = block => /^(header|footer|page_number|number|formula_number|header_image|footer_image|aside_text)$/.test(block.type);
+const ignoredBlock = block => /^(header|footer|page_number|number|formula_number|header_image|footer_image|aside_text|vertical_text)$/.test(block.type);
 const translatable = block => !mediaBlock(block) && !ignoredBlock(block) && /[A-Za-z]/.test(block.text);
 
 function providerConfig(input = {}) {
-  const url = new URL(input.baseUrl || 'https://api.deepseek.com/v1');
-  if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password || url.search || url.hash) throw Error('模型地址必须是 HTTP(S) 基地址，不能包含密钥或查询参数');
-  const official = url.hostname === 'api.deepseek.com';
+  if(!input||typeof input!=='object'||Array.isArray(input))throw clientError('模型配置无效');
+  let url;try{url=new URL(input.baseUrl || 'https://api.deepseek.com/v1');}catch{throw clientError('模型地址无效');}
+  if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password || url.search || url.hash) throw clientError('模型地址必须是 HTTP(S) 基地址，不能包含密钥或查询参数');
+  const official = url.origin === 'https://api.deepseek.com';
   const model = String(input.model || (official ? 'deepseek-flash' : '')).trim();
-  if (!model || model.length > 200) throw Error('请填写有效的模型名称');
+  if (!model || model.length > 200) throw clientError('请填写有效的模型名称');
   const key = String(input.key || (official ? process.env.DEEPSEEK_API_KEY || '' : ''));
-  if (official && !key) throw Error('请在 API 设置中填写 DeepSeek API Key');
+  if (official && !key) throw clientError('请在 API 设置中填写 DeepSeek API Key');
   return {baseUrl: url.href.replace(/\/$/, ''), protocol: input.protocol === 'ollama' ? 'ollama' : 'openai', model, key, official};
 }
 
-async function requestJSON(config, messages, signal) {
+const requestBudget=()=>({remaining:3});
+async function requestJSON(config, messages, signal, budget=requestBudget()) {
   const target = endpoint(config.baseUrl, config.protocol);
-  for (let attempt = 0; attempt < 3; attempt++) {
+  for (let attempt = 0; attempt < 3 && budget.remaining>0; attempt++) {
     signal.throwIfAborted();
+    budget.remaining--;
     try {
       const response = await fetch(target.url, {
         method: 'POST', headers: {'Content-Type': 'application/json', ...(config.key ? {Authorization: 'Bearer ' + config.key} : {})},
@@ -42,13 +46,15 @@ async function requestJSON(config, messages, signal) {
       try { return JSON.parse(clean); } catch { throw Error('模型未返回有效 JSON'); }
     } catch (error) {
       signal.throwIfAborted();
-      if (attempt === 2 || error.retryable === false) {
+      const transient = error.retryable === true || error instanceof TypeError || error.name === 'TimeoutError';
+      if (!transient || attempt === 2 || budget.remaining===0) {
         if (error.retryable !== undefined || error instanceof TypeError || error.name === 'TimeoutError') error.failedRequest = true;
         throw error;
       }
       await delay(600 * 2 ** attempt, null, {signal});
     }
   }
+  throw Object.assign(Error('模型请求重试次数已耗尽'),{failedRequest:true});
 }
 
 function chunkItems(items, limit = 14000) {
@@ -151,4 +157,4 @@ function validateTranslations(value, units) {
   return {results, errors};
 }
 
-module.exports = {digest, mediaBlock, ignoredBlock, translatable, providerConfig, requestJSON, chunkItems, splitText, analysisInput, analysisMessages, validateContext, protectText, translationMessages, validateTranslations};
+module.exports = {digest, mediaBlock, ignoredBlock, translatable, providerConfig, requestBudget, requestJSON, chunkItems, splitText, analysisInput, analysisMessages, validateContext, protectText, translationMessages, validateTranslations};

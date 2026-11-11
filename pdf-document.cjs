@@ -41,6 +41,15 @@ async function openPdf(filename, {adaptive=false}={}) {
   }
   return {
     pageCount:pdf.numPages,
+    async layoutInput(number,signal){
+      const {extractRuns}=require('./pdf-layout-model.cjs'),{preprocess}=require('./layout-preprocess.cjs');
+      const page=await pdf.getPage(number),input=await extractRuns(page,signal);
+      cachePages.add(number);
+      if(!fullPages.has(number))fullPages.set(number,sharedSurface(number,signal));
+      const full=await fullPages.get(number);signal.throwIfAborted();
+      const pixels=preprocess(full.context.getImageData(0,0,full.canvas.width,full.canvas.height).data,full.canvas.width,full.canvas.height);
+      signal.throwIfAborted();return {...input,pixels};
+    },
     prepareRegions(number,count,regions){
       if(count>1)cachePages.add(number);
       // Formula pages keep the previous full-page pixel grid and exact inputs.

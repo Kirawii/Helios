@@ -1,6 +1,8 @@
 const {ignoredBlock} = require('./translation-model.cjs');
 
 function readingOrder(blocks) {
+  // Native PDF pages were already ordered with their detected column gutter.
+  if (blocks.length && blocks.every(block => String(block.source || '').startsWith('pdf-'))) return blocks;
   const normalized = blocks.map(block => {
     const type = block.type === 'vision_footnote' ? 'text' : block.type === 'figure_title' && /^\s*Table\s+\d/i.test(block.text) ? 'table_title' : block.type;
     return type === block.type ? block : {...block, sourceType: block.type, type};

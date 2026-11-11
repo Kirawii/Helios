@@ -78,10 +78,15 @@ async function runHybrid({document,payload,onEvent,signal,worker,normalizeApiPag
         const block=plan.blocks.find(block=>block.id===task.blockId);
         if(task.kind==='formula') {
           const latex=stripMath(result.text);if(!latex)throw Error('OCR API 返回了空公式');
+          if(block.type==='formula'){block.text=latex;block.format='latex';}
+          else{
           block.mathReplacements||=[];block.mathReplacements.push({start:task.start,end:task.end,latex,bbox:task.bbox});
           let text=block.originalText;
           for(const replacement of [...block.mathReplacements].sort((a,b)=>b.start-a.start))text=text.slice(0,replacement.start)+'$'+replacement.latex+'$'+text.slice(replacement.end);
           block.text=text;block.format='mixed';
+          }
+        } else if(['text','table','chart'].includes(task.kind)) {
+          block.text=result.text;block.format=task.kind==='table'&&/<table[\s>]/i.test(result.text)?'html':'markdown';block.recognitionSource='api-region';
         } else {block.ocrText=result.text;block.recognitionSource='api-region';}
       }
       task.status='completed';timing.completedRegions++;

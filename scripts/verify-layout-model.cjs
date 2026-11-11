@@ -1,0 +1,26 @@
+const assert=require('node:assert/strict');
+const {decode,LABELS}=require('../layout-contract.cjs');
+const {buildModelPlan}=require('../pdf-layout-model.cjs');
+const {preprocess}=require('../layout-preprocess.cjs');
+const tensor=(dims,fill)=>({dims,data:new Float32Array(dims.reduce((a,b)=>a*b,1)).fill(fill)});
+const outputs={logits:tensor([1,300,25],-20),pred_boxes:tensor([1,300,4],.2),order_logits:tensor([1,300,300],8)};
+outputs.logits.data[5*25+15]=8;outputs.logits.data[2*25+22]=8;
+const regions=decode(outputs);assert.deepEqual(regions.map(r=>[r.query,r.label]),[[2,'text'],[5,'inline_formula']]);
+assert.equal(LABELS[5],'display_formula');assert.equal(LABELS[15],'inline_formula');assert.equal(LABELS[23],'vertical_text');
+assert.throws(()=>decode({...outputs,logits:tensor([1,200,25],0)}),/contract/);
+const run=(id,text,bbox)=>({id,text,bbox,baseline:bbox[3]-.002,height:bbox[3]-bbox[1]});
+const region=(classId,bbox,order=0)=>({id:'r'+classId,classId,bbox,score:.99,order});
+const input={page:1,width:600,height:800,runs:[run(0,'This paragraph describes ',[.1,.1,.4,.12]),run(1,'x+y',[.41,.1,.46,.12]),run(2,' within the surrounding native prose.',[.47,.1,.9,.12])]};
+const plan=buildModelPlan(input,[region(22,[.09,.09,.92,.13]),region(15,[.405,.095,.465,.125],1)]);
+assert.equal(plan.layout.coverage.inlineAligned,1);assert.equal(plan.tasks.length,1);const task=plan.tasks[0],block=plan.blocks.find(b=>b.id===task.blockId);assert.equal(block.originalText.slice(task.start,task.end),'x+y');
+assert.equal(plan.layout.coverage.retainedCharacters,input.runs.reduce((n,r)=>n+r.text.length,0));
+// A mixed run must remain intact; the formula is detached and explicitly flagged.
+const mixed={...input,runs:[run(0,'This paragraph contains x+y within the same PDF text run.',[.1,.1,.9,.12])]};
+const ambiguous=buildModelPlan(mixed,[region(22,[.09,.09,.92,.13]),region(15,[.4,.095,.46,.125],1)]);
+assert.equal(ambiguous.layout.coverage.inlineUnresolved,1);assert.equal(ambiguous.blocks[0].originalText,mixed.runs[0].text);assert.equal(ambiguous.blocks[1].alignment,'unresolved');
+const orphan=buildModelPlan(input,[]);assert.equal(orphan.layout.coverage.assignmentRatio,0);assert.equal(orphan.layout.coverage.retainedCharacters,plan.layout.coverage.retainedCharacters);assert.match(orphan.warning,/未匹配/);
+const scan=buildModelPlan({...input,runs:[]},[region(22,[.1,.1,.9,.4]),region(21,[.1,.5,.9,.9],1)]);assert.deepEqual(scan.tasks.map(t=>t.kind),['text','table']);
+const redundant=buildModelPlan(input,[region(22,[.09,.09,.92,.13]),{...region(22,[.09,.09,.92,.13]),score:.8}]);assert.equal(redundant.blocks.length,1);
+const reversed=buildModelPlan({...input,runs:[]},[region(22,[.1,.5,.9,.6],0),region(17,[.1,.1,.8,.2],1)]);assert.equal(reversed.layout.readingOrder,'geometric-fallback');assert.equal(reversed.blocks[0].type,'paragraph_title');assert.match(reversed.warning,/上下倒置/);
+const white=preprocess(Uint8ClampedArray.from([255,255,255,255]),1,1);assert.equal(white.length,3*800*800);assert.ok(white.every(v=>v===1));
+console.log('PASS: layout tensor contract, class IDs/order decoding, inline range alignment, ambiguous-run preservation, coverage, scan routing, duplicate boxes, preprocessing');

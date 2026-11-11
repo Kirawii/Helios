@@ -31,6 +31,20 @@ const grounded = page => `<|ref|>title<|/ref|><|det|>[[50, 40, 900, 100]]<|/det|
     assert.throws(() => resolveOcrConfig({mode: 'api', baseUrl: 'file:///private'}), /HTTP/);
     const sample = resolveOcrConfig({mode: 'api', key: secret});
     assert.ok(!JSON.stringify(publicOcrConfig(sample)).includes(secret));
+    {
+      const saved = {key: process.env.SILICONFLOW_API_KEY, url: process.env.HELIOS_OCR_API_URL};
+      process.env.SILICONFLOW_API_KEY = 'ENV-KEY-MUST-NOT-LEAK'; delete process.env.HELIOS_OCR_API_URL;
+      try {
+        assert.equal(resolveOcrConfig({mode: 'api', baseUrl: 'https://evil.example.com/v1'}).key, '');
+        assert.equal(resolveOcrConfig({mode: 'api', baseUrl: 'https://api.siliconflow.cn/v1'}).key, 'ENV-KEY-MUST-NOT-LEAK');
+        assert.equal(resolveOcrConfig({mode: 'api', baseUrl: 'https://evil.example.com/v1', key: 'own'}).key, 'own');
+        process.env.HELIOS_OCR_API_URL = 'https://ocr.internal.test/v1';
+        assert.equal(resolveOcrConfig({mode: 'api', baseUrl: 'https://ocr.internal.test/v2'}).key, 'ENV-KEY-MUST-NOT-LEAK');
+        assert.equal(resolveOcrConfig({mode: 'api', baseUrl: 'https://evil.example.com/v1'}).key, '');
+      } finally {
+        for (const [name, value] of [['SILICONFLOW_API_KEY', saved.key], ['HELIOS_OCR_API_URL', saved.url]]) { if (value === undefined) delete process.env[name]; else process.env[name] = value; }
+      }
+    }
     assert.equal(ocrFingerprint(sample), ocrFingerprint({...sample, key: 'ROTATED', maxTokens: 8192}));
 
     // API mode renders PDFs using Node only; no Paddle import or Python process.

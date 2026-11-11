@@ -6,7 +6,7 @@
 
 主应用保留原来的阅读与覆盖式翻译界面。**PDF 识别与重排阅读**在独立调试页 `http://localhost:3210/ocr-debug/` 中进行，使用 PaddleOCR PP-StructureV3，提供内容类型、阅读顺序编号、原文对照和文本校对。安装、资源限制和验证边界见 [识别与排版说明](RECOGNITION.md)。
 
-需要 Node.js 20 或更高版本。
+需要 Node.js 20.12 或更高版本。
 
 ```powershell
 npm install
@@ -15,6 +15,8 @@ npm start
 
 打开 http://localhost:3210 。上传 PDF 后进入阅读器。在设置中配置模型：
 
+本机可以在项目根目录 `.env` 中填写 `SILICONFLOW_API_KEY=你的Key`，服务启动时会自动读取，重启后继续使用。该文件已被 Git 忽略；不要把真实密钥写入文档或提交到仓库。版面模型通过 `HELIOS_LAYOUT=model` 在本地运行，硅基流动仅负责 OCR。
+
 OCR 调试支持两种方式：本地部署需另行运行 `npm run setup:ocr`（Python 3.12），无需 API Key；硅基流动 API 方式填写 Key 和 OCR 模型，无需安装本地 OCR。访问 `/ocr-debug/`，选择识别方式和 PDF 后点击“开始全文识别”。主应用的模型设置用于问答和原有翻译。
 
 API 默认使用混合解析：保留 PDF 文字层与行坐标，仅将图像和疑似公式区域送给 `PaddlePaddle/PaddleOCR-VL-1.5`，扫描页回退整页 OCR。区域跨页流水线并发，默认 8 路，可调 1–32；缓存成功区域，失败后只补缺失部分。调试页分别显示文字页数、区域完成数、失败数和实际耗时，未完成区域不会记为全文完成。此优化暂用于 API 方式，本地完整 PaddleOCR 流程保留。不能保证公共云 API 的全文 2 秒延迟。
@@ -22,6 +24,10 @@ API 默认使用混合解析：保留 PDF 文字层与行坐标，仅将图像�
 启动时预热 PDF.js 和常驻本地线程池，默认最多 4 个线程；`HELIOS_PDF_WORKERS=1–8` 可调整，独立于 API 并发。布局与裁剪 PNG 保存在 `.cache/pdf-preparation/`，OCR 结果缓存会在渲染前查询，重试可跳过本地计算；修改文档内容或准备实现会使对应准备缓存失效。公式候选、提示词和公式 PNG 输入保持不变。对照基准：`node scripts/benchmark-ocr-preparation.cjs paper.pdf report.json`，只测本地准备，不调用云服务。
 
 本地准备和 API 请求使用独立队列：同页最多 16 个区域一次裁剪传输，按页打包保存 PNG 与校验和，已知布局中绘图指令较多的页优先准备。等待云端响应时本地仍可推进，结果缓冲上限为 128 个区域、32 MiB；单个超大图片可独占缓冲，保持原图分辨率。调试页分别显示本地准备完成时间和 API 处理中数量。
+
+可选本地版面模型：运行 `npm run setup:layout -- --provider=cpu` 安装并校验 PP-DocLayoutV3，再用 `npm run start:layout` 启动模型路径。它输出区域类别和阅读顺序，复用 PDF 原生文字，并支持行内公式范围匹配及扫描文字区域识别；普通启动默认保持原布局。Windows 可选择 DirectML，但已发现样本中的原始阅读顺序差异。安装、验证结果与阶段边界见 [本地版面模型说明](LAYOUT-MODEL.md)。
+
+逐句翻译与双向定位已接入独立页面 `http://localhost:3210/translate/`，也可从 OCR 调试页进入。支持本地断句、句子 ID 与多页原文坐标、公式/数字/引用保护、原文和译文双向高亮、取消与失败续译。使用方法和边界见 [逐句翻译说明](SENTENCE-TRANSLATION.md)，模型的条件验收结果见 [布局质量验收](LAYOUT-QUALITY.md)。
 
 - Ollama：地址 `http://localhost:11434/api`，填写已安装的模型名，如 `qwen3:8b`。
 - LM Studio：地址 `http://localhost:1234/v1`，填写加载的模型名。

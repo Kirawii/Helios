@@ -1,25 +1,29 @@
 const crypto = require('node:crypto');
 const {OcrWorker} = require('./ocr-worker.cjs');
 const {ApiOcrWorker} = require('./ocr-api.cjs');
+const {layoutMode,layoutProfile}=require('./layout-contract.cjs');
+const {clientError}=require('./http-error.cjs');
 
 function resolveOcrConfig(input, previous) {
-  if (input != null && (typeof input !== 'object' || Array.isArray(input))) throw Error('OCR 配置无效');
+  if (input != null && (typeof input !== 'object' || Array.isArray(input))) throw clientError('OCR 配置无效');
   const settings = input || previous || {};
   const mode = settings.mode || process.env.HELIOS_OCR_MODE || 'local';
   if (mode === 'local') return {mode};
-  if (mode !== 'api') throw Error('请选择本地部署或 API 识别');
-  const url = new URL(settings.baseUrl || process.env.HELIOS_OCR_API_URL || 'https://api.siliconflow.cn/v1');
-  if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password || url.search || url.hash) throw Error('OCR API 地址必须是 HTTP(S) 地址，不能包含密钥或查询参数');
+  if (mode !== 'api') throw clientError('请选择本地部署或 API 识别');
+  let url;try{url=new URL(settings.baseUrl || process.env.HELIOS_OCR_API_URL || 'https://api.siliconflow.cn/v1');}catch{throw clientError('OCR API 地址无效');}
+  if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password || url.search || url.hash) throw clientError('OCR API 地址必须是 HTTP(S) 地址，不能包含密钥或查询参数');
   const model = String(settings.model || process.env.HELIOS_OCR_API_MODEL || 'PaddlePaddle/PaddleOCR-VL-1.5').trim();
-  if (!model || model.length > 200) throw Error('OCR 模型名称无效');
-  const key = String(settings.key || process.env.SILICONFLOW_API_KEY || '');
-  if (/[\r\n]/.test(key)) throw Error('OCR API Key 格式无效');
+  if (!model || model.length > 200) throw clientError('OCR 模型名称无效');
+  const trustedOrigins = new Set(['https://api.siliconflow.cn', 'https://api.siliconflow.com']);
+  try { if (process.env.HELIOS_OCR_API_URL) {const configured=new URL(process.env.HELIOS_OCR_API_URL);if(['http:','https:'].includes(configured.protocol)&&!configured.username&&!configured.password&&!configured.search&&!configured.hash)trustedOrigins.add(configured.origin);} } catch {}
+  const key = String(settings.key || (trustedOrigins.has(url.origin) ? process.env.SILICONFLOW_API_KEY || '' : ''));
+  if (/[\r\n]/.test(key)) throw clientError('OCR API Key 格式无效');
   const maxTokens = Number(settings.maxTokens || 4096);
-  if (!Number.isInteger(maxTokens) || maxTokens < 256 || maxTokens > 32768) throw Error('OCR 最大输出长度应在 256–32768 之间');
+  if (!Number.isInteger(maxTokens) || maxTokens < 256 || maxTokens > 32768) throw clientError('OCR 最大输出长度应在 256–32768 之间');
   const strategy=settings.strategy||'hybrid',concurrency=Number(settings.concurrency??8);
-  if(!['hybrid','full'].includes(strategy))throw Error('OCR 解析策略无效');
-  if(!Number.isInteger(concurrency)||concurrency<1||concurrency>32)throw Error('API 并发数应在 1–32 之间');
-  return {mode, provider: 'siliconflow', baseUrl: url.href.replace(/\/+$/, ''), model, maxTokens, strategy, concurrency, key};
+  if(!['hybrid','full'].includes(strategy))throw clientError('OCR 解析策略无效');
+  if(!Number.isInteger(concurrency)||concurrency<1||concurrency>32)throw clientError('API 并发数应在 1–32 之间');
+  return {mode, provider: 'siliconflow', baseUrl: url.href.replace(/\/+$/, ''), model, maxTokens, strategy, concurrency, key,...(strategy==='hybrid'&&layoutMode()==='model'?{layout:'model',layoutProfile:layoutProfile()}:{})};
 }
 
 function publicOcrConfig(config) {

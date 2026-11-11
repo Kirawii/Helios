@@ -8,6 +8,7 @@ const pageInput = document.querySelector('#page-number');
 const toggle = document.querySelector('#toggle-original');
 const original = document.querySelector('#original');
 let paper = null, pdf = null, loadingTask = null, generation = 0, toastTimer, pageObserver;
+let activeLayout='heuristic';
 const ocrForm = document.querySelector('#ocr-settings');
 const ocrMode = document.querySelector('#ocr-mode');
 const ocrUrl = document.querySelector('#ocr-api-url');
@@ -31,7 +32,7 @@ function getOcrConfig() {
 function updateOcrSettings() {
   document.querySelector('#ocr-api-fields').hidden = ocrMode.value !== 'api';
   document.querySelector('#ocr-mode-description').textContent = ocrMode.value === 'api'
-    ? ocrStrategy.value === 'hybrid' ? '先提取 PDF 文字与坐标，仅将图像、公式候选区域并发发送到 API；扫描页回退整页识别。缺失或失败区域仍标为未完成。' : '兼容模式逐页发送整页图像到 API；长文档建议使用混合解析。'
+    ? ocrStrategy.value === 'hybrid' ? activeLayout==='model' ? '本地 PP-DocLayoutV3 定位版面并复用 PDF 文字；公式、表格、图表和扫描文字按区域发送到 API。' : '先提取 PDF 文字与坐标，仅将图像、公式候选区域并发发送到 API；扫描页回退整页识别。缺失或失败区域仍标为未完成。' : '兼容模式逐页发送整页图像到 API；长文档建议使用混合解析。'
     : '本地识别需先运行 npm run setup:ocr；PDF 在本机处理。切换识别方式会备份旧结果并重新识别。';
   const {key, ...settings} = getOcrConfig();
   // Preserve API preferences when switching to local; never store the API key.
@@ -40,6 +41,7 @@ function updateOcrSettings() {
 ocrForm.onsubmit = event => event.preventDefault();
 ocrForm.onchange = updateOcrSettings;
 updateOcrSettings();
+api('/api/layout/status').then(status=>{activeLayout=status.mode;updateOcrSettings();}).catch(()=>{});
 
 async function api(url, options = {}) {
   const response = await fetch(url, options);
@@ -94,6 +96,7 @@ async function openPaper(id) {
     const selected = await api('/api/papers/' + encodeURIComponent(id));
     if (current !== generation) return;
     paper = selected;
+    document.querySelector('#sentence-link').href='/translate/?paper='+encodeURIComponent(id);
     history.replaceState(null, '', '?paper=' + encodeURIComponent(id));
     loadingTask = pdfjs.getDocument({url: '/api/papers/' + encodeURIComponent(id) + '/pdf', useSystemFonts: true});
     const documentPdf = await loadingTask.promise;

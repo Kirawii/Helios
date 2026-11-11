@@ -64,6 +64,13 @@ const formulaPlan = page => ({page,width:600,height:800,nativeCharacters:80,pars
     assert.match(nativeBlock.originalText.slice(range.start,range.end),/^Dn,\.\.\.\}$/);
     assert.match(nativeBlock.originalText.slice(range.end),/Each document/);
 
+    // A display-equation block takes the recognized LaTeX as its whole text instead of an inline $...$ splice.
+    {
+      const formulaPages=[];
+      const equationWorker=new ApiOcrWorker({openDocument:async()=>({pageCount:1,analyze:async page=>({page,width:600,height:800,sourceKind:'pdf-native',blocks:[{id:'p1-b0',page:1,order:1,type:'formula',format:'latex',text:'a+b',originalText:'a+b',bbox:[.1,.1,.4,.2],lines:[]}],tasks:[{id:'p1-b0-m0',kind:'formula',bbox:[.1,.1,.4,.2],blockId:'p1-b0',start:0,end:3}]}),regionIdentity:(page,bounds)=>JSON.stringify([page,bounds]),renderRegion:async()=>({width:40,height:20,png:Buffer.from('REGION-1')}),close:async()=>{}}),fetchImpl:async()=>response('\\[\\frac{a}{b}\\]')});
+      await equationWorker.request({path:filename,pageCount:1,pages:[1],outputDirectory:path.join(root,'equation'),config},event=>{if(event.event==='page')formulaPages.push(event.data);},signal);
+      assert.equal(formulaPages.length,1);assert.equal(formulaPages[0].blocks[0].text,'\\frac{a}{b}');assert.equal(formulaPages[0].blocks[0].format,'latex');
+    }
     let active=0,peak=0,failPage=2,closes=0;
     const requests=[],renders=[];
     const fixture=()=>({pageCount:2,analyze:async page=>formulaPlan(page),regionIdentity:(page,bounds)=>JSON.stringify([page,bounds]),

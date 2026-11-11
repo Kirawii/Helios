@@ -3,6 +3,7 @@ const path = require('node:path');
 const {OcrProvider, resolveOcrConfig, publicOcrConfig, ocrFingerprint} = require('./ocr-provider.cjs');
 const model = require('./translation-model.cjs');
 const {readingOrder} = require('./recognition-order.cjs');
+const {clientError,sendHttpError}=require('./http-error.cjs');
 
 const VERSION = 1;
 const OCR_PROFILE = 'structurev3-3.7.0-pdfium-144dpi-utf8-all-features-quality-v4';
@@ -10,7 +11,7 @@ const CONTEXT_PROFILE = 'evidence-context-v1';
 const TRANSLATION_PROFILE = 'zh-protected-v1';
 
 function createTranslationService({root, getPaper, worker = new OcrProvider(), requestJSON = model.requestJSON}) {
-  const states = new Map(), jobs = new Map();
+  const states = new Map(), jobs = new Map(), deleting=new Map(), retired=new WeakSet();
   const stateDirectory = id => path.join(root, 'translations', id);
   const initialState = (id, pdfHash, pageCount) => ({version: VERSION, paperId: id, pdfHash, ocrProfile: OCR_PROFILE, revision: 0, pages: {}, overrides: {}, context: null, contextOverride: null, contextFingerprint: '', analysisCache: {}, translations: {}, errors: {}, status: 'idle', stage: 'ocr', progress: {done: 0, total: pageCount}, stale: false});
   const getBlocks = state => {
@@ -21,17 +22,20 @@ function createTranslationService({root, getPaper, worker = new OcrProvider(), r
   };
   const pendingWrites=new Map();
   const writeState = state => {
+    if(retired.has(state))return;
     const directory = stateDirectory(state.paperId);
     fs.mkdirSync(directory, {recursive: true});
     const filename = path.join(directory, 'state.json');
     fs.writeFileSync(filename + '.tmp', JSON.stringify(state)); fs.renameSync(filename + '.tmp', filename);
   };
   const persist = (state,defer=false) => {
+    if(retired.has(state))return;
     state.updatedAt=new Date().toISOString();state.revision++;
     if(defer){if(!pendingWrites.has(state.paperId)){const timer=setTimeout(()=>{pendingWrites.delete(state.paperId);writeState(state);},100);timer.unref();pendingWrites.set(state.paperId,timer);}return;}
     clearTimeout(pendingWrites.get(state.paperId));pendingWrites.delete(state.paperId);writeState(state);
   };
   function load(id) {
+    if(deleting.has(id))throw clientError('论文正在删除，请稍后重试',409);
     const paper = getPaper(id);
     if (!paper) { const error = Error('论文不存在'); error.status = 404; throw error; }
     if (states.has(id)) return states.get(id);
@@ -53,6 +57,7 @@ function createTranslationService({root, getPaper, worker = new OcrProvider(), r
     return {...state, analysisCache: undefined, pages: Object.values(state.pages).sort((first, second) => first.page - second.page).map(page => ({...page, blocks: blocks.filter(block => block.page === page.page)})), blocks, active: jobs.has(id)};
   }
   function start(id, input = {}, recognitionOnly = false) {
+    if(!input||typeof input!=='object'||Array.isArray(input))throw clientError('请求内容无效');
     const state = load(id);
     if (jobs.has(id)) { const error = Error('这篇论文已有翻译任务正在运行'); error.status = 409; throw error; }
     const config = recognitionOnly ? null : model.providerConfig(input);
@@ -61,7 +66,7 @@ function createTranslationService({root, getPaper, worker = new OcrProvider(), r
     const previousFingerprint = state.ocrFingerprint || ocrFingerprint({mode: 'local'});
     const changedOcr = previousFingerprint !== fingerprint;
     const paper = getPaper(id);
-    if (ocr.mode === 'api' && ocr.strategy !== 'hybrid' && !ocr.key && (changedOcr || Object.keys(state.pages).length < paper.pages)) throw Error('请填写硅基流动 OCR API Key，或配置 SILICONFLOW_API_KEY');
+    if (ocr.mode === 'api' && ocr.strategy !== 'hybrid' && !ocr.key && (changedOcr || Object.keys(state.pages).length < paper.pages)) throw clientError('请填写硅基流动 OCR API Key，或配置 SILICONFLOW_API_KEY');
     if (changedOcr) {
       if (Object.keys(state.pages).length || Object.keys(state.overrides).length) {
         const directory = stateDirectory(id); fs.mkdirSync(directory, {recursive: true});
@@ -193,13 +198,13 @@ function createTranslationService({root, getPaper, worker = new OcrProvider(), r
       const translated = new Map();
       let failure = '';
       for (const batch of model.chunkItems(units, 6500)) {
-        let pending = batch;
-        for (let attempt = 0; attempt < 3 && pending.length; attempt++) {
+        let pending = batch;const budget=model.requestBudget();
+        for (let attempt = 0; attempt < 3 && pending.length && budget.remaining>0; attempt++) {
           signal.throwIfAborted();
           try {
             const sourceIndex = blocks.findIndex(source => source.id === block.id);
             const neighbors = [blocks[sourceIndex - 1], blocks[sourceIndex + 1]].filter(Boolean).map(source => ({id: source.id, text: source.text.slice(0, 2000)}));
-            const value = await requestJSON(config, model.translationMessages(context, pending, neighbors), signal);
+            const value = await requestJSON(config, model.translationMessages(context, pending, neighbors), signal,budget);
             const result = model.validateTranslations(value, pending);
             for (const [unitId, text] of result.results) translated.set(unitId, text);
             pending = pending.filter(unit => !result.results.has(unit.id));
@@ -218,23 +223,24 @@ function createTranslationService({root, getPaper, worker = new OcrProvider(), r
     state.error = state.stale ? '部分段落未通过校验，可重试；已有译文已保留' : null;
   }
   async function validatedAnalysis(messages, blocks, config, signal) {
-    let lastError;
-    for (let attempt = 0; attempt < 3; attempt++) {
+    let lastError;const budget=model.requestBudget();
+    for (let attempt = 0; attempt < 3 && budget.remaining>0; attempt++) {
       signal.throwIfAborted();
-      try { return model.validateContext(await requestJSON(config, messages, signal), blocks); }
+      try { return model.validateContext(await requestJSON(config, messages, signal,budget), blocks); }
       catch (error) { signal.throwIfAborted(); if (error.failedRequest) throw error; lastError = error; }
     }
     throw lastError;
   }
   function correct(id, input, recognitionOnly = false) {
+    if(!input||typeof input!=='object'||Array.isArray(input))throw clientError('校对内容无效');
     const state = load(id);
     if (jobs.has(id)) { const error = Error('请先停止当前翻译，再保存校对'); error.status = 409; throw error; }
     if (input.revision !== state.revision) { const error = Error('内容已更新，请重新打开校对窗口'); error.status = 409; throw error; }
     const blocks = getBlocks(state), ids = new Set(blocks.map(block => block.id));
     const corrections = input.texts || {};
-    if (typeof corrections !== 'object' || Array.isArray(corrections) || Object.entries(corrections).some(([blockId, text]) => !ids.has(blockId) || typeof text !== 'string' || !text.trim() || text.length > 100000)) throw Error('校对文本或块 ID 无效');
+    if (!corrections || typeof corrections !== 'object' || Array.isArray(corrections) || Object.entries(corrections).some(([blockId, text]) => !ids.has(blockId) || typeof text !== 'string' || !text.trim() || text.length > 100000)) throw clientError('校对文本或块 ID 无效');
     let context;
-    if (input.context) context = model.validateContext(input.context, blocks.map(block => ({...block, text: corrections[block.id] ?? block.text})));
+    if (input.context) {try{context = model.validateContext(input.context, blocks.map(block => ({...block, text: corrections[block.id] ?? block.text})));}catch(error){throw clientError(error.message);}}
     const sourceChanged = Object.entries(corrections).some(([blockId, text]) => state.overrides[blockId] !== text && blocks.find(block => block.id === blockId).text !== text);
     Object.assign(state.overrides, corrections);
     if (sourceChanged) state.contextSourceFingerprint = '';
@@ -263,8 +269,14 @@ function createTranslationService({root, getPaper, worker = new OcrProvider(), r
     return view(id);
   }
   function remove(id) {
-    jobs.get(id)?.controller.abort();
-    states.delete(id);
+    if(deleting.has(id))return deleting.get(id);
+    const removal=Promise.resolve().then(async()=>{
+      const state=states.get(id);if(state)retired.add(state);
+      clearTimeout(pendingWrites.get(id));pendingWrites.delete(id);
+      const job=jobs.get(id);job?.controller.abort();await job?.promise;
+      clearTimeout(pendingWrites.get(id));pendingWrites.delete(id);states.delete(id);
+    }).finally(()=>deleting.delete(id));
+    deleting.set(id,removal);return removal;
   }
   async function close() {
     for (const job of jobs.values()) job.controller.abort();
@@ -282,7 +294,7 @@ function createTranslationService({root, getPaper, worker = new OcrProvider(), r
 
 function installTranslationRoutes(app, service) {
   const wrap = handler => async (request, response) => {
-    try { await handler(request, response); } catch (error) { response.status(error.status || 400).json({error: error.message}); }
+    try { await handler(request, response); } catch (error) { sendHttpError(response,error); }
   };
   app.get('/api/papers/:id/translation', wrap((request, response) => response.json(service.view(request.params.id))));
   app.post('/api/papers/:id/translation', wrap((request, response) => response.status(202).json(service.start(request.params.id, request.body))));
@@ -291,7 +303,7 @@ function installTranslationRoutes(app, service) {
   app.get('/api/papers/:id/recognition', wrap((request, response) => response.json(service.view(request.params.id))));
   for (const [suffix, format] of [['image', 'png'], ['raw', 'json']]) app.get('/api/papers/:id/recognition/pages/:page/' + suffix, wrap((request, response) => {
     const asset = service.sourceAsset(request.params.id, request.params.page, format);
-    response.sendFile(asset.filename, {root: asset.directory, dotfiles: 'allow'});
+    response.sendFile(asset.filename, {root: asset.directory, dotfiles: 'allow'},error=>{if(error)sendHttpError(response,error);});
   }));
   app.post('/api/papers/:id/recognition', wrap((request, response) => response.status(202).json(service.recognize(request.params.id, request.body))));
   app.patch('/api/papers/:id/recognition', wrap((request, response) => response.json(service.correct(request.params.id, request.body, true))));

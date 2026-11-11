@@ -15,6 +15,7 @@ async function execute({method,documentId,filename,args},signal) {
   signal.throwIfAborted();
   if(method==='open')return {pageCount:document.pageCount};
   if(method==='analyze')return document.analyze(args[0],signal);
+  if(method==='layoutInput')return document.layoutInput(args[0],signal);
   if(method==='prepare')return document.prepareRegions(...args);
   if(method==='release')return document.releasePage(args[0]);
   if(method==='render')return document.render(args[0],signal);
@@ -40,7 +41,8 @@ parentPort.on('message',message=>{
     try {
       controller.signal.throwIfAborted();
       const data=await execute(message,controller.signal);
-      if(data?.images){const buffers=[];for(const image of data.images)if(image.png){image.png=Uint8Array.from(image.png);buffers.push(image.png.buffer);}parentPort.postMessage({id:message.id,data,threadId},buffers);}
+      if(data?.pixels)parentPort.postMessage({id:message.id,data,threadId},[data.pixels.buffer]);
+      else if(data?.images){const buffers=[];for(const image of data.images)if(image.png){image.png=Uint8Array.from(image.png);buffers.push(image.png.buffer);}parentPort.postMessage({id:message.id,data,threadId},buffers);}
       else if(data?.png){const png=Uint8Array.from(data.png);parentPort.postMessage({id:message.id,data:{...data,png},threadId},[png.buffer]);}
       else parentPort.postMessage({id:message.id,data,threadId});
     }catch(error){parentPort.postMessage({id:message.id,error:{name:error.name,message:error.message},threadId});}

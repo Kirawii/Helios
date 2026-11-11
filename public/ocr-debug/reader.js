@@ -97,7 +97,7 @@ export function createTranslationReader({getPaper, getConfig, getDocument = () =
     const apiMode = state?.ocrProvider?.mode === 'api';
     const hybrid=apiMode&&state.ocrProvider.strategy==='hybrid';
     const device = state?.ocrDevice || '';
-    if (explanation) explanation.textContent = hybrid ? 'PDF 原有文字与坐标直接复用；只识别图像和公式候选区域。复杂版式与公式区域由启发式定位，请对照原文核对。' : apiMode
+    if (explanation) explanation.textContent = hybrid ? state.ocrProvider.layout==='model' ? '本地 PP-DocLayoutV3 检测版面与阅读顺序，复用 PDF 文字；公式、表格、图表及扫描文字按区域识别。未对齐的行内公式保留原文并单独展示，请核对页面提示。' : 'PDF 原有文字与坐标直接复用；只识别图像和公式候选区域。复杂版式与公式区域由启发式定位，请对照原文核对。' : apiMode
       ? `硅基流动 API · ${state.ocrProvider.model}。编号关联原文与识别结果；未返回位置框的页面仅支持页级定位。`
       : '本地 PaddleOCR，无需模型密钥。公式、表格和图表支持结构化展示；编号关联原文与识别结果。';
     if (apiMode && device === 'api') workspace.querySelector('.translation-task-heading strong').append(' · API');
@@ -109,6 +109,8 @@ export function createTranslationReader({getPaper, getConfig, getDocument = () =
       if(timing.preparation)info.textContent+=` · 本地池 ${timing.preparation.poolSize} 线程 · 布局缓存 ${timing.preparation.layoutCacheHits} 页 · 图片缓存 ${timing.preparation.cropCacheHits} 区域 · 免裁剪 ${timing.renderSkipped||0} 区域`;
       if(Number.isFinite(timing.preparationMs))info.textContent+=` · 本地准备完成 ${(timing.preparationMs/1000).toFixed(2)} 秒`;
       if(Number.isFinite(timing.activeApi))info.textContent+=` · API 处理中 ${timing.activeApi}`;
+      const layouts=(state.pages||[]).map(page=>page.layout).filter(layout=>layout?.engine==='PP-DocLayoutV3');
+      if(layouts.length)info.textContent+=` · 版面 ${layouts[0].provider==='dml'?'DirectML':'CPU'} · 行内公式已对齐 ${layouts.reduce((n,l)=>n+(l.coverage?.inlineAligned||0),0)} · 待核对 ${layouts.reduce((n,l)=>n+(l.coverage?.inlineUnresolved||0),0)}`;
       workspace.querySelector('.translation-task').append(info);
     }
     const features = state?.pages?.[0]?.features;
